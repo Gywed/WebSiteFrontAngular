@@ -5,7 +5,8 @@ import { AppComponent } from './app.component';
 import { UserHubComponent } from './user-hub/user-hub.component';
 import { UserCreateComponent } from './user-hub/user-create/user-create.component';
 import {ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {InterceptorCredentialInterceptor} from "./interceptor-credential.interceptor";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,13 @@ import {HttpClientModule} from "@angular/common/http";
         ReactiveFormsModule,
         HttpClientModule
     ],
-  providers: [],
+  providers: [
+    {
+    provide : HTTP_INTERCEPTORS,
+    useClass : InterceptorCredentialInterceptor,
+    multi : true
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
