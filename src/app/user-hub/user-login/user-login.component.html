@@ -1,0 +1,19 @@
+<form [formGroup]="form" (ngSubmit)="emitCredential()">
+  <div>
+    <label>
+      Email : <input type="text" formControlName="email">
+    </label>
+    <div *ngIf="controls('email')?.dirty && controls('email')?.invalid">
+      This information is required!
+    </div>
+  </div>
+  <div>
+    <label>
+      Password : <input type="password" formControlName="password">
+    </label>
+    <div *ngIf="controls('password')?.dirty && controls('password')?.invalid">
+      This information is required!
+    </div>
+  </div>
+  <input type="submit" [disabled]="form.invalid">
+</form>

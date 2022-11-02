@@ -7,12 +7,14 @@ import { UserCreateComponent } from './user-hub/user-create/user-create.componen
 import {ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {InterceptorCredentialInterceptor} from "./interceptor-credential.interceptor";
+import { UserLoginComponent } from './user-hub/user-login/user-login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserHubComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    UserLoginComponent
   ],
     imports: [
         BrowserModule,
