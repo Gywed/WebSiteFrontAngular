@@ -10,6 +10,7 @@ import {InterceptorCredentialInterceptor} from "./interceptor-credential.interce
 import { UserLoginComponent } from './user-hub/user-login/user-login.component';
 import { AdminHubComponent } from './admin-hub/admin-hub.component';
 import { EmployeeCreateComponent } from './admin-hub/employee-create/employee-create.component';
+import { EmployeeListComponent } from './admin-hub/employee-list/employee-list.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EmployeeCreateComponent } from './admin-hub/employee-create/employee-cr
     UserCreateComponent,
     UserLoginComponent,
     AdminHubComponent,
-    EmployeeCreateComponent
+    EmployeeCreateComponent,
+    EmployeeListComponent
   ],
     imports: [
         BrowserModule,

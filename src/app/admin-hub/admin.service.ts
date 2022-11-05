@@ -16,4 +16,8 @@ export class AdminService {
   createEmployee(dto: DtoOutputCreateUser): Observable<DtoInputUser>{
     return this._httpClient.post<DtoInputUser>(AdminService.ENTRY_POINT + "/employee", dto)
   }
+
+  fetchAllEmployees():Observable<DtoInputUser[]>{
+    return this._httpClient.get<DtoInputUser[]>(AdminService.ENTRY_POINT+ "/employee")
+  }
 }
