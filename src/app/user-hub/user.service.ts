@@ -14,8 +14,8 @@ export class UserService {
 
   constructor(private _httpClient : HttpClient ) { }
 
-  create(dto : DtoOutputCreateUser) : Observable<DtoInputUser>{
-    return this._httpClient.post<DtoInputUser>(UserService.ENTRY_POINT, dto);
+  createClient(dto : DtoOutputCreateUser) : Observable<DtoInputUser>{
+    return this._httpClient.post<DtoInputUser>(`${UserService.ENTRY_POINT}/client`, dto);
   }
 
   login(dto : DtoOutputLogUser) : Observable<DtoInputUser>{

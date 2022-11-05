@@ -15,8 +15,8 @@ export class UserHubComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  create(dto: DtoOutputCreateUser) {
-    this._userService.create(dto).subscribe();
+  createClient(dto: DtoOutputCreateUser) {
+    this._userService.createClient(dto).subscribe();
   }
 
   login(dto: DtoOutputLogUser) {

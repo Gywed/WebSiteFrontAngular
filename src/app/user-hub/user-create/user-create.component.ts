@@ -9,7 +9,7 @@ import {DtoOutputCreateUser} from "../dtos/dto-output-create-user";
 })
 export class UserCreateComponent implements OnInit {
   @Output()
-  userCreated: EventEmitter<DtoOutputCreateUser>
+  clientCreated: EventEmitter<DtoOutputCreateUser>
   = new EventEmitter<DtoOutputCreateUser>();
 
   form: FormGroup = this._fb.group({
@@ -26,7 +26,7 @@ export class UserCreateComponent implements OnInit {
   }
 
   emitUser() {
-    this.userCreated.next({
+    this.clientCreated.next({
       surname: this.form.value.surname,
       lastname : this.form.value.lastname,
       email : this.form.value.email,
