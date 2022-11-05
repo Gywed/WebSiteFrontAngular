@@ -1,0 +1,43 @@
+<form [formGroup]="form" (ngSubmit)="emitEmployee()">
+  <div>
+    <label>
+      Surname : <input type="text" formControlName="surname">
+    </label>
+    <div *ngIf="controls('surname')?.dirty && controls('surname')?.invalid">
+      This information is required!
+    </div>
+  </div>
+  <div>
+    <label>
+      Lastname : <input type="text" formControlName="lastname">
+    </label>
+    <div *ngIf="controls('lastname')?.dirty && controls('lastname')?.invalid">
+      This information is required!
+    </div>
+  </div>
+  <div>
+    <label>
+      Email : <input type="text" formControlName="email">
+    </label>
+    <div *ngIf="controls('email')?.dirty && controls('email')?.invalid">
+      This information is required!
+    </div>
+  </div>
+  <div>
+    <label>
+      Age : <input type="number" formControlName="age">
+    </label>
+    <div *ngIf="controls('age')?.dirty && controls('age')?.invalid">
+      This information is required!
+    </div>
+  </div>
+  <div>
+    <label>
+      Password : <input type="password" formControlName="password">
+    </label>
+    <div *ngIf="controls('password')?.dirty && controls('password')?.invalid">
+      This information is required!
+    </div>
+  </div>
+  <input type="submit" [disabled]="form.invalid">
+</form>

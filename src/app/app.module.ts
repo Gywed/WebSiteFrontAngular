@@ -8,13 +8,17 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {InterceptorCredentialInterceptor} from "./interceptor-credential.interceptor";
 import { UserLoginComponent } from './user-hub/user-login/user-login.component';
+import { AdminHubComponent } from './admin-hub/admin-hub.component';
+import { EmployeeCreateComponent } from './admin-hub/employee-create/employee-create.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserHubComponent,
     UserCreateComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    AdminHubComponent,
+    EmployeeCreateComponent
   ],
     imports: [
         BrowserModule,
