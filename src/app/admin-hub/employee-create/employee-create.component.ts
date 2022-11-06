@@ -38,6 +38,6 @@ export class EmployeeCreateComponent implements OnInit {
       password : this.form.value.password,
       permission : 1
     })
-    this.form.reset()
+    //this.form.reset()
   }
 }
