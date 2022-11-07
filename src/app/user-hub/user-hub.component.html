@@ -1,3 +1,12 @@
-<app-user-create (clientCreated)="createClient($event)"></app-user-create>
+<h2>User</h2>
 
-<app-user-login (userLog)="login($event)"></app-user-login>
+<button
+   (click)="clickRegister()">
+  Register</button>
+
+<button
+   (click)="clickLogin()">
+Login</button>
+<app-user-create (clientCreated)="createClient($event)" [hidden]="!RegisterClick"></app-user-create>
+
+<app-user-login (userLog)="login($event)" [hidden]="!LoginClick"></app-user-login>

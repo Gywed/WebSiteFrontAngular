@@ -9,6 +9,8 @@ import {DtoInputUser} from "../user-hub/dtos/dto-input-user";
   styleUrls: ['./admin-hub.component.css']
 })
 export class AdminHubComponent implements OnInit {
+  LoginClick = false;
+  RegisterClick = false;
 
   employees: DtoInputUser[] = []
 
@@ -26,5 +28,21 @@ export class AdminHubComponent implements OnInit {
 
   fetchAllEmployees(){
     this._adminService.fetchAllEmployees().subscribe(employees=> this.employees = employees)
+  }
+
+  clickLogin() {
+    this.LoginClick = !this.LoginClick;
+
+    if (this.LoginClick) {
+      this.RegisterClick = false;
+    }
+  }
+
+  clickRegister() {
+    this.RegisterClick = !this.RegisterClick;
+
+    if (this.RegisterClick) {
+      this.LoginClick = false;
+    }
   }
 }
