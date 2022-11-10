@@ -4,6 +4,7 @@ import {environment} from "../../environments/environment";
 import {DtoOutputCreateUser} from "../user-hub/dtos/dto-output-create-user";
 import {Observable} from "rxjs";
 import {DtoInputUser} from "../user-hub/dtos/dto-input-user";
+import {DtoOutputDeleteEmployee} from "./dtos/dto-output-delete-employee";
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,9 @@ export class AdminService {
 
   fetchAllEmployees():Observable<DtoInputUser[]>{
     return this._httpClient.get<DtoInputUser[]>(AdminService.ENTRY_POINT+ "/employee")
+  }
+
+  deleteEmployee(dto: DtoOutputDeleteEmployee): Observable<any>{
+    return this._httpClient.request<any>('delete', AdminService.ENTRY_POINT, {body: dto})
   }
 }
