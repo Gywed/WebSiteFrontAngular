@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DtoOutputCreateUser} from "../user-hub/dtos/dto-output-create-user";
 import {AdminService} from "./admin.service";
 import {DtoInputUser} from "../user-hub/dtos/dto-input-user";
+import {DtoOutputDeleteEmployee} from "./dtos/dto-output-delete-employee";
 
 @Component({
   selector: 'app-admin-hub',
@@ -30,19 +31,11 @@ export class AdminHubComponent implements OnInit {
     this._adminService.fetchAllEmployees().subscribe(employees=> this.employees = employees)
   }
 
-  clickLogin() {
-    this.LoginClick = !this.LoginClick;
-
-    if (this.LoginClick) {
-      this.RegisterClick = false;
-    }
-  }
-
-  clickRegister() {
-    this.RegisterClick = !this.RegisterClick;
-
-    if (this.RegisterClick) {
-      this.LoginClick = false;
-    }
+  deleteEmployee(dto: DtoOutputDeleteEmployee){
+    let employee = this.employees.filter(e=> e.id==dto.id)
+    let index = this.employees.indexOf(employee[0])
+    this._adminService
+      .deleteEmployee(dto)
+      .subscribe(()=>this.employees.splice(index, 1))
   }
 }

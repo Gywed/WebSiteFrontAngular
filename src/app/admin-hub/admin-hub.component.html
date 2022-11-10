@@ -1,13 +1,4 @@
 <h2>Administrator</h2>
-
-<button
-  (click)="clickRegister()">
-  Register</button>
-
-<button
-  (click)="clickLogin()">
-  Login</button>
-
-<app-employee-create (employeeCreated)="createEmployee($event)" [hidden]="!RegisterClick"></app-employee-create>
-
-<app-employee-list [employees]="employees" [hidden]="!LoginClick"></app-employee-list>
+<app-employee-create (employeeCreated)="createEmployee($event)"></app-employee-create>
+<app-employee-list [employees]="employees"
+                    (deletedEmployee)="deleteEmployee($event)"></app-employee-list>
