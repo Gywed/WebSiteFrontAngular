@@ -10,8 +10,8 @@ import {DtoOutputDeleteEmployee} from "./dtos/dto-output-delete-employee";
   styleUrls: ['./admin-hub.component.css']
 })
 export class AdminHubComponent implements OnInit {
-  LoginClick = false;
-  RegisterClick = false;
+  listClick = false;
+  addClick = false;
 
   employees: DtoInputUser[] = []
 
@@ -19,6 +19,21 @@ export class AdminHubComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchAllEmployees();
+  }
+
+  clickList() {
+    this.resetDisplay();
+    this.listClick = true;
+  }
+
+  clickAdd() {
+    this.resetDisplay();
+    this.addClick = true;
+  }
+
+  resetDisplay() {
+    this.addClick = false;
+    this.listClick = false;
   }
 
   createEmployee(dto: DtoOutputCreateUser) {

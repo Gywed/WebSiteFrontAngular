@@ -1,43 +1,43 @@
 <form [formGroup]="form" (ngSubmit)="emitEmployee()">
   <div>
     <label>
-      Surname : <input type="text" formControlName="surname">
+      Surname : <input type="text" formControlName="surname" class="fields">
     </label>
-    <div *ngIf="controls('surname')?.dirty && controls('surname')?.invalid">
+    <div *ngIf="controls('surname')?.dirty && controls('surname')?.invalid" class="warning">
       This information is required!
     </div>
   </div>
   <div>
     <label>
-      Lastname : <input type="text" formControlName="lastname">
+      Lastname : <input type="text" formControlName="lastname" class="fields">
     </label>
-    <div *ngIf="controls('lastname')?.dirty && controls('lastname')?.invalid">
+    <div *ngIf="controls('lastname')?.dirty && controls('lastname')?.invalid" class="warning">
       This information is required!
     </div>
   </div>
   <div>
     <label>
-      Email : <input type="text" formControlName="email">
+      Email : <input type="text" formControlName="email" class="fields">
     </label>
-    <div *ngIf="controls('email')?.dirty && controls('email')?.invalid">
+    <div *ngIf="controls('email')?.dirty && controls('email')?.invalid" class="warning">
       This information is required!
     </div>
   </div>
   <div>
     <label>
-      Age : <input type="number" formControlName="age">
+      Age : <input type="number" formControlName="age" class="fields">
     </label>
-    <div *ngIf="controls('age')?.dirty && controls('age')?.invalid">
+    <div *ngIf="controls('age')?.dirty && controls('age')?.invalid" class="warning">
       This information is required!
     </div>
   </div>
   <div>
     <label>
-      Password : <input type="password" formControlName="password">
+      Password : <input type="password" formControlName="password" class="fields">
     </label>
-    <div *ngIf="controls('password')?.dirty && controls('password')?.invalid">
+    <div *ngIf="controls('password')?.dirty && controls('password')?.invalid" class="warning">
       This information is required!
     </div>
-  </div>
-  <input type="submit" [disabled]="form.invalid">
+  </div> <br/>
+  <input type="submit" [disabled]="form.invalid" class="btn">
 </form>
