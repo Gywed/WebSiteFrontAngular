@@ -1,4 +1,8 @@
 <h2>Administrator</h2>
+
+<h4>Add a new employees</h4>
 <app-employee-create (employeeCreated)="createEmployee($event)"></app-employee-create>
+
+<h4>List of employees</h4>
 <app-employee-list [employees]="employees"
                     (deletedEmployee)="deleteEmployee($event)"></app-employee-list>

@@ -1,20 +1,23 @@
-<p>Login as a user</p>
-<form [formGroup]="form" (ngSubmit)="emitCredential()">
-  <div>
-    <label>
-      Email : <input type="text" formControlName="email">
-    </label>
-    <div *ngIf="controls('email')?.dirty && controls('email')?.invalid">
-      This information is required!
+<div class="form">
+  <h2>Login as a user</h2>
+  <form [formGroup]="form" (ngSubmit)="emitCredential()">
+    <div>
+      <label>
+        Email : <input type="text" formControlName="email" class="fields">
+      </label>
+      <div *ngIf="controls('email')?.dirty && controls('email')?.invalid" class="warning">
+        This information is required!
+      </div>
     </div>
-  </div>
-  <div>
-    <label>
-      Password : <input type="password" formControlName="password">
-    </label>
-    <div *ngIf="controls('password')?.dirty && controls('password')?.invalid">
-      This information is required!
-    </div>
-  </div>
-  <input type="submit" [disabled]="form.invalid">
-</form>
+    <div>
+      <label>
+        Password : <input type="password" formControlName="password" class="fields">
+      </label>
+      <div *ngIf="controls('password')?.dirty && controls('password')?.invalid" class="warning">
+        This information is required!
+      </div>
+    </div> <br/>
+    <input type="submit" [disabled]="form.invalid" value="Login" class="btn">
+  </form>
+</div>
+

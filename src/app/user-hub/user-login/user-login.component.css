@@ -1,0 +1,18 @@
+.form
+{
+  text-align: left;
+  margin-left: 35%;
+  font-size: 200%;
+}
+.fields
+{
+  font-size: 100%;
+}
+.btn
+{
+  font-size: 100%;
+}
+.warning
+{
+  color: red;
+}

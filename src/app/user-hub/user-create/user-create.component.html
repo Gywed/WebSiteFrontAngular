@@ -1,44 +1,47 @@
-<p>Register as a user</p>
-<form [formGroup]="form" (ngSubmit)="emitUser()">
-  <div>
-    <label>
-      Surname : <input type="text" formControlName="surname">
-    </label>
-    <div *ngIf="controls('surname')?.dirty && controls('surname')?.invalid">
-      This information is required!
+<div class="form">
+  <h2>Register as a user</h2>
+  <form [formGroup]="form" (ngSubmit)="emitUser()">
+    <div>
+      <label>
+        Surname : <input type="text" formControlName="surname" class="fields">
+      </label>
+      <div *ngIf="controls('surname')?.dirty && controls('surname')?.invalid" class="warning">
+        This information is required!
+      </div>
     </div>
-  </div>
-  <div>
-    <label>
-      Lastname : <input type="text" formControlName="lastname">
-    </label>
-    <div *ngIf="controls('lastname')?.dirty && controls('lastname')?.invalid">
-      This information is required!
+    <div>
+      <label>
+        Lastname : <input type="text" formControlName="lastname" class="fields">
+      </label>
+      <div *ngIf="controls('lastname')?.dirty && controls('lastname')?.invalid" class="warning">
+        This information is required!
+      </div>
     </div>
-  </div>
-  <div>
-    <label>
-      Email : <input type="text" formControlName="email">
-    </label>
-    <div *ngIf="controls('email')?.dirty && controls('email')?.invalid">
-      This information is required!
+    <div>
+      <label>
+        Email : <input type="text" formControlName="email" class="fields">
+      </label>
+      <div *ngIf="controls('email')?.dirty && controls('email')?.invalid" class="warning">
+        This information is required!
+      </div>
     </div>
-  </div>
-  <div>
-    <label>
-      Age : <input type="number" formControlName="age">
-    </label>
-    <div *ngIf="controls('age')?.dirty && controls('age')?.invalid">
-      This information is required!
+    <div>
+      <label>
+        Age : <input type="number" formControlName="age" class="fields">
+      </label>
+      <div *ngIf="controls('age')?.dirty && controls('age')?.invalid" class="warning">
+        This information is required!
+      </div>
     </div>
-  </div>
-  <div>
-    <label>
-      Password : <input type="password" formControlName="password">
-    </label>
-    <div *ngIf="controls('password')?.dirty && controls('password')?.invalid">
-      This information is required!
-    </div>
-  </div>
-  <input type="submit" [disabled]="form.invalid">
-</form>
+    <div>
+      <label>
+        Password : <input type="password" formControlName="password" class="fields">
+      </label>
+      <div *ngIf="controls('password')?.dirty && controls('password')?.invalid" class="warning">
+        This information is required!
+      </div>
+    </div> <br/>
+    <input type="submit" [disabled]="form.invalid" value="Register" class="btn">
+  </form>
+</div>
+
