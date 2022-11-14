@@ -1,2 +1,25 @@
-<app-user-hub></app-user-hub>
-<app-admin-hub></app-admin-hub>
+<div class="ban">
+  <h2 class="title">Take And Dash</h2>
+
+  <button
+    (click)="clickAdmin()" id="admin">
+    Administration</button>
+
+  <button
+    (click)="clickRegister()" id="reg">
+    Register</button>
+
+  <button
+    (click)="clickLogin()" id="log">
+    Login</button>
+</div>
+
+<div class="form">
+  <app-user-create (clientCreated)="createClient($event)" [hidden]="!RegisterActive"></app-user-create>
+  <p [hidden]="!RegisterActive" class="txtlink">Already registered ? <a (click)="clickLogin()" [hidden]="!RegisterActive" class="link">Login here</a></p>
+
+  <app-user-login (userLog)="login($event)" [hidden]="!LoginActive"></app-user-login>
+  <p [hidden]="!LoginActive" class="txtlink">Not yet registered ? <a (click)="clickRegister()" [hidden]="!LoginActive" class="link">Register here</a></p>
+</div>
+
+<app-admin-hub [hidden]="!AdminActive"></app-admin-hub>
