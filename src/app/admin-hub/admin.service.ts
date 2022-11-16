@@ -18,10 +18,6 @@ export class AdminService {
     return this._httpClient.post<DtoInputUser>(AdminService.ENTRY_POINT + "/employee", dto)
   }
 
-  fetchAllEmployees():Observable<DtoInputUser[]>{
-    return this._httpClient.get<DtoInputUser[]>(AdminService.ENTRY_POINT+ "/employee")
-  }
-
   deleteEmployee(dto: DtoOutputDeleteEmployee): Observable<any>{
     return this._httpClient.request<any>('delete', AdminService.ENTRY_POINT, {body: dto})
   }

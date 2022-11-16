@@ -18,7 +18,6 @@ export class AdminHubComponent implements OnInit {
   constructor(private _adminService: AdminService) { }
 
   ngOnInit(): void {
-    this.fetchAllEmployees();
   }
 
   clickList() {
@@ -40,10 +39,6 @@ export class AdminHubComponent implements OnInit {
     this._adminService
       .createEmployee(dto)
       .subscribe(employee=>this.employees.push(employee))
-  }
-
-  fetchAllEmployees(){
-    this._adminService.fetchAllEmployees().subscribe(employees=> this.employees = employees)
   }
 
   deleteEmployee(dto: DtoOutputDeleteEmployee){
