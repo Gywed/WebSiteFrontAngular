@@ -13,6 +13,8 @@ import { EmployeeCreateComponent } from './admin-hub/employee-create/employee-cr
 import { EmployeeListComponent } from './admin-hub/employee-list/employee-list.component';
 import { ArticleHubComponent } from './article-hub/article-hub.component';
 import { ArticleListComponent } from './article-hub/article-list/article-list.component';
+import { OrderHubComponent } from './order-hub/order-hub.component';
+import { OrderListDateComponent } from './order-hub/order-list-date/order-list-date.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { ArticleListComponent } from './article-hub/article-list/article-list.co
     EmployeeListComponent,
     ArticleHubComponent,
     ArticleListComponent,
+    OrderHubComponent,
+    OrderListDateComponent
   ],
     imports: [
         BrowserModule,
