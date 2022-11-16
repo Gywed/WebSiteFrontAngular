@@ -1,22 +1,25 @@
-<div *ngIf="employees.length; else employeeListEmpty">
-  <table>
-    <tr>
-      <th>Surname</th>
-      <th>Lastname</th>
-      <th>Age</th>
-      <th>E-Mail</th>
-    </tr>
-    <tr *ngFor="let employee of employees">
-      <td>{{employee.surname}}</td>
-      <td>{{employee.lastname}}</td>
-      <td>{{employee.age}}</td>
-      <td>{{employee.email}}</td>
-      <td><button (click)="emitDelete(employee)">X</button></td>
-    </tr>
-  </table>
-</div>
+<div class="list">
+  <h3>List of employees</h3>
+  <div *ngIf="employees.length; else employeeListEmpty">
+    <table>
+      <tr>
+        <th>Surname</th>
+        <th>Lastname</th>
+        <th>Age</th>
+        <th>E-Mail</th>
+      </tr>
+      <tr *ngFor="let employee of employees">
+        <td>{{employee.surname}}</td>
+        <td>{{employee.firstname}}</td>
+        <td>{{employee.age}}</td>
+        <td>{{employee.email}}</td>
+        <td><button (click)="emitDelete(employee)">X</button></td>
+      </tr>
+    </table>
+  </div>
 
-<!-- Will be displayed if employees list is empty-->
-<ng-template #employeeListEmpty>
-  <p>You don't have any employee. Register a new employee.</p>
-</ng-template>
+  <!-- Will be displayed if employees list is empty-->
+  <ng-template #employeeListEmpty>
+    <p>You don't have any employee. Register a new employee.</p>
+  </ng-template>
+</div>

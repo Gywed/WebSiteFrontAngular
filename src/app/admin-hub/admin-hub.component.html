@@ -1,7 +1,7 @@
 <div class="adminBanner">
   <button
     (click)="clickAdd()" id="add">
-    Add an employee</button>
+    Register an employee</button>
 
   <button
     (click)="clickList()" id="lis">
@@ -10,12 +10,10 @@
 
 <div class="adminWindows">
   <div [hidden]="!addClick">
-    <h4>Add a new employees</h4>
     <app-employee-create (employeeCreated)="createEmployee($event)"></app-employee-create>
   </div>
 
   <div [hidden]="!listClick">
-    <h4>List of employees</h4>
     <app-employee-list [employees]="employees"
                        (deletedEmployee)="deleteEmployee($event)"></app-employee-list>
   </div>

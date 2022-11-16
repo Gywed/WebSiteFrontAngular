@@ -1,7 +1,7 @@
 export interface DtoInputUser {
   id: number,
   surname : string,
-  lastname : string,
+  firstname : string,
   email : string,
   age : number
 }

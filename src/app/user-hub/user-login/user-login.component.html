@@ -2,17 +2,13 @@
   <h2>Login as a user</h2>
   <form [formGroup]="form" (ngSubmit)="emitCredential()">
     <div>
-      <label>
-        Email : <input type="text" formControlName="email" class="fields">
-      </label>
+      <input type="text" formControlName="email" class="fields" placeholder="Email">
       <div *ngIf="controls('email')?.dirty && controls('email')?.invalid" class="warning">
         This information is required!
       </div>
     </div>
     <div>
-      <label>
-        Password : <input type="password" formControlName="password" class="fields">
-      </label>
+      <input type="password" formControlName="password" class="fields" placeholder="Password">
       <div *ngIf="controls('password')?.dirty && controls('password')?.invalid" class="warning">
         This information is required!
       </div>
@@ -20,4 +16,5 @@
     <input type="submit" [disabled]="form.invalid" value="Login" class="btn">
   </form>
 </div>
+
 

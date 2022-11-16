@@ -32,7 +32,7 @@ export class EmployeeCreateComponent implements OnInit {
   emitEmployee() {
     this.employeeCreated.next({
       surname: this.form.value.surname,
-      lastname : this.form.value.lastname,
+      firstname : this.form.value.firstname,
       email : this.form.value.email,
       age : this.form.value.age,
       password : this.form.value.password,
