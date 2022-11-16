@@ -1,0 +1,22 @@
+<div class="list">
+  <div *ngIf="articles.length; else articleListEmpty">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+      </tr>
+      <tr *ngFor="let article of articles">
+        <td>{{article.nametag}}</td>
+        <td>{{article.price}}</td>
+        <td>{{article.stock}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Will be displayed if article list is empty-->
+  <ng-template #articleListEmpty>
+    <p>There is no article.</p>
+  </ng-template>
+</div>
+
