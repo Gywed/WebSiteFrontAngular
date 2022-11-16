@@ -12,7 +12,7 @@
 
 
 <div *ngIf="orders.length; else orderListEmpty">
-  <table>
+  <table border="2">
     <tr>
       <th>Id</th>
       <th>Date</th>
@@ -24,14 +24,14 @@
       <td>{{order.date}}</td>
       <td>{{order.totalOrderPrice}}</td>
       <td>
-        <table>
+        <table border="1">
           <tr>
             <th>Article</th>
             <th>Quantity</th>
-          <tr/>
+          </tr>
           <tr *ngFor="let orderContent of order.orderContents">
             <td>
-              <table>
+              <table border="1">
                 <tr>
                   <th>Id</th>
                   <th>Name tag</th>
@@ -51,7 +51,7 @@
         </table>
 
       </td>
-    <tr/>
+    </tr>
   </table>
 </div>
 
