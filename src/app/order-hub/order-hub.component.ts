@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DtoOutputOrderDate} from "./dtos/dto-output-order-date";
+import {OrderService} from "./order.service";
+import {DtoInputOrder} from "./dtos/dto-input-order";
 
 @Component({
   selector: 'app-order-hub',
@@ -7,13 +9,14 @@ import {DtoOutputOrderDate} from "./dtos/dto-output-order-date";
   styleUrls: ['./order-hub.component.css']
 })
 export class OrderHubComponent implements OnInit {
+  orders : DtoInputOrder[] = []
 
-  constructor() { }
+  constructor(private _service: OrderService) { }
 
   ngOnInit(): void {
   }
 
-  fetchOrderByDate($event: DtoOutputOrderDate) {
-
+  fetchOrderByDate(dto: DtoOutputOrderDate) {
+    this._service.fetchOrderByDate(dto).subscribe(orders => this.orders = orders)
   }
 }
