@@ -17,7 +17,7 @@
   display: inline;
   position: absolute;
   top: 0;
-  left: 1%;
+  left: 6%;
   right: 0;
   bottom: 95%;
   margin-top: 0.2%;
@@ -66,4 +66,31 @@
   color: #0000EE;
   text-decoration-line: underline;
   cursor: pointer;
+}
+.logo{
+  text-align: left;
+  position:absolute;
+}
+.logo img{
+  position: relative;
+  width:89.5px;
+  height: 83px;
+  margin-left:0px;
+}
+#base{
+  position: absolute;
+}
+#dash{
+  position:relative;
+  margin-left:-100px;
+  animation-delay: 3s;
+  animation: logoDash 2s normal forwards;
+}
+
+@keyframes logoDash {
+  0%{}
+  100%{
+    opacity: 1;
+    margin-left: 0px;
+  }
 }
