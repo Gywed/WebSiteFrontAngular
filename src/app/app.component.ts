@@ -13,6 +13,7 @@ export class AppComponent {
   LoginActive = false;
   RegisterActive = false;
   AdminActive = false;
+  ArticleActive = false;
 
   constructor(private _userService : UserService) { }
 
@@ -31,10 +32,20 @@ export class AppComponent {
     this.AdminActive = true;
   }
 
+  clickArticle() {
+    this.resetDisplay();
+    this.ArticleActive = true;
+  }
+
+  clickLogo() {
+    this.resetDisplay();
+  }
+
   resetDisplay() {
     this.RegisterActive = false;
     this.AdminActive = false;
     this.LoginActive = false;
+    this.ArticleActive = false;
   }
 
   createClient(dto: DtoOutputCreateUser) {

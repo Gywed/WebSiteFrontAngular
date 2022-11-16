@@ -1,5 +1,9 @@
 <div class="ban">
-  <h2 class="title">Take And Dash</h2>
+  <h2 (click)="clickLogo()" class="title">Take And Dash</h2>
+
+  <button
+    (click)="clickArticle()" id="article">
+    Articles</button>
 
   <button
     (click)="clickAdmin()" id="admin">
@@ -23,3 +27,5 @@
 </div>
 
 <app-admin-hub [hidden]="!AdminActive"></app-admin-hub>
+
+<app-article-hub [hidden]="!ArticleActive"></app-article-hub>
