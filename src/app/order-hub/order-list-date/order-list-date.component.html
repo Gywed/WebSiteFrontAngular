@@ -21,7 +21,7 @@
     </tr>
     <tr *ngFor="let order of orders">
       <td>{{order.id}}</td>
-      <td>{{order.date}}</td>
+      <td>{{order.date.slice(0,order.date.search("T"))}}</td>
       <td>{{order.totalOrderPrice}}</td>
       <td>
         <table border="1">
