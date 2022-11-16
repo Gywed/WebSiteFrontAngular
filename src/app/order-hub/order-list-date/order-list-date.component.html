@@ -1,0 +1,61 @@
+<form [formGroup]="form" (ngSubmit)="emitDate()">
+  <div>
+    <label>
+      Surname : <input type="date" formControlName="date" class="fields">
+    </label>
+    <div *ngIf="controls('date')?.dirty && controls('date')?.invalid" class="warning">
+      This information is required!
+    </div>
+  </div>
+  <input type="submit" [disabled]="form.invalid" class="btn">
+</form>
+
+
+<div *ngIf="orders.length; else orderListEmpty">
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Date</th>
+      <th>Total of the order</th>
+      <th>Order content</th>
+    </tr>
+    <tr *ngFor="let order of orders">
+      <td>{{order.id}}</td>
+      <td>{{order.date}}</td>
+      <td>{{order.totalOrderPrice}}</td>
+      <td>
+        <table>
+          <tr>
+            <th>Article</th>
+            <th>Quantity</th>
+          <tr/>
+          <tr *ngFor="let orderContent of order.orderContents">
+            <td>
+              <table>
+                <tr>
+                  <th>Id</th>
+                  <th>Name tag</th>
+                  <th>Price</th>
+                  <th>Pricing type</th>
+                </tr>
+                <tr>
+                  <td>{{orderContent.article.id}}</td>
+                  <td>{{orderContent.article.nametag}}</td>
+                  <td>{{orderContent.article.price}}</td>
+                  <td>{{orderContent.article.pricingtype}}</td>
+                </tr>
+              </table>
+            </td>
+            <td>{{orderContent.quantity}}</td>
+          </tr>
+        </table>
+
+      </td>
+    <tr/>
+  </table>
+</div>
+
+<!-- Will be displayed if employees list is empty-->
+<ng-template #orderListEmpty>
+  <p>Enter a date to get this date's orders.</p>
+</ng-template>

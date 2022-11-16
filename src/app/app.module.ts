@@ -11,6 +11,8 @@ import { UserLoginComponent } from './user-hub/user-login/user-login.component';
 import { AdminHubComponent } from './admin-hub/admin-hub.component';
 import { EmployeeCreateComponent } from './admin-hub/employee-create/employee-create.component';
 import { EmployeeListComponent } from './admin-hub/employee-list/employee-list.component';
+import { OrderHubComponent } from './order-hub/order-hub.component';
+import { OrderListDateComponent } from './order-hub/order-list-date/order-list-date.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { EmployeeListComponent } from './admin-hub/employee-list/employee-list.c
     UserLoginComponent,
     AdminHubComponent,
     EmployeeCreateComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    OrderHubComponent,
+    OrderListDateComponent
   ],
     imports: [
         BrowserModule,
