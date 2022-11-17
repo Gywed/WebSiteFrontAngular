@@ -18,6 +18,7 @@ export class OrderFilteredListComponent implements OnInit {
 
   form: FormGroup = this._fb.group({
     date : ['', Validators.required],
+    name : ['', Validators.required]
   })
 
   constructor(private _fb : FormBuilder) { }
@@ -29,8 +30,12 @@ export class OrderFilteredListComponent implements OnInit {
     return this.form.get(name);
   }
 
-  emitDate() {
+  emitFilter() {
     this.filterForFetch.next({
-      date : this.form.value.date
+      date: this.form.value.date,
+      name : this.form.value.name
     });
+  }
 }
+
+
