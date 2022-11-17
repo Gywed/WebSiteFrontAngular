@@ -1,6 +1,6 @@
 .ban
 {
-  text-align: right;
+  text-align: left;
   background-color: darkslategrey;
   position: absolute;
   top: 0;
@@ -9,6 +9,15 @@
   bottom: 90%;
   border-bottom: black;
   border-bottom-style: solid;
+}
+.banRight
+{
+  text-align: right;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 90%;
 }
 .title
 {
@@ -23,17 +32,17 @@
   margin-top: 0.2%;
   color: darkturquoise;
 }
-#order
-{
-  font-size: 220%;
-  margin-right: 2%;
-  margin-top: 1.2%;
-  background-color: goldenrod;
-}
 #article
 {
   font-size: 220%;
-  margin-right: 2%;
+  margin-left: 30%;
+  margin-top: 1.2%;
+  background-color: goldenrod;
+}
+#order
+{
+  font-size: 220%;
+  margin-left: 2%;
   margin-top: 1.2%;
   background-color: goldenrod;
 }
