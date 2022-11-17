@@ -1,0 +1,17 @@
+.fields
+{
+  font-size: 100%;
+  width: 10%;
+  margin-top: 0.5%;
+}
+.btn
+{
+  text-align: left;
+  font-size: 100%;
+  margin-top: 0.5%;
+  width: 6%;
+}
+.warning
+{
+  color: red;
+}
