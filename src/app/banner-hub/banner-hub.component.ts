@@ -13,6 +13,7 @@ export class BannerHubComponent implements OnInit {
   RegisterActive = false;
   AdminActive = false;
   ArticleActive = false;
+  OrderActive = false;
 
   constructor(private _userService : UserService) { }
 
@@ -44,6 +45,11 @@ export class BannerHubComponent implements OnInit {
     this.ArticleActive = true;
   }
 
+  clickOrder() {
+    this.resetDisplay();
+    this.OrderActive = true;
+  }
+
   clickLogo() {
     this.resetDisplay();
   }
@@ -53,6 +59,7 @@ export class BannerHubComponent implements OnInit {
     this.AdminActive = false;
     this.LoginActive = false;
     this.ArticleActive = false;
+    this.OrderActive = false;
   }
 
   ngOnInit(): void {
