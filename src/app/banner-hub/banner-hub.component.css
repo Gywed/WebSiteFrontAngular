@@ -1,0 +1,96 @@
+.ban
+{
+  text-align: right;
+  background-color: darkslategrey;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 90%;
+  border-bottom: black;
+  border-bottom-style: solid;
+}
+.title
+{
+  text-align: left;
+  font-size: 400%;
+  display: inline;
+  position: absolute;
+  top: 0;
+  left: 6%;
+  right: 70%;
+  bottom: 0;
+  margin-top: 0.2%;
+  color: darkturquoise;
+}
+#article
+{
+  font-size: 220%;
+  margin-right: 2%;
+  margin-top: 1.2%;
+  background-color: goldenrod;
+}
+#admin
+{
+  font-size: 220%;
+  margin-right: 3%;
+  margin-top: 1.2%;
+  background-color: yellow;
+}
+#reg
+{
+  font-size: 220%;
+  margin-right: 1%;
+  margin-top: 1.2%;
+  background-color: dodgerblue;
+}
+#log
+{
+  font-size: 220%;
+  margin-right: 1%;
+  margin-top: 1.2%;
+  background-color: dodgerblue;
+}
+.logReg
+{
+  margin-top: 8%;
+  text-align: center;
+}
+.txtlink
+{
+  text-align: center;
+  font-size: 200%;
+}
+.link
+{
+  color: #0000EE;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+.logo{
+  text-align: left;
+  position:absolute;
+}
+.logo img{
+  position: relative;
+  width:89.5px;
+  height: 83px;
+  margin-left:0;
+}
+#base{
+  position: absolute;
+}
+#dash{
+  position:relative;
+  margin-left:-100px;
+  animation-delay: 3s;
+  animation: logoDash 2s normal forwards;
+}
+
+@keyframes logoDash {
+  0%{}
+  100%{
+    opacity: 1;
+    margin-left: 0;
+  }
+}

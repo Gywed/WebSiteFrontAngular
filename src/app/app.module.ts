@@ -15,6 +15,7 @@ import { ArticleHubComponent } from './article-hub/article-hub.component';
 import { ArticleListComponent } from './article-hub/article-list/article-list.component';
 import { OrderHubComponent } from './order-hub/order-hub.component';
 import { OrderListDateComponent } from './order-hub/order-list-date/order-list-date.component';
+import { BannerHubComponent } from './banner-hub/banner-hub.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { OrderListDateComponent } from './order-hub/order-list-date/order-list-d
     ArticleHubComponent,
     ArticleListComponent,
     OrderHubComponent,
-    OrderListDateComponent
+    OrderListDateComponent,
+    BannerHubComponent
   ],
     imports: [
         BrowserModule,
