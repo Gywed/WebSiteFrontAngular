@@ -3,6 +3,7 @@ import {DtoOutputCreateUser} from "../user-hub/dtos/dto-output-create-user";
 import {AdminService} from "./admin.service";
 import {DtoInputUser} from "../user-hub/dtos/dto-input-user";
 import {DtoOutputDeleteEmployee} from "./dtos/dto-output-delete-employee";
+import {DtoOutputPaginationParameters} from "../dtos/dto-output-pagination-parameters";
 
 @Component({
   selector: 'app-admin-hub',
@@ -18,6 +19,7 @@ export class AdminHubComponent implements OnInit {
   constructor(private _adminService: AdminService) { }
 
   ngOnInit(): void {
+    this.fetchEmployeePagination({  })
   }
 
   clickList() {
@@ -33,6 +35,12 @@ export class AdminHubComponent implements OnInit {
   resetDisplay() {
     this.addClick = false;
     this.listClick = false;
+  }
+
+  fetchEmployeePagination(dto : DtoOutputPaginationParameters){
+    this._adminService
+      .fetchEmployeePagination(dto)
+      .subscribe(employees => this.employees = employees)
   }
 
   createEmployee(dto: DtoOutputCreateUser) {
