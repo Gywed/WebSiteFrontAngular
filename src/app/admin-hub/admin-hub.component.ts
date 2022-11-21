@@ -4,6 +4,7 @@ import {AdminService} from "./admin.service";
 import {DtoInputUser} from "../user-hub/dtos/dto-input-user";
 import {DtoOutputDeleteEmployee} from "./dtos/dto-output-delete-employee";
 import {DtoOutputPaginationParameters} from "../dtos/dto-output-pagination-parameters";
+import {LocalService} from "../local.service";
 
 @Component({
   selector: 'app-admin-hub',
@@ -16,10 +17,13 @@ export class AdminHubComponent implements OnInit {
 
   employees: DtoInputUser[] = []
 
-  constructor(private _adminService: AdminService) { }
+  constructor(private _adminService: AdminService, private _localService: LocalService) { }
 
   ngOnInit(): void {
-    this.fetchEmployeePagination({  })
+    this.fetchEmployeePagination({
+      nbPage: +(this._localService.getData("nbPage")??1),
+      nbElementsByPage: +(this._localService.getData("nbEmployeesByPage")??10)
+    })
   }
 
   clickList() {
