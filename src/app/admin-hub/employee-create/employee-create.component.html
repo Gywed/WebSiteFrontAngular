@@ -19,8 +19,8 @@
     </div>
   </div>
   <div>
-    <input type="number" formControlName="age" class="fields" placeholder="Age">
-    <div *ngIf="controls('age')?.dirty && controls('age')?.invalid" class="warning">
+    <input type="date" formControlName="birthdate" class="fields">
+    <div *ngIf="controls('birthdate')?.dirty && controls('birthdate')?.invalid" class="warning">
       This information is required!
     </div>
   </div>

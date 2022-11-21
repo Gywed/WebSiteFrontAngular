@@ -16,7 +16,7 @@ export class UserCreateComponent implements OnInit {
     surname : ['', Validators.required],
     lastname : ['', Validators.required],
     email : ['', Validators.required],
-    age : [1, Validators.required],
+    birthdate : [Validators.required],
     password : ['', Validators.required]
 });
 
@@ -30,9 +30,8 @@ export class UserCreateComponent implements OnInit {
       surname: this.form.value.surname,
       lastname : this.form.value.lastname,
       email : this.form.value.email,
-      age : this.form.value.age,
-      password : this.form.value.password,
-      permission : 0
+      birthdate : this.form.value.birthdate,
+      password : this.form.value.password
     });
     this.form.reset();
   }
