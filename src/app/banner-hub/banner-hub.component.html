@@ -14,8 +14,8 @@
     </div>
 
     <div class="dropdown">
-      <button class="dropbtn">Log In</button>
-      <div class="dropdown-content">
+      <button class="dropbtn" (click)="showDropdown(content)">Log In</button>
+      <div class="dropdown-content" #content style="display: none;">
 
         <app-user-create (clientCreated)="createClient($event)" [hidden]="!RegisterActive"></app-user-create>
 
@@ -33,5 +33,6 @@
     </div>
   </nav>
 </div>
-
-
+<app-menubar-hub></app-menubar-hub>
+<div class="container">
+</div>

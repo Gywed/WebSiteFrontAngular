@@ -65,4 +65,13 @@ export class BannerHubComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  showDropdown(content: HTMLDivElement) {
+    if(content.style.display=='none'){
+      content.style.display='block';
+    }
+    else if(content.style.display=='block'){
+      content.style.display='none';
+    }
+  }
 }
