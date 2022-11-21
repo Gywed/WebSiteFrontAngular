@@ -17,7 +17,7 @@
       </tr>
       <tr *ngFor="let employee of employees">
         <td>{{employee.surname}}</td>
-        <td>{{employee.firstname}}</td>
+        <td>{{employee.lastname}}</td>
         <td>{{employee.age}}</td>
         <td>{{employee.email}}</td>
         <td><button (click)="emitDelete(employee)">X</button></td>

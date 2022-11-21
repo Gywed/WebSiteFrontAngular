@@ -14,7 +14,7 @@ export class UserCreateComponent implements OnInit {
 
   form: FormGroup = this._fb.group({
     surname : ['', Validators.required],
-    firstname : ['', Validators.required],
+    lastname : ['', Validators.required],
     email : ['', Validators.required],
     age : [1, Validators.required],
     password : ['', Validators.required]
@@ -28,7 +28,7 @@ export class UserCreateComponent implements OnInit {
   emitUser() {
     this.clientCreated.next({
       surname: this.form.value.surname,
-      firstname : this.form.value.firstname,
+      lastname : this.form.value.lastname,
       email : this.form.value.email,
       age : this.form.value.age,
       password : this.form.value.password,

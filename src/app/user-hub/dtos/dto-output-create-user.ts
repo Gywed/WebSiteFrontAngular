@@ -1,6 +1,6 @@
 export interface DtoOutputCreateUser {
   surname : string,
-  firstname : string,
+  lastname : string,
   email : string,
   age : number,
   password : string,
