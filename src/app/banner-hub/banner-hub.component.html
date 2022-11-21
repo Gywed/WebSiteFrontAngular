@@ -1,46 +1,38 @@
-<div class="ban">
-  <div class="logo">
-    <img src="assets/Logo_1.png" id="base" (click)="clickLogo()">
-    <img src="assets/Logo_2.png" id="dash" (click)="clickLogo()">
-  </div>
-  <h2 (click)="clickLogo()" class="title">Take And Dash</h2>
+<div class="divnavbar">
+  <nav class="navbar">
+    <div  (click)="clickLogo()" class="brand-title">
+      <div  class="logo">
+        <img src="assets/Logo_1.png" id="base">
+        <img src="assets/Logo_2.png" id="dash">
+      </div>
+      <div class="title">
+        <img src="assets/title.png" id="title_img">
+      </div>
+    </div>
+    <div class="center-links">
+      <input type="text" placeholder="Which article are you looking for?">
+    </div>
 
-  <button
-    (click)="clickArticle()" id="article">
-    Articles</button>
+    <div class="dropdown">
+      <button class="dropbtn" (click)="showDropdown(content)">Log In</button>
+      <div class="dropdown-content" #content style="display: none;">
 
-  <button
-    (click)="clickOrder()" id="order">
-    Orders</button>
+        <app-user-create (clientCreated)="createClient($event)" [hidden]="!RegisterActive"></app-user-create>
 
-  <div class="banRight">
-    <button
-      (click)="clickAdmin()" id="admin">
-      Admin</button>
 
-    <button
-      (click)="clickRegister()" id="reg">
-      Register</button>
+        <app-user-login (userLog)="login($event)" [hidden]="!LoginActive"></app-user-login>
 
-    <button
-      (click)="clickLogin()" id="log">
-      Login</button>
-  </div>
+        <a href="#">Scan Qr Code</a>
+        <div *ngIf="RegisterActive;else logActive">
+          <a (click)="clickLogin()" [hidden]="RegisterActive">Log in</a>
+        </div>
+        <ng-template #logActive><a (click)="clickRegister()" [hidden]="LoginActive">Register</a></ng-template>
+
+
+      </div>
+    </div>
+  </nav>
 </div>
-
-
-
-
-<div class="logReg">
-  <app-user-create (clientCreated)="createClient($event)" [hidden]="!RegisterActive"></app-user-create>
-  <p [hidden]="!RegisterActive" class="txtlink">Already registered ? <a (click)="clickLogin()" [hidden]="!RegisterActive" class="link">Login here</a></p>
-
-  <app-user-login (userLog)="login($event)" [hidden]="!LoginActive"></app-user-login>
-  <p [hidden]="!LoginActive" class="txtlink">Not yet registered ? <a (click)="clickRegister()" [hidden]="!LoginActive" class="link">Register here</a></p>
+<app-menubar-hub></app-menubar-hub>
+<div class="container">
 </div>
-
-<app-admin-hub [hidden]="!AdminActive"></app-admin-hub>
-
-<app-article-hub [hidden]="!ArticleActive"></app-article-hub>
-
-<app-order-hub [hidden]="!OrderActive"></app-order-hub>

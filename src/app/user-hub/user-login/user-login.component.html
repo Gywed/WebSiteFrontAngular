@@ -1,5 +1,4 @@
 <div class="form">
-  <h2>Login as a user</h2>
   <form [formGroup]="form" (ngSubmit)="emitCredential()">
     <div>
       <input type="text" formControlName="email" class="fields" placeholder="Email">
@@ -12,7 +11,7 @@
       <div *ngIf="controls('password')?.dirty && controls('password')?.invalid" class="warning">
         This information is required!
       </div>
-    </div> <br/>
+    </div>
     <input type="submit" [disabled]="form.invalid" value="Login" class="btn">
   </form>
 </div>

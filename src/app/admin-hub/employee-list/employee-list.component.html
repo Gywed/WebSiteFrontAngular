@@ -1,5 +1,12 @@
 <div class="list">
   <h3>List of employees</h3>
+  <label>Nb employees : </label>
+  {{nbElementsByPage}}
+  <select [(ngModel)]="nbElementsByPage" (ngModelChange)="emitPaginationChanged()">
+    <option [ngValue]="10" >10</option>
+    <option [ngValue]="25" >25</option>
+    <option [ngValue]="50" >50</option>
+  </select>
   <div *ngIf="employees.length; else employeeListEmpty">
     <table>
       <tr>

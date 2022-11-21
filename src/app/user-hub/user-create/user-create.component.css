@@ -1,21 +1,21 @@
 .form
 {
   text-align: center;
+
   font-size: 200%;
 }
 .fields
 {
-  font-size: 80%;
-  width: 40%;
-  margin-top: 0.5%;
+  font-size: 13px;
+  width: 90%;
 }
 .btn
 {
   text-align: center;
-  font-size: 100%;
-  width: 40.5%;
+  width: 80.5%;
 }
 .warning
 {
   color: red;
+  font-size: 9px;
 }

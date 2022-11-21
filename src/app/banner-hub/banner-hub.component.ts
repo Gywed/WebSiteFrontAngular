@@ -9,7 +9,7 @@ import {DtoOutputLogUser} from "../user-hub/dtos/dto-output-log-user";
   styleUrls: ['./banner-hub.component.css']
 })
 export class BannerHubComponent implements OnInit {
-  LoginActive = false;
+  LoginActive = true;
   RegisterActive = false;
   AdminActive = false;
   ArticleActive = false;
@@ -65,4 +65,13 @@ export class BannerHubComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  showDropdown(content: HTMLDivElement) {
+    if(content.style.display=='none'){
+      content.style.display='block';
+    }
+    else if(content.style.display=='block'){
+      content.style.display='none';
+    }
+  }
 }

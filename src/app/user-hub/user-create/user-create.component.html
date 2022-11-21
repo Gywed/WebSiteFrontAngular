@@ -1,5 +1,4 @@
 <div class="form">
-  <h2>Register as a user</h2>
   <form [formGroup]="form" (ngSubmit)="emitUser()">
     <div>
       <input type="text" formControlName="surname" class="fields" placeholder="Surname">
@@ -30,7 +29,7 @@
       <div *ngIf="controls('password')?.dirty && controls('password')?.invalid" class="warning">
         This information is required!
       </div>
-    </div> <br/>
+    </div>
     <input type="submit" [disabled]="form.invalid" value="Register" class="btn">
   </form>
 </div>

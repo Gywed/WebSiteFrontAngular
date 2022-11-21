@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { UserHubComponent } from './user-hub/user-hub.component';
 import { UserCreateComponent } from './user-hub/user-create/user-create.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {InterceptorCredentialInterceptor} from "./interceptor-credential.interceptor";
 import { UserLoginComponent } from './user-hub/user-login/user-login.component';
@@ -17,6 +17,7 @@ import { OrderHubComponent } from './order-hub/order-hub.component';
 import { OrderListDateComponent } from './order-hub/order-list-date/order-list-date.component';
 import { BannerHubComponent } from './banner-hub/banner-hub.component';
 import { OrderFilteredListComponent } from './order-hub/order-filtered-list/order-filtered-list.component';
+import { MenubarHubComponent } from './menubar-hub/menubar-hub.component';
 
 @NgModule({
   declarations: [
@@ -32,12 +33,14 @@ import { OrderFilteredListComponent } from './order-hub/order-filtered-list/orde
     OrderHubComponent,
     OrderListDateComponent,
     BannerHubComponent,
-    OrderFilteredListComponent
+    OrderFilteredListComponent,
+    MenubarHubComponent
   ],
     imports: [
         BrowserModule,
         ReactiveFormsModule,
-        HttpClientModule
+        HttpClientModule,
+        FormsModule
     ],
   providers: [
     {
