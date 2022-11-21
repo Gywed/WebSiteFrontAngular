@@ -9,7 +9,7 @@ import {DtoOutputLogUser} from "../user-hub/dtos/dto-output-log-user";
   styleUrls: ['./banner-hub.component.css']
 })
 export class BannerHubComponent implements OnInit {
-  LoginActive = false;
+  LoginActive = true;
   RegisterActive = false;
   AdminActive = false;
   ArticleActive = false;
