@@ -15,7 +15,7 @@ export class OrderService {
   constructor(private _httpClient: HttpClient) { }
 
   fetchOrderByDate(dto : DtoOutputOrderDate): Observable<DtoInputOrder[]>{
-    return this._httpClient.get<DtoInputOrder[]>(`${OrderService.ENTRY_POINT}/${dto.date}`)
+    return this._httpClient.get<DtoInputOrder[]>(`${OrderService.ENTRY_POINT}/date/${dto.date}`)
   }
 
   fetchFilteredOrder(dto: DtoOutputFilterOrder) : Observable<DtoInputOrder[]> {
