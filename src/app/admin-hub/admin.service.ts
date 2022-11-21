@@ -20,7 +20,8 @@ export class AdminService {
   }
 
   fetchEmployeePagination(dto: DtoOutputPaginationParameters): Observable<DtoInputUser[]>{
-    return this._httpClient.get<DtoInputUser[]>(`${AdminService.ENTRY_POINT}/employee?${dto.nbPage}?${dto.nbElementsByPage}`)
+    return this._httpClient.get<DtoInputUser[]>(
+      `${AdminService.ENTRY_POINT}/employee?nbPage=${dto.nbPage}&nbElementsByPage=${dto.nbElementsByPage}`)
   }
 
   deleteEmployee(dto: DtoOutputDeleteEmployee): Observable<any>{
