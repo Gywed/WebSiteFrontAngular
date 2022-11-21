@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DtoInputUser} from "../user-hub/dtos/dto-input-user";
 import {DtoInputArticle} from "./dtos/dto-input-article";
+import {ArticleService} from "./article.service";
 
 @Component({
   selector: 'app-article-hub',
@@ -10,9 +11,12 @@ import {DtoInputArticle} from "./dtos/dto-input-article";
 export class ArticleHubComponent implements OnInit {
   articles: DtoInputArticle[] = []
 
-  constructor() { }
+  constructor(private _articleService: ArticleService) { }
 
   ngOnInit(): void {
+    this.fetchAll();
   }
-
+  private fetchAll() {
+    this._articleService.fetchAllArticle().subscribe(articles => this.articles = articles);
+  }
 }
