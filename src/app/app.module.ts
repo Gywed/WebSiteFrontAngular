@@ -18,6 +18,7 @@ import { OrderListDateComponent } from './order-hub/order-list-date/order-list-d
 import { BannerHubComponent } from './banner-hub/banner-hub.component';
 import { OrderFilteredListComponent } from './order-hub/order-filtered-list/order-filtered-list.component';
 import { MenubarHubComponent } from './menubar-hub/menubar-hub.component';
+import { ArticleCreateComponent } from './admin-hub/article-create/article-create.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MenubarHubComponent } from './menubar-hub/menubar-hub.component';
     OrderListDateComponent,
     BannerHubComponent,
     OrderFilteredListComponent,
-    MenubarHubComponent
+    MenubarHubComponent,
+    ArticleCreateComponent
   ],
     imports: [
         BrowserModule,

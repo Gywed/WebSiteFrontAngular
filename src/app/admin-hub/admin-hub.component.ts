@@ -5,6 +5,8 @@ import {DtoInputUser} from "../user-hub/dtos/dto-input-user";
 import {DtoOutputDeleteEmployee} from "./dtos/dto-output-delete-employee";
 import {DtoOutputPaginationParameters} from "../dtos/dto-output-pagination-parameters";
 import {LocalService} from "../local.service";
+import {DtoOutputCreateArticle} from "../article-hub/dtos/dto-output-create-article";
+import {DtoInputArticle} from "../order-hub/dtos/dto-input-article";
 
 @Component({
   selector: 'app-admin-hub',
@@ -12,10 +14,12 @@ import {LocalService} from "../local.service";
   styleUrls: ['./admin-hub.component.css']
 })
 export class AdminHubComponent implements OnInit {
-  listClick = false;
-  addClick = false;
+  listEmpClick = false;
+  addEmpClick = false;
+  addArtClick = false;
 
   employees: DtoInputUser[] = []
+  articles: DtoInputArticle[] = []
 
   constructor(private _adminService: AdminService, private _localService: LocalService) { }
 
@@ -26,19 +30,25 @@ export class AdminHubComponent implements OnInit {
     })
   }
 
-  clickList() {
+  clickListEmp() {
     this.resetDisplay();
-    this.listClick = true;
+    this.listEmpClick = true;
   }
 
-  clickAdd() {
+  clickAddEmp() {
     this.resetDisplay();
-    this.addClick = true;
+    this.addEmpClick = true;
+  }
+
+  clickAddArt() {
+    this.resetDisplay();
+    this.addArtClick = true;
   }
 
   resetDisplay() {
-    this.addClick = false;
-    this.listClick = false;
+    this.addEmpClick = false;
+    this.listEmpClick = false;
+    this.addArtClick = false;
   }
 
   fetchEmployeePagination(dto : DtoOutputPaginationParameters){
@@ -51,6 +61,12 @@ export class AdminHubComponent implements OnInit {
     this._adminService
       .createEmployee(dto)
       .subscribe(employee=>this.employees.push(employee))
+  }
+
+  createArticle(dto: DtoOutputCreateArticle) {
+    this._adminService
+      .createArticle(dto)
+      .subscribe(article=>this.articles.push(article))
   }
 
   deleteEmployee(dto: DtoOutputDeleteEmployee){

@@ -6,6 +6,8 @@ import {Observable} from "rxjs";
 import {DtoInputUser} from "../user-hub/dtos/dto-input-user";
 import {DtoOutputDeleteEmployee} from "./dtos/dto-output-delete-employee";
 import {DtoOutputPaginationParameters} from "../dtos/dto-output-pagination-parameters";
+import {DtoOutputCreateArticle} from "../article-hub/dtos/dto-output-create-article";
+import {DtoInputArticle} from "../order-hub/dtos/dto-input-article";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,10 @@ export class AdminService {
   private static readonly ENTRY_POINT = environment.apiUrl + "/users";
 
   constructor(private _httpClient: HttpClient) { }
+
+  createArticle(dto: DtoOutputCreateArticle): Observable<DtoInputArticle>{
+    return this._httpClient.post<DtoInputArticle>(AdminService.ENTRY_POINT + "/articles", dto)
+  }
 
   createEmployee(dto: DtoOutputCreateUser): Observable<DtoInputUser>{
     return this._httpClient.post<DtoInputUser>(AdminService.ENTRY_POINT + "/employee", dto)

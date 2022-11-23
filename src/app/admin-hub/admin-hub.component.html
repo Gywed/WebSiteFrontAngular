@@ -1,21 +1,29 @@
 <div class="adminBanner">
   <button
-    (click)="clickAdd()" id="add">
+    (click)="clickAddEmp()" class="btnAdm">
     Register an employee</button>
 
   <button
-    (click)="clickList()" id="lis">
+    (click)="clickListEmp()" class="btnAdm">
     List all employees</button>
+
+  <button
+    (click)="clickAddArt()" class="btnAdm">
+    Register an article</button>
 </div>
 
 <div class="adminWindows">
-  <div [hidden]="!addClick">
+  <div [hidden]="!addEmpClick">
     <app-employee-create (employeeCreated)="createEmployee($event)"></app-employee-create>
   </div>
 
-  <div [hidden]="!listClick">
+  <div [hidden]="!listEmpClick">
     <app-employee-list [employees]="employees"
                        (deletedEmployee)="deleteEmployee($event)"
                        (paginationChanged)="fetchEmployeePagination($event)"></app-employee-list>
+  </div>
+
+  <div [hidden]="!addArtClick">
+    <app-article-create (articleCreated)="createArticle($event)"></app-article-create>
   </div>
 </div>
