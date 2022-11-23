@@ -18,7 +18,8 @@
   </div>
 
   <div [hidden]="!listEmpClick">
-    <app-employee-list [employees]="employees"
+    <app-employee-list [employeesInPage]="employeesInPage"
+                       [nbOfPages]="nbOfPagesEmployee"
                        (deletedEmployee)="deleteEmployee($event)"
                        (paginationChanged)="fetchEmployeePagination($event)"></app-employee-list>
   </div>
