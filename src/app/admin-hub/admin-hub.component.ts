@@ -15,7 +15,8 @@ export class AdminHubComponent implements OnInit {
   listClick = false;
   addClick = false;
 
-  employees: DtoInputUser[] = []
+  employeesInPage: DtoInputUser[] = []
+  nbOfPagesEmployee: number = 0;
 
   constructor(private _adminService: AdminService, private _localService: LocalService) { }
 
@@ -44,20 +45,23 @@ export class AdminHubComponent implements OnInit {
   fetchEmployeePagination(dto : DtoOutputPaginationParameters){
     this._adminService
       .fetchEmployeePagination(dto)
-      .subscribe(employees => this.employees = employees)
+      .subscribe(employees => {
+        this.employeesInPage = employees.pageElements;
+        this.nbOfPagesEmployee = employees.nbOfPages
+      })
   }
 
   createEmployee(dto: DtoOutputCreateUser) {
     this._adminService
       .createEmployee(dto)
-      .subscribe(employee=>this.employees.push(employee))
+      .subscribe(employee=>this.employeesInPage.push(employee))
   }
 
   deleteEmployee(dto: DtoOutputDeleteEmployee){
-    let employee = this.employees.filter(e=> e.id==dto.id)
-    let index = this.employees.indexOf(employee[0])
+    let employee = this.employeesInPage.filter(e=> e.id==dto.id)
+    let index = this.employeesInPage.indexOf(employee[0])
     this._adminService
       .deleteEmployee(dto)
-      .subscribe(()=>this.employees.splice(index, 1))
+      .subscribe(()=>this.employeesInPage.splice(index, 1))
   }
 }
