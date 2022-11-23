@@ -10,7 +10,8 @@ import {DtoOutputPaginationParameters} from "../../dtos/dto-output-pagination-pa
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
-  @Input() employees: DtoInputUser[] = []
+  @Input() employeesInPage: DtoInputUser[] = []
+  @Input() nbOfPages: number = 0;
   nbPage: number = +(this._localService.getData("nbPage")??1)
   nbElementsByPage: number = +(this._localService.getData("nbEmployeesByPage")??10)
 
