@@ -39,4 +39,10 @@ export class EmployeeListComponent implements OnInit {
     this._localService.saveData("nbPage", this.nbPage.toString())
     this._localService.saveData("nbEmployeesByPage", this.nbElementsByPage.toString())
   }
+
+  createPageNumberRange(){
+    // return new Array(number);
+    return new Array(this.nbOfPages).fill(0)
+      .map((n, index) => index + 1);
+  }
 }

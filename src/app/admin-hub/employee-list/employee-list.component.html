@@ -1,13 +1,14 @@
 <div class="list">
   <h3>List of employees</h3>
+  <!--Select the number of elements by page-->
   <label>Nb employees : </label>
-  {{nbElementsByPage}}
   <select [(ngModel)]="nbElementsByPage" (ngModelChange)="emitPaginationChanged()">
     <option [ngValue]="10" >10</option>
     <option [ngValue]="25" >25</option>
     <option [ngValue]="50" >50</option>
   </select>
-  <div *ngIf="employees.length; else employeeListEmpty">
+  <!--List of employees-->
+  <div *ngIf="employeesInPage.length; else employeeListEmpty">
     <table>
       <tr>
         <th>Surname</th>
@@ -15,7 +16,7 @@
         <th>Age</th>
         <th>E-Mail</th>
       </tr>
-      <tr *ngFor="let employee of employees">
+      <tr *ngFor="let employee of employeesInPage">
         <td>{{employee.surname}}</td>
         <td>{{employee.firstname}}</td>
         <td>{{employee.age}}</td>
@@ -23,6 +24,10 @@
         <td><button (click)="emitDelete(employee)">X</button></td>
       </tr>
     </table>
+    <!--Page selector-->
+    <div>
+      <button *ngFor="let page of createPageNumberRange()">{{page}}</button>
+    </div>
   </div>
 
   <!-- Will be displayed if employees list is empty-->
