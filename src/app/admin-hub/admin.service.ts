@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {DtoInputUser} from "../user-hub/dtos/dto-input-user";
 import {DtoOutputDeleteEmployee} from "./dtos/dto-output-delete-employee";
 import {DtoOutputPaginationParameters} from "../dtos/dto-output-pagination-parameters";
+import {DtoInputPaginationFiltering} from "../dtos/dto-input-pagination-filtering";
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,8 @@ export class AdminService {
     return this._httpClient.post<DtoInputUser>(AdminService.ENTRY_POINT + "/employee", dto)
   }
 
-  fetchEmployeePagination(dto: DtoOutputPaginationParameters): Observable<DtoInputUser[]>{
-    return this._httpClient.get<DtoInputUser[]>(
+  fetchEmployeePagination(dto: DtoOutputPaginationParameters): Observable<DtoInputPaginationFiltering<DtoInputUser>>{
+    return this._httpClient.get<DtoInputPaginationFiltering<DtoInputUser>>(
       `${AdminService.ENTRY_POINT}/employee?nbPage=${dto.nbPage}&nbElementsByPage=${dto.nbElementsByPage}`)
   }
 
