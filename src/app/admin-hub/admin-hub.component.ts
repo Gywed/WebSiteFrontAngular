@@ -6,7 +6,7 @@ import {DtoOutputDeleteEmployee} from "./dtos/dto-output-delete-employee";
 import {DtoOutputPaginationParameters} from "../dtos/dto-output-pagination-parameters";
 import {LocalService} from "../local.service";
 import {DtoOutputCreateArticle} from "../article-hub/dtos/dto-output-create-article";
-import {DtoInputArticle} from "../order-hub/dtos/dto-input-article";
+import {DtoInputArticle} from "../article-hub/dtos/dto-input-article";
 
 @Component({
   selector: 'app-admin-hub',
@@ -14,14 +14,17 @@ import {DtoInputArticle} from "../order-hub/dtos/dto-input-article";
   styleUrls: ['./admin-hub.component.css']
 })
 export class AdminHubComponent implements OnInit {
+  // Flags for first banner
   artClick = false;
   empClick = false;
 
+  // Flags for second banner
   listEmpClick = false;
   addEmpClick = false;
   addArtClick = false;
+  listArtClick = false;
 
-  articles: DtoInputArticle[] = []
+  articlesInPage: DtoInputArticle[] = []
   employeesInPage: DtoInputUser[] = []
   nbOfPagesEmployee: number = 0;
 
@@ -32,16 +35,15 @@ export class AdminHubComponent implements OnInit {
       nbPage: +(this._localService.getData("nbPage")??1),
       nbElementsByPage: +(this._localService.getData("nbEmployeesByPage")??10)
     })
+    this.fetchAllArticles()
   }
 
   clickArt() {
-    this.resetWindow();
     this.resetBanner();
     this.artClick = true;
   }
 
   clickEmp() {
-    this.resetWindow();
     this.resetBanner();
     this.empClick = true;
   }
@@ -61,13 +63,20 @@ export class AdminHubComponent implements OnInit {
     this.addArtClick = true;
   }
 
+  clickListArt() {
+    this.resetWindow();
+    this.listArtClick = true;
+  }
+
   resetWindow() {
     this.addEmpClick = false;
     this.listEmpClick = false;
     this.addArtClick = false;
+    this.listArtClick = false;
   }
 
   resetBanner() {
+    this.resetWindow();
     this.artClick = false;
     this.empClick = false;
   }
@@ -87,17 +96,21 @@ export class AdminHubComponent implements OnInit {
       .subscribe(employee=>this.employeesInPage.push(employee))
   }
 
-  createArticle(dto: DtoOutputCreateArticle) {
-    this._adminService
-      .createArticle(dto)
-      .subscribe(article=>this.articles.push(article))
-  }
-
   deleteEmployee(dto: DtoOutputDeleteEmployee){
     let employee = this.employeesInPage.filter(e=> e.id==dto.id)
     let index = this.employeesInPage.indexOf(employee[0])
     this._adminService
       .deleteEmployee(dto)
       .subscribe(()=>this.employeesInPage.splice(index, 1))
+  }
+
+  createArticle(dto: DtoOutputCreateArticle) {
+    this._adminService
+      .createArticle(dto)
+      .subscribe(article=>this.articlesInPage.push(article))
+  }
+
+  fetchAllArticles(){
+    this._adminService.fetchAllArticle().subscribe(articlesInPage=> this.articlesInPage = articlesInPage)
   }
 }

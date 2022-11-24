@@ -22,6 +22,10 @@
   <button
     (click)="clickAddArt()" class="btnAdm">
     Register an article</button>
+
+  <button
+    (click)="clickListArt()" class="btnAdm">
+    List all articles</button>
 </div>
 
 <div class="adminWindows">
@@ -38,5 +42,9 @@
 
   <div [hidden]="!addArtClick">
     <app-article-create (articleCreated)="createArticle($event)"></app-article-create>
+  </div>
+
+  <div [hidden]="!listArtClick">
+    <app-admin-list-article [articlesInPage]="articlesInPage"></app-admin-list-article>
   </div>
 </div>
