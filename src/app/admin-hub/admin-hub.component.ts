@@ -7,6 +7,7 @@ import {DtoOutputPaginationParameters} from "../dtos/dto-output-pagination-param
 import {LocalService} from "../local.service";
 import {DtoOutputCreateArticle} from "../article-hub/dtos/dto-output-create-article";
 import {DtoInputArticle} from "../order-hub/dtos/dto-input-article";
+import {DtoOutputEmployeeFilteringParameters} from "./dtos/dto-output-employee-filtering-parameters";
 
 @Component({
   selector: 'app-admin-hub',
@@ -29,8 +30,12 @@ export class AdminHubComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchEmployeePagination({
-      nbPage: +(this._localService.getData("nbPage")??1),
-      nbElementsByPage: +(this._localService.getData("nbEmployeesByPage")??10)
+      surname: "",
+      lastname: "",
+      dtoPagination: {
+        nbPage: +(this._localService.getData("nbPage")??1),
+        nbElementsByPage: +(this._localService.getData("nbEmployeesByPage")??10)
+      }
     })
   }
 
@@ -72,7 +77,7 @@ export class AdminHubComponent implements OnInit {
     this.empClick = false;
   }
 
-  fetchEmployeePagination(dto : DtoOutputPaginationParameters){
+  fetchEmployeePagination(dto : DtoOutputEmployeeFilteringParameters){
     this._adminService
       .fetchEmployeePagination(dto)
       .subscribe(employees => {
