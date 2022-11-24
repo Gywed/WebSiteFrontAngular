@@ -26,12 +26,12 @@ export class BannerHubComponent implements OnInit {
   }
 
   clickLogin() {
-    this.resetDisplay();
+    this.RegisterActive = false;
     this.LoginActive = true;
   }
 
   clickRegister() {
-    this.resetDisplay();
+    this.LoginActive = false;
     this.RegisterActive = true;
   }
 
@@ -55,9 +55,7 @@ export class BannerHubComponent implements OnInit {
   }
 
   resetDisplay() {
-    this.RegisterActive = false;
     this.AdminActive = false;
-    this.LoginActive = false;
     this.ArticleActive = false;
     this.OrderActive = false;
   }
