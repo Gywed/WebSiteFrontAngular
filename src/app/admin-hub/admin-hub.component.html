@@ -1,12 +1,24 @@
 <div class="adminBanner">
   <button
+    (click)="clickArt()" class="btnAdm">
+    Manage articles</button>
+
+  <button
+    (click)="clickEmp()" class="btnAdm">
+    Manage employees</button>
+</div>
+
+<div id="empBanner" [hidden]="!empClick">
+  <button
     (click)="clickAddEmp()" class="btnAdm">
     Register an employee</button>
 
   <button
     (click)="clickListEmp()" class="btnAdm">
     List all employees</button>
+</div>
 
+<div id="artBanner" [hidden]="!artClick">
   <button
     (click)="clickAddArt()" class="btnAdm">
     Register an article</button>

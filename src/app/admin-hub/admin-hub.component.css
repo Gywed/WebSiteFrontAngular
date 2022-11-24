@@ -1,6 +1,15 @@
 .adminBanner
 {
-  margin-top: 3%;
+  text-align: center;
+}
+#empBanner
+{
+  margin-top: 1%;
+  text-align: center;
+}
+#artBanner
+{
+  margin-top: 1%;
   text-align: center;
 }
 .adminWindows
@@ -13,5 +22,7 @@
   font-size: 160%;
   margin-right: 1%;
   margin-top: 0.5%;
-  background-color: slategray;
+  background-color: #007a7a;
+  border-radius: 15px;
+  width: 15%;
 }

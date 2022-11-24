@@ -14,6 +14,9 @@ import {DtoInputArticle} from "../order-hub/dtos/dto-input-article";
   styleUrls: ['./admin-hub.component.css']
 })
 export class AdminHubComponent implements OnInit {
+  artClick = false;
+  empClick = false;
+
   listEmpClick = false;
   addEmpClick = false;
   addArtClick = false;
@@ -31,25 +34,42 @@ export class AdminHubComponent implements OnInit {
     })
   }
 
+  clickArt() {
+    this.resetWindow();
+    this.resetBanner();
+    this.artClick = true;
+  }
+
+  clickEmp() {
+    this.resetWindow();
+    this.resetBanner();
+    this.empClick = true;
+  }
+
   clickListEmp() {
-    this.resetDisplay();
+    this.resetWindow();
     this.listEmpClick = true;
   }
 
   clickAddEmp() {
-    this.resetDisplay();
+    this.resetWindow();
     this.addEmpClick = true;
   }
 
   clickAddArt() {
-    this.resetDisplay();
+    this.resetWindow();
     this.addArtClick = true;
   }
 
-  resetDisplay() {
+  resetWindow() {
     this.addEmpClick = false;
     this.listEmpClick = false;
     this.addArtClick = false;
+  }
+
+  resetBanner() {
+    this.artClick = false;
+    this.empClick = false;
   }
 
   fetchEmployeePagination(dto : DtoOutputPaginationParameters){
