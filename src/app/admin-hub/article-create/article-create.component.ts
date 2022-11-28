@@ -39,5 +39,6 @@ export class ArticleCreateComponent implements OnInit {
       idcategory : this.form.value.idCategory,
       idbrand : this.form.value.idBrand
     })
+    this.form.reset();
   }
 }
