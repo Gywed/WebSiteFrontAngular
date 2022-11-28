@@ -9,6 +9,7 @@ import {DtoOutputPaginationParameters} from "../dtos/dto-output-pagination-param
 import {DtoOutputCreateArticle} from "../article-hub/dtos/dto-output-create-article";
 import {DtoInputPaginationFiltering} from "../dtos/dto-input-pagination-filtering";
 import {DtoInputArticle} from "../article-hub/dtos/dto-input-article";
+import {DtoOutputDeleteArticle} from "./dtos/dto-output-delete-article";
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,9 @@ export class AdminService {
 
   deleteEmployee(dto: DtoOutputDeleteEmployee): Observable<any>{
     return this._httpClient.request<any>('delete', AdminService.ENTRY_POINT_USER, {body: dto})
+  }
+
+  deleteArticle(dto: DtoOutputDeleteArticle): Observable<any>{
+    return this._httpClient.request<any>('delete', AdminService.ENTRY_POINT_ARTICLE, {body: dto})
   }
 }

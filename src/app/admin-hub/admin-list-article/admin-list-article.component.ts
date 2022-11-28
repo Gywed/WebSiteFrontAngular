@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LocalService} from "../../local.service";
 import {DtoInputArticle} from "../../article-hub/dtos/dto-input-article";
+import {DtoOutputDeleteArticle} from "../dtos/dto-output-delete-article";
 
 @Component({
   selector: 'app-admin-list-article',
@@ -10,8 +11,8 @@ import {DtoInputArticle} from "../../article-hub/dtos/dto-input-article";
 export class AdminListArticleComponent implements OnInit {
   @Input() articlesInPage: DtoInputArticle[] = []
 
-//  @Output()
-//  deletedArticle: EventEmitter<DtoOutputDeleteArticle> = new EventEmitter<DtoOutputDeleteArticle>()
+  @Output()
+  deletedArticle: EventEmitter<DtoOutputDeleteArticle> = new EventEmitter<DtoOutputDeleteArticle>()
 
   constructor(private _localService : LocalService) { }
 
@@ -19,6 +20,8 @@ export class AdminListArticleComponent implements OnInit {
   }
 
   emitDelete(article: DtoInputArticle) {
-    //todo
+    this.deletedArticle.next({
+      id: article.id
+    })
   }
 }

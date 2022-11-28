@@ -7,6 +7,7 @@ import {DtoOutputPaginationParameters} from "../dtos/dto-output-pagination-param
 import {LocalService} from "../local.service";
 import {DtoOutputCreateArticle} from "../article-hub/dtos/dto-output-create-article";
 import {DtoInputArticle} from "../article-hub/dtos/dto-input-article";
+import {DtoOutputDeleteArticle} from "./dtos/dto-output-delete-article";
 
 @Component({
   selector: 'app-admin-hub',
@@ -112,5 +113,13 @@ export class AdminHubComponent implements OnInit {
 
   fetchAllArticles(){
     this._adminService.fetchAllArticle().subscribe(articlesInPage=> this.articlesInPage = articlesInPage)
+  }
+
+  deleteArticle(dto: DtoOutputDeleteArticle){
+    let article = this.articlesInPage.filter(e=> e.id==dto.id)
+    let index = this.articlesInPage.indexOf(article[0])
+    this._adminService
+      .deleteArticle(dto)
+      .subscribe(()=>this.articlesInPage.splice(index, 1))
   }
 }
