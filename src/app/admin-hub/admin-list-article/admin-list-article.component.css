@@ -22,3 +22,10 @@ th {
 th, td {
   padding: 12px 15px;
 }
+#btnBackToList {
+  margin-left: 28%;
+  font-size: 80%;
+  width: 8%;
+  background-color: #007a7a;
+  border-radius: 15px;
+}

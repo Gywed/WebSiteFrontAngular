@@ -11,8 +11,10 @@ export class AdminUpdateArticleComponent implements OnChanges {
 
   @Input() nametag: string = "";
   @Input() price: number = 0;
-  @Input() pricingType: string = "";
+  @Input() pricingType: number = 0;
   @Input() stock: number = 0;
+  @Input() idcategory: number = 0;
+  @Input() idbrand: number = 0;
 
   @Output()
   articleCreated: EventEmitter<DtoOutputCreateArticle> = new EventEmitter<DtoOutputCreateArticle>()
@@ -29,13 +31,13 @@ export class AdminUpdateArticleComponent implements OnChanges {
   constructor(private _fb: FormBuilder) { }
 
   ngOnChanges(): void {
-    this.form.setValue( {
+    this.form.patchValue( {
       nameTag: this.nametag,
       price: this.price,
-      pricingType: 1,
+      pricingType: this.pricingType,
       stock: this.stock,
-      idCategory: 1,
-      idBrand: 1
+      idCategory: this.idcategory,
+      idBrand: this.idbrand
     });
   }
 

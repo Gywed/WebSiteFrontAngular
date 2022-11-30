@@ -25,6 +25,9 @@ export class AdminHubComponent implements OnInit {
   addArtClick = false;
   listArtClick = false;
 
+  // Flags of windows
+  updateClick = false;
+
   articlesInPage: DtoInputArticle[] = []
   employeesInPage: DtoInputUser[] = []
   nbOfPagesEmployee: number = 0;
@@ -74,6 +77,7 @@ export class AdminHubComponent implements OnInit {
     this.listEmpClick = false;
     this.addArtClick = false;
     this.listArtClick = false;
+    this.updateClick = false;
   }
 
   resetBanner() {

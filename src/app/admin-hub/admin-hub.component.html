@@ -46,6 +46,7 @@
 
   <div [hidden]="!listArtClick">
     <app-admin-list-article [articlesInPage]="articlesInPage"
-                            (deletedArticle)="deleteArticle($event)"></app-admin-list-article>
+                            (deletedArticle)="deleteArticle($event)"
+                            [(updateArticleClick)]="updateClick"></app-admin-list-article>
   </div>
 </div>
