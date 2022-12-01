@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DtoOutputCreateArticle} from "../../article-hub/dtos/dto-output-create-article";
+import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-article";
 
 @Component({
   selector: 'app-admin-update-article',
@@ -9,6 +9,7 @@ import {DtoOutputCreateArticle} from "../../article-hub/dtos/dto-output-create-a
 })
 export class AdminUpdateArticleComponent implements OnChanges {
 
+  @Input() id: number = 0;
   @Input() nametag: string = "";
   @Input() price: number = 0;
   @Input() pricingType: number = 0;
@@ -17,7 +18,7 @@ export class AdminUpdateArticleComponent implements OnChanges {
   @Input() idbrand: number = 0;
 
   @Output()
-  articleCreated: EventEmitter<DtoOutputCreateArticle> = new EventEmitter<DtoOutputCreateArticle>()
+  articleUpdated: EventEmitter<DtoOutputUpdateArticle> = new EventEmitter<DtoOutputUpdateArticle>()
 
   form: FormGroup = this._fb.group({
     nameTag : ['', Validators.required],
@@ -46,13 +47,14 @@ export class AdminUpdateArticleComponent implements OnChanges {
   }
 
   emitUpdate() {
-    this.articleCreated.next({
+    this.articleUpdated.next({
+      id : this.id,
       nametag : this.form.value.nameTag,
       price : this.form.value.price,
-      pricingtype : this.form.value.pricingType,
+      pricingType : this.form.value.pricingType,
       stock : this.form.value.stock,
-      idcategory : this.form.value.idCategory,
-      idbrand : this.form.value.idBrand
+      idCategory : this.form.value.idCategory,
+      idBrand : this.form.value.idBrand
     })
     this.form.reset();
   }

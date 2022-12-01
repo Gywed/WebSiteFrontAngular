@@ -8,6 +8,7 @@ import {LocalService} from "../local.service";
 import {DtoOutputCreateArticle} from "../article-hub/dtos/dto-output-create-article";
 import {DtoInputArticle} from "../article-hub/dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "./dtos/dto-output-delete-article";
+import {DtoOutputUpdateArticle} from "../article-hub/dtos/dto-output-update-article";
 
 @Component({
   selector: 'app-admin-hub',
@@ -125,5 +126,16 @@ export class AdminHubComponent implements OnInit {
     this._adminService
       .deleteArticle(dto)
       .subscribe(()=>this.articlesInPage.splice(index, 1))
+  }
+
+  updateArticle(dto: DtoOutputUpdateArticle){
+    this._adminService
+      .updateArticle(dto)
+      .subscribe(article=>
+          this.articlesInPage.forEach((art) => {
+              if(art.id == dto.id) {
+                  this.articlesInPage[this.articlesInPage.indexOf(art)] = dto;
+              }
+          }))
   }
 }

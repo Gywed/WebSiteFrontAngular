@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LocalService} from "../../local.service";
 import {DtoInputArticle} from "../../article-hub/dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "../dtos/dto-output-delete-article";
+import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-article";
 
 @Component({
   selector: 'app-admin-list-article',
@@ -18,6 +19,10 @@ export class AdminListArticleComponent implements OnInit {
   @Output()
   deletedArticle: EventEmitter<DtoOutputDeleteArticle> = new EventEmitter<DtoOutputDeleteArticle>()
 
+  @Output()
+  updatedArticle: EventEmitter<DtoOutputUpdateArticle> = new EventEmitter<DtoOutputUpdateArticle>()
+
+  idToUpdate: number = 0;
   nametagToUpdate: string = "";
   priceToUpdate: number = 0;
   pricingTypeToUpdate: number = 0;
@@ -31,6 +36,7 @@ export class AdminListArticleComponent implements OnInit {
   }
 
   clickUpdateArticle(article: DtoInputArticle) {
+    this.idToUpdate = article.id;
     this.nametagToUpdate = article.nametag;
     this.priceToUpdate = article.price;
     this.pricingTypeToUpdate = article.pricingType;
@@ -48,6 +54,18 @@ export class AdminListArticleComponent implements OnInit {
   emitDelete(article: DtoInputArticle) {
     this.deletedArticle.next({
       id: article.id
+    })
+  }
+
+  emitUpdate(article: DtoOutputUpdateArticle) {
+    this.updatedArticle.next( {
+      id: article.id,
+      nametag : article.nametag,
+      price : article.price,
+      pricingType : article.pricingType,
+      stock : article.stock,
+      idCategory : article.idCategory,
+      idBrand : article.idBrand
     })
   }
 }

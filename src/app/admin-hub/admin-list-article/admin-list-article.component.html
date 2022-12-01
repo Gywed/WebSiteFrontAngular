@@ -25,5 +25,5 @@
 </div>
 
 <button [hidden]="!updateArticleClick" (click)="clickBackToList()" id="btnBackToList">Go back</button>
-<app-admin-update-article [hidden]="!updateArticleClick" [nametag]="nametagToUpdate" [price]="priceToUpdate" [pricingType]="pricingTypeToUpdate" [stock]="stockToUpdate"
-                          [idcategory]="idCategoryToUpdate" [idbrand]="idBrandToUpdate"></app-admin-update-article>
+<app-admin-update-article [hidden]="!updateArticleClick" [id]="idToUpdate" [nametag]="nametagToUpdate" [price]="priceToUpdate" [pricingType]="pricingTypeToUpdate" [stock]="stockToUpdate"
+                          [idcategory]="idCategoryToUpdate" [idbrand]="idBrandToUpdate" (articleUpdated)="emitUpdate($event)"></app-admin-update-article>

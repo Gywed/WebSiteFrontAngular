@@ -10,6 +10,7 @@ import {DtoOutputCreateArticle} from "../article-hub/dtos/dto-output-create-arti
 import {DtoInputPaginationFiltering} from "../dtos/dto-input-pagination-filtering";
 import {DtoInputArticle} from "../article-hub/dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "./dtos/dto-output-delete-article";
+import {DtoOutputUpdateArticle} from "../article-hub/dtos/dto-output-update-article";
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,14 @@ export class AdminService {
     return this._httpClient.get<DtoInputArticle[]>(AdminService.ENTRY_POINT_ARTICLE)
   }
 
+  deleteArticle(dto: DtoOutputDeleteArticle): Observable<any>{
+    return this._httpClient.request<any>('delete', AdminService.ENTRY_POINT_ARTICLE, {body: dto})
+  }
+
+  updateArticle(dto: DtoOutputUpdateArticle): Observable<DtoInputArticle>{
+    return this._httpClient.put<DtoInputArticle>(AdminService.ENTRY_POINT_ARTICLE + "/update", dto)
+  }
+
   createEmployee(dto: DtoOutputCreateUser): Observable<DtoInputUser>{
     return this._httpClient.post<DtoInputUser>(AdminService.ENTRY_POINT_USER + "/employee", dto)
   }
@@ -39,9 +48,5 @@ export class AdminService {
 
   deleteEmployee(dto: DtoOutputDeleteEmployee): Observable<any>{
     return this._httpClient.request<any>('delete', AdminService.ENTRY_POINT_USER, {body: dto})
-  }
-
-  deleteArticle(dto: DtoOutputDeleteArticle): Observable<any>{
-    return this._httpClient.request<any>('delete', AdminService.ENTRY_POINT_ARTICLE, {body: dto})
   }
 }
