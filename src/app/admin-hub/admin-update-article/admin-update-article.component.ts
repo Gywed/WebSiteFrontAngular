@@ -8,6 +8,8 @@ import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-a
   styleUrls: ['./admin-update-article.component.css']
 })
 export class AdminUpdateArticleComponent implements OnChanges {
+  //Flag for the validation message
+  updated = false;
 
   @Input() id: number = 0;
   @Input() nametag: string = "";
@@ -40,6 +42,7 @@ export class AdminUpdateArticleComponent implements OnChanges {
       idCategory: this.idcategory,
       idBrand: this.idbrand
     });
+    this.updated = false
   }
 
   controls(name: string): AbstractControl | null {
@@ -56,6 +59,6 @@ export class AdminUpdateArticleComponent implements OnChanges {
       idCategory : this.form.value.idCategory,
       idBrand : this.form.value.idBrand
     })
-    this.form.reset();
+    this.updated = true;
   }
 }

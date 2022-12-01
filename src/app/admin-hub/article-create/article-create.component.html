@@ -1,5 +1,4 @@
 <form [formGroup]="form" (ngSubmit)="emitArticle()" class="form">
-  <h3>Register a new article</h3>
   <div>
     <input type="text" formControlName="nameTag" class="fields" placeholder="name tag">
     <div *ngIf="controls('nameTag')?.dirty && controls('nameTag')?.invalid" class="warning">
