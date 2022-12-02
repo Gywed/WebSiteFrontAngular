@@ -5,7 +5,7 @@ export interface DtoInputArticle {
   id: number,
   nametag : string,
   price : number,
-  pricingtype : number
+  pricingType : number
   category : DtoInputCategory
   brand : DtoInputBrand
 }

@@ -35,6 +35,7 @@ export class OrderFilteredListComponent implements OnInit {
       date: this.form.value.date,
       name : this.form.value.name
     });
+    this.orders = []
   }
 }
 

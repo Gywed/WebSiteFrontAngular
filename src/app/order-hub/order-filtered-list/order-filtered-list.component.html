@@ -3,15 +3,9 @@
     <label>
       Select a date : <input type="date" formControlName="date" class="fields">
     </label>
-    <div *ngIf="controls('date')?.dirty && controls('date')?.invalid" class="warning">
-      This information is required!
-    </div>
     <label>
       Name of the emitter of the order : <input type="text" formControlName="name" class="fields">
     </label>
-    <div *ngIf="controls('name')?.dirty && controls('name')?.invalid" class="warning">
-      This information is required!
-    </div>
   </div>
   <input type="submit" value="Select" class="btn">
 </form>
@@ -21,13 +15,13 @@
   <table border="2">
     <tr>
       <th>Id</th>
-      <th>Date</th>
+      <th>Creation</th>
       <th>Total of the order</th>
       <th>Order content</th>
     </tr>
     <tr *ngFor="let order of orders">
       <td>{{order.id}}</td>
-      <td>{{order.date.slice(0,order.date.search("T"))}}</td>
+      <td>{{order.creationDate.slice(0,order.creationDate.search("T"))}}</td>
       <td>{{order.totalOrderPrice}}</td>
       <td>
         <table border="1">
@@ -43,12 +37,16 @@
                   <th>Name tag</th>
                   <th>Price</th>
                   <th>Pricing type</th>
+                  <th>Category</th>
+                  <th>Brand</th>
                 </tr>
                 <tr>
                   <td>{{orderContent.article.id}}</td>
                   <td>{{orderContent.article.nametag}}</td>
                   <td>{{orderContent.article.price}}</td>
-                  <td>{{orderContent.article.pricingtype}}</td>
+                  <td>{{orderContent.article.pricingType}}</td>
+                  <td>{{orderContent.article.category.name}}</td>
+                  <td>{{orderContent.article.brand.name}}</td>
                 </tr>
               </table>
             </td>
