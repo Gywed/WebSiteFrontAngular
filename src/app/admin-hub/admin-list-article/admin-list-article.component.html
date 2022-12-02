@@ -8,7 +8,7 @@
       <tr>
         <th>Name</th>
         <th>Price</th>
-        <th>In stock</th>
+        <th (click)="sortArticleByStock()">In stock <a [hidden]="sortIncreasingArticleStock">↑</a><a [hidden]="!sortIncreasingArticleStock">↓</a></th>
         <th>Delete</th>
       </tr>
       <tr *ngFor="let article of articlesInPage">

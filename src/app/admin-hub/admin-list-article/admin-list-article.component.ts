@@ -41,6 +41,9 @@ export class AdminListArticleComponent implements OnInit {
   searchingByName = false;
   nametagToSearch: string = "";
 
+  // Flag for sort
+  sortIncreasingArticleStock = false;
+
   constructor(private _localService : LocalService) { }
 
   ngOnInit(): void {
@@ -92,4 +95,12 @@ export class AdminListArticleComponent implements OnInit {
     }
   }
 
+  sortArticleByStock() {
+    if (this.sortIncreasingArticleStock) {
+      this.articlesInPage.sort((a,b) => a.stock - b.stock);
+    } else {
+      this.articlesInPage.sort((a,b) => b.stock - a.stock);
+    }
+    this.sortIncreasingArticleStock = !this.sortIncreasingArticleStock;
+  }
 }
