@@ -48,6 +48,8 @@
     <app-admin-list-article [articlesInPage]="articlesInPage"
                             (deletedArticle)="deleteArticle($event)"
                             [(updateArticleClick)]="updateClick"
-                            (updatedArticle)="updateArticle($event)"></app-admin-list-article>
+                            (updatedArticle)="updateArticle($event)"
+                            (filteredArticle)="fetchFilteredArticles($event)"
+                            (fetchArticle)="fetchAllArticles()"></app-admin-list-article>
   </div>
 </div>

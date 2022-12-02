@@ -9,6 +9,7 @@ import {DtoOutputCreateArticle} from "../article-hub/dtos/dto-output-create-arti
 import {DtoInputArticle} from "../article-hub/dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "./dtos/dto-output-delete-article";
 import {DtoOutputUpdateArticle} from "../article-hub/dtos/dto-output-update-article";
+import {DtoOutputFilterArticle} from "./dtos/dto-output-filter-article";
 
 @Component({
   selector: 'app-admin-hub',
@@ -118,6 +119,10 @@ export class AdminHubComponent implements OnInit {
 
   fetchAllArticles(){
     this._adminService.fetchAllArticle().subscribe(articlesInPage=> this.articlesInPage = articlesInPage)
+  }
+
+  fetchFilteredArticles(dto: DtoOutputFilterArticle){
+    this._adminService.fetchFilteredArticle(dto).subscribe(articlesInPage=> this.articlesInPage = articlesInPage)
   }
 
   deleteArticle(dto: DtoOutputDeleteArticle){

@@ -30,3 +30,9 @@ th, td {
   background-color: #007a7a;
   border-radius: 15px;
 }
+.fields
+{
+  font-size: 80%;
+  width: 28%;
+  margin-top: 0.5%;
+}

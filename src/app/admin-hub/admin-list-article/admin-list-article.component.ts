@@ -3,6 +3,7 @@ import {LocalService} from "../../local.service";
 import {DtoInputArticle} from "../../article-hub/dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "../dtos/dto-output-delete-article";
 import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-article";
+import {DtoOutputFilterArticle} from "../dtos/dto-output-filter-article";
 
 @Component({
   selector: 'app-admin-list-article',
@@ -22,6 +23,12 @@ export class AdminListArticleComponent implements OnInit {
   @Output()
   updatedArticle: EventEmitter<DtoOutputUpdateArticle> = new EventEmitter<DtoOutputUpdateArticle>()
 
+  @Output()
+  filteredArticle: EventEmitter<DtoOutputFilterArticle> = new EventEmitter<DtoOutputFilterArticle>()
+
+  @Output()
+  fetchArticle: EventEmitter<null> = new EventEmitter<null>()
+
   idToUpdate: number = 0;
   nametagToUpdate: string = "";
   priceToUpdate: number = 0;
@@ -29,6 +36,10 @@ export class AdminListArticleComponent implements OnInit {
   stockToUpdate: number = 0;
   idCategoryToUpdate: number = 0;
   idBrandToUpdate: number = 0;
+
+  // Flag for search
+  searchingByName = false;
+  nametagToSearch: string = "";
 
   constructor(private _localService : LocalService) { }
 
@@ -68,4 +79,17 @@ export class AdminListArticleComponent implements OnInit {
       idBrand : article.idBrand
     })
   }
+
+  emitFilter() {
+    this.searchingByName = this.nametagToSearch != "";
+
+    if (this.searchingByName) {
+      this.filteredArticle.next({
+        nametag: this.nametagToSearch
+      })
+    } else {
+      this.fetchArticle.next(null)
+    }
+  }
+
 }

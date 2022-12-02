@@ -1,4 +1,7 @@
 <div class="list" [hidden]="updateArticleClick">
+
+  <input class="fields" placeholder="Search by name" [(ngModel)]="nametagToSearch" (ngModelChange)="emitFilter()">
+
   <!--List of articles-->
   <div *ngIf="articlesInPage.length; else articleListEmpty">
     <table class="tbl">
@@ -19,7 +22,8 @@
 
   <!-- Will be displayed if articles list is empty-->
   <ng-template #articleListEmpty>
-    <p>You don't have any article. Register a new article.</p>
+    <p [hidden]="searchingByName">You don't have any article. Register a new article.</p>
+    <p [hidden]="!searchingByName">There is no article matching your search.</p>
   </ng-template>
 </div>
 

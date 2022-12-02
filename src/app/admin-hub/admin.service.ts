@@ -11,6 +11,7 @@ import {DtoInputPaginationFiltering} from "../dtos/dto-input-pagination-filterin
 import {DtoInputArticle} from "../article-hub/dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "./dtos/dto-output-delete-article";
 import {DtoOutputUpdateArticle} from "../article-hub/dtos/dto-output-update-article";
+import {DtoOutputFilterArticle} from "./dtos/dto-output-filter-article";
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,10 @@ export class AdminService {
 
   fetchAllArticle(): Observable<DtoInputArticle[]>{
     return this._httpClient.get<DtoInputArticle[]>(AdminService.ENTRY_POINT_ARTICLE)
+  }
+
+  fetchFilteredArticle(dto: DtoOutputFilterArticle): Observable<DtoInputArticle[]>{
+    return this._httpClient.get<DtoInputArticle[]>(`${AdminService.ENTRY_POINT_ARTICLE}/${dto.nametag}`)
   }
 
   deleteArticle(dto: DtoOutputDeleteArticle): Observable<any>{
