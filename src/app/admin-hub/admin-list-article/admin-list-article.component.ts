@@ -39,6 +39,7 @@ export class AdminListArticleComponent implements OnInit {
 
   // Flag for search
   searchingByName = false;
+
   nametagToSearch: string = "";
 
   // Flag for sort
