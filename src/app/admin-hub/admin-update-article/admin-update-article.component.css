@@ -5,7 +5,7 @@
 .fieldsHeader
 {
   font-size: 80%;
-  width: 12%;
+  width: 15%;
   margin-top: 0.5%;
   background-color: #007a7a;
   color: #f1f1f1;
@@ -13,14 +13,21 @@
 .fields
 {
   font-size: 80%;
-  width: 28%;
+  width: 35%;
+  margin-top: 0.5%;
+}
+.list
+{
+  font-size: 80%;
+  width: 35.5%;
   margin-top: 0.5%;
 }
 .btn
 {
+  margin-left: 39%;
   text-align: center;
   font-size: 100%;
-  width: 40.5%;
+  width: 12%;
 }
 .warning
 {

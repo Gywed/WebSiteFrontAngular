@@ -4,6 +4,7 @@ import {DtoInputArticle} from "../../article-hub/dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "../dtos/dto-output-delete-article";
 import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-article";
 import {DtoOutputFilterArticle} from "../dtos/dto-output-filter-article";
+import {DtoInputCategory} from "../../order-hub/dtos/dto-input-category";
 
 @Component({
   selector: 'app-admin-list-article',
@@ -16,6 +17,7 @@ export class AdminListArticleComponent implements OnInit {
   @Output() updateArticleClickChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Input() articlesInPage: DtoInputArticle[] = []
+  @Input() listOfCategories: DtoInputCategory[] = []
 
   @Output()
   deletedArticle: EventEmitter<DtoOutputDeleteArticle> = new EventEmitter<DtoOutputDeleteArticle>()

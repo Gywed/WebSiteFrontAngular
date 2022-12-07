@@ -13,6 +13,7 @@ import {DtoOutputFilterArticle} from "./dtos/dto-output-filter-article";
 import {DtoOutputEmployeeFilteringParameters} from "./dtos/dto-output-employee-filtering-parameters";
 import {DtoOutputUpdateUser} from "../user-hub/dtos/dto-output-update-user";
 import {DtoInputCompleteUser} from "../user-hub/dtos/dto-input-complete-user";
+import {DtoInputCategory} from "../order-hub/dtos/dto-input-category";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ import {DtoInputCompleteUser} from "../user-hub/dtos/dto-input-complete-user";
 export class AdminService {
   private static readonly ENTRY_POINT_USER = environment.apiUrl + "/users";
   private static readonly ENTRY_POINT_ARTICLE = environment.apiUrl + "/articles";
+  private static readonly ENTRY_POINT_CATEGORIE = environment.apiUrl + "/categories";
 
   constructor(private _httpClient: HttpClient) { }
 
@@ -29,6 +31,10 @@ export class AdminService {
 
   fetchAllArticle(): Observable<DtoInputArticle[]>{
     return this._httpClient.get<DtoInputArticle[]>(AdminService.ENTRY_POINT_ARTICLE)
+  }
+
+  fetchAllCategories(): Observable<DtoInputCategory[]>{
+    return this._httpClient.get<DtoInputCategory[]>(AdminService.ENTRY_POINT_CATEGORIE)
   }
 
   fetchFilteredArticle(dto: DtoOutputFilterArticle): Observable<DtoInputArticle[]>{

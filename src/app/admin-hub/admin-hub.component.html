@@ -52,6 +52,7 @@
                             [(updateArticleClick)]="updateClick"
                             (updatedArticle)="updateArticle($event)"
                             (filteredArticle)="fetchFilteredArticles($event)"
-                            (fetchArticle)="fetchAllArticles()"></app-admin-list-article>
+                            (fetchArticle)="fetchAllArticles()"
+                            [listOfCategories]="listOfCategories"></app-admin-list-article>
   </div>
 </div>

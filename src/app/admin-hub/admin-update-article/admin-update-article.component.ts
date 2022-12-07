@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-article";
+import {DtoInputCategory} from "../../order-hub/dtos/dto-input-category";
 
 @Component({
   selector: 'app-admin-update-article',
@@ -19,6 +20,8 @@ export class AdminUpdateArticleComponent implements OnChanges {
   @Input() idcategory: number = 0;
   @Input() idbrand: number = 0;
 
+  @Input() listOfCategories: DtoInputCategory[] = []
+
   @Output()
   articleUpdated: EventEmitter<DtoOutputUpdateArticle> = new EventEmitter<DtoOutputUpdateArticle>()
 
@@ -27,9 +30,12 @@ export class AdminUpdateArticleComponent implements OnChanges {
     price : ['', Validators.required],
     pricingType : ['', Validators.required],
     stock : ['', Validators.required],
-    idCategory : ['', Validators.required],
     idBrand : ['', Validators.required]
   })
+
+  idCategoryToUpdate = 0;
+  idBrandToUpdate = 0;
+  PricingTypeToUpdate = 0;
 
   constructor(private _fb: FormBuilder) { }
 
@@ -39,10 +45,12 @@ export class AdminUpdateArticleComponent implements OnChanges {
       price: this.price,
       pricingType: this.pricingType,
       stock: this.stock,
-      idCategory: this.idcategory,
       idBrand: this.idbrand
     });
     this.updated = false
+    this.idCategoryToUpdate = this.idcategory;
+    this.idBrandToUpdate = this.idbrand;
+    this.PricingTypeToUpdate = this.pricingType;
   }
 
   controls(name: string): AbstractControl | null {
@@ -56,9 +64,21 @@ export class AdminUpdateArticleComponent implements OnChanges {
       price : this.form.value.price,
       pricingType : this.form.value.pricingType,
       stock : this.form.value.stock,
-      idCategory : this.form.value.idCategory,
+      idCategory : this.idCategoryToUpdate,
       idBrand : this.form.value.idBrand
     })
     this.updated = true;
+  }
+
+  setIdCategory(id: any) {
+    this.idCategoryToUpdate = id.target.value;
+  }
+
+  setIdBrand(id: number) {
+    this.idBrandToUpdate = id;
+  }
+
+  setPricingType(id: number) {
+    this.PricingTypeToUpdate = id;
   }
 }
