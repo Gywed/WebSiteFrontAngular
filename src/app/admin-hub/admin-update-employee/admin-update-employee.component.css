@@ -1,0 +1,32 @@
+.form
+{
+  text-align: center;
+}
+.fieldsHeader
+{
+  font-size: 80%;
+  width: 12%;
+  margin-top: 0.5%;
+  background-color: #007a7a;
+  color: #f1f1f1;
+}
+.fields
+{
+  font-size: 80%;
+  width: 28%;
+  margin-top: 0.5%;
+}
+.btn
+{
+  text-align: center;
+  font-size: 100%;
+  width: 40.5%;
+}
+.warning
+{
+  color: red;
+}
+#validation
+{
+  color: forestgreen;
+}

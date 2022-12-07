@@ -1,4 +1,4 @@
-<div class="list">
+<div class="list" [hidden]="updateEmployeeClick">
   <!-- filtering by surname and lastname -->
   <p>Search an employee</p>
   <input class="fields" type="text" placeholder="surname" [(ngModel)]="surname" (ngModelChange)="nbPage=1; emitPaginationChanged()">
@@ -19,10 +19,10 @@
         <th>E-Mail</th>
       </tr>
       <tr *ngFor="let employee of employeesInPage">
-        <td>{{employee.surname}}</td>
-        <td>{{employee.lastname}}</td>
-        <td>{{employee.age}}</td>
-        <td>{{employee.email}}</td>
+        <td (click)="clickUpdateEmployee(employee)">{{employee.surname}}</td>
+        <td (click)="clickUpdateEmployee(employee)">{{employee.lastname}}</td>
+        <td (click)="clickUpdateEmployee(employee)">{{employee.age}}</td>
+        <td (click)="clickUpdateEmployee(employee)">{{employee.email}}</td>
         <td><button (click)="emitDelete(employee)">X</button></td>
       </tr>
     </table>
@@ -38,3 +38,7 @@
     <p [hidden]="!searchingByName">There is no employee matching your search.</p>
   </ng-template>
 </div>
+
+<button [hidden]="!updateEmployeeClick" (click)="clickBackToList()" id="btnBackToList">Go back</button>
+<app-admin-update-employee [hidden]="!updateEmployeeClick" [id]="idToUpdate" [surname]="surnameToUpdate" [lastname]="lastnameToUpdate" [age]="ageToUpdate"
+                          [permission]="permissionToUpdate" (employeeUpdated)="emitUpdate($event)"></app-admin-update-employee>

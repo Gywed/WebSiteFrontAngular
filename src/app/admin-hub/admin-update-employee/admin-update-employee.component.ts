@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-article";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {DtoOutputUpdateUser} from "../../user-hub/dtos/dto-output-update-user";
 
 @Component({
   selector: 'app-admin-update-employee',
@@ -12,23 +12,19 @@ export class AdminUpdateEmployeeComponent implements OnChanges {
   updated = false;
 
   @Input() id: number = 0;
-  @Input() nametag: string = "";
-  @Input() price: number = 0;
-  @Input() pricingType: number = 0;
-  @Input() stock: number = 0;
-  @Input() idcategory: number = 0;
-  @Input() idbrand: number = 0;
+  @Input() surname: string = "";
+  @Input() lastname: string = "";
+  @Input() age: number = 0;
+  @Input() permission: number = 0;
 
   @Output()
-  articleUpdated: EventEmitter<DtoOutputUpdateArticle> = new EventEmitter<DtoOutputUpdateArticle>()
+  employeeUpdated: EventEmitter<DtoOutputUpdateUser> = new EventEmitter<DtoOutputUpdateUser>()
 
   form: FormGroup = this._fb.group({
-    nameTag: ['', Validators.required],
-    price: ['', Validators.required],
-    pricingType: ['', Validators.required],
-    stock: ['', Validators.required],
-    idCategory: ['', Validators.required],
-    idBrand: ['', Validators.required]
+    surname: ['', Validators.required],
+    lastname: ['', Validators.required],
+    age: ['', Validators.required],
+    permission: ['', Validators.required]
   })
 
   constructor(private _fb: FormBuilder) {
@@ -36,12 +32,10 @@ export class AdminUpdateEmployeeComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.form.patchValue({
-      nameTag: this.nametag,
-      price: this.price,
-      pricingType: this.pricingType,
-      stock: this.stock,
-      idCategory: this.idcategory,
-      idBrand: this.idbrand
+      surname: this.surname,
+      lastname: this.lastname,
+      age: this.age,
+      permission: this.permission
     });
     this.updated = false
   }
@@ -51,14 +45,12 @@ export class AdminUpdateEmployeeComponent implements OnChanges {
   }
 
   emitUpdate() {
-    this.articleUpdated.next({
+    this.employeeUpdated.next({
       id: this.id,
-      nametag: this.form.value.nameTag,
-      price: this.form.value.price,
-      pricingType: this.form.value.pricingType,
-      stock: this.form.value.stock,
-      idCategory: this.form.value.idCategory,
-      idBrand: this.form.value.idBrand
+      surname: this.form.value.surname,
+      lastname: this.form.value.lastname,
+      age: this.form.value.age,
+      permission: this.form.value.permission
     })
     this.updated = true;
   }
