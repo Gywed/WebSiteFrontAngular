@@ -1,0 +1,46 @@
+<form [formGroup]="form" (ngSubmit)="emitUpdate()" class="form">
+  <div>
+    <input type="text" class="fieldsHeader" value="Name tag" readonly>
+    <input type="text" formControlName="nameTag" class="fields" placeholder="name tag">
+    <div *ngIf="controls('nameTag')?.dirty && controls('nameTag')?.invalid" class="warning">
+      This information is required!
+    </div>
+  </div>
+  <div>
+    <input type="text" class="fieldsHeader" value="Price" readonly>
+    <input type="text" formControlName="price" class="fields" placeholder="price">
+    <div *ngIf="controls('price')?.dirty && controls('price')?.invalid" class="warning">
+      This information is required!
+    </div>
+  </div>
+  <div>
+    <input type="text" class="fieldsHeader" value="Pricing type" readonly>
+    <input type="text" formControlName="pricingType" class="fields" placeholder="type of pricing">
+    <div *ngIf="controls('pricingType')?.dirty && controls('pricingType')?.invalid" class="warning">
+      This information is required!
+    </div>
+  </div>
+  <div>
+    <input type="text" class="fieldsHeader" value="Stock" readonly>
+    <input type="text" formControlName="stock" class="fields" placeholder="number of article in stock">
+    <div *ngIf="controls('stock')?.dirty && controls('stock')?.invalid" class="warning">
+      This information is required!
+    </div>
+  </div>
+  <div>
+    <input type="text" class="fieldsHeader" value="Id of the category" readonly>
+    <input type="text" formControlName="idCategory" class="fields" placeholder="id of the category">
+    <div *ngIf="controls('idCategory')?.dirty && controls('idCategory')?.invalid" class="warning">
+      This information is required!
+    </div>
+  </div>
+  <div>
+    <input type="text" class="fieldsHeader" value="Id of the brand" readonly>
+    <input type="text" formControlName="idBrand" class="fields" placeholder="id of the brand">
+    <div *ngIf="controls('idBrand')?.dirty && controls('idBrand')?.invalid" class="warning">
+      This information is required!
+    </div>
+  </div> <br/>
+  <input type="submit" [disabled]="form.invalid" value="Modify" class="btn">
+  <h3 [hidden]="!updated" id="validation">Article updated with success</h3>
+</form>

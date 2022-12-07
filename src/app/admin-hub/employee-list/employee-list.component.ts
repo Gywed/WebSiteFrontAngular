@@ -2,9 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DtoInputUser} from "../../user-hub/dtos/dto-input-user";
 import {DtoOutputDeleteEmployee} from "../dtos/dto-output-delete-employee";
 import {LocalService} from "../../local.service";
-import {DtoOutputPaginationParameters} from "../../dtos/dto-output-pagination-parameters";
-import {DtoOutputFilterEmployee} from "../dtos/dto-output-filter-employee";
 import {DtoOutputEmployeeFilteringParameters} from "../dtos/dto-output-employee-filtering-parameters";
+import {DtoInputCompleteUser} from "../../user-hub/dtos/dto-input-complete-user";
 
 @Component({
   selector: 'app-employee-list',
@@ -12,7 +11,7 @@ import {DtoOutputEmployeeFilteringParameters} from "../dtos/dto-output-employee-
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
-  @Input() employeesInPage: DtoInputUser[] = []
+  @Input() employeesInPage: DtoInputCompleteUser[] = []
   @Input() nbOfPages: number = 0;
   nbPage: number = +(this._localService.getData("nbPage")??1)
   nbElementsByPage: number = +(this._localService.getData("nbEmployeesByPage")??10)

@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {DtoOutputCreateUser} from "../user-hub/dtos/dto-output-create-user";
 import {AdminService} from "./admin.service";
-import {DtoInputUser} from "../user-hub/dtos/dto-input-user";
 import {DtoOutputDeleteEmployee} from "./dtos/dto-output-delete-employee";
-import {DtoOutputPaginationParameters} from "../dtos/dto-output-pagination-parameters";
 import {LocalService} from "../local.service";
 import {DtoOutputCreateArticle} from "../article-hub/dtos/dto-output-create-article";
 import {DtoInputArticle} from "../article-hub/dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "./dtos/dto-output-delete-article";
 import {DtoOutputUpdateArticle} from "../article-hub/dtos/dto-output-update-article";
 import {DtoOutputFilterArticle} from "./dtos/dto-output-filter-article";
-import {DtoOutputFilterEmployee} from "./dtos/dto-output-filter-employee";
 import {DtoOutputEmployeeFilteringParameters} from "./dtos/dto-output-employee-filtering-parameters";
+import {DtoOutputUpdateUser} from "../user-hub/dtos/dto-output-update-user";
+import {DtoInputCompleteUser} from "../user-hub/dtos/dto-input-complete-user";
 
 @Component({
   selector: 'app-admin-hub',
@@ -33,7 +32,7 @@ export class AdminHubComponent implements OnInit {
   updateClick = false;
 
   articlesInPage: DtoInputArticle[] = []
-  employeesInPage: DtoInputUser[] = []
+  employeesInPage: DtoInputCompleteUser[] = []
   nbOfPagesEmployee: number = 0;
 
   constructor(private _adminService: AdminService, private _localService: LocalService) { }
@@ -115,6 +114,20 @@ export class AdminHubComponent implements OnInit {
     this._adminService
       .deleteEmployee(dto)
       .subscribe(()=>this.employeesInPage.splice(index, 1))
+  }
+
+  updateEmployee(dto: DtoOutputUpdateUser){
+    this._adminService
+      .updateEmployee(dto)
+      .subscribe(employee=>
+        this.employeesInPage.forEach((emp) => {
+          if(emp.id == dto.id) {
+            this.employeesInPage[this.employeesInPage.indexOf(emp)].surname = dto.surname;
+            this.employeesInPage[this.employeesInPage.indexOf(emp)].lastname = dto.lastname;
+            this.employeesInPage[this.employeesInPage.indexOf(emp)].age = dto.age;
+            this.employeesInPage[this.employeesInPage.indexOf(emp)].permission = dto.permission;
+          }
+        }))
   }
 
   createArticle(dto: DtoOutputCreateArticle) {
