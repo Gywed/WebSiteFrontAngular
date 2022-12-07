@@ -1,1 +1,8 @@
-
+#btnBackToList {
+  margin-left: 20%;
+  margin-bottom: 2%;
+  font-size: 80%;
+  width: 8%;
+  background-color: #007a7a;
+  border-radius: 15px;
+}
