@@ -11,7 +11,6 @@ import {DtoOutputDeleteArticle} from "./dtos/dto-output-delete-article";
 import {DtoOutputUpdateArticle} from "../article-hub/dtos/dto-output-update-article";
 import {DtoOutputFilterArticle} from "./dtos/dto-output-filter-article";
 import {DtoOutputFilterEmployee} from "./dtos/dto-output-filter-employee";
-import {DtoInputArticle} from "../order-hub/dtos/dto-input-article";
 import {DtoOutputEmployeeFilteringParameters} from "./dtos/dto-output-employee-filtering-parameters";
 
 @Component({
@@ -98,15 +97,6 @@ export class AdminHubComponent implements OnInit {
   fetchEmployeePagination(dto : DtoOutputEmployeeFilteringParameters){
     this._adminService
       .fetchEmployeePagination(dto)
-      .subscribe(employees => {
-        this.employeesInPage = employees.pageElements;
-        this.nbOfPagesEmployee = employees.nbOfPages
-      })
-  }
-
-  fetchEmployeeByNamePagination(dto : DtoOutputFilterEmployee){
-    this._adminService
-      .fetchEmployeeByNamePagination(dto)
       .subscribe(employees => {
         this.employeesInPage = employees.pageElements;
         this.nbOfPagesEmployee = employees.nbOfPages

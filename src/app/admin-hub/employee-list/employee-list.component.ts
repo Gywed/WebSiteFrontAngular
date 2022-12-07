@@ -24,6 +24,8 @@ export class EmployeeListComponent implements OnInit {
   @Output() paginationChanged: EventEmitter<DtoOutputEmployeeFilteringParameters> =
     new EventEmitter<DtoOutputEmployeeFilteringParameters>()
 
+  searchingByName: boolean = false;
+
 
   constructor(private _localService : LocalService) { }
 
@@ -38,6 +40,8 @@ export class EmployeeListComponent implements OnInit {
   }
 
   emitPaginationChanged() {
+    this.searchingByName = this.surname!="" || this.lastname!=""
+
     this.paginationChanged.next({
       surname: this.surname,
       lastname: this.lastname,

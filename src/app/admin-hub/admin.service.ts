@@ -8,15 +8,12 @@ import {DtoOutputDeleteEmployee} from "./dtos/dto-output-delete-employee";
 import {DtoOutputPaginationParameters} from "../dtos/dto-output-pagination-parameters";
 import {DtoOutputCreateArticle} from "../article-hub/dtos/dto-output-create-article";
 import {DtoInputPaginationFiltering} from "../dtos/dto-input-pagination-filtering";
-<<<<<<< HEAD
 import {DtoInputArticle} from "../article-hub/dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "./dtos/dto-output-delete-article";
 import {DtoOutputUpdateArticle} from "../article-hub/dtos/dto-output-update-article";
 import {DtoOutputFilterArticle} from "./dtos/dto-output-filter-article";
 import {DtoOutputFilterEmployee} from "./dtos/dto-output-filter-employee";
-=======
 import {DtoOutputEmployeeFilteringParameters} from "./dtos/dto-output-employee-filtering-parameters";
->>>>>>> feature/admin/searchEmployeByNameLastname
 
 @Injectable({
   providedIn: 'root'
@@ -53,12 +50,8 @@ export class AdminService {
 
   fetchEmployeePagination(dto: DtoOutputEmployeeFilteringParameters): Observable<DtoInputPaginationFiltering<DtoInputUser>>{
     return this._httpClient.get<DtoInputPaginationFiltering<DtoInputUser>>(
-      `${AdminService.ENTRY_POINT_USER}/employee?nbPage=${dto.nbPage}&nbElementsByPage=${dto.nbElementsByPage}`)
-  }
-
-  fetchEmployeeByNamePagination(dto: DtoOutputFilterEmployee): Observable<DtoInputPaginationFiltering<DtoInputUser>>{
-    return this._httpClient.get<DtoInputPaginationFiltering<DtoInputUser>>(
-      `${AdminService.ENTRY_POINT_USER}/employee?nbPage=${dto.nbPage}&nbElementsByPage=${dto.nbElementsByPage}&surname=${dto.surname}&lastname=${dto.lastname}`)
+      `${AdminService.ENTRY_POINT_USER}/employee?nbPage=${dto.dtoPagination.nbPage}&nbElementsByPage=${dto.dtoPagination.nbElementsByPage}
+      &surname=${dto.surname}&lastname=${dto.lastname}`)
   }
 
   deleteEmployee(dto: DtoOutputDeleteEmployee): Observable<any>{
