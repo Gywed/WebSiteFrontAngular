@@ -1,6 +1,16 @@
 <div class="menubar">
-  <div class="right">
-    <span class="material-symbols-outlined">
+  <div class="left-menu">
+    <div id="category">
+      <button class="dropbtn-category" (click)="showDropdownCategory(category_content)">Category</button>
+      <div class="dropdown-content-category" #category_content style="display: none;">
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="dropdown-order">
+    <span class="material-symbols-outlined shoppingcart">
       shopping_cart
     </span>
   </div>

@@ -12,4 +12,12 @@ export class MenubarHubComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  showDropdownCategory(category_content: HTMLDivElement) {
+    if(category_content.style.display=='none'){
+      category_content.style.display='block';
+    }
+    else if(category_content.style.display=='block'){
+      category_content.style.display='none';
+    }
+  }
 }
