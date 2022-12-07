@@ -37,7 +37,9 @@
     <app-employee-list [employeesInPage]="employeesInPage"
                        [nbOfPages]="nbOfPagesEmployee"
                        (deletedEmployee)="deleteEmployee($event)"
-                       (paginationChanged)="fetchEmployeePagination($event)"></app-employee-list>
+                       (paginationChanged)="fetchEmployeePagination($event)"
+                       [(updateEmployeeClick)]="updateClick"
+                       (updatedEmployee)="updateEmployee($event)"></app-employee-list>
   </div>
 
   <div [hidden]="!addArtClick">
