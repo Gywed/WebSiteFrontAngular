@@ -4,6 +4,7 @@ import {DtoOutputDeleteEmployee} from "../dtos/dto-output-delete-employee";
 import {LocalService} from "../../local.service";
 import {DtoOutputPaginationParameters} from "../../dtos/dto-output-pagination-parameters";
 import {DtoOutputFilterEmployee} from "../dtos/dto-output-filter-employee";
+import {DtoOutputEmployeeFilteringParameters} from "../dtos/dto-output-employee-filtering-parameters";
 
 @Component({
   selector: 'app-employee-list',
@@ -15,19 +16,14 @@ export class EmployeeListComponent implements OnInit {
   @Input() nbOfPages: number = 0;
   nbPage: number = +(this._localService.getData("nbPage")??1)
   nbElementsByPage: number = +(this._localService.getData("nbEmployeesByPage")??10)
+  surname: string = ""
+  lastname: string = ""
 
   @Output()
   deletedEmployee: EventEmitter<DtoOutputDeleteEmployee> = new EventEmitter<DtoOutputDeleteEmployee>()
-  @Output() paginationChanged: EventEmitter<DtoOutputPaginationParameters> = new EventEmitter<DtoOutputPaginationParameters>()
+  @Output() paginationChanged: EventEmitter<DtoOutputEmployeeFilteringParameters> =
+    new EventEmitter<DtoOutputEmployeeFilteringParameters>()
 
-  @Output()
-  filteredEmployee: EventEmitter<DtoOutputFilterEmployee> = new EventEmitter<DtoOutputFilterEmployee>()
-
-  // Flag for search
-  searchingByName = false;
-
-  surnameToSearch: string = "";
-  lastnameToSearch: string = "";
 
   constructor(private _localService : LocalService) { }
 
@@ -43,8 +39,12 @@ export class EmployeeListComponent implements OnInit {
 
   emitPaginationChanged() {
     this.paginationChanged.next({
-      nbPage: this.nbPage,
-      nbElementsByPage: this.nbElementsByPage
+      surname: this.surname,
+      lastname: this.lastname,
+      dtoPagination:{
+        nbPage: this.nbPage,
+        nbElementsByPage: this.nbElementsByPage
+      }
     })
     this._localService.saveData("nbPage", this.nbPage.toString())
     this._localService.saveData("nbEmployeesByPage", this.nbElementsByPage.toString())
@@ -56,23 +56,4 @@ export class EmployeeListComponent implements OnInit {
       .map((n, index) => index + 1);
   }
 
-  emitFilter() {
-    this.searchingByName = this.surnameToSearch != "" || this.lastnameToSearch != "";
-
-    if (this.searchingByName) {
-      this.filteredEmployee.next({
-        nbPage: this.nbPage,
-        nbElementsByPage: this.nbElementsByPage,
-        surname: this.surnameToSearch,
-        lastname: this.lastnameToSearch
-      })
-    } else {
-      this.paginationChanged.next( {
-        nbPage: this.nbPage,
-        nbElementsByPage: this.nbElementsByPage
-      })
-    }
-    this._localService.saveData("nbPage", this.nbPage.toString())
-    this._localService.saveData("nbEmployeesByPage", this.nbElementsByPage.toString())
-  }
 }
