@@ -1,8 +1,11 @@
 <div class="list">
   <h3>List of employees</h3>
+  <!-- filtering by surname and lastname -->
+  <p>Search an employee</p>
+  <input class="fields" type="text" placeholder="surname" [(ngModel)]="surname" (ngModelChange)="nbPage=1; emitPaginationChanged()">
+  <input class="fileds" type="text" placeholder="lastname" [(ngModel)]="lastname" (ngModelChange)="nbPage=1; emitPaginationChanged()">
   <!--Select the number of elements by page-->
-  <label>Nb employees : </label>
-  <select [(ngModel)]="nbElementsByPage" (ngModelChange)="emitPaginationChanged()">
+  <select [(ngModel)]="nbElementsByPage" (ngModelChange)="nbPage=1; emitPaginationChanged()">
     <option [ngValue]="10" >10</option>
     <option [ngValue]="25" >25</option>
     <option [ngValue]="50" >50</option>
@@ -32,6 +35,7 @@
 
   <!-- Will be displayed if employees list is empty-->
   <ng-template #employeeListEmpty>
-    <p>You don't have any employee. Register a new employee.</p>
+    <p [hidden]="searchingByName">You don't have any employee. Register a new employee.</p>
+    <p [hidden]="!searchingByName">There is no employee matching your search.</p>
   </ng-template>
 </div>
