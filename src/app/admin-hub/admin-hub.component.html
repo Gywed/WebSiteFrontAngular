@@ -43,7 +43,7 @@
   </div>
 
   <div [hidden]="!addArtClick">
-    <app-article-create (articleCreated)="createArticle($event)"></app-article-create>
+    <app-article-create (articleCreated)="createArticle($event)" [listOfCategories]="listOfCategories"></app-article-create>
   </div>
 
   <div [hidden]="!listArtClick">

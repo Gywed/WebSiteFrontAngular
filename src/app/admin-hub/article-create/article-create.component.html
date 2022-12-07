@@ -24,10 +24,9 @@
     </div>
   </div>
   <div>
-    <input type="text" formControlName="idCategory" class="fields" placeholder="id of the category">
-    <div *ngIf="controls('idCategory')?.dirty && controls('idCategory')?.invalid" class="warning">
-      This information is required!
-    </div>
+    <select class="list" (change)="setIdCategory($event)" [selectedIndex]="idCategory - 1">
+      <option *ngFor="let cate of listOfCategories" [value]="cate.id">{{cate.name}}</option>
+    </select>
   </div>
   <div>
     <input type="text" formControlName="idBrand" class="fields" placeholder="id of the brand">
