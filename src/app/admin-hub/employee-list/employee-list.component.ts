@@ -5,6 +5,7 @@ import {LocalService} from "../../local.service";
 import {DtoOutputEmployeeFilteringParameters} from "../dtos/dto-output-employee-filtering-parameters";
 import {DtoInputCompleteUser} from "../../user-hub/dtos/dto-input-complete-user";
 import {DtoOutputUpdateUser} from "../../user-hub/dtos/dto-output-update-user";
+import {debounceTime, distinctUntilChanged, Subject} from "rxjs";
 
 @Component({
   selector: 'app-employee-list',
@@ -18,6 +19,7 @@ export class EmployeeListComponent implements OnInit {
   nbElementsByPage: number = +(this._localService.getData("nbEmployeesByPage")??10)
   surname: string = ""
   lastname: string = ""
+  searchNotifier = new Subject()
 
   @Output()
   deletedEmployee: EventEmitter<DtoOutputDeleteEmployee> = new EventEmitter<DtoOutputDeleteEmployee>()
@@ -42,6 +44,9 @@ export class EmployeeListComponent implements OnInit {
   constructor(private _localService : LocalService) { }
 
   ngOnInit(): void {
+    this.searchNotifier
+      .pipe(debounceTime(1000))
+      .subscribe(data=>this.emitPaginationChanged())
   }
 
   clickUpdateEmployee(user: DtoInputCompleteUser) {

@@ -37,6 +37,6 @@ export class EmployeeCreateComponent implements OnInit {
       birthdate : this.form.value.birthdate,
       password : this.form.value.password
     })
-    //this.form.reset()
+    this.form.reset()
   }
 }
