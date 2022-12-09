@@ -5,6 +5,7 @@ import {DtoOutputOrderDate} from "./dtos/dto-output-order-date";
 import {DtoInputOrder} from "./dtos/dto-input-order";
 import {Observable} from "rxjs";
 import {DtoOutputFilterOrder} from "./dtos/dto-output-filter-order";
+import {DtoOutputOrderCategory} from "./dtos/dto-output-order-category";
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,10 @@ export class OrderService {
       params = params.append("date",dto.date);
 
     return this._httpClient.get<DtoInputOrder[]>(`${OrderService.ENTRY_POINT}/filter?${params.toString()}`)
+  }
+
+  fetchOrderByCategory(dto: DtoOutputOrderCategory) : Observable<DtoInputOrder[]>
+  {
+    return this._httpClient.get<DtoInputOrder[]>(`${OrderService.ENTRY_POINT}/category/${dto.idCategory}`);
   }
 }
