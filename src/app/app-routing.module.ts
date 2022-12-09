@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {Routes} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
 import {AdminHubComponent} from "./admin-hub/admin-hub.component";
 import {EmployeeListComponent} from "./admin-hub/employee-list/employee-list.component";
 import {EmployeeCreateComponent} from "./admin-hub/employee-create/employee-create.component";
@@ -21,9 +21,7 @@ const routes: Routes =[
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
