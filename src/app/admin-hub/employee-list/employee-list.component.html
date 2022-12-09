@@ -1,8 +1,8 @@
 <div class="list" [hidden]="updateEmployeeClick">
   <!-- filtering by surname and lastname -->
   <p>Search an employee</p>
-  <input class="fields" type="text" placeholder="surname" [(ngModel)]="surname" (ngModelChange)="nbPage=1; emitPaginationChanged()">
-  <input class="fileds" type="text" placeholder="lastname" [(ngModel)]="lastname" (ngModelChange)="nbPage=1; emitPaginationChanged()">
+  <input class="fields" type="text" placeholder="surname" [(ngModel)]="surname" (ngModelChange)="nbPage=1; searchNotifier.next(null)">
+  <input class="fileds" type="text" placeholder="lastname" [(ngModel)]="lastname" (ngModelChange)="nbPage=1; searchNotifier.next(null)">
   <!--Select the number of elements by page-->
   <select [(ngModel)]="nbElementsByPage" (ngModelChange)="nbPage=1; emitPaginationChanged()">
     <option [ngValue]="10" >10</option>
