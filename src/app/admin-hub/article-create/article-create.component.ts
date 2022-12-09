@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoOutputCreateArticle} from "../../article-hub/dtos/dto-output-create-article";
 import {DtoInputCategory} from "../../order-hub/dtos/dto-input-category";
+import {DtoInputBrand} from "../../order-hub/dtos/dto-input-brand";
 
 @Component({
   selector: 'app-article-create',
@@ -15,7 +16,6 @@ export class ArticleCreateComponent implements OnInit {
     price : ['', Validators.required],
     pricingType : ['', Validators.required],
     stock : ['', Validators.required],
-    idBrand : ['', Validators.required]
   })
 
   idCategory = 0;
@@ -26,6 +26,7 @@ export class ArticleCreateComponent implements OnInit {
   articleCreated: EventEmitter<DtoOutputCreateArticle> = new EventEmitter<DtoOutputCreateArticle>()
 
   @Input() listOfCategories: DtoInputCategory[] = []
+  @Input() listOfBrands: DtoInputBrand[] = []
 
   constructor(private _fb: FormBuilder) { }
 
@@ -43,7 +44,7 @@ export class ArticleCreateComponent implements OnInit {
       pricingtype : this.form.value.pricingType,
       stock : this.form.value.stock,
       idcategory : this.idCategory,
-      idbrand : this.form.value.idBrand
+      idbrand : this.idBrand
     })
     this.form.reset();
   }
@@ -52,8 +53,8 @@ export class ArticleCreateComponent implements OnInit {
     this.idCategory = id.target.value;
   }
 
-  setIdBrand(id: number) {
-    this.idBrand = id;
+  setIdBrand(id: any) {
+    this.idBrand = id.target.value;
   }
 
   setPricingType(id: number) {

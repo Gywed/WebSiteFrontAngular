@@ -29,10 +29,9 @@
     </select>
   </div>
   <div>
-    <input type="text" formControlName="idBrand" class="fields" placeholder="id of the brand">
-    <div *ngIf="controls('idBrand')?.dirty && controls('idBrand')?.invalid" class="warning">
-      This information is required!
-    </div>
+    <select class="list" (change)="setIdBrand($event)" [selectedIndex]="idBrand - 1">
+      <option *ngFor="let bran of listOfBrands" [value]="bran.id">{{bran.name}}</option>
+    </select>
   </div> <br/>
   <input type="submit" [disabled]="form.invalid" value="Register" class="btn">
 </form>

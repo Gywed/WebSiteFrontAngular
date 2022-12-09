@@ -43,7 +43,9 @@
   </div>
 
   <div [hidden]="!addArtClick">
-    <app-article-create (articleCreated)="createArticle($event)" [listOfCategories]="listOfCategories"></app-article-create>
+    <app-article-create (articleCreated)="createArticle($event)"
+                        [listOfCategories]="listOfCategories"
+                        [listOfBrands]="listOfBrands"></app-article-create>
   </div>
 
   <div [hidden]="!listArtClick">
@@ -53,6 +55,7 @@
                             (updatedArticle)="updateArticle($event)"
                             (filteredArticle)="fetchFilteredArticles($event)"
                             (fetchArticle)="fetchAllArticles()"
-                            [listOfCategories]="listOfCategories"></app-admin-list-article>
+                            [listOfCategories]="listOfCategories"
+                            [listOfBrands]="listOfBrands"></app-admin-list-article>
   </div>
 </div>

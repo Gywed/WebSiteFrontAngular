@@ -14,6 +14,7 @@ import {DtoOutputEmployeeFilteringParameters} from "./dtos/dto-output-employee-f
 import {DtoOutputUpdateUser} from "../user-hub/dtos/dto-output-update-user";
 import {DtoInputCompleteUser} from "../user-hub/dtos/dto-input-complete-user";
 import {DtoInputCategory} from "../order-hub/dtos/dto-input-category";
+import {DtoInputBrand} from "../order-hub/dtos/dto-input-brand";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,8 @@ import {DtoInputCategory} from "../order-hub/dtos/dto-input-category";
 export class AdminService {
   private static readonly ENTRY_POINT_USER = environment.apiUrl + "/users";
   private static readonly ENTRY_POINT_ARTICLE = environment.apiUrl + "/articles";
-  private static readonly ENTRY_POINT_CATEGORIE = environment.apiUrl + "/categories";
+  private static readonly ENTRY_POINT_CATEGORY = environment.apiUrl + "/categories";
+  private static readonly ENTRY_POINT_BRAND = environment.apiUrl + "/brands";
 
   constructor(private _httpClient: HttpClient) { }
 
@@ -34,7 +36,11 @@ export class AdminService {
   }
 
   fetchAllCategories(): Observable<DtoInputCategory[]>{
-    return this._httpClient.get<DtoInputCategory[]>(AdminService.ENTRY_POINT_CATEGORIE)
+    return this._httpClient.get<DtoInputCategory[]>(AdminService.ENTRY_POINT_CATEGORY)
+  }
+
+  fetchAllBrands(): Observable<DtoInputBrand[]>{
+    return this._httpClient.get<DtoInputBrand[]>(AdminService.ENTRY_POINT_BRAND)
   }
 
   fetchFilteredArticle(dto: DtoOutputFilterArticle): Observable<DtoInputArticle[]>{
