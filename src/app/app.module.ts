@@ -21,6 +21,7 @@ import { MenubarHubComponent } from './menubar-hub/menubar-hub.component';
 import { ArticleCreateComponent } from './admin-hub/article-create/article-create.component';
 import { AdminListArticleComponent } from './admin-hub/admin-list-article/admin-list-article.component';
 import { AdminUpdateArticleComponent } from './admin-hub/admin-update-article/admin-update-article.component';
+import { CategoryHubComponent } from './menubar-hub/category-hub/category-hub.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AdminUpdateArticleComponent } from './admin-hub/admin-update-article/ad
     MenubarHubComponent,
     ArticleCreateComponent,
     AdminListArticleComponent,
-    AdminUpdateArticleComponent
+    AdminUpdateArticleComponent,
+    CategoryHubComponent
   ],
     imports: [
         BrowserModule,

@@ -1,0 +1,9 @@
+<div *ngIf="categories.length;else categoryListEmpty">
+  <div *ngFor="let category of categories" class="content">
+    <p>{{category.name}}</p>
+  </div>
+</div>
+
+<ng-template #categoryListEmpty>
+  <p>There is no category.</p>
+</ng-template>
