@@ -2,10 +2,6 @@
 {
   text-align: center;
 }
-.tbl {
-  margin-left: auto;
-  margin-right: auto;
-}
 table, th, td {
   text-align: center;
   border: 1px solid;
@@ -29,10 +25,4 @@ th, td {
   width: 8%;
   background-color: #007a7a;
   border-radius: 15px;
-}
-.fields
-{
-  font-size: 80%;
-  width: 28.5%;
-  margin-top: 0.5%;
 }
