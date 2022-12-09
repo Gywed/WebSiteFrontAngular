@@ -23,6 +23,7 @@ import { AdminListArticleComponent } from './admin-hub/admin-list-article/admin-
 import { AdminUpdateArticleComponent } from './admin-hub/admin-update-article/admin-update-article.component';
 import { CategoryHubComponent } from './menubar-hub/category-hub/category-hub.component';
 import { AdminUpdateEmployeeComponent } from './admin-hub/admin-update-employee/admin-update-employee.component';
+import { ShoppingCartHubComponent } from './menubar-hub/shopping-cart-hub/shopping-cart-hub.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { AdminUpdateEmployeeComponent } from './admin-hub/admin-update-employee/
     AdminUpdateArticleComponent,
     AdminUpdateEmployeeComponent,
     AdminUpdateArticleComponent,
-    CategoryHubComponent
+    CategoryHubComponent,
+    ShoppingCartHubComponent,
   ],
     imports: [
         BrowserModule,
