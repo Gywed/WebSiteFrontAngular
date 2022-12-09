@@ -35,10 +35,9 @@
   </div>
   <div>
     <input type="text" class="fieldsHeader" value="Id of the brand" readonly>
-    <input type="text" formControlName="idBrand" class="fields" placeholder="id of the brand">
-    <div *ngIf="controls('idBrand')?.dirty && controls('idBrand')?.invalid" class="warning">
-      This information is required!
-    </div>
+    <select class="list" (change)="setIdBrand($event)" [selectedIndex]="idBrandToUpdate - 1">
+      <option *ngFor="let bran of listOfBrands" [value]="bran.id">{{bran.name}}</option>
+    </select>
   </div> <br/>
   <input type="submit" [disabled]="form.invalid" value="Modify" class="btn">
   <h3 [hidden]="!updated" id="validation">Article updated with success</h3>

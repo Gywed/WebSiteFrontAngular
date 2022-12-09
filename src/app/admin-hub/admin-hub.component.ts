@@ -12,6 +12,7 @@ import {DtoOutputEmployeeFilteringParameters} from "./dtos/dto-output-employee-f
 import {DtoOutputUpdateUser} from "../user-hub/dtos/dto-output-update-user";
 import {DtoInputCompleteUser} from "../user-hub/dtos/dto-input-complete-user";
 import {DtoInputCategory} from "../order-hub/dtos/dto-input-category";
+import {DtoInputBrand} from "../order-hub/dtos/dto-input-brand";
 
 @Component({
   selector: 'app-admin-hub',
@@ -34,6 +35,7 @@ export class AdminHubComponent implements OnInit {
 
   articlesInPage: DtoInputArticle[] = []
   listOfCategories: DtoInputCategory[] = []
+  listOfBrands: DtoInputBrand[] = []
   employeesInPage: DtoInputCompleteUser[] = []
   nbOfPagesEmployee: number = 0;
 
@@ -50,6 +52,7 @@ export class AdminHubComponent implements OnInit {
     })
     this.fetchAllArticles()
     this.fetchAllCategories()
+    this.fetchAllBrands()
   }
 
   clickArt() {
@@ -145,6 +148,10 @@ export class AdminHubComponent implements OnInit {
 
   fetchAllCategories(){
     this._adminService.fetchAllCategories().subscribe(listOfCategories=> this.listOfCategories = listOfCategories)
+  }
+
+  fetchAllBrands(){
+    this._adminService.fetchAllBrands().subscribe(listOfBrands=> this.listOfBrands = listOfBrands)
   }
 
   fetchFilteredArticles(dto: DtoOutputFilterArticle){

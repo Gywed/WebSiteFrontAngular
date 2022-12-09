@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-article";
 import {DtoInputCategory} from "../../order-hub/dtos/dto-input-category";
+import {DtoInputBrand} from "../../order-hub/dtos/dto-input-brand";
 
 @Component({
   selector: 'app-admin-update-article',
@@ -21,6 +22,7 @@ export class AdminUpdateArticleComponent implements OnChanges {
   @Input() idbrand: number = 0;
 
   @Input() listOfCategories: DtoInputCategory[] = []
+  @Input() listOfBrands: DtoInputBrand[] = []
 
   @Output()
   articleUpdated: EventEmitter<DtoOutputUpdateArticle> = new EventEmitter<DtoOutputUpdateArticle>()
@@ -30,7 +32,6 @@ export class AdminUpdateArticleComponent implements OnChanges {
     price : ['', Validators.required],
     pricingType : ['', Validators.required],
     stock : ['', Validators.required],
-    idBrand : ['', Validators.required]
   })
 
   idCategoryToUpdate = 0;
@@ -45,7 +46,6 @@ export class AdminUpdateArticleComponent implements OnChanges {
       price: this.price,
       pricingType: this.pricingType,
       stock: this.stock,
-      idBrand: this.idbrand
     });
     this.updated = false
     this.idCategoryToUpdate = this.idcategory;
@@ -65,7 +65,7 @@ export class AdminUpdateArticleComponent implements OnChanges {
       pricingType : this.form.value.pricingType,
       stock : this.form.value.stock,
       idCategory : this.idCategoryToUpdate,
-      idBrand : this.form.value.idBrand
+      idBrand : this.idBrandToUpdate
     })
     this.updated = true;
   }
@@ -74,8 +74,8 @@ export class AdminUpdateArticleComponent implements OnChanges {
     this.idCategoryToUpdate = id.target.value;
   }
 
-  setIdBrand(id: number) {
-    this.idBrandToUpdate = id;
+  setIdBrand(id: any) {
+    this.idBrandToUpdate = id.target.value;
   }
 
   setPricingType(id: number) {
