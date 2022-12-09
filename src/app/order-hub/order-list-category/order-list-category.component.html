@@ -1,0 +1,65 @@
+<form [formGroup]="form" (ngSubmit)="emitCategory()">
+  <div>
+    <label>
+      Category Id : <input type="text" formControlName="idCategory" class="fields">
+    </label>
+    <div *ngIf="controls('idCategory')?.dirty && controls('idCategory')?.invalid" class="warning">
+      This information is required!
+    </div>
+  </div>
+  <input type="submit" [disabled]="form.invalid" value="Select" class="btn">
+</form>
+
+
+<div *ngIf="orders.length; else orderListEmpty">
+  <table border="2">
+    <tr>
+      <th>Id</th>
+      <th>Creation</th>
+      <th>Total of the order</th>
+      <th>Order content</th>
+    </tr>
+    <tr *ngFor="let order of orders">
+      <td>{{order.id}}</td>
+      <td>{{order.creationDate.slice(0,order.creationDate.search("T"))}}</td>
+      <td>{{order.totalOrderPrice}}</td>
+      <td>
+        <table border="1">
+          <tr>
+            <th>Article</th>
+            <th>Quantity</th>
+          </tr>
+          <tr *ngFor="let orderContent of order.orderContents">
+            <td>
+              <table border="1">
+                <tr>
+                  <th>Id</th>
+                  <th>Name tag</th>
+                  <th>Price</th>
+                  <th>Pricing type</th>
+                  <th>Category</th>
+                  <th>Brand</th>
+                </tr>
+                <tr>
+                  <td>{{orderContent.article.id}}</td>
+                  <td>{{orderContent.article.nametag}}</td>
+                  <td>{{orderContent.article.price}}</td>
+                  <td>{{orderContent.article.pricingType}}</td>
+                  <td>{{orderContent.article.category.name}}</td>
+                  <td>{{orderContent.article.brand.name}}</td>
+                </tr>
+              </table>
+            </td>
+            <td>{{orderContent.quantity}}</td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!-- Will be displayed if employees list is empty-->
+<ng-template #orderListEmpty>
+  <p>Enter a category id to get the orders which have articles in this category.</p>
+</ng-template>
