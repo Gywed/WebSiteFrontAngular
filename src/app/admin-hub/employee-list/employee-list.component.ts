@@ -71,9 +71,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   emitDelete(employee: DtoInputUser) {
-    this.deletedEmployee.next({
-      id: employee.id
-    })
+    this._eventBus.emit(new EmitEvent(Events.deleteEmployee, employee))
 
   }
 

@@ -14,6 +14,7 @@ import {DtoInputCompleteUser} from "../user-hub/dtos/dto-input-complete-user";
 import {DtoInputCategory} from "../order-hub/dtos/dto-input-category";
 import {DtoInputBrand} from "../order-hub/dtos/dto-input-brand";
 import {EmitEvent, EventBusService, Events} from "../event-bus.service";
+import {DtoInputUser} from "../user-hub/dtos/dto-input-user";
 
 @Component({
   selector: 'app-admin-hub',
@@ -54,7 +55,9 @@ export class AdminHubComponent implements OnInit {
       }
     })
 
+    //employee events
     this._eventBus.on(Events.updateEmployeeList, (data: DtoOutputEmployeeFilteringParameters) => this.fetchEmployeePagination(data))
+    this._eventBus.on(Events.deleteEmployee, (data: DtoInputUser) => this.deleteEmployee(data))
 
     this.fetchAllArticles()
     this.fetchAllCategories()

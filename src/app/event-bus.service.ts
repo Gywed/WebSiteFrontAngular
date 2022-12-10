@@ -29,6 +29,8 @@ export class EmitEvent {
 
 // this works like a communication channel
 export enum Events {
+  //EmployeeEvent
   fetchEmployeeInPages,
-  updateEmployeeList
+  updateEmployeeList,
+  deleteEmployee
 }
