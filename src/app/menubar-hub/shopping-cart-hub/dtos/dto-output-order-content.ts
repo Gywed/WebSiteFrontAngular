@@ -1,6 +1,6 @@
 import {DtoOutputArticle} from "./dto-output-article";
 
 export interface DtoOutputOrderContent {
-  article: DtoOutputArticle,
+  article: DtoOutputArticle
   quantity: number
 }
