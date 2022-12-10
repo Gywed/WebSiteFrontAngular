@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DtoOutputCreateUser} from "../user-hub/dtos/dto-output-create-user";
 import {AdminService} from "./admin.service";
 import {DtoOutputDeleteEmployee} from "./dtos/dto-output-delete-employee";
@@ -13,6 +13,7 @@ import {DtoOutputUpdateUser} from "../user-hub/dtos/dto-output-update-user";
 import {DtoInputCompleteUser} from "../user-hub/dtos/dto-input-complete-user";
 import {DtoInputCategory} from "../order-hub/dtos/dto-input-category";
 import {DtoInputBrand} from "../order-hub/dtos/dto-input-brand";
+import {EmitEvent, EventBusService, Events} from "../event-bus.service";
 
 @Component({
   selector: 'app-admin-hub',
@@ -39,7 +40,9 @@ export class AdminHubComponent implements OnInit {
   employeesInPage: DtoInputCompleteUser[] = []
   nbOfPagesEmployee: number = 0;
 
-  constructor(private _adminService: AdminService, private _localService: LocalService) { }
+  constructor(private _adminService: AdminService,
+              private _localService: LocalService,
+              private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
     this.fetchEmployeePagination({
@@ -50,6 +53,9 @@ export class AdminHubComponent implements OnInit {
         nbElementsByPage: +(this._localService.getData("nbEmployeesByPage")??10)
       }
     })
+
+    this._eventBus.on(Events.updateEmployeeList, (data: DtoOutputEmployeeFilteringParameters) => this.fetchEmployeePagination(data))
+
     this.fetchAllArticles()
     this.fetchAllCategories()
     this.fetchAllBrands()
@@ -105,6 +111,9 @@ export class AdminHubComponent implements OnInit {
       .subscribe(employees => {
         this.employeesInPage = employees.pageElements;
         this.nbOfPagesEmployee = employees.nbOfPages
+        this._eventBus.emit(new EmitEvent(Events.fetchEmployeeInPages, {
+          employees: this.employeesInPage, nbOfPages: this.nbOfPagesEmployee
+        }))
       })
   }
 

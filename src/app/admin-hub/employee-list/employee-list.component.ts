@@ -5,7 +5,8 @@ import {LocalService} from "../../local.service";
 import {DtoOutputEmployeeFilteringParameters} from "../dtos/dto-output-employee-filtering-parameters";
 import {DtoInputCompleteUser} from "../../user-hub/dtos/dto-input-complete-user";
 import {DtoOutputUpdateUser} from "../../user-hub/dtos/dto-output-update-user";
-import {debounceTime, distinctUntilChanged, Subject} from "rxjs";
+import {debounceTime, Subject} from "rxjs";
+import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 
 @Component({
   selector: 'app-employee-list',
@@ -41,12 +42,18 @@ export class EmployeeListComponent implements OnInit {
 
   searchingByName: boolean = false;
 
-  constructor(private _localService : LocalService) { }
+  constructor(private _localService : LocalService,
+              private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
     this.searchNotifier
       .pipe(debounceTime(1000))
       .subscribe(data=>this.emitPaginationChanged())
+
+    this._eventBus.on(Events.fetchEmployeeInPages, (data: any) => {
+      this.employeesInPage = data.employees
+      this.nbOfPages = data.nbOfPages
+    })
   }
 
   clickUpdateEmployee(user: DtoInputCompleteUser) {
@@ -83,14 +90,15 @@ export class EmployeeListComponent implements OnInit {
   emitPaginationChanged() {
     this.searchingByName = this.surname!="" || this.lastname!=""
 
-    this.paginationChanged.next({
+    this._eventBus.emit(new EmitEvent(Events.updateEmployeeList, {
       surname: this.surname,
       lastname: this.lastname,
       dtoPagination:{
         nbPage: this.nbPage,
         nbElementsByPage: this.nbElementsByPage
       }
-    })
+    }))
+
     this._localService.saveData("nbPage", this.nbPage.toString())
     this._localService.saveData("nbEmployeesByPage", this.nbElementsByPage.toString())
   }
