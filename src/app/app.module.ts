@@ -24,6 +24,7 @@ import { AdminUpdateArticleComponent } from './admin-hub/admin-update-article/ad
 import { CategoryHubComponent } from './menubar-hub/category-hub/category-hub.component';
 import { AdminUpdateEmployeeComponent } from './admin-hub/admin-update-employee/admin-update-employee.component';
 import { OrderListCategoryComponent } from './order-hub/order-list-category/order-list-category.component';
+import { ShoppingCartHubComponent } from './menubar-hub/shopping-cart-hub/shopping-cart-hub.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { OrderListCategoryComponent } from './order-hub/order-list-category/orde
     AdminUpdateEmployeeComponent,
     AdminUpdateArticleComponent,
     CategoryHubComponent,
-    OrderListCategoryComponent
+    OrderListCategoryComponent,
+    ShoppingCartHubComponent,
   ],
     imports: [
         BrowserModule,

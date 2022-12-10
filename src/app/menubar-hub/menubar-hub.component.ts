@@ -20,4 +20,13 @@ export class MenubarHubComponent implements OnInit {
       category_content.style.display='none';
     }
   }
+
+  showDropdownShoppingCart(cart_content: HTMLDivElement) {
+    if(cart_content.style.display=='none'){
+      cart_content.style.display='block';
+    }
+    else if(cart_content.style.display=='block'){
+      cart_content.style.display='none';
+    }
+  }
 }

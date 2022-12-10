@@ -10,9 +10,12 @@
 
 
   <div class="dropdown-order">
-    <span class="material-symbols-outlined shoppingcart">
+    <button class="material-symbols-outlined shoppingcart dropbtn-cart" (click)="showDropdownShoppingCart(cart_content)">
       shopping_cart
-    </span>
+    </button>
+    <div class="dropdown-content-cart" #cart_content style="display: none;">
+      <app-shopping-cart-hub></app-shopping-cart-hub>
+    </div>
   </div>
 
 </div>

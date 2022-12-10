@@ -6,10 +6,18 @@
         <th>Price</th>
         <th>Stock</th>
       </tr>
-      <tr *ngFor="let article of articles">
+      <tr *ngFor="let article of articles;let i = index">
         <td>{{article.nametag}}</td>
         <td>{{article.price}}</td>
         <td>{{article.stock}}</td>
+        <td>
+          <input type="number" name="quantity" [(ngModel)]="quantity[i]">
+        </td>
+        <td>
+          <button (click)="addToCart(article,quantity[i])">
+            Add to cart
+          </button>
+        </td>
       </tr>
     </table>
   </div>
