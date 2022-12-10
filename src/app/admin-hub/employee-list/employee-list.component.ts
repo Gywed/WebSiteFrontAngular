@@ -22,11 +22,6 @@ export class EmployeeListComponent implements OnInit {
   lastname: string = ""
   searchNotifier = new Subject()
 
-  @Output()
-  deletedEmployee: EventEmitter<DtoOutputDeleteEmployee> = new EventEmitter<DtoOutputDeleteEmployee>()
-  @Output() paginationChanged: EventEmitter<DtoOutputEmployeeFilteringParameters> =
-    new EventEmitter<DtoOutputEmployeeFilteringParameters>()
-
   // Flag for modyfing employee
   @Input() updateEmployeeClick = false;
   @Output() updateEmployeeClickChange: EventEmitter<boolean> = new EventEmitter<boolean>();
