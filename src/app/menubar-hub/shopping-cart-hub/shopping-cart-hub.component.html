@@ -1,0 +1,11 @@
+<div *ngIf="orderContent.length;else articlesListEmpty">
+  <div *ngFor="let article of orderContent" class="content">
+    <p>{{article.article.nametag}} quantity : {{article.quantity}}</p>
+  </div>
+</div>
+
+
+
+<ng-template #articlesListEmpty>
+  <p>There is no article inside the shopping cart.</p>
+</ng-template>
