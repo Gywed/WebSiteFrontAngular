@@ -1,6 +1,7 @@
+<button routerLink="../employeeCreate">Register a new employee</button>
 <div class="list" [hidden]="updateEmployeeClick">
   <!-- filtering by surname and lastname -->
-  <p>Search an employee</p>
+  <label>Search an employee : </label>
   <input class="fields" type="text" placeholder="surname" [(ngModel)]="surname" (ngModelChange)="nbPage=1; searchNotifier.next(null)">
   <input class="fileds" type="text" placeholder="lastname" [(ngModel)]="lastname" (ngModelChange)="nbPage=1; searchNotifier.next(null)">
   <!--Select the number of elements by page-->

@@ -49,6 +49,7 @@ export class AdminHubComponent implements OnInit {
     //employee events
     this._eventBus.on(Events.updateEmployeeList, (data: DtoOutputEmployeeFilteringParameters) => this.fetchEmployeePagination(data))
     this._eventBus.on(Events.deleteEmployee, (data: DtoInputUser) => this.deleteEmployee(data))
+    this._eventBus.on(Events.createEmployee, (data: DtoOutputCreateUser) => this.createEmployee(data))
 
     this.fetchAllArticles()
     this.fetchAllCategories()

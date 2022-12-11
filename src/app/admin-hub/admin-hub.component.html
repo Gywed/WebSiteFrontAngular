@@ -3,19 +3,9 @@
     (click)="clickArt()" class="btnAdm">
     Manage articles</button>
 
-  <a
+  <button class="btnAdm"
     routerLink="employeeList">
-    Manage employees</a>
-</div>
-
-<div id="empBanner" [hidden]="!empClick">
-  <button
-    (click)="clickAddEmp()" class="btnAdm">
-    Register an employee</button>
-
-  <button
-    (click)="clickListEmp()" class="btnAdm">
-    List all employees</button>
+    Manage employees</button>
 </div>
 
 <div id="artBanner" [hidden]="!artClick">
@@ -29,11 +19,12 @@
 </div>
 
 <div class="adminWindows">
+  <!--
   <div [hidden]="!addEmpClick">
     <app-employee-create (employeeCreated)="createEmployee($event)"></app-employee-create>
   </div>
 
-  <!--
+
   <div [hidden]="!listEmpClick">
     <app-employee-list [employeesInPage]="employeesInPage"
                        [nbOfPages]="nbOfPagesEmployee"
