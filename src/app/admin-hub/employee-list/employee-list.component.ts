@@ -49,6 +49,7 @@ export class EmployeeListComponent implements OnInit {
       this.employeesInPage = data.employees
       this.nbOfPages = data.nbOfPages
     })
+    this.emitPaginationChanged()
   }
 
   clickUpdateEmployee(user: DtoInputCompleteUser) {

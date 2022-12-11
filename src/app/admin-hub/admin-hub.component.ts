@@ -46,15 +46,6 @@ export class AdminHubComponent implements OnInit {
               private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
-    this.fetchEmployeePagination({
-      surname: "",
-      lastname: "",
-      dtoPagination: {
-        nbPage: +(this._localService.getData("nbPage")??1),
-        nbElementsByPage: +(this._localService.getData("nbEmployeesByPage")??10)
-      }
-    })
-
     //employee events
     this._eventBus.on(Events.updateEmployeeList, (data: DtoOutputEmployeeFilteringParameters) => this.fetchEmployeePagination(data))
     this._eventBus.on(Events.deleteEmployee, (data: DtoInputUser) => this.deleteEmployee(data))
