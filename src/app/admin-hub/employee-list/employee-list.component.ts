@@ -45,7 +45,7 @@ export class EmployeeListComponent implements OnInit {
       .pipe(debounceTime(1000))
       .subscribe(data=>this.emitPaginationChanged())
 
-    this._eventBus.on(Events.fetchEmployeeInPages, (data: any) => {
+    this._eventBus.on(Events.fetchEmployeeInPages).subscribe((data: any) => {
       this.employeesInPage = data.employees
       this.nbOfPages = data.nbOfPages
     })

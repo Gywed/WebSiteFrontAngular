@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import {Component} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 import {DtoInputCompleteUser} from "../../user-hub/dtos/dto-input-complete-user";
@@ -25,10 +25,7 @@ export class AdminUpdateEmployeeComponent {
   }
 
   ngOnInit(): void {
-    this._eventBus.on(Events.emitEmployee, (data: DtoInputCompleteUser) => this.setFormValue(data))
-
-
-
+    this._eventBus.on(Events.emitEmployee).subscribe(data => this.setFormValue(data))
     this.updated = false
   }
 

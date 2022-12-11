@@ -47,9 +47,9 @@ export class AdminHubComponent implements OnInit {
 
   ngOnInit(): void {
     //employee events
-    this._eventBus.on(Events.updateEmployeeList, (data: DtoOutputEmployeeFilteringParameters) => this.fetchEmployeePagination(data))
-    this._eventBus.on(Events.deleteEmployee, (data: DtoInputUser) => this.deleteEmployee(data))
-    this._eventBus.on(Events.createEmployee, (data: DtoOutputCreateUser) => this.createEmployee(data))
+    this._eventBus.on(Events.updateEmployeeList).subscribe((data: DtoOutputEmployeeFilteringParameters) => this.fetchEmployeePagination(data))
+    this._eventBus.on(Events.deleteEmployee).subscribe((data: DtoInputUser) => this.deleteEmployee(data))
+    this._eventBus.on(Events.createEmployee).subscribe((data: DtoOutputCreateUser) => this.createEmployee(data))
 
     this.fetchAllArticles()
     this.fetchAllCategories()
