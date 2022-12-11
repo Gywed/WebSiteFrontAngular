@@ -1,42 +1,34 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DtoOutputUpdateUser} from "../../user-hub/dtos/dto-output-update-user";
+import {Component, Input, OnChanges} from '@angular/core';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
+import {DtoInputCompleteUser} from "../../user-hub/dtos/dto-input-complete-user";
 
 @Component({
   selector: 'app-admin-update-employee',
   templateUrl: './admin-update-employee.component.html',
   styleUrls: ['./admin-update-employee.component.css']
 })
-export class AdminUpdateEmployeeComponent implements OnChanges {
+export class AdminUpdateEmployeeComponent {
   //Flag for the validation message
   updated = false;
 
-  @Input() id: number = 0;
-  @Input() surname: string = "";
-  @Input() lastname: string = "";
-  @Input() age: number = 0;
-  @Input() permission: number = 0;
-
-  @Output()
-  employeeUpdated: EventEmitter<DtoOutputUpdateUser> = new EventEmitter<DtoOutputUpdateUser>()
-
   form: FormGroup = this._fb.group({
-    surname: ['', Validators.required],
+    surname: new FormControl("", Validators.required),
     lastname: ['', Validators.required],
     age: ['', Validators.required],
+    email: ['', Validators.required],
     permission: ['', Validators.required]
   })
 
-  constructor(private _fb: FormBuilder) {
+  constructor(private _fb: FormBuilder,
+              private _eventBus: EventBusService) {
   }
 
-  ngOnChanges(): void {
-    this.form.patchValue({
-      surname: this.surname,
-      lastname: this.lastname,
-      age: this.age,
-      permission: this.permission
-    });
+  ngOnInit(): void {
+    this._eventBus.on(Events.emitEmployee, (data: DtoInputCompleteUser) => this.setFormValue(data))
+
+
+
     this.updated = false
   }
 
@@ -44,14 +36,25 @@ export class AdminUpdateEmployeeComponent implements OnChanges {
     return this.form.get(name);
   }
 
+  setFormValue(data: DtoInputCompleteUser){
+    console.log(data)
+    this.form.patchValue({
+      surname: "data.surname",
+      lastname: "data.lastname",
+      age: "birthdate",
+      email: "data.email",
+      permission: "1"
+    })
+  }
   emitUpdate() {
-    this.employeeUpdated.next({
-      id: this.id,
+    this._eventBus.emit(new EmitEvent(Events.employeeUpdate, {
+      id: -1,
       surname: this.form.value.surname,
       lastname: this.form.value.lastname,
       age: this.form.value.age,
+      email: this.form.value.email,
       permission: this.form.value.permission
-    })
+    }))
     this.updated = true;
   }
 }

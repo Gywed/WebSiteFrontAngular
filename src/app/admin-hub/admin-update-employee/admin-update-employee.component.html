@@ -21,6 +21,13 @@
     </div>
   </div>
   <div>
+    <input type="text" class="fieldsHeader" value="Email" readonly>
+    <input type="text" formControlName="email" class="fields" placeholder="email">
+    <div *ngIf="controls('email')?.dirty && controls('age')?.invalid" class="warning">
+      This information is required!
+    </div>
+  </div>
+  <div>
     <input type="text" class="fieldsHeader" value="Permission" readonly>
     <input type="text" formControlName="permission" class="fields" placeholder="permission">
     <div *ngIf="controls('permission')?.dirty && controls('permission')?.invalid" class="warning">
@@ -30,3 +37,5 @@
   <input type="submit" [disabled]="form.invalid" value="Modify" class="btn">
   <h3 [hidden]="!updated" id="validation">Employee updated with success</h3>
 </form>
+
+<button (click)="setFormValue(this.localData)">test</button>

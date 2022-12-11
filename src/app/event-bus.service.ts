@@ -33,5 +33,7 @@ export enum Events {
   fetchEmployeeInPages,
   updateEmployeeList,
   deleteEmployee,
-  createEmployee
+  createEmployee,
+  emitEmployee,
+  employeeUpdate
 }

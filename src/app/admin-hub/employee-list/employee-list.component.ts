@@ -52,21 +52,15 @@ export class EmployeeListComponent implements OnInit {
     this.emitPaginationChanged()
   }
 
-  clickUpdateEmployee(user: DtoInputCompleteUser) {
-    this.idToUpdate = user.id;
-    this.surnameToUpdate = user.surname;
-    this.lastnameToUpdate = user.lastname;
-    this.ageToUpdate = user.age;
-    this.permissionToUpdate = user.permission;
-    this.updateEmployeeClick = true;
-    this.updateEmployeeClickChange.next(this.updateEmployeeClick);
+  clickUpdateEmployee(employee: DtoInputCompleteUser) {
+    this._eventBus.emit(new EmitEvent(Events.emitEmployee, employee))
   }
 
   clickBackToList() {
     this.updateEmployeeClick = false;
   }
 
-  emitDelete(employee: DtoInputUser) {
+  emitDelete(employee: DtoInputCompleteUser) {
     this._eventBus.emit(new EmitEvent(Events.deleteEmployee, employee))
 
   }
