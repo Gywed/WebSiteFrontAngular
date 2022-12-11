@@ -25,6 +25,7 @@ import { CategoryHubComponent } from './menubar-hub/category-hub/category-hub.co
 import { AdminUpdateEmployeeComponent } from './admin-hub/admin-update-employee/admin-update-employee.component';
 import { OrderListCategoryComponent } from './order-hub/order-list-category/order-list-category.component';
 import { ShoppingCartHubComponent } from './menubar-hub/shopping-cart-hub/shopping-cart-hub.component';
+import { OrderUpdateOrdercontentComponent } from './order-hub/order-update-ordercontent/order-update-ordercontent.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ShoppingCartHubComponent } from './menubar-hub/shopping-cart-hub/shoppi
     CategoryHubComponent,
     OrderListCategoryComponent,
     ShoppingCartHubComponent,
+    OrderUpdateOrdercontentComponent,
   ],
     imports: [
         BrowserModule,

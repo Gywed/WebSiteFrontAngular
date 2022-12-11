@@ -4,6 +4,7 @@ import {OrderService} from "./order.service";
 import {DtoInputOrder} from "./dtos/dto-input-order";
 import {DtoOutputFilterOrder} from "./dtos/dto-output-filter-order";
 import {DtoOutputOrderCategory} from "./dtos/dto-output-order-category";
+import {DtoOutputUpdateOrdercontent} from "./dtos/dto-output-update-ordercontent";
 
 @Component({
   selector: 'app-order-hub',
@@ -14,6 +15,7 @@ export class OrderHubComponent implements OnInit {
   ordersDate : DtoInputOrder[] = []
   ordersFilterred : DtoInputOrder[] = []
   ordersCategory : DtoInputOrder[] = []
+  newPrepared : boolean = false
 
   constructor(private _service: OrderService) { }
 
@@ -30,5 +32,9 @@ export class OrderHubComponent implements OnInit {
 
   fetchOrderByCategory(dto: DtoOutputOrderCategory) {
     this._service.fetchOrderByCategory(dto).subscribe(orders => this.ordersCategory = orders)
+  }
+
+  updateOrderContent(dto : DtoOutputUpdateOrdercontent){
+    this._service.updateOrderContent(dto).subscribe(prepared => this.newPrepared = prepared)
   }
 }

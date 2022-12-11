@@ -1,0 +1,14 @@
+<form [formGroup]="form" (ngSubmit)="emitPrepared()">
+  <div>
+    <label>
+      Id of the order : <input type="number" formControlName="orderid" class="fields">
+    </label>
+    <label>
+      Id of the article : <input type="number" formControlName="articleid" class="fields">
+    </label>
+    <label>
+      Prepared value : <input type="checkbox" formControlName="prepared" class="fields">
+    </label>
+  </div>
+  <input type="submit" value="Update" class="btn">
+</form>
