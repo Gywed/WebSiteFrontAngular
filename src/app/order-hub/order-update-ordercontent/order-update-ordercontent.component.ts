@@ -1,6 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DtoOutputFilterOrder} from "../dtos/dto-output-filter-order";
 import {DtoOutputUpdateOrdercontent} from "../dtos/dto-output-update-ordercontent";
 
 @Component({

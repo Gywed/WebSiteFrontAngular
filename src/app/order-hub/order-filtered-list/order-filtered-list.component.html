@@ -10,6 +10,7 @@
   <input type="submit" value="Select" class="btn">
 </form>
 
+
 <div *ngIf="orders.length; else orderListEmpty">
   <table class="tblMain">
     <tr class="tileMain">
@@ -38,6 +39,7 @@
                   <th>Pricing type</th>
                   <th>Category</th>
                   <th>Brand</th>
+                  <th>Prepared</th>
                 </tr>
                 <tr class="tileSecondary">
                   <td class="tileSecondary">{{orderContent.article.id}}</td>
@@ -46,6 +48,8 @@
                   <td class="tileSecondary">{{orderContent.article.pricingType}}</td>
                   <td class="tileSecondary">{{orderContent.article.category.name}}</td>
                   <td class="tileSecondary">{{orderContent.article.brand.name}}</td>
+                  <td class="tileSecondary"><input type="checkbox" [checked]="orderContent.prepared"
+                                                   (change)="emitPreparedUpdate(order.id,orderContent)"></td>
                 </tr>
               </table>
             </td>

@@ -1,4 +1,3 @@
-<app-order-list-date (dateForFetch)="fetchOrderByDate($event)" [orders]="ordersDate" class="order"></app-order-list-date>
-<app-order-filtered-list (filterForFetch)="fetchOrderThroughFilter($event)" [orders]="ordersFilterred" class="order"></app-order-filtered-list>
+<app-order-filtered-list (filterForFetch)="fetchOrderThroughFilter($event)" (updatePrepared)="updateOrderContent($event)"  [orders]="ordersFilterred" class="order"></app-order-filtered-list>
 <app-order-list-category (categoryForFetch)="fetchOrderByCategory($event)" [orders]="ordersCategory" class="order"></app-order-list-category>
 <app-order-update-ordercontent (updatePrepared)="updateOrderContent($event)"></app-order-update-ordercontent>

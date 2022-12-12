@@ -3,6 +3,8 @@ import {DtoInputOrder} from "../dtos/dto-input-order";
 import {DtoOutputOrderDate} from "../dtos/dto-output-order-date";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoOutputFilterOrder} from "../dtos/dto-output-filter-order";
+import {DtoInputOrderContent} from "../dtos/dto-input-order-content";
+import {DtoOutputUpdateOrdercontent} from "../dtos/dto-output-update-ordercontent";
 
 @Component({
   selector: 'app-order-filtered-list',
@@ -15,6 +17,9 @@ export class OrderFilteredListComponent implements OnInit {
 
   @Output()
   filterForFetch : EventEmitter<DtoOutputFilterOrder> = new EventEmitter<DtoOutputFilterOrder>();
+
+  @Output()
+  updatePrepared : EventEmitter<DtoOutputUpdateOrdercontent> = new EventEmitter<DtoOutputUpdateOrdercontent>();
 
   form: FormGroup = this._fb.group({
     date : ['', Validators.required],
@@ -36,6 +41,15 @@ export class OrderFilteredListComponent implements OnInit {
       name : this.form.value.name
     });
     this.orders = []
+  }
+
+  emitPreparedUpdate(id: number, orderContent: DtoInputOrderContent) {
+    this.updatePrepared.next({
+      orderid : id,
+      articleid : orderContent.article.id,
+      prepared : !orderContent.prepared
+    })
+    orderContent.prepared = !orderContent.prepared
   }
 }
 
