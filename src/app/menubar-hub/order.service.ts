@@ -12,7 +12,7 @@ export class OrderService {
 
   constructor(private _httpClient : HttpClient) { }
 
-  CreateOrder():Observable<DtoOutputOrder[]>{
-    return this._httpClient.get<DtoOutputOrder[]>(`${OrderService.ENTRY_POINT}`);
+  CreateOrder(dto:DtoOutputOrder):Observable<DtoOutputOrder>{
+    return this._httpClient.post<DtoOutputOrder>(OrderService.ENTRY_POINT, dto);
   }
 }

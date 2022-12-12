@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {OrderService} from "../order.service";
 import {ShoppingCartService} from "./shopping-cart.service";
-import {DtoOutputOrderContent} from "./dtos/dto-output-order-content";
+import {DtoOutputCartContent} from "./dtos/dto-output-cart-content";
 import {DtoInputArticle} from "../../article-hub/dtos/dto-input-article";
 
 @Component({
@@ -12,7 +12,7 @@ import {DtoInputArticle} from "../../article-hub/dtos/dto-input-article";
 export class ShoppingCartHubComponent implements OnInit {
   articles:DtoInputArticle[]=[];
 
-  orderContent:DtoOutputOrderContent[]=[];
+  orderContent:DtoOutputCartContent[]=[];
 
 
   constructor(private _orderService: OrderService,private _shoppingCartService:ShoppingCartService) { }
@@ -26,7 +26,7 @@ export class ShoppingCartHubComponent implements OnInit {
     //this.articles =
   }
 
-  private fetchShoppingCart():DtoOutputOrderContent[]{
+  private fetchShoppingCart():DtoOutputCartContent[]{
 
     return this._shoppingCartService.fetchShoppingCartList();
   }
