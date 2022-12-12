@@ -1,0 +1,24 @@
+<p>user-create-order works!</p>
+<div>
+  <table>
+    <tr>
+      <td>Name</td>
+      <td>Quantity</td>
+      <td>Delete</td>
+    </tr>
+    <tr *ngFor="let article of cartContent">
+      <td>{{article.article.nametag}}</td>
+      <td>{{article.quantity}}</td>
+      <td>
+        <button>
+          X
+        </button>
+      </td>
+    </tr>
+  </table>
+  <p>When do you want to come take your order ?</p>
+  <input type="datetime-local" [(ngModel)]="date">
+  <button (click)="confirmOrder(cartContent,date)">
+    Confirm order
+  </button>
+</div>

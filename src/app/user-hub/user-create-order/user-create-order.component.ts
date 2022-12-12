@@ -1,0 +1,44 @@
+import { Component, OnInit } from '@angular/core';
+import {OrderService} from "../../menubar-hub/order.service";
+import {ShoppingCartService} from "../../menubar-hub/shopping-cart-hub/shopping-cart.service";
+import {DtoOutputCartContent} from "../../menubar-hub/shopping-cart-hub/dtos/dto-output-cart-content";
+import {DtoOutputOrderContent} from "../../menubar-hub/shopping-cart-hub/dtos/dto-output-order-content";
+import {DtoOutputOrder} from "../../menubar-hub/shopping-cart-hub/dtos/dto-output-order";
+
+@Component({
+  selector: 'app-user-create-order',
+  templateUrl: './user-create-order.component.html',
+  styleUrls: ['./user-create-order.component.css']
+})
+export class UserCreateOrderComponent implements OnInit {
+  cartContent:DtoOutputCartContent[]=[];
+  orderContent:DtoOutputOrder[]=[];
+  date:string="";
+
+  constructor(private _shoppingCartService: ShoppingCartService,private _orderService:OrderService) { }
+
+  ngOnInit(): void {
+    this.cartContent=this.fetchShoppingCart();
+
+  }
+
+  private fetchShoppingCart():DtoOutputCartContent[]{
+
+    return this._shoppingCartService.fetchShoppingCartList();
+  }
+
+  confirmOrder(orderContent:DtoOutputCartContent[],date:string) {
+    var orderContents: DtoOutputOrderContent[]=[];
+    for(let article of this.cartContent){
+      orderContents.push({
+        idarticle:article.article.id,
+        quantity:article.quantity
+      });
+    }
+    var dto:DtoOutputOrder = {
+      takeDateTime:date,
+      orderContents:orderContents
+    }
+    this._orderService.CreateOrder(dto).subscribe(order => this.orderContent.push(order));
+  }
+}
