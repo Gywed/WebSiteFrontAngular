@@ -11,13 +11,18 @@
         <th (click)="sortArticleByStock()">In stock <a [hidden]="sortIncreasingArticleStock">↑</a><a [hidden]="!sortIncreasingArticleStock">↓</a></th>
         <th>Delete</th>
       </tr>
-      <tr *ngFor="let article of articlesInPage">
+      <tr *ngFor="let article of articlesDisplayed">
         <td (click)="clickUpdateArticle(article)">{{article.nametag}}</td>
         <td (click)="clickUpdateArticle(article)">{{article.price}}</td>
         <td (click)="clickUpdateArticle(article)">{{article.stock}}</td>
         <td><button (click)="emitDelete(article)">X</button></td>
       </tr>
     </table>
+
+    <!--Page selector-->
+    <div>
+      <button *ngFor="let page of createPageNumberRange()" (click)="rangeDisplayed=page; changeDisplayedRange()">{{page}}</button>
+    </div>
   </div>
 
   <!-- Will be displayed if articles list is empty-->

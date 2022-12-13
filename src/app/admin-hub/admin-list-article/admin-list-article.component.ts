@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {LocalService} from "../../local.service";
 import {DtoInputArticle} from "../../article-hub/dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "../dtos/dto-output-delete-article";
@@ -12,7 +12,7 @@ import {DtoInputBrand} from "../../order-hub/dtos/dto-input-brand";
   templateUrl: './admin-list-article.component.html',
   styleUrls: ['./admin-list-article.component.css']
 })
-export class AdminListArticleComponent implements OnInit {
+export class AdminListArticleComponent implements OnChanges {
   // Flag for modyfing article
   @Input() updateArticleClick = false;
   @Output() updateArticleClickChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -33,6 +33,10 @@ export class AdminListArticleComponent implements OnInit {
   @Output()
   fetchArticle: EventEmitter<null> = new EventEmitter<null>()
 
+  rangeDisplayed: number = 1;
+  nbPages: number = 0;
+  articlesDisplayed: DtoInputArticle[] = []
+
   idToUpdate: number = 0;
   nametagToUpdate: string = "";
   priceToUpdate: number = 0;
@@ -51,7 +55,8 @@ export class AdminListArticleComponent implements OnInit {
 
   constructor(private _localService : LocalService) { }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    this.changeDisplayedRange();
   }
 
   clickUpdateArticle(article: DtoInputArticle) {
@@ -74,6 +79,8 @@ export class AdminListArticleComponent implements OnInit {
     this.deletedArticle.next({
       id: article.id
     })
+
+    this.changeDisplayedRange();
   }
 
   emitUpdate(article: DtoOutputUpdateArticle) {
@@ -107,5 +114,16 @@ export class AdminListArticleComponent implements OnInit {
       this.articlesInPage.sort((a,b) => b.stock - a.stock);
     }
     this.sortIncreasingArticleStock = !this.sortIncreasingArticleStock;
+  }
+
+  createPageNumberRange(){
+    // return new Array(number);
+    return new Array(this.nbPages).fill(0)
+      .map((n, index) => index + 1);
+  }
+
+  changeDisplayedRange() {
+    this.nbPages = parseInt(((this.articlesInPage.length - 1) / 10).toString(), 10) + 1;
+    this.articlesDisplayed = this.articlesInPage.slice((this.rangeDisplayed - 1) * 10, this.rangeDisplayed * 10);
   }
 }
