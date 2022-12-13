@@ -1,6 +1,7 @@
+<button routerLink="../employeeCreate">Register a new employee</button>
 <div class="list" [hidden]="updateEmployeeClick">
   <!-- filtering by surname and lastname -->
-  <p>Search an employee</p>
+  <label>Search an employee : </label>
   <input class="fields" type="text" placeholder="surname" [(ngModel)]="surname" (ngModelChange)="nbPage=1; searchNotifier.next(null)">
   <input class="fileds" type="text" placeholder="lastname" [(ngModel)]="lastname" (ngModelChange)="nbPage=1; searchNotifier.next(null)">
   <!--Select the number of elements by page-->
@@ -17,13 +18,16 @@
         <th>Lastname</th>
         <th>Age</th>
         <th>E-Mail</th>
+        <th>Permission</th>
       </tr>
       <tr *ngFor="let employee of employeesInPage">
-        <td (click)="clickUpdateEmployee(employee)">{{employee.surname}}</td>
-        <td (click)="clickUpdateEmployee(employee)">{{employee.lastname}}</td>
-        <td (click)="clickUpdateEmployee(employee)">{{employee.age}}</td>
-        <td (click)="clickUpdateEmployee(employee)">{{employee.email}}</td>
+        <td >{{employee.surname}}</td>
+        <td >{{employee.lastname}}</td>
+        <td >{{employee.birthdate}}</td>
+        <td >{{employee.email}}</td>
+        <td>{{employee.permission}}</td>
         <td><button (click)="emitDelete(employee)">X</button></td>
+        <td><button routerLink="../employeeUpdate" (click)="clickUpdateEmployee(employee)">Modify</button></td>
       </tr>
     </table>
     <!--Page selector-->
@@ -38,7 +42,3 @@
     <p [hidden]="!searchingByName">There is no employee matching your search.</p>
   </ng-template>
 </div>
-
-<button [hidden]="!updateEmployeeClick" (click)="clickBackToList()" id="btnBackToList">Go back</button>
-<app-admin-update-employee [hidden]="!updateEmployeeClick" [id]="idToUpdate" [surname]="surnameToUpdate" [lastname]="lastnameToUpdate" [age]="ageToUpdate"
-                          [permission]="permissionToUpdate" (employeeUpdated)="emitUpdate($event)"></app-admin-update-employee>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DtoOutputCreateUser} from "../user-hub/dtos/dto-output-create-user";
 import {AdminService} from "./admin.service";
 import {DtoOutputDeleteEmployee} from "./dtos/dto-output-delete-employee";
@@ -13,6 +13,8 @@ import {DtoOutputUpdateUser} from "../user-hub/dtos/dto-output-update-user";
 import {DtoInputCompleteUser} from "../user-hub/dtos/dto-input-complete-user";
 import {DtoInputCategory} from "../order-hub/dtos/dto-input-category";
 import {DtoInputBrand} from "../order-hub/dtos/dto-input-brand";
+import {EmitEvent, EventBusService, Events} from "../event-bus.service";
+import {DtoInputUser} from "../user-hub/dtos/dto-input-user";
 
 @Component({
   selector: 'app-admin-hub',
@@ -39,17 +41,17 @@ export class AdminHubComponent implements OnInit {
   employeesInPage: DtoInputCompleteUser[] = []
   nbOfPagesEmployee: number = 0;
 
-  constructor(private _adminService: AdminService, private _localService: LocalService) { }
+  constructor(private _adminService: AdminService,
+              private _localService: LocalService,
+              private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
-    this.fetchEmployeePagination({
-      surname: "",
-      lastname: "",
-      dtoPagination: {
-        nbPage: +(this._localService.getData("nbPage")??1),
-        nbElementsByPage: +(this._localService.getData("nbEmployeesByPage")??10)
-      }
-    })
+    //employee events
+    this._eventBus.on(Events.updateEmployeeList).subscribe((data: DtoOutputEmployeeFilteringParameters) => this.fetchEmployeePagination(data))
+    this._eventBus.on(Events.deleteEmployee).subscribe((data: DtoInputUser) => this.deleteEmployee(data))
+    this._eventBus.on(Events.createEmployee).subscribe((data: DtoOutputCreateUser) => this.createEmployee(data))
+    this._eventBus.on(Events.employeeUpdate).subscribe((data: DtoOutputUpdateUser) => this.updateEmployee(data))
+
     this.fetchAllArticles()
     this.fetchAllCategories()
     this.fetchAllBrands()
@@ -105,6 +107,9 @@ export class AdminHubComponent implements OnInit {
       .subscribe(employees => {
         this.employeesInPage = employees.pageElements;
         this.nbOfPagesEmployee = employees.nbOfPages
+        this._eventBus.emit(new EmitEvent(Events.fetchEmployeeInPages, {
+          employees: this.employeesInPage, nbOfPages: this.nbOfPagesEmployee
+        }))
       })
   }
 
@@ -130,7 +135,7 @@ export class AdminHubComponent implements OnInit {
           if(emp.id == dto.id) {
             this.employeesInPage[this.employeesInPage.indexOf(emp)].surname = dto.surname;
             this.employeesInPage[this.employeesInPage.indexOf(emp)].lastname = dto.lastname;
-            this.employeesInPage[this.employeesInPage.indexOf(emp)].age = dto.age;
+            //this.employeesInPage[this.employeesInPage.indexOf(emp)].age = dto.age;
             this.employeesInPage[this.employeesInPage.indexOf(emp)].permission = dto.permission;
           }
         }))

@@ -5,7 +5,8 @@ import {LocalService} from "../../local.service";
 import {DtoOutputEmployeeFilteringParameters} from "../dtos/dto-output-employee-filtering-parameters";
 import {DtoInputCompleteUser} from "../../user-hub/dtos/dto-input-complete-user";
 import {DtoOutputUpdateUser} from "../../user-hub/dtos/dto-output-update-user";
-import {debounceTime, distinctUntilChanged, Subject} from "rxjs";
+import {debounceTime, Subject} from "rxjs";
+import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 
 @Component({
   selector: 'app-employee-list',
@@ -21,11 +22,6 @@ export class EmployeeListComponent implements OnInit {
   lastname: string = ""
   searchNotifier = new Subject()
 
-  @Output()
-  deletedEmployee: EventEmitter<DtoOutputDeleteEmployee> = new EventEmitter<DtoOutputDeleteEmployee>()
-  @Output() paginationChanged: EventEmitter<DtoOutputEmployeeFilteringParameters> =
-    new EventEmitter<DtoOutputEmployeeFilteringParameters>()
-
   // Flag for modyfing employee
   @Input() updateEmployeeClick = false;
   @Output() updateEmployeeClickChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -33,64 +29,44 @@ export class EmployeeListComponent implements OnInit {
   @Output()
   updatedEmployee: EventEmitter<DtoOutputUpdateUser> = new EventEmitter<DtoOutputUpdateUser>()
 
-  idToUpdate: number = 0;
-  surnameToUpdate: string = "";
-  lastnameToUpdate: string = "";
-  ageToUpdate: number = 0;
-  permissionToUpdate: number = 0;
-
   searchingByName: boolean = false;
 
-  constructor(private _localService : LocalService) { }
+  constructor(private _localService : LocalService,
+              private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
     this.searchNotifier
       .pipe(debounceTime(1000))
       .subscribe(data=>this.emitPaginationChanged())
-  }
 
-  clickUpdateEmployee(user: DtoInputCompleteUser) {
-    this.idToUpdate = user.id;
-    this.surnameToUpdate = user.surname;
-    this.lastnameToUpdate = user.lastname;
-    this.ageToUpdate = user.age;
-    this.permissionToUpdate = user.permission;
-    this.updateEmployeeClick = true;
-    this.updateEmployeeClickChange.next(this.updateEmployeeClick);
-  }
-
-  clickBackToList() {
-    this.updateEmployeeClick = false;
-  }
-
-  emitDelete(employee: DtoInputUser) {
-    this.deletedEmployee.next({
-      id: employee.id
+    this._eventBus.on(Events.fetchEmployeeInPages).subscribe((data: any) => {
+      this.employeesInPage = data.employees
+      this.nbOfPages = data.nbOfPages
     })
-
+    this.emitPaginationChanged()
   }
 
-  emitUpdate(employee: DtoOutputUpdateUser) {
-    this.updatedEmployee.next( {
-      id: employee.id,
-      surname : employee.surname,
-      lastname : employee.lastname,
-      age : employee.age,
-      permission : employee.permission
-    })
+  clickUpdateEmployee(employee: DtoInputCompleteUser) {
+    this._eventBus.emit(new EmitEvent(Events.emitEmployee, employee))
+  }
+
+  emitDelete(employee: DtoInputCompleteUser) {
+    this._eventBus.emit(new EmitEvent(Events.deleteEmployee, employee))
+
   }
 
   emitPaginationChanged() {
     this.searchingByName = this.surname!="" || this.lastname!=""
 
-    this.paginationChanged.next({
+    this._eventBus.emit(new EmitEvent(Events.updateEmployeeList, {
       surname: this.surname,
       lastname: this.lastname,
       dtoPagination:{
         nbPage: this.nbPage,
         nbElementsByPage: this.nbElementsByPage
       }
-    })
+    }))
+
     this._localService.saveData("nbPage", this.nbPage.toString())
     this._localService.saveData("nbEmployeesByPage", this.nbElementsByPage.toString())
   }
