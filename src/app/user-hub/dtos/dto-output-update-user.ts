@@ -2,6 +2,6 @@ export interface DtoOutputUpdateUser {
   id: number,
   surname : string,
   lastname : string,
-  age : number,
+  birthdate : string,
   permission : number
 }

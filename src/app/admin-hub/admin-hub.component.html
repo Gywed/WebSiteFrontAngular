@@ -3,19 +3,9 @@
     (click)="clickArt()" class="btnAdm">
     Manage articles</button>
 
-  <button
-    (click)="clickEmp()" class="btnAdm">
+  <button class="btnAdm"
+    routerLink="employeeList">
     Manage employees</button>
-</div>
-
-<div id="empBanner" [hidden]="!empClick">
-  <button
-    (click)="clickAddEmp()" class="btnAdm">
-    Register an employee</button>
-
-  <button
-    (click)="clickListEmp()" class="btnAdm">
-    List all employees</button>
 </div>
 
 <div id="artBanner" [hidden]="!artClick">
@@ -29,9 +19,11 @@
 </div>
 
 <div class="adminWindows">
+  <!--
   <div [hidden]="!addEmpClick">
     <app-employee-create (employeeCreated)="createEmployee($event)"></app-employee-create>
   </div>
+
 
   <div [hidden]="!listEmpClick">
     <app-employee-list [employeesInPage]="employeesInPage"
@@ -41,6 +33,8 @@
                        [(updateEmployeeClick)]="updateClick"
                        (updatedEmployee)="updateEmployee($event)"></app-employee-list>
   </div>
+  -->
+  <router-outlet></router-outlet>
 
   <div [hidden]="!addArtClick">
     <app-article-create (articleCreated)="createArticle($event)"
