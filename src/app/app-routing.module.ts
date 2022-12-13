@@ -8,6 +8,9 @@ import {AdminUpdateEmployeeComponent} from "./admin-hub/admin-update-employee/ad
 import {AdminListArticleComponent} from "./admin-hub/admin-list-article/admin-list-article.component";
 import {ArticleCreateComponent} from "./admin-hub/article-create/article-create.component";
 import {AdminUpdateArticleComponent} from "./admin-hub/admin-update-article/admin-update-article.component";
+import {OrderHubComponent} from "./order-hub/order-hub.component";
+import {OrderFilteredListComponent} from "./order-hub/order-filtered-list/order-filtered-list.component";
+import {OrderListDateComponent} from "./order-hub/order-list-date/order-list-date.component";
 
 const routes: Routes =[
   {path: "admin", component: AdminHubComponent, children: [
@@ -17,6 +20,10 @@ const routes: Routes =[
       {path: "articleList", component:AdminListArticleComponent},
       {path: "articleCreate", component: ArticleCreateComponent},
       {path: "articleUpdate", component: AdminUpdateArticleComponent}
+    ]},
+  {path: "order", component: OrderHubComponent, children: [
+      {path: "orderFiltered", component: OrderFilteredListComponent},
+      {path: "orderDate", component: OrderListDateComponent}
     ]}
 ];
 

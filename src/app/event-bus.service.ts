@@ -34,5 +34,11 @@ export enum Events {
   deleteEmployee,
   createEmployee,
   emitEmployee,
-  employeeUpdate
+  employeeUpdate,
+
+  //OrderEvent
+  fetchOrderByDate,
+  fetchOrderThroughFilter,
+  fetchOrderByCategory,
+  updateOrderContent
 }

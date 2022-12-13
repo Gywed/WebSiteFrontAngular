@@ -5,6 +5,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/form
 import {DtoOutputFilterOrder} from "../dtos/dto-output-filter-order";
 import {DtoInputOrderContent} from "../dtos/dto-input-order-content";
 import {DtoOutputUpdateOrdercontent} from "../dtos/dto-output-update-ordercontent";
+import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 
 @Component({
   selector: 'app-order-filtered-list',
@@ -12,46 +13,40 @@ import {DtoOutputUpdateOrdercontent} from "../dtos/dto-output-update-orderconten
   styleUrls: ['./order-filtered-list.component.css']
 })
 export class OrderFilteredListComponent implements OnInit {
-  @Input()
+
   orders : DtoInputOrder[] = []
-
-  @Input()
-  newPrepared : boolean = false;
-
-  @Output()
-  filterForFetch : EventEmitter<DtoOutputFilterOrder> = new EventEmitter<DtoOutputFilterOrder>();
-
-  @Output()
-  updatePrepared : EventEmitter<DtoOutputUpdateOrdercontent> = new EventEmitter<DtoOutputUpdateOrdercontent>();
 
   form: FormGroup = this._fb.group({
     date : ['', Validators.required],
     name : ['', Validators.required]
   })
 
-  constructor(private _fb : FormBuilder) { }
+  constructor(private _fb : FormBuilder,
+              private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
-  }
+    this._eventBus.on(Events.fetchOrderThroughFilter).
+    subscribe(orders => this.orders = orders);
 
+  }
   controls(name: string): AbstractControl | null {
     return this.form.get(name);
   }
 
   emitFilter() {
-    this.filterForFetch.next({
+    this._eventBus.emit(new EmitEvent(Events.fetchOrderThroughFilter,{
       date: this.form.value.date,
       name : this.form.value.name
-    });
+    }));
     this.orders = []
   }
 
   emitPreparedUpdate(order: DtoInputOrder, orderContent: DtoInputOrderContent) {
-    this.updatePrepared.next({
+    this._eventBus.emit(new EmitEvent(Events.updateOrderContent, {
       orderid : order.id,
       articleid : orderContent.article.id,
       prepared : !orderContent.prepared
-    })
+    }));
     orderContent.prepared = !orderContent.prepared
     order.isFullyPrepared = order.orderContents.every(o => o.prepared)
   }
