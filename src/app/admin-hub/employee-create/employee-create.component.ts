@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoOutputCreateUser} from "../../user-hub/dtos/dto-output-create-user";
+import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 
 @Component({
   selector: 'app-employee-create',
@@ -17,10 +18,8 @@ export class EmployeeCreateComponent implements OnInit {
     password : ['', Validators.required]
   })
 
-  @Output()
-  employeeCreated: EventEmitter<DtoOutputCreateUser> = new EventEmitter<DtoOutputCreateUser>()
-
-  constructor(private _fb: FormBuilder) { }
+  constructor(private _fb: FormBuilder,
+              private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
   }
@@ -30,13 +29,12 @@ export class EmployeeCreateComponent implements OnInit {
   }
 
   emitEmployee() {
-    this.employeeCreated.next({
-      surname: this.form.value.surname,
+    this._eventBus.emit(new EmitEvent(Events.createEmployee, {surname: this.form.value.surname,
       lastname : this.form.value.lastname,
       email : this.form.value.email,
       birthdate : this.form.value.birthdate,
       password : this.form.value.password
-    })
+    }))
     this.form.reset()
   }
 }

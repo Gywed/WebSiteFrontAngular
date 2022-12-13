@@ -26,6 +26,8 @@ import { AdminUpdateEmployeeComponent } from './admin-hub/admin-update-employee/
 import { OrderListCategoryComponent } from './order-hub/order-list-category/order-list-category.component';
 import { ShoppingCartHubComponent } from './menubar-hub/shopping-cart-hub/shopping-cart-hub.component';
 import { OrderUpdateOrdercontentComponent } from './order-hub/order-update-ordercontent/order-update-ordercontent.component';
+import {RouterLink, RouterLinkWithHref, RouterOutlet} from "@angular/router";
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
@@ -53,12 +55,13 @@ import { OrderUpdateOrdercontentComponent } from './order-hub/order-update-order
     ShoppingCartHubComponent,
     OrderUpdateOrdercontentComponent,
   ],
-    imports: [
-        BrowserModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        FormsModule
-    ],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule,
+    AppRoutingModule
+  ],
   providers: [
     {
     provide : HTTP_INTERCEPTORS,
