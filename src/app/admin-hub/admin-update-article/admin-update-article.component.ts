@@ -34,9 +34,9 @@ export class AdminUpdateArticleComponent implements OnChanges {
     stock : ['', Validators.required],
   })
 
-  idCategoryToUpdate = 0;
-  idBrandToUpdate = 0;
-  PricingTypeToUpdate = 0;
+  idCategoryToUpdate = 1;
+  idBrandToUpdate = 1;
+  PricingTypeToUpdate = 1;
 
   constructor(private _fb: FormBuilder) { }
 

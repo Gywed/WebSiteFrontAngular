@@ -18,9 +18,9 @@ export class ArticleCreateComponent implements OnInit {
     stock : ['', Validators.required],
   })
 
-  idCategory = 0;
-  idBrand = 0;
-  PricingType = 0;
+  idCategory = 1;
+  idBrand = 1;
+  PricingType = 1;
 
   @Output()
   articleCreated: EventEmitter<DtoOutputCreateArticle> = new EventEmitter<DtoOutputCreateArticle>()
