@@ -17,12 +17,14 @@
       <th>Id</th>
       <th>Creation</th>
       <th>Total of the order</th>
+      <th>Is the order fully prepared</th>
       <th>Order content</th>
     </tr>
     <tr *ngFor="let order of orders" class="tileMain">
       <td class="tileMain">{{order.id}}</td>
       <td class="tileMain">{{order.creationDate.slice(0,order.creationDate.search("T"))}}</td>
       <td class="tileMain">{{order.totalOrderPrice}}</td>
+      <td class="tileMain">{{order.isFullyPrepared}}</td>
       <td class="tileMain">
         <table class="tblSecondary">
           <tr class="tileSecondary">
@@ -49,7 +51,7 @@
                   <td class="tileSecondary">{{orderContent.article.category.name}}</td>
                   <td class="tileSecondary">{{orderContent.article.brand.name}}</td>
                   <td class="tileSecondary"><input type="checkbox" [checked]="orderContent.prepared"
-                                                   (change)="emitPreparedUpdate(order.id,orderContent)"></td>
+                                                   (change)="emitPreparedUpdate(order,orderContent)"></td>
                 </tr>
               </table>
             </td>

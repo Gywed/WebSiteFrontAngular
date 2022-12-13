@@ -35,6 +35,6 @@ export class OrderHubComponent implements OnInit {
   }
 
   updateOrderContent(dto : DtoOutputUpdateOrdercontent){
-    this._service.updateOrderContent(dto).subscribe(prepared => this.newPrepared = prepared)
+    this._service.updateOrderContent(dto).subscribe(isFullyPrepared => this.newPrepared = isFullyPrepared)
   }
 }

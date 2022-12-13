@@ -15,6 +15,9 @@ export class OrderFilteredListComponent implements OnInit {
   @Input()
   orders : DtoInputOrder[] = []
 
+  @Input()
+  newPrepared : boolean = false;
+
   @Output()
   filterForFetch : EventEmitter<DtoOutputFilterOrder> = new EventEmitter<DtoOutputFilterOrder>();
 
@@ -43,13 +46,14 @@ export class OrderFilteredListComponent implements OnInit {
     this.orders = []
   }
 
-  emitPreparedUpdate(id: number, orderContent: DtoInputOrderContent) {
+  emitPreparedUpdate(order: DtoInputOrder, orderContent: DtoInputOrderContent) {
     this.updatePrepared.next({
-      orderid : id,
+      orderid : order.id,
       articleid : orderContent.article.id,
       prepared : !orderContent.prepared
     })
     orderContent.prepared = !orderContent.prepared
+    order.isFullyPrepared = order.orderContents.every(o => o.prepared)
   }
 }
 
