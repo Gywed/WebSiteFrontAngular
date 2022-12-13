@@ -1,4 +1,3 @@
-<p>user-create-order works!</p>
 <div>
   <table>
     <tr>
@@ -10,7 +9,7 @@
       <td>{{article.article.nametag}}</td>
       <td>{{article.quantity}}</td>
       <td>
-        <button>
+        <button (click)="deleteArticle(article)">
           X
         </button>
       </td>

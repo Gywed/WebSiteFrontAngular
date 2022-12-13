@@ -37,8 +37,18 @@ export class UserCreateOrderComponent implements OnInit {
     }
     var dto:DtoOutputOrder = {
       takeDateTime:date,
-      orderContents:orderContents
+      dtosOrderContents:orderContents
     }
     this._orderService.CreateOrder(dto).subscribe(order => this.orderContent.push(order));
+  }
+
+  deleteArticle(article: DtoOutputCartContent) {
+    for(let item of this.cartContent)
+    {
+      if(item==article)
+      {
+        this.cartContent.splice(this.cartContent.indexOf(article),1);
+      }
+    }
   }
 }
