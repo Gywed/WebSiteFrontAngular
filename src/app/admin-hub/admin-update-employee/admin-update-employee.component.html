@@ -21,13 +21,6 @@
     </div>
   </div>
   <div>
-    <input type="text" class="fieldsHeader" value="Email" readonly>
-    <input type="text" formControlName="email" class="fields" placeholder="email">
-    <div *ngIf="controls('email')?.dirty && controls('age')?.invalid" class="warning">
-      This information is required!
-    </div>
-  </div>
-  <div>
     <input type="text" class="fieldsHeader" value="Permission" readonly>
     <input type="text" formControlName="permission" class="fields" placeholder="permission">
     <div *ngIf="controls('permission')?.dirty && controls('permission')?.invalid" class="warning">

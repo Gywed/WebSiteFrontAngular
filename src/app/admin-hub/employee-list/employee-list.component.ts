@@ -29,12 +29,6 @@ export class EmployeeListComponent implements OnInit {
   @Output()
   updatedEmployee: EventEmitter<DtoOutputUpdateUser> = new EventEmitter<DtoOutputUpdateUser>()
 
-  idToUpdate: number = 0;
-  surnameToUpdate: string = "";
-  lastnameToUpdate: string = "";
-  ageToUpdate: number = 0;
-  permissionToUpdate: number = 0;
-
   searchingByName: boolean = false;
 
   constructor(private _localService : LocalService,
@@ -56,23 +50,9 @@ export class EmployeeListComponent implements OnInit {
     this._eventBus.emit(new EmitEvent(Events.emitEmployee, employee))
   }
 
-  clickBackToList() {
-    this.updateEmployeeClick = false;
-  }
-
   emitDelete(employee: DtoInputCompleteUser) {
     this._eventBus.emit(new EmitEvent(Events.deleteEmployee, employee))
 
-  }
-
-  emitUpdate(employee: DtoOutputUpdateUser) {
-    this.updatedEmployee.next( {
-      id: employee.id,
-      surname : employee.surname,
-      lastname : employee.lastname,
-      age : employee.age,
-      permission : employee.permission
-    })
   }
 
   emitPaginationChanged() {

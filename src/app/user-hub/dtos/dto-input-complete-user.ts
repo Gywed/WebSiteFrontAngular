@@ -3,6 +3,6 @@ export interface DtoInputCompleteUser {
   surname : string,
   lastname : string,
   email : string,
-  age : string,
+  birthdate : string,
   permission : number
 }

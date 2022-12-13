@@ -18,12 +18,14 @@
         <th>Lastname</th>
         <th>Age</th>
         <th>E-Mail</th>
+        <th>Permission</th>
       </tr>
       <tr *ngFor="let employee of employeesInPage">
         <td >{{employee.surname}}</td>
         <td >{{employee.lastname}}</td>
-        <td >{{employee.age}}</td>
+        <td >{{employee.birthdate}}</td>
         <td >{{employee.email}}</td>
+        <td>{{employee.permission}}</td>
         <td><button (click)="emitDelete(employee)">X</button></td>
         <td><button routerLink="../employeeUpdate" (click)="clickUpdateEmployee(employee)">Modify</button></td>
       </tr>
