@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {filter, map, Observable, Subject, Subscription} from "rxjs";
+import {filter, map, Observable, ReplaySubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventBusService {
   //$ suffix means that it is an Observable
-  private subject$ = new Subject<any>()
+  private subject$ = new ReplaySubject<any>()
 
   constructor() { }
 
