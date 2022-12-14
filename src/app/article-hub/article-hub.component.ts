@@ -10,17 +10,18 @@ import {ArticleService} from "./article.service";
 export class ArticleHubComponent implements OnInit {
   articles: DtoInputArticle[] = [];
 
-  constructor(private _articleService: ArticleService) { }
+  constructor(private _articleService: ArticleService) {
+  }
 
   ngOnInit(): void {
     this.fetchAll();
 
   }
+
   private fetchAll() {
     this._articleService
       .fetchAllArticle()
       .subscribe(articles => this.articles = articles);
   }
-
 
 }
