@@ -32,7 +32,7 @@ export class OrderListDateComponent implements OnInit {
   }
 
   emitDate() {
-    this._eventBus.emit(new EmitEvent(Events.fetchOrderByDate, {
+    this._eventBus.emit(new EmitEvent(Events.emitOrderDate, {
       date : this.form.value.date
     }))
     this.form.reset();

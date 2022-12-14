@@ -33,7 +33,7 @@ export class OrderListCategoryComponent implements OnInit {
   }
 
   emitCategory() {
-    this._eventBus.emit(new EmitEvent(Events.fetchOrderByCategory, {
+    this._eventBus.emit(new EmitEvent(Events.emitOrderCategory, {
       idCategory : this.form.value.idCategory
     }))
     this.form.reset();

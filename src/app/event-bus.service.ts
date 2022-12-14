@@ -38,7 +38,10 @@ export enum Events {
 
   //OrderEvent
   fetchOrderByDate,
+  emitOrderDate,
   fetchOrderThroughFilter,
+  emitOrderFilter,
   fetchOrderByCategory,
+  emitOrderCategory,
   updateOrderContent
 }

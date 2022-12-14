@@ -37,7 +37,7 @@ export class OrderFilteredListComponent implements OnInit {
   }
 
   emitFilter() {
-    this._eventBus.emit(new EmitEvent(Events.fetchOrderThroughFilter,{
+    this._eventBus.emit(new EmitEvent(Events.emitOrderFilter,{
       date: this.form.value.date,
       name : this.form.value.name
     }));

@@ -19,18 +19,18 @@ export class OrderHubComponent implements OnInit {
   ordersCategory : DtoInputOrder[] = []
   newPrepared : boolean = false
 
-  fetchOrderThroughFilterSub? : Subscription;
-  fetchOrderByDateSub? : Subscription;
-  fetchOrderByCategorySub? : Subscription;
+  emitOrderFilterSub? : Subscription;
+  emitOrderDateSub? : Subscription;
+  emitOrderCategorySub? : Subscription;
   updateOrderContentSub? : Subscription;
 
   constructor(private _service: OrderService,
               private _eventBus : EventBusService) { }
 
   ngOnInit(): void {
-    this.fetchOrderThroughFilterSub = this._eventBus.on(Events.fetchOrderThroughFilter).subscribe((orders :  DtoOutputFilterOrder) => this.fetchOrderThroughFilter(orders))
-    this.fetchOrderByDateSub = this._eventBus.on(Events.fetchOrderByDate).subscribe((orders :  DtoOutputOrderDate) => this.fetchOrderByDate(orders))
-    this.fetchOrderByCategorySub = this._eventBus.on(Events.fetchOrderByCategory).subscribe((orders :  DtoOutputOrderCategory) => this.fetchOrderByCategory(orders))
+    this.emitOrderFilterSub = this._eventBus.on(Events.emitOrderFilter).subscribe((orders :  DtoOutputFilterOrder) => this.fetchOrderThroughFilter(orders))
+    this.emitOrderDateSub = this._eventBus.on(Events.emitOrderDate).subscribe((orders :  DtoOutputOrderDate) => this.fetchOrderByDate(orders))
+    this.emitOrderCategorySub = this._eventBus.on(Events.emitOrderCategory).subscribe((orders :  DtoOutputOrderCategory) => this.fetchOrderByCategory(orders))
     this.updateOrderContentSub = this._eventBus.on(Events.updateOrderContent).subscribe((orders :  DtoOutputUpdateOrdercontent) => this.updateOrderContent(orders))
   }
 
@@ -61,9 +61,9 @@ export class OrderHubComponent implements OnInit {
 
   ngOnDestroy()
   {
-    this.fetchOrderByCategorySub?.unsubscribe()
-    this.fetchOrderThroughFilterSub?.unsubscribe()
-    this.fetchOrderByDateSub?.unsubscribe()
+    this.emitOrderCategorySub?.unsubscribe()
+    this.emitOrderFilterSub?.unsubscribe()
+    this.emitOrderDateSub?.unsubscribe()
     this.updateOrderContentSub?.unsubscribe()
   }
 }
