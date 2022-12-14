@@ -37,7 +37,7 @@ export class EmployeeListComponent implements OnInit {
   ngOnInit(): void {
     this.searchNotifier
       .pipe(debounceTime(1000))
-      .subscribe(data=>this.emitPaginationChanged())
+      .subscribe(()=>this.emitPaginationChanged())
 
     this._eventBus.on(Events.fetchEmployeeInPages).subscribe((data: any) => {
       this.employeesInPage = data.employees
