@@ -19,18 +19,22 @@ export class ArticleListComponent implements OnInit {
   }
 
   addToCart(article: DtoInputArticle,quantity:number) {
-    var articlesCart:DtoOutputCartContent = {
-      article : {
-        id:article.id,
-        nametag:article.nametag,
-        idBrand:article.idBrand,
-        idCategory:article.idCategory,
-        price : article.price,
-        pricingType : article.pricingType
-      },
-      quantity : quantity
-    };
-    this._shoppingCartService.addArticle(articlesCart);
+    if(quantity > 0)
+    {
+      var articlesCart:DtoOutputCartContent = {
+        article : {
+          id:article.id,
+          nametag:article.nametag,
+          idBrand:article.idBrand,
+          idCategory:article.idCategory,
+          price : article.price,
+          pricingType : article.pricingType
+        },
+        quantity : quantity
+      };
+      this._shoppingCartService.addArticle(articlesCart);
+    }
+
   }
 
 }
