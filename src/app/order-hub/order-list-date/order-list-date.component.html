@@ -1,13 +1,12 @@
-<form [formGroup]="form" (ngSubmit)="emitDate()">
+<form [formGroup]="form">
   <div>
     <label>
-      Select a date : <input type="date" formControlName="date" class="fields">
+      Select a date : <input type="date" formControlName="date" class="fields" (ngModelChange)="emitDate()">
     </label>
     <div *ngIf="controls('date')?.dirty && controls('date')?.invalid" class="warning">
       This information is required!
     </div>
   </div>
-  <input type="submit" [disabled]="form.invalid" value="Select" class="btn">
 </form>
 
 
