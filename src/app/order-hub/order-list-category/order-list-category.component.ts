@@ -4,6 +4,7 @@ import {DtoOutputOrderDate} from "../dtos/dto-output-order-date";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoOutputOrderCategory} from "../dtos/dto-output-order-category";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-order-list-category',
@@ -13,6 +14,8 @@ import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 export class OrderListCategoryComponent implements OnInit {
   orders : DtoInputOrder[] = []
 
+  fetchOrderByCategorySub? : Subscription
+
   form: FormGroup = this._fb.group({
     idCategory : ['', Validators.required],
   })
@@ -21,7 +24,7 @@ export class OrderListCategoryComponent implements OnInit {
               private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
-    this._eventBus.on(Events.fetchOrderByCategory).
+    this.fetchOrderByCategorySub = this._eventBus.on(Events.fetchOrderByCategory).
     subscribe(orders => this.orders = orders);
   }
 
@@ -34,5 +37,9 @@ export class OrderListCategoryComponent implements OnInit {
       idCategory : this.form.value.idCategory
     }))
     this.form.reset();
+  }
+
+  ngOnDestroy(){
+    this.fetchOrderByCategorySub?.unsubscribe()
   }
 }

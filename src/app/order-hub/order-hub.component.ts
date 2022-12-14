@@ -6,6 +6,7 @@ import {DtoOutputFilterOrder} from "./dtos/dto-output-filter-order";
 import {DtoOutputOrderCategory} from "./dtos/dto-output-order-category";
 import {DtoOutputUpdateOrdercontent} from "./dtos/dto-output-update-ordercontent";
 import {EmitEvent, EventBusService, Events} from "../event-bus.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-order-hub',
@@ -18,14 +19,19 @@ export class OrderHubComponent implements OnInit {
   ordersCategory : DtoInputOrder[] = []
   newPrepared : boolean = false
 
+  fetchOrderThroughFilterSub? : Subscription;
+  fetchOrderByDateSub? : Subscription;
+  fetchOrderByCategorySub? : Subscription;
+  updateOrderContentSub? : Subscription;
+
   constructor(private _service: OrderService,
               private _eventBus : EventBusService) { }
 
   ngOnInit(): void {
-    this._eventBus.on(Events.fetchOrderThroughFilter).subscribe((orders :  DtoOutputFilterOrder) => this.fetchOrderThroughFilter(orders))
-    this._eventBus.on(Events.fetchOrderByDate).subscribe((orders :  DtoOutputOrderDate) => this.fetchOrderByDate(orders))
-    this._eventBus.on(Events.fetchOrderByCategory).subscribe((orders :  DtoOutputOrderCategory) => this.fetchOrderByCategory(orders))
-    this._eventBus.on(Events.updateOrderContent).subscribe((orders :  DtoOutputUpdateOrdercontent) => this.updateOrderContent(orders))
+    this.fetchOrderThroughFilterSub = this._eventBus.on(Events.fetchOrderThroughFilter).subscribe((orders :  DtoOutputFilterOrder) => this.fetchOrderThroughFilter(orders))
+    this.fetchOrderByDateSub = this._eventBus.on(Events.fetchOrderByDate).subscribe((orders :  DtoOutputOrderDate) => this.fetchOrderByDate(orders))
+    this.fetchOrderByCategorySub = this._eventBus.on(Events.fetchOrderByCategory).subscribe((orders :  DtoOutputOrderCategory) => this.fetchOrderByCategory(orders))
+    this.updateOrderContentSub = this._eventBus.on(Events.updateOrderContent).subscribe((orders :  DtoOutputUpdateOrdercontent) => this.updateOrderContent(orders))
   }
 
   fetchOrderByDate(dto: DtoOutputOrderDate) {
@@ -37,7 +43,7 @@ export class OrderHubComponent implements OnInit {
 
   fetchOrderThroughFilter(dto: DtoOutputFilterOrder) {
     this._service.fetchFilteredOrder(dto).subscribe(orders => {
-      this.ordersFilterred = orders
+      this.ordersFilterred = orders;
       this._eventBus.emit(new EmitEvent(Events.fetchOrderThroughFilter, this.ordersFilterred))
     })
   }
@@ -51,5 +57,13 @@ export class OrderHubComponent implements OnInit {
 
   updateOrderContent(dto : DtoOutputUpdateOrdercontent){
     this._service.updateOrderContent(dto).subscribe(isFullyPrepared => this.newPrepared = isFullyPrepared)
+  }
+
+  ngOnDestroy()
+  {
+    this.fetchOrderByCategorySub?.unsubscribe()
+    this.fetchOrderThroughFilterSub?.unsubscribe()
+    this.fetchOrderByDateSub?.unsubscribe()
+    this.updateOrderContentSub?.unsubscribe()
   }
 }

@@ -4,6 +4,7 @@ import {DtoOutputOrderDate} from "../dtos/dto-output-order-date";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 import {DtoInputOrderContent} from "../dtos/dto-input-order-content";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-order-list-date',
@@ -12,6 +13,7 @@ import {DtoInputOrderContent} from "../dtos/dto-input-order-content";
 })
 export class OrderListDateComponent implements OnInit {
   orders : DtoInputOrder[] = []
+  fetchOrderByDateSub? : Subscription
 
   form: FormGroup = this._fb.group({
     date : ['', Validators.required],
@@ -21,7 +23,7 @@ export class OrderListDateComponent implements OnInit {
               private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
-    this._eventBus.on(Events.fetchOrderByDate).
+    this.fetchOrderByDateSub = this._eventBus.on(Events.fetchOrderByDate).
     subscribe(orders => this.orders = orders);
   }
 
@@ -44,5 +46,9 @@ export class OrderListDateComponent implements OnInit {
     }));
     orderContent.prepared = !orderContent.prepared
     order.isFullyPrepared = order.orderContents.every(o => o.prepared)
+  }
+
+  ngOnDestroy(){
+    this.fetchOrderByDateSub?.unsubscribe()
   }
 }

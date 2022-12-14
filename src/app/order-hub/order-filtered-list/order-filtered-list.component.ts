@@ -6,6 +6,7 @@ import {DtoOutputFilterOrder} from "../dtos/dto-output-filter-order";
 import {DtoInputOrderContent} from "../dtos/dto-input-order-content";
 import {DtoOutputUpdateOrdercontent} from "../dtos/dto-output-update-ordercontent";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-order-filtered-list',
@@ -16,6 +17,8 @@ export class OrderFilteredListComponent implements OnInit {
 
   orders : DtoInputOrder[] = []
 
+  fetchOrderThroughFilterSub? : Subscription
+
   form: FormGroup = this._fb.group({
     date : ['', Validators.required],
     name : ['', Validators.required]
@@ -25,7 +28,7 @@ export class OrderFilteredListComponent implements OnInit {
               private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
-    this._eventBus.on(Events.fetchOrderThroughFilter).
+    this.fetchOrderThroughFilterSub = this._eventBus.on(Events.fetchOrderThroughFilter).
     subscribe(orders => this.orders = orders);
 
   }
@@ -49,6 +52,10 @@ export class OrderFilteredListComponent implements OnInit {
     }));
     orderContent.prepared = !orderContent.prepared
     order.isFullyPrepared = order.orderContents.every(o => o.prepared)
+  }
+
+  ngOnDestroy(){
+    this.fetchOrderThroughFilterSub?.unsubscribe()
   }
 }
 
