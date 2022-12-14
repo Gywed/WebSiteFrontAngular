@@ -2,7 +2,7 @@
   <div *ngFor="let article of orderContent" class="content">
     <p>{{article.article.nametag}} quantity : {{article.quantity}}</p>
   </div>
-  <button (click)="showCart()">
+  <button routerLink="user-create-order" >
     Show Cart
   </button>
 </div>

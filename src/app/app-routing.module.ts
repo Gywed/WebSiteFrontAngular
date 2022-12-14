@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {AdminHubComponent} from "./admin-hub/admin-hub.component";
 import {EmployeeListComponent} from "./admin-hub/employee-list/employee-list.component";
@@ -13,8 +12,11 @@ import {OrderFilteredListComponent} from "./order-hub/order-filtered-list/order-
 import {OrderListDateComponent} from "./order-hub/order-list-date/order-list-date.component";
 import {OrderListCategoryComponent} from "./order-hub/order-list-category/order-list-category.component";
 import {OrderListUserComponent} from "./order-hub/order-list-user/order-list-user.component";
+import {UserCreateOrderComponent} from "./user-hub/user-create-order/user-create-order.component";
+import {ArticleHubComponent} from "./article-hub/article-hub.component";
 
 const routes: Routes =[
+  {path: "", component: ArticleHubComponent},
   {path: "admin", component: AdminHubComponent, children: [
       {path: "employeeList", component: EmployeeListComponent},
       {path: "employeeCreate", component: EmployeeCreateComponent},
@@ -28,7 +30,8 @@ const routes: Routes =[
       {path: "orderDate", component: OrderListDateComponent},
       {path: "orderCategory", component: OrderListCategoryComponent},
       {path: "orderUser", component: OrderListUserComponent},
-    ]}
+    ]},
+  {path:"user-create-order",component:UserCreateOrderComponent}
 ];
 
 @NgModule({
