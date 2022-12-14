@@ -28,19 +28,27 @@ export class UserCreateOrderComponent implements OnInit {
   }
 
   confirmOrder(orderContent:DtoOutputCartContent[],date:string) {
-    var orderContents: DtoOutputOrderContent[]=[];
-    for(let article of this.cartContent){
-      orderContents.push({
-        idarticle:article.article.id,
-        quantity:article.quantity
-      });
+
+    var takedatetime = new Date(date);
+    const today = new Date();
+    today.setHours(today.getHours()+1);
+    if(takedatetime>today)
+    {
+      var orderContents: DtoOutputOrderContent[]=[];
+      for(let article of this.cartContent){
+        orderContents.push({
+          idarticle:article.article.id,
+          quantity:article.quantity
+        });
+      }
+      var dto:DtoOutputOrder = {
+        takeDateTime:date,
+        dtosOrderContents:orderContents
+      }
+      this._orderService.CreateOrder(dto).subscribe(order => this.orderContent.push(order));
     }
-    var dto:DtoOutputOrder = {
-      takeDateTime:date,
-      dtosOrderContents:orderContents
-    }
-    this._orderService.CreateOrder(dto).subscribe(order => this.orderContent.push(order));
   }
+
 
   deleteArticle(article: DtoOutputCartContent) {
     for(let item of this.cartContent)

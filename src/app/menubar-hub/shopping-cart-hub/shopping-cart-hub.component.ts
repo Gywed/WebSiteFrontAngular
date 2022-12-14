@@ -35,4 +35,8 @@ export class ShoppingCartHubComponent implements OnInit {
   private fetchArticleList() {
     return this._shoppingCartService.fetchArticleList();
   }
+
+  showCart() {
+
+  }
 }
