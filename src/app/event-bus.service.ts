@@ -43,5 +43,7 @@ export enum Events {
   emitOrderFilter,
   fetchOrderByCategory,
   emitOrderCategory,
-  updateOrderContent
+  updateOrderContent,
+  emitUser,
+  fetchOrderByUserId
 }

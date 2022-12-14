@@ -28,6 +28,7 @@ import { ShoppingCartHubComponent } from './menubar-hub/shopping-cart-hub/shoppi
 import { OrderUpdateOrdercontentComponent } from './order-hub/order-update-ordercontent/order-update-ordercontent.component';
 import {RouterLink, RouterLinkWithHref, RouterOutlet} from "@angular/router";
 import {AppRoutingModule} from "./app-routing.module";
+import { OrderListUserComponent } from './order-hub/order-list-user/order-list-user.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import {AppRoutingModule} from "./app-routing.module";
     OrderListCategoryComponent,
     ShoppingCartHubComponent,
     OrderUpdateOrdercontentComponent,
+    OrderListUserComponent,
   ],
   imports: [
     BrowserModule,
