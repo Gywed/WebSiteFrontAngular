@@ -6,15 +6,15 @@ import {Observable} from "rxjs";
 import {DtoOutputDeleteEmployee} from "./dtos/dto-output-delete-employee";
 import {DtoOutputCreateArticle} from "../article-hub/dtos/dto-output-create-article";
 import {DtoInputPaginationFiltering} from "../dtos/dto-input-pagination-filtering";
-import {DtoInputArticle} from "../article-hub/dtos/dto-input-article";
+import {DtoInputArticle} from "../dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "./dtos/dto-output-delete-article";
 import {DtoOutputUpdateArticle} from "../article-hub/dtos/dto-output-update-article";
 import {DtoOutputFilterArticle} from "./dtos/dto-output-filter-article";
 import {DtoOutputEmployeeFilteringParameters} from "./dtos/dto-output-employee-filtering-parameters";
 import {DtoOutputUpdateUser} from "../user-hub/dtos/dto-output-update-user";
 import {DtoInputCompleteUser} from "../user-hub/dtos/dto-input-complete-user";
-import {DtoInputCategory} from "../order-hub/dtos/dto-input-category";
-import {DtoInputBrand} from "../order-hub/dtos/dto-input-brand";
+import {DtoInputCategory} from "../dtos/dto-input-category";
+import {DtoInputBrand} from "../dtos/dto-input-brand";
 
 @Injectable({
   providedIn: 'root'

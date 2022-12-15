@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LocalService} from "../../local.service";
-import {DtoInputArticle} from "../../article-hub/dtos/dto-input-article";
+import {DtoInputArticle} from "../../dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "../dtos/dto-output-delete-article";
 import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-article";
 import {DtoOutputFilterArticle} from "../dtos/dto-output-filter-article";
-import {DtoInputCategory} from "../../order-hub/dtos/dto-input-category";
-import {DtoInputBrand} from "../../order-hub/dtos/dto-input-brand";
+import {DtoInputCategory} from "../../dtos/dto-input-category";
+import {DtoInputBrand} from "../../dtos/dto-input-brand";
 
 @Component({
   selector: 'app-admin-list-article',
@@ -60,8 +60,8 @@ export class AdminListArticleComponent implements OnInit {
     this.priceToUpdate = article.price;
     this.pricingTypeToUpdate = article.pricingType;
     this.stockToUpdate = article.stock;
-    this.idCategoryToUpdate = article.idCategory;
-    this.idBrandToUpdate = article.idBrand;
+    this.idCategoryToUpdate = article.category.id;
+    this.idBrandToUpdate = article.brand.id;
     this.updateArticleClick = true;
     this.updateArticleClickChange.next(this.updateArticleClick);
   }
@@ -83,8 +83,8 @@ export class AdminListArticleComponent implements OnInit {
       price : article.price,
       pricingType : article.pricingType,
       stock : article.stock,
-      idCategory : article.idCategory,
-      idBrand : article.idBrand
+      category : article.category,
+      brand : article.brand
     })
   }
 

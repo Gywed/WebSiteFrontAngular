@@ -4,15 +4,15 @@ import {AdminService} from "./admin.service";
 import {DtoOutputDeleteEmployee} from "./dtos/dto-output-delete-employee";
 import {LocalService} from "../local.service";
 import {DtoOutputCreateArticle} from "../article-hub/dtos/dto-output-create-article";
-import {DtoInputArticle} from "../article-hub/dtos/dto-input-article";
+import {DtoInputArticle} from "../dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "./dtos/dto-output-delete-article";
 import {DtoOutputUpdateArticle} from "../article-hub/dtos/dto-output-update-article";
 import {DtoOutputFilterArticle} from "./dtos/dto-output-filter-article";
 import {DtoOutputEmployeeFilteringParameters} from "./dtos/dto-output-employee-filtering-parameters";
 import {DtoOutputUpdateUser} from "../user-hub/dtos/dto-output-update-user";
 import {DtoInputCompleteUser} from "../user-hub/dtos/dto-input-complete-user";
-import {DtoInputCategory} from "../order-hub/dtos/dto-input-category";
-import {DtoInputBrand} from "../order-hub/dtos/dto-input-brand";
+import {DtoInputCategory} from "../dtos/dto-input-category";
+import {DtoInputBrand} from "../dtos/dto-input-brand";
 import {EmitEvent, EventBusService, Events} from "../event-bus.service";
 import {DtoInputUser} from "../user-hub/dtos/dto-input-user";
 
@@ -177,7 +177,15 @@ export class AdminHubComponent implements OnInit {
       .subscribe(article=>
           this.articlesInPage.forEach((art) => {
               if(art.id == dto.id) {
-                  this.articlesInPage[this.articlesInPage.indexOf(art)] = dto;
+                  this.articlesInPage[this.articlesInPage.indexOf(art)] = {
+                    nametag : dto.nametag,
+                    price : dto.price,
+                    pricingType : dto.pricingType,
+                    stock : dto.stock,
+                    id : dto.id,
+                    brand : dto.brand,
+                    category : dto.category
+                  };
               }
           }))
   }

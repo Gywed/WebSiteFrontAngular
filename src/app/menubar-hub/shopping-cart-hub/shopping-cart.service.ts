@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {DtoOutputCartContent} from "./dtos/dto-output-cart-content";
 import {ArticleService} from "../../article-hub/article.service";
-import {DtoInputArticle} from "../../article-hub/dtos/dto-input-article";
+import {DtoInputArticle} from "../../dtos/dto-input-article";
 
 @Injectable({
   providedIn: 'root'

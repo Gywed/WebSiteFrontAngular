@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {DtoOutputOrderDate} from "./dtos/dto-output-order-date";
-import {DtoInputOrder} from "./dtos/dto-input-order";
+import {DtoInputOrder} from "../dtos/dto-input-order";
 import {Observable} from "rxjs";
 import {DtoOutputFilterOrder} from "./dtos/dto-output-filter-order";
 import {DtoOutputOrderCategory} from "./dtos/dto-output-order-category";

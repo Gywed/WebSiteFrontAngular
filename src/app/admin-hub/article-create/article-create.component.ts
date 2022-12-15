@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoOutputCreateArticle} from "../../article-hub/dtos/dto-output-create-article";
-import {DtoInputCategory} from "../../order-hub/dtos/dto-input-category";
-import {DtoInputBrand} from "../../order-hub/dtos/dto-input-brand";
+import {DtoInputCategory} from "../../dtos/dto-input-category";
+import {DtoInputBrand} from "../../dtos/dto-input-brand";
 
 @Component({
   selector: 'app-article-create',

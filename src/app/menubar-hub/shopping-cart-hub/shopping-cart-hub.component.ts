@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {OrderService} from "../order.service";
 import {ShoppingCartService} from "./shopping-cart.service";
 import {DtoOutputCartContent} from "./dtos/dto-output-cart-content";
-import {DtoInputArticle} from "../../article-hub/dtos/dto-input-article";
+import {DtoInputArticle} from "../../dtos/dto-input-article";
 
 @Component({
   selector: 'app-shopping-cart-hub',

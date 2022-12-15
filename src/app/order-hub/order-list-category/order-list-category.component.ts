@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {DtoInputOrder} from "../dtos/dto-input-order";
+import {DtoInputOrder} from "../../dtos/dto-input-order";
 import {DtoOutputOrderDate} from "../dtos/dto-output-order-date";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoOutputOrderCategory} from "../dtos/dto-output-order-category";
