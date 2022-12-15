@@ -1,0 +1,16 @@
+.familyList{
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 20%;
+  height: auto;
+  text-align: center;
+}
+.familyListElement{
+  border: 1px solid black;
+  border-radius: 5px;
+  width: available;
+  text-align: center;
+  font-size: large;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
