@@ -1,1 +1,3 @@
-<app-families-list [families]="families"></app-families-list>
+<app-families-list [families]="families"
+                   [articlesInFamily]="articlesOfFamily
+"                  (familySelected)="fetchArticlesOfFamily($event)"></app-families-list>

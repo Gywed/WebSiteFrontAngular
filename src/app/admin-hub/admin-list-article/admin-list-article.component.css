@@ -1,6 +1,7 @@
 .list
 {
   text-align: center;
+  float: left;
 }
 table, th, td {
   text-align: center;

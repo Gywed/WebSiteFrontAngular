@@ -1,7 +1,13 @@
-<h2>List</h2>
 <div class="familyList" >
   <label>Families list</label>
-  <div class="familyListElement" *ngFor="let family of families">
-    {{family.familyName}}
+  <div *ngFor="let family of families" (click)="familyClicked(family)">
+    <div class="familyListElement">
+      {{family.familyName}}
+    </div>
+    <div *ngIf="familySelectedId == family.id" >
+      <div *ngFor="let article of articlesInFamily" class="articleOfFamily">
+        {{article.nametag}}
+      </div>
+    </div>
   </div>
 </div>
