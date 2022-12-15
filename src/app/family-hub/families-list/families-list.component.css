@@ -7,6 +7,7 @@
   float: right;
 }
 .familyListElement{
+  cursor: pointer;
   border: 1px solid black;
   border-radius: 5px;
   width: available;
@@ -14,4 +15,10 @@
   font-size: large;
   margin-bottom: 5px;
   margin-top: 5px;
+}
+
+.articleOfFamily{
+  text-align: right;
+  margin-right: 10px;
+  font-size: medium;
 }
