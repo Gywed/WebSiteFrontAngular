@@ -55,6 +55,7 @@ export class AdminUpdateEmployeeComponent {
       permission: data.permission
     })
   }
+
   emitUpdate() {
     this._eventBus.emit(new EmitEvent(Events.employeeUpdate, {
       id: this.employeeToUpdateId,

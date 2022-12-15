@@ -1,27 +1,27 @@
 <form [formGroup]="form" (ngSubmit)="emitUpdate()" class="form">
   <div>
-    <input type="text" class="fieldsHeader" value="Surname" readonly>
+    <input type="text" class="fieldsHeader" value="Surname" readonly [disabled]="true">
     <input type="text" formControlName="surname" class="fields" placeholder="surname">
     <div *ngIf="controls('surname')?.dirty && controls('surname')?.invalid" class="warning">
       This information is required!
     </div>
   </div>
   <div>
-    <input type="text" class="fieldsHeader" value="Lastname" readonly>
+    <input type="text" class="fieldsHeader" value="Lastname" readonly [disabled]="true">
     <input type="text" formControlName="lastname" class="fields" placeholder="lastname">
     <div *ngIf="controls('lastname')?.dirty && controls('lastname')?.invalid" class="warning">
       This information is required!
     </div>
   </div>
   <div>
-    <input type="text" class="fieldsHeader" value="Age" readonly>
+    <input type="text" class="fieldsHeader" value="Age" readonly [disabled]="true">
     <input type="text" formControlName="age" class="fields" placeholder="age">
     <div *ngIf="controls('age')?.dirty && controls('age')?.invalid" class="warning">
       This information is required!
     </div>
   </div>
   <div>
-    <input type="text" class="fieldsHeader" value="Permission" readonly>
+    <input type="text" class="fieldsHeader" value="Permission" readonly [disabled]="true">
     <input type="text" formControlName="permission" class="fields" placeholder="permission">
     <div *ngIf="controls('permission')?.dirty && controls('permission')?.invalid" class="warning">
       This information is required!
