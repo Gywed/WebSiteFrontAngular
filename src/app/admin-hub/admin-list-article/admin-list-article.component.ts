@@ -51,7 +51,6 @@ export class AdminListArticleComponent implements OnInit {
 
   emitFilter() {
     this.searchingByName = this.nametagToSearch!=""
-    this.rangeDisplayed = 1;
 
     this._eventBus.emit(new EmitEvent(Events.updateArticleList, this.nametagToSearch))
     this._eventBus.on(Events.fetchArticle).subscribe((data: any) => {
@@ -80,5 +79,7 @@ export class AdminListArticleComponent implements OnInit {
   changeDisplayedRange(articlesInPage: DtoInputArticle[]) {
     this.nbPages = parseInt(((articlesInPage.length - 1) / 10).toString(), 10) + 1;
     this.articlesDisplayed = articlesInPage.slice((this.rangeDisplayed - 1) * 10, this.rangeDisplayed * 10);
+
+      this.rangeDisplayed = 1;
   }
 }

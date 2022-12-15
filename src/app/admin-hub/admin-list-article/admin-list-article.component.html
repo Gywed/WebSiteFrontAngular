@@ -24,6 +24,7 @@
     <!--Page selector-->
     <div>
       <button *ngFor="let page of createPageNumberRange()" (click)="rangeDisplayed=page; changeDisplayedRange(this.articlesInPage)">{{page}}</button>
+      {{articlesDisplayed.length}}
     </div>
   </div>
 
