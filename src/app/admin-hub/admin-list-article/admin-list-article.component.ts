@@ -1,11 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalService} from "../../local.service";
 import {DtoInputArticle} from "../../dtos/dto-input-article";
-import {DtoOutputDeleteArticle} from "../dtos/dto-output-delete-article";
 import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-article";
-import {DtoOutputFilterArticle} from "../dtos/dto-output-filter-article";
-import {DtoInputCategory} from "../../dtos/dto-input-category";
-import {DtoInputBrand} from "../../dtos/dto-input-brand";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 import {debounceTime, Subject} from "rxjs";
 
@@ -60,12 +56,6 @@ export class AdminListArticleComponent implements OnInit {
 
   clickBackToList() {
     this.updateArticleClick = false;
-  }
-
-  emitDelete(article: DtoInputArticle) {
-    this.deletedArticle.next({
-      id: article.id
-    })
   }
 
   emitUpdate(article: DtoOutputUpdateArticle) {

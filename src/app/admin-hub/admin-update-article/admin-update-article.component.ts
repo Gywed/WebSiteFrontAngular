@@ -6,6 +6,7 @@ import {DtoInputBrand} from "../../dtos/dto-input-brand";
 import {tsCastToAny} from "@angular/compiler-cli/src/ngtsc/typecheck/src/ts_util";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 import {Subscription} from "rxjs";
+import {DtoInputArticle} from "../../dtos/dto-input-article";
 
 @Component({
   selector: 'app-admin-update-article',
@@ -55,8 +56,8 @@ export class AdminUpdateArticleComponent implements OnInit {
       });
       this.updated = false
       this.id = data.id;
-      this.idCategoryToUpdate = data.idCategory;
-      this.idBrandToUpdate = data.idBrand;
+      this.idCategoryToUpdate = data.category.id;
+      this.idBrandToUpdate = data.brand.id;
       this.PricingTypeToUpdate = data.pricingType;
     })
 
@@ -80,13 +81,12 @@ export class AdminUpdateArticleComponent implements OnInit {
   }
 
   emitUpdate() {
-    let updateCategory = this.listOfCategories.find(value => value.id == this.idcategory)
+    let updateCategory = this.listOfCategories.find(value => value.id == this.idCategoryToUpdate)
     if (updateCategory == undefined)
       return;
-    let updateBrand = this.listOfBrands.find(value => value.id == this.idbrand)
+    let updateBrand = this.listOfBrands.find(value => value.id == this.idBrandToUpdate)
     if (updateBrand == undefined)
       return;
-    this.articleUpdated.next({
     this._eventBus.emit(new EmitEvent(Events.articleUpdate, {
       id : this.id,
       nametag : this.form.value.nameTag,
@@ -95,8 +95,7 @@ export class AdminUpdateArticleComponent implements OnInit {
       stock : this.form.value.stock,
       category : updateCategory,
       brand : updateBrand
-    })
-    }))
+    }));
     this.updated = true;
   }
 
