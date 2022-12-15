@@ -16,5 +16,9 @@ export class AppAuthService {
     return this._httpClient.get<boolean>(AppAuthService.ENTRY_POINT_URL+"/isadmin");
   }
 
+  CheckCookieEmployee() : Observable<boolean> {
+    return this._httpClient.get<boolean>(AppAuthService.ENTRY_POINT_URL+"/isemployee");
+  }
+
 
 }
