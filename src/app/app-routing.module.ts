@@ -14,6 +14,7 @@ import {OrderListCategoryComponent} from "./order-hub/order-list-category/order-
 import {OrderListUserComponent} from "./order-hub/order-list-user/order-list-user.component";
 import {UserCreateOrderComponent} from "./user-hub/user-create-order/user-create-order.component";
 import {ArticleHubComponent} from "./article-hub/article-hub.component";
+import {CanActivateAdminGuard} from "./can-activate-admin.guard";
 
 const routes: Routes =[
   {path: "", component: ArticleHubComponent},
@@ -24,7 +25,7 @@ const routes: Routes =[
       {path: "articleList", component:AdminListArticleComponent},
       {path: "articleCreate", component: ArticleCreateComponent},
       {path: "articleUpdate", component: AdminUpdateArticleComponent}
-    ]},
+    ]/*,canActivate:[CanActivateAdminGuard],canActivateChild:[CanActivateAdminGuard]*/},
   {path: "order", component: OrderHubComponent, children: [
       {path: "orderFiltered", component: OrderFilteredListComponent},
       {path: "orderDate", component: OrderListDateComponent},

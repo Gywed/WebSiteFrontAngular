@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 })
 export class AppAuthService {
 
-  private static readonly ENTRY_POINT_URL = environment.apiUrl +"users/";
+  private static readonly ENTRY_POINT_URL = environment.apiUrl +"/users";
 
   constructor(private _httpClient : HttpClient) { }
 
