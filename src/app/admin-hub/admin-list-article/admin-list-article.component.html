@@ -1,6 +1,7 @@
-<div class="list" [hidden]="updateArticleClick">
+<button routerLink="../articleCreate">Register a new article</button>
+<div class="list">
 
-  <input class="fields" placeholder="Search by name" [(ngModel)]="nametagToSearch" (ngModelChange)="emitFilter()">
+  <input class="fields" placeholder="Search by name" [(ngModel)]="nametagToSearch" (ngModelChange)="searchNotifier.next(null)">
 
   <!--List of articles-->
   <div *ngIf="articlesInPage.length; else articleListEmpty">
@@ -8,20 +9,21 @@
       <tr>
         <th>Name</th>
         <th>Price</th>
-        <th (click)="sortArticleByStock()">In stock <a [hidden]="sortIncreasingArticleStock">↑</a><a [hidden]="!sortIncreasingArticleStock">↓</a></th>
+        <th (click)="sortArticleByStock(this.articlesInPage)">In stock <a [hidden]="sortIncreasingArticleStock">↑</a><a [hidden]="!sortIncreasingArticleStock">↓</a></th>
         <th>Delete</th>
       </tr>
       <tr *ngFor="let article of articlesDisplayed">
-        <td (click)="clickUpdateArticle(article)">{{article.nametag}}</td>
-        <td (click)="clickUpdateArticle(article)">{{article.price}}</td>
-        <td (click)="clickUpdateArticle(article)">{{article.stock}}</td>
-        <td><button (click)="emitDelete(article)">X</button></td>
+        <td>{{article.nametag}}</td>
+        <td>{{article.price}}</td>
+        <td>{{article.stock}}</td>
+        <td><button (click)="emitDelete(article);searchNotifier.next(null)">X</button></td>
+        <td><button routerLink="../articleUpdate" (click)="clickUpdateArticle(article)">Modify</button></td>
       </tr>
     </table>
 
     <!--Page selector-->
     <div>
-      <button *ngFor="let page of createPageNumberRange()" (click)="rangeDisplayed=page; changeDisplayedRange()">{{page}}</button>
+      <button *ngFor="let page of createPageNumberRange()" (click)="rangeDisplayed=page; changeDisplayedRange(this.articlesInPage)">{{page}}</button>
     </div>
   </div>
 
@@ -31,8 +33,3 @@
     <p [hidden]="!searchingByName">There is no article matching your search.</p>
   </ng-template>
 </div>
-
-<button [hidden]="!updateArticleClick" (click)="clickBackToList()" id="btnBackToList">Go back</button>
-<app-admin-update-article [hidden]="!updateArticleClick" [id]="idToUpdate" [nametag]="nametagToUpdate" [price]="priceToUpdate" [pricingType]="pricingTypeToUpdate"
-                          [stock]="stockToUpdate" [idcategory]="idCategoryToUpdate" [idbrand]="idBrandToUpdate" (articleUpdated)="emitUpdate($event)"
-                          [listOfCategories]="listOfCategories" [listOfBrands]="listOfBrands"></app-admin-update-article>

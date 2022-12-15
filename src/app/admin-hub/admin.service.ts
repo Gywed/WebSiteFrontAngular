@@ -9,7 +9,6 @@ import {DtoInputPaginationFiltering} from "../dtos/dto-input-pagination-filterin
 import {DtoInputArticle} from "../article-hub/dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "./dtos/dto-output-delete-article";
 import {DtoOutputUpdateArticle} from "../article-hub/dtos/dto-output-update-article";
-import {DtoOutputFilterArticle} from "./dtos/dto-output-filter-article";
 import {DtoOutputEmployeeFilteringParameters} from "./dtos/dto-output-employee-filtering-parameters";
 import {DtoOutputUpdateUser} from "../user-hub/dtos/dto-output-update-user";
 import {DtoInputCompleteUser} from "../user-hub/dtos/dto-input-complete-user";
@@ -43,8 +42,8 @@ export class AdminService {
     return this._httpClient.get<DtoInputBrand[]>(AdminService.ENTRY_POINT_BRAND)
   }
 
-  fetchFilteredArticle(dto: DtoOutputFilterArticle): Observable<DtoInputArticle[]>{
-    return this._httpClient.get<DtoInputArticle[]>(`${AdminService.ENTRY_POINT_ARTICLE}/${dto.nametag}`)
+  fetchFilteredArticle(filter: string): Observable<DtoInputArticle[]>{
+    return this._httpClient.get<DtoInputArticle[]>(`${AdminService.ENTRY_POINT_ARTICLE}/${filter}`)
   }
 
   deleteArticle(dto: DtoOutputDeleteArticle): Observable<any>{

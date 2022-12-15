@@ -1,31 +1,34 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-article";
 import {DtoInputCategory} from "../../order-hub/dtos/dto-input-category";
 import {DtoInputBrand} from "../../order-hub/dtos/dto-input-brand";
+import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
+import {Subscription} from "rxjs";
+import {DtoInputArticle} from "../../article-hub/dtos/dto-input-article";
 
 @Component({
   selector: 'app-admin-update-article',
   templateUrl: './admin-update-article.component.html',
   styleUrls: ['./admin-update-article.component.css']
 })
-export class AdminUpdateArticleComponent implements OnChanges {
+export class AdminUpdateArticleComponent implements OnInit {
   //Flag for the validation message
   updated = false;
 
-  @Input() id: number = 0;
-  @Input() nametag: string = "";
-  @Input() price: number = 0;
-  @Input() pricingType: number = 0;
-  @Input() stock: number = 0;
-  @Input() idcategory: number = 0;
-  @Input() idbrand: number = 0;
+  id: number = 0;
+  nametag: string = "";
+  price: number = 0;
+  pricingType: number = 0;
+  stock: number = 0;
 
-  @Input() listOfCategories: DtoInputCategory[] = []
-  @Input() listOfBrands: DtoInputBrand[] = []
+  // liste temporaire pour eviter un bug ou les listes ne changent pas
+  tmplistOfCategories: DtoInputCategory[] = []
+  tmplistOfBrands: DtoInputBrand[] = []
 
-  @Output()
-  articleUpdated: EventEmitter<DtoOutputUpdateArticle> = new EventEmitter<DtoOutputUpdateArticle>()
+  listOfCategories: DtoInputCategory[] = []
+  listOfBrands: DtoInputBrand[] = []
+
+  emitArticleSubs?: Subscription
 
   form: FormGroup = this._fb.group({
     nameTag : ['', Validators.required],
@@ -38,19 +41,36 @@ export class AdminUpdateArticleComponent implements OnChanges {
   idBrandToUpdate = 1;
   PricingTypeToUpdate = 1;
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(private _fb: FormBuilder, private _eventBus: EventBusService) { }
 
-  ngOnChanges(): void {
-    this.form.patchValue( {
-      nameTag: this.nametag,
-      price: this.price,
-      pricingType: this.pricingType,
-      stock: this.stock,
-    });
-    this.updated = false
-    this.idCategoryToUpdate = this.idcategory;
-    this.idBrandToUpdate = this.idbrand;
-    this.PricingTypeToUpdate = this.pricingType;
+  ngOnInit(): void {
+    this.emitArticleSubs = this._eventBus.on(Events.emitArticle).subscribe((data: DtoInputArticle) => {
+      this.form.patchValue( {
+        nameTag: data.nametag,
+        price: data.price,
+        pricingType: data.pricingType,
+        stock: data.stock,
+      });
+      this.updated = false
+      this.id = data.id;
+      this.idCategoryToUpdate = data.idCategory;
+      this.idBrandToUpdate = data.idBrand;
+      this.PricingTypeToUpdate = data.pricingType;
+    })
+
+    this._eventBus.on(Events.fetchCategorie).subscribe((data: any) => {
+      this.tmplistOfCategories = data.categories
+    })
+    this.listOfCategories = this.tmplistOfCategories
+
+    this._eventBus.on(Events.fetchBrand).subscribe((data: any) => {
+      this.tmplistOfBrands = data.brands
+    })
+    this.listOfBrands = this.tmplistOfBrands
+  }
+
+  ngOnDestroy(): void {
+    this.emitArticleSubs?.unsubscribe()
   }
 
   controls(name: string): AbstractControl | null {
@@ -58,7 +78,7 @@ export class AdminUpdateArticleComponent implements OnChanges {
   }
 
   emitUpdate() {
-    this.articleUpdated.next({
+    this._eventBus.emit(new EmitEvent(Events.articleUpdate, {
       id : this.id,
       nametag : this.form.value.nameTag,
       price : this.form.value.price,
@@ -66,7 +86,7 @@ export class AdminUpdateArticleComponent implements OnChanges {
       stock : this.form.value.stock,
       idCategory : this.idCategoryToUpdate,
       idBrand : this.idBrandToUpdate
-    })
+    }))
     this.updated = true;
   }
 
