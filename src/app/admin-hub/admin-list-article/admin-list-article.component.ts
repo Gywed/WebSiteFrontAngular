@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalService} from "../../local.service";
 import {DtoInputArticle} from "../../dtos/dto-input-article";
-import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-article";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 import {debounceTime, Subject} from "rxjs";
 
@@ -40,34 +39,11 @@ export class AdminListArticleComponent implements OnInit {
     })
     this.emitFilter()
     this.sortArticleByStock(this.articlesInPage)
+    this._eventBus.emit(new EmitEvent(Events.fetchCategorie))
+    this._eventBus.emit(new EmitEvent(Events.fetchBrand))
   }
 
   clickUpdateArticle(article: DtoInputArticle) {
-    this.idToUpdate = article.id;
-    this.nametagToUpdate = article.nametag;
-    this.priceToUpdate = article.price;
-    this.pricingTypeToUpdate = article.pricingType;
-    this.stockToUpdate = article.stock;
-    this.idCategoryToUpdate = article.category.id;
-    this.idBrandToUpdate = article.brand.id;
-    this.updateArticleClick = true;
-    this.updateArticleClickChange.next(this.updateArticleClick);
-  }
-
-  clickBackToList() {
-    this.updateArticleClick = false;
-  }
-
-  emitUpdate(article: DtoOutputUpdateArticle) {
-    this.updatedArticle.next( {
-      id: article.id,
-      nametag : article.nametag,
-      price : article.price,
-      pricingType : article.pricingType,
-      stock : article.stock,
-      category : article.category,
-      brand : article.brand
-    })
     this._eventBus.emit(new EmitEvent(Events.emitArticle, article))
   }
 

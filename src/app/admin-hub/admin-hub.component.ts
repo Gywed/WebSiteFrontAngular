@@ -47,10 +47,6 @@ export class AdminHubComponent implements OnInit {
 
     //brand events
     this._eventBus.on(Events.fetchBrand).subscribe(() => this.fetchAllBrands())
-
-    this.fetchAllBrands()
-    this.fetchAllCategories()
-    this.fetchArticles("")
   }
 
   fetchEmployeePagination(dto : DtoOutputEmployeeFilteringParameters){
@@ -119,7 +115,7 @@ export class AdminHubComponent implements OnInit {
 
   fetchAllCategories(){
     this._adminService.fetchAllCategories().subscribe(listOfCategories=> {
-      this._eventBus.emit(new EmitEvent(Events.fetchCategorie, {
+      this._eventBus.emit(new EmitEvent(Events.emitfetchCategorie, {
         categories: listOfCategories
       }))
     })
@@ -127,7 +123,7 @@ export class AdminHubComponent implements OnInit {
 
   fetchAllBrands(){
     this._adminService.fetchAllBrands().subscribe(listOfBrands=> {
-      this._eventBus.emit(new EmitEvent(Events.fetchBrand, {
+      this._eventBus.emit(new EmitEvent(Events.emitfetchBranch, {
         brands: listOfBrands
       }))
     })

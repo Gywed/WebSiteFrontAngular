@@ -61,12 +61,12 @@ export class AdminUpdateArticleComponent implements OnInit {
       this.PricingTypeToUpdate = data.pricingType;
     })
 
-    this._eventBus.on(Events.fetchCategorie).subscribe((data: any) => {
+    this._eventBus.on(Events.emitfetchCategorie).subscribe((data: any) => {
       this.tmplistOfCategories = data.categories
     })
     this.listOfCategories = this.tmplistOfCategories
 
-    this._eventBus.on(Events.fetchBrand).subscribe((data: any) => {
+    this._eventBus.on(Events.emitfetchBranch).subscribe((data: any) => {
       this.tmplistOfBrands = data.brands
     })
     this.listOfBrands = this.tmplistOfBrands
