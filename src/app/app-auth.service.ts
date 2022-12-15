@@ -11,4 +11,10 @@ export class AppAuthService {
   private static readonly ENTRY_POINT_URL = environment.apiUrl +"users/";
 
   constructor(private _httpClient : HttpClient) { }
+
+  CheckCookieAdmin() : Observable<boolean> {
+    return this._httpClient.get<boolean>(AppAuthService.ENTRY_POINT_URL+"/isadmin");
+  }
+
+
 }
