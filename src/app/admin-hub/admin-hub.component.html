@@ -1,6 +1,6 @@
 <div class="adminBanner">
-  <button
-    (click)="clickArt()" class="btnAdm">
+  <button class="btnAdm"
+          routerLink="articleList">
     Manage articles</button>
 
   <button class="btnAdm"
@@ -8,48 +8,6 @@
     Manage employees</button>
 </div>
 
-<div id="artBanner" [hidden]="!artClick">
-  <button
-    (click)="clickAddArt()" class="btnAdm">
-    Register an article</button>
-
-  <button
-    (click)="clickListArt()" class="btnAdm">
-    List all articles</button>
-</div>
-
 <div class="adminWindows">
-  <!--
-  <div [hidden]="!addEmpClick">
-    <app-employee-create (employeeCreated)="createEmployee($event)"></app-employee-create>
-  </div>
-
-
-  <div [hidden]="!listEmpClick">
-    <app-employee-list [employeesInPage]="employeesInPage"
-                       [nbOfPages]="nbOfPagesEmployee"
-                       (deletedEmployee)="deleteEmployee($event)"
-                       (paginationChanged)="fetchEmployeePagination($event)"
-                       [(updateEmployeeClick)]="updateClick"
-                       (updatedEmployee)="updateEmployee($event)"></app-employee-list>
-  </div>
-  -->
   <router-outlet></router-outlet>
-
-  <div [hidden]="!addArtClick">
-    <app-article-create (articleCreated)="createArticle($event)"
-                        [listOfCategories]="listOfCategories"
-                        [listOfBrands]="listOfBrands"></app-article-create>
-  </div>
-
-  <div [hidden]="!listArtClick">
-    <app-admin-list-article [articlesInPage]="articlesInPage"
-                            (deletedArticle)="deleteArticle($event)"
-                            [(updateArticleClick)]="updateClick"
-                            (updatedArticle)="updateArticle($event)"
-                            (filteredArticle)="fetchFilteredArticles($event)"
-                            (fetchArticle)="fetchAllArticles()"
-                            [listOfCategories]="listOfCategories"
-                            [listOfBrands]="listOfBrands"></app-admin-list-article>
-  </div>
 </div>

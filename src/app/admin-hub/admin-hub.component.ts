@@ -7,7 +7,6 @@ import {DtoOutputCreateArticle} from "../article-hub/dtos/dto-output-create-arti
 import {DtoInputArticle} from "../dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "./dtos/dto-output-delete-article";
 import {DtoOutputUpdateArticle} from "../article-hub/dtos/dto-output-update-article";
-import {DtoOutputFilterArticle} from "./dtos/dto-output-filter-article";
 import {DtoOutputEmployeeFilteringParameters} from "./dtos/dto-output-employee-filtering-parameters";
 import {DtoOutputUpdateUser} from "../user-hub/dtos/dto-output-update-user";
 import {DtoInputCompleteUser} from "../user-hub/dtos/dto-input-complete-user";
@@ -22,22 +21,7 @@ import {DtoInputUser} from "../user-hub/dtos/dto-input-user";
   styleUrls: ['./admin-hub.component.css']
 })
 export class AdminHubComponent implements OnInit {
-  // Flags for first banner
-  artClick = false;
-  empClick = false;
-
-  // Flags for second banner
-  listEmpClick = false;
-  addEmpClick = false;
-  addArtClick = false;
-  listArtClick = false;
-
-  // Flags of windows
-  updateClick = false;
-
   articlesInPage: DtoInputArticle[] = []
-  listOfCategories: DtoInputCategory[] = []
-  listOfBrands: DtoInputBrand[] = []
   employeesInPage: DtoInputCompleteUser[] = []
   nbOfPagesEmployee: number = 0;
 
@@ -52,53 +36,21 @@ export class AdminHubComponent implements OnInit {
     this._eventBus.on(Events.createEmployee).subscribe((data: DtoOutputCreateUser) => this.createEmployee(data))
     this._eventBus.on(Events.employeeUpdate).subscribe((data: DtoOutputUpdateUser) => this.updateEmployee(data))
 
-    this.fetchAllArticles()
-    this.fetchAllCategories()
+    //article events
+    this._eventBus.on(Events.updateArticleList).subscribe((data: string) => this.fetchArticles(data))
+    this._eventBus.on(Events.deleteArticle).subscribe((data: DtoInputArticle) => this.deleteArticle(data))
+    this._eventBus.on(Events.createArticle).subscribe((data: DtoOutputCreateArticle) => this.createArticle(data))
+    this._eventBus.on(Events.articleUpdate).subscribe((data: DtoOutputUpdateArticle) => this.updateArticle(data))
+
+    //categorie events
+    this._eventBus.on(Events.fetchCategorie).subscribe(() => this.fetchAllCategories())
+
+    //brand events
+    this._eventBus.on(Events.fetchBrand).subscribe(() => this.fetchAllBrands())
+
     this.fetchAllBrands()
-  }
-
-  clickArt() {
-    this.resetBanner();
-    this.artClick = true;
-  }
-
-  clickEmp() {
-    this.resetBanner();
-    this.empClick = true;
-  }
-
-  clickListEmp() {
-    this.resetWindow();
-    this.listEmpClick = true;
-  }
-
-  clickAddEmp() {
-    this.resetWindow();
-    this.addEmpClick = true;
-  }
-
-  clickAddArt() {
-    this.resetWindow();
-    this.addArtClick = true;
-  }
-
-  clickListArt() {
-    this.resetWindow();
-    this.listArtClick = true;
-  }
-
-  resetWindow() {
-    this.addEmpClick = false;
-    this.listEmpClick = false;
-    this.addArtClick = false;
-    this.listArtClick = false;
-    this.updateClick = false;
-  }
-
-  resetBanner() {
-    this.resetWindow();
-    this.artClick = false;
-    this.empClick = false;
+    this.fetchAllCategories()
+    this.fetchArticles("")
   }
 
   fetchEmployeePagination(dto : DtoOutputEmployeeFilteringParameters){
@@ -147,20 +99,38 @@ export class AdminHubComponent implements OnInit {
       .subscribe(article=>this.articlesInPage.push(article))
   }
 
-  fetchAllArticles(){
-    this._adminService.fetchAllArticle().subscribe(articlesInPage=> this.articlesInPage = articlesInPage)
+  fetchArticles(filter: string){
+    if (filter == "") {
+      this._adminService.fetchAllArticle().subscribe(listOfArticles=> {
+        this.articlesInPage = listOfArticles
+        this._eventBus.emit(new EmitEvent(Events.fetchArticle, {
+          articles: listOfArticles
+        }))
+      })
+    } else {
+      this._adminService.fetchFilteredArticle(filter).subscribe(listOfArticles=> {
+        this.articlesInPage = listOfArticles
+        this._eventBus.emit(new EmitEvent(Events.fetchArticle, {
+          articles: listOfArticles
+        }))
+      })
+    }
   }
 
   fetchAllCategories(){
-    this._adminService.fetchAllCategories().subscribe(listOfCategories=> this.listOfCategories = listOfCategories)
+    this._adminService.fetchAllCategories().subscribe(listOfCategories=> {
+      this._eventBus.emit(new EmitEvent(Events.fetchCategorie, {
+        categories: listOfCategories
+      }))
+    })
   }
 
   fetchAllBrands(){
-    this._adminService.fetchAllBrands().subscribe(listOfBrands=> this.listOfBrands = listOfBrands)
-  }
-
-  fetchFilteredArticles(dto: DtoOutputFilterArticle){
-    this._adminService.fetchFilteredArticle(dto).subscribe(articlesInPage=> this.articlesInPage = articlesInPage)
+    this._adminService.fetchAllBrands().subscribe(listOfBrands=> {
+      this._eventBus.emit(new EmitEvent(Events.fetchBrand, {
+        brands: listOfBrands
+      }))
+    })
   }
 
   deleteArticle(dto: DtoOutputDeleteArticle){

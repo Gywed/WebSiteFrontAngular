@@ -45,5 +45,19 @@ export enum Events {
   emitOrderCategory,
   updateOrderContent,
   emitUser,
-  fetchOrderByUserId
+  fetchOrderByUserId,
+
+  //ArticleEvent
+  fetchArticle,
+  updateArticleList,
+  deleteArticle,
+  createArticle,
+  emitArticle,
+  articleUpdate,
+
+  //CategorieEvent
+  fetchCategorie,
+
+  //BrandEvent
+  fetchBrand
 }

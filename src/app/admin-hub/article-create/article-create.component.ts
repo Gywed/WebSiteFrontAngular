@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoOutputCreateArticle} from "../../article-hub/dtos/dto-output-create-article";
 import {DtoInputCategory} from "../../dtos/dto-input-category";
 import {DtoInputBrand} from "../../dtos/dto-input-brand";
+import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 
 @Component({
   selector: 'app-article-create',
@@ -18,19 +19,22 @@ export class ArticleCreateComponent implements OnInit {
     stock : ['', Validators.required],
   })
 
-  idCategory = 0;
-  idBrand = 0;
-  PricingType = 0;
+  idCategory = 1;
+  idBrand = 1;
+  PricingType = 1;
 
-  @Output()
-  articleCreated: EventEmitter<DtoOutputCreateArticle> = new EventEmitter<DtoOutputCreateArticle>()
+  listOfCategories: DtoInputCategory[] = []
+  listOfBrands: DtoInputBrand[] = []
 
-  @Input() listOfCategories: DtoInputCategory[] = []
-  @Input() listOfBrands: DtoInputBrand[] = []
-
-  constructor(private _fb: FormBuilder) { }
+  constructor(private _fb: FormBuilder, private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
+    this._eventBus.on(Events.fetchCategorie).subscribe((data: any) => {
+      this.listOfCategories = data.categories
+    })
+    this._eventBus.on(Events.fetchBrand).subscribe((data: any) => {
+      this.listOfBrands = data.brands
+    })
   }
 
   controls(name: string): AbstractControl | null {
@@ -38,14 +42,14 @@ export class ArticleCreateComponent implements OnInit {
   }
 
   emitArticle() {
-    this.articleCreated.next({
+    this._eventBus.emit(new EmitEvent(Events.createArticle, {
       nametag : this.form.value.nameTag,
       price : this.form.value.price,
       pricingtype : this.form.value.pricingType,
       stock : this.form.value.stock,
       idcategory : this.idCategory,
       idbrand : this.idBrand
-    })
+    }))
     this.form.reset();
   }
 

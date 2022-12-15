@@ -1,32 +1,35 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-article";
 import {DtoInputCategory} from "../../dtos/dto-input-category";
 import {DtoInputBrand} from "../../dtos/dto-input-brand";
 import {tsCastToAny} from "@angular/compiler-cli/src/ngtsc/typecheck/src/ts_util";
+import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-admin-update-article',
   templateUrl: './admin-update-article.component.html',
   styleUrls: ['./admin-update-article.component.css']
 })
-export class AdminUpdateArticleComponent implements OnChanges {
+export class AdminUpdateArticleComponent implements OnInit {
   //Flag for the validation message
   updated = false;
 
-  @Input() id: number = 0;
-  @Input() nametag: string = "";
-  @Input() price: number = 0;
-  @Input() pricingType: number = 0;
-  @Input() stock: number = 0;
-  @Input() idcategory: number = 0;
-  @Input() idbrand: number = 0;
+  id: number = 0;
+  nametag: string = "";
+  price: number = 0;
+  pricingType: number = 0;
+  stock: number = 0;
 
-  @Input() listOfCategories: DtoInputCategory[] = []
-  @Input() listOfBrands: DtoInputBrand[] = []
+  // liste temporaire pour eviter un bug ou les listes ne changent pas
+  tmplistOfCategories: DtoInputCategory[] = []
+  tmplistOfBrands: DtoInputBrand[] = []
 
-  @Output()
-  articleUpdated: EventEmitter<DtoOutputUpdateArticle> = new EventEmitter<DtoOutputUpdateArticle>()
+  listOfCategories: DtoInputCategory[] = []
+  listOfBrands: DtoInputBrand[] = []
+
+  emitArticleSubs?: Subscription
 
   form: FormGroup = this._fb.group({
     nameTag : ['', Validators.required],
@@ -35,28 +38,41 @@ export class AdminUpdateArticleComponent implements OnChanges {
     stock : ['', Validators.required],
   })
 
-  updateCategory : DtoInputCategory = {
-    id : 0,
-    name : ""
+
+  idCategoryToUpdate = 1;
+  idBrandToUpdate = 1;
+  PricingTypeToUpdate = 1;
+
+  constructor(private _fb: FormBuilder, private _eventBus: EventBusService) { }
+
+  ngOnInit(): void {
+    this.emitArticleSubs = this._eventBus.on(Events.emitArticle).subscribe((data: DtoInputArticle) => {
+      this.form.patchValue( {
+        nameTag: data.nametag,
+        price: data.price,
+        pricingType: data.pricingType,
+        stock: data.stock,
+      });
+      this.updated = false
+      this.id = data.id;
+      this.idCategoryToUpdate = data.idCategory;
+      this.idBrandToUpdate = data.idBrand;
+      this.PricingTypeToUpdate = data.pricingType;
+    })
+
+    this._eventBus.on(Events.fetchCategorie).subscribe((data: any) => {
+      this.tmplistOfCategories = data.categories
+    })
+    this.listOfCategories = this.tmplistOfCategories
+
+    this._eventBus.on(Events.fetchBrand).subscribe((data: any) => {
+      this.tmplistOfBrands = data.brands
+    })
+    this.listOfBrands = this.tmplistOfBrands
   }
 
-  idCategoryToUpdate = 0;
-  idBrandToUpdate = 0;
-  PricingTypeToUpdate = 0;
-
-  constructor(private _fb: FormBuilder) { }
-
-  ngOnChanges(): void {
-    this.form.patchValue( {
-      nameTag: this.nametag,
-      price: this.price,
-      pricingType: this.pricingType,
-      stock: this.stock,
-    });
-    this.updated = false
-    this.idCategoryToUpdate = this.idcategory;
-    this.idBrandToUpdate = this.idbrand;
-    this.PricingTypeToUpdate = this.pricingType;
+  ngOnDestroy(): void {
+    this.emitArticleSubs?.unsubscribe()
   }
 
   controls(name: string): AbstractControl | null {
@@ -71,6 +87,7 @@ export class AdminUpdateArticleComponent implements OnChanges {
     if (updateBrand == undefined)
       return;
     this.articleUpdated.next({
+    this._eventBus.emit(new EmitEvent(Events.articleUpdate, {
       id : this.id,
       nametag : this.form.value.nameTag,
       price : this.form.value.price,
@@ -79,6 +96,7 @@ export class AdminUpdateArticleComponent implements OnChanges {
       category : updateCategory,
       brand : updateBrand
     })
+    }))
     this.updated = true;
   }
 

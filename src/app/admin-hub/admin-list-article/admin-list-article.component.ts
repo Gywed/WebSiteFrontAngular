@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LocalService} from "../../local.service";
 import {DtoInputArticle} from "../../dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "../dtos/dto-output-delete-article";
@@ -6,6 +6,8 @@ import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-a
 import {DtoOutputFilterArticle} from "../dtos/dto-output-filter-article";
 import {DtoInputCategory} from "../../dtos/dto-input-category";
 import {DtoInputBrand} from "../../dtos/dto-input-brand";
+import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
+import {debounceTime, Subject} from "rxjs";
 
 @Component({
   selector: 'app-admin-list-article',
@@ -13,45 +15,35 @@ import {DtoInputBrand} from "../../dtos/dto-input-brand";
   styleUrls: ['./admin-list-article.component.css']
 })
 export class AdminListArticleComponent implements OnInit {
-  // Flag for modyfing article
-  @Input() updateArticleClick = false;
-  @Output() updateArticleClickChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  articlesInPage: DtoInputArticle[] = []
 
-  @Input() articlesInPage: DtoInputArticle[] = []
-  @Input() listOfCategories: DtoInputCategory[] = []
-  @Input() listOfBrands: DtoInputBrand[] = []
-
-  @Output()
-  deletedArticle: EventEmitter<DtoOutputDeleteArticle> = new EventEmitter<DtoOutputDeleteArticle>()
-
-  @Output()
-  updatedArticle: EventEmitter<DtoOutputUpdateArticle> = new EventEmitter<DtoOutputUpdateArticle>()
-
-  @Output()
-  filteredArticle: EventEmitter<DtoOutputFilterArticle> = new EventEmitter<DtoOutputFilterArticle>()
-
-  @Output()
-  fetchArticle: EventEmitter<null> = new EventEmitter<null>()
-
-  idToUpdate: number = 0;
-  nametagToUpdate: string = "";
-  priceToUpdate: number = 0;
-  pricingTypeToUpdate: number = 0;
-  stockToUpdate: number = 0;
-  idCategoryToUpdate: number = 0;
-  idBrandToUpdate: number = 0;
+  rangeDisplayed: number = 1;
+  nbPages: number = 0;
+  articlesDisplayed: DtoInputArticle[] = []
 
   // Flag for search
   searchingByName = false;
-
   nametagToSearch: string = "";
 
-  // Flag for sort
+  searchNotifier = new Subject()
+
+  // Flag for sorting
   sortIncreasingArticleStock = false;
 
-  constructor(private _localService : LocalService) { }
+  constructor(private _localService : LocalService,
+              private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
+    this.searchNotifier
+      .pipe(debounceTime(100))
+      .subscribe(data=>this.emitFilter())
+
+    this._eventBus.on(Events.fetchArticle).subscribe((data: any) => {
+      this.articlesInPage = data.articles
+      this.changeDisplayedRange(this.articlesInPage)
+    })
+    this.emitFilter()
+    this.sortArticleByStock(this.articlesInPage)
   }
 
   clickUpdateArticle(article: DtoInputArticle) {
@@ -86,26 +78,44 @@ export class AdminListArticleComponent implements OnInit {
       category : article.category,
       brand : article.brand
     })
+    this._eventBus.emit(new EmitEvent(Events.emitArticle, article))
+  }
+
+  emitDelete(article: DtoInputArticle) {
+    this._eventBus.emit(new EmitEvent(Events.deleteArticle, article))
   }
 
   emitFilter() {
-    this.searchingByName = this.nametagToSearch != "";
+    this.searchingByName = this.nametagToSearch!=""
 
-    if (this.searchingByName) {
-      this.filteredArticle.next({
-        nametag: this.nametagToSearch
-      })
-    } else {
-      this.fetchArticle.next(null)
-    }
+    this._eventBus.emit(new EmitEvent(Events.updateArticleList, this.nametagToSearch))
+    this._eventBus.on(Events.fetchArticle).subscribe((data: any) => {
+      this.changeDisplayedRange(data.articles)
+    })
   }
 
-  sortArticleByStock() {
+  sortArticleByStock(articlesInPage: DtoInputArticle[]) {
     if (this.sortIncreasingArticleStock) {
-      this.articlesInPage.sort((a,b) => a.stock - b.stock);
+      articlesInPage.sort((a,b) => a.stock - b.stock);
     } else {
-      this.articlesInPage.sort((a,b) => b.stock - a.stock);
+      articlesInPage.sort((a,b) => b.stock - a.stock);
     }
     this.sortIncreasingArticleStock = !this.sortIncreasingArticleStock;
+    this.rangeDisplayed = 1;
+    this.articlesInPage = articlesInPage;
+    this.changeDisplayedRange(articlesInPage)
+  }
+
+  createPageNumberRange(){
+    // return new Array(number);
+    return new Array(this.nbPages).fill(0)
+      .map((n, index) => index + 1);
+  }
+
+  changeDisplayedRange(articlesInPage: DtoInputArticle[]) {
+    this.nbPages = parseInt(((articlesInPage.length - 1) / 10).toString(), 10) + 1;
+    this.articlesDisplayed = articlesInPage.slice((this.rangeDisplayed - 1) * 10, this.rangeDisplayed * 10);
+
+      this.rangeDisplayed = 1;
   }
 }
