@@ -30,6 +30,8 @@ import {RouterLink, RouterLinkWithHref, RouterOutlet} from "@angular/router";
 import {AppRoutingModule} from "./app-routing.module";
 import { OrderListUserComponent } from './order-hub/order-list-user/order-list-user.component';
 import { UserCreateOrderComponent } from './user-hub/user-create-order/user-create-order.component';
+import { FamilyHubComponent } from './family-hub/family-hub.component';
+import { FamiliesListComponent } from './family-hub/families-list/families-list.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { UserCreateOrderComponent } from './user-hub/user-create-order/user-crea
     OrderUpdateOrdercontentComponent,
     OrderListUserComponent,
     UserCreateOrderComponent,
+    FamilyHubComponent,
+    FamiliesListComponent,
   ],
   imports: [
     BrowserModule,
