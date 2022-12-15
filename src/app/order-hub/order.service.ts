@@ -39,4 +39,9 @@ export class OrderService {
   {
     return this._httpClient.patch<boolean>(OrderService.ENTRY_POINT+"/orderContent",dto)
   }
+
+  fetchOrderByUserId(): Observable<DtoInputOrder[]>
+  {
+    return this._httpClient.get<DtoInputOrder[]>(`${OrderService.ENTRY_POINT}/client`);
+  }
 }

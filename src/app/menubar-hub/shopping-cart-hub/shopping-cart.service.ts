@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {DtoOutputOrderContent} from "./dtos/dto-output-order-content";
+import {DtoOutputCartContent} from "./dtos/dto-output-cart-content";
 import {ArticleService} from "../../article-hub/article.service";
 import {DtoInputArticle} from "../../article-hub/dtos/dto-input-article";
 
@@ -7,16 +7,30 @@ import {DtoInputArticle} from "../../article-hub/dtos/dto-input-article";
   providedIn: 'root'
 })
 export class ShoppingCartService {
-  shoppingCartList : DtoOutputOrderContent[]=[];
+  shoppingCartList : DtoOutputCartContent[]=[];
   articles:DtoInputArticle[]=[];
 
   constructor(private _articleService: ArticleService) { }
 
-  addArticle(article:DtoOutputOrderContent){
-    this.shoppingCartList.push(article);
-    this.fetchArticleById(article.article.id);
+  addArticle(article:DtoOutputCartContent){
+    var stop:boolean = false;
+    for(let item of this.shoppingCartList)
+    {
+      if(item.article.id==article.article.id)
+      {
+        item.quantity+=article.quantity;
+        stop = true;
+        break;
+      }
+    }
+    if(!stop)
+    {
+      this.shoppingCartList.push(article);
+      this.fetchArticleById(article.article.id);
+    }
+
   }
- fetchShoppingCartList():DtoOutputOrderContent[]{
+ fetchShoppingCartList():DtoOutputCartContent[]{
     return this.shoppingCartList;
   }
 

@@ -1,3 +1,24 @@
-<app-order-filtered-list (filterForFetch)="fetchOrderThroughFilter($event)" (updatePrepared)="updateOrderContent($event)"  [orders]="ordersFilterred" class="order"></app-order-filtered-list>
-<app-order-list-category (categoryForFetch)="fetchOrderByCategory($event)" [orders]="ordersCategory" class="order"></app-order-list-category>
-<app-order-update-ordercontent (updatePrepared)="updateOrderContent($event)"></app-order-update-ordercontent>
+
+<div class="adminBanner">
+  <button class="btnAdm"
+          routerLink="orderFiltered">
+    Filter Order
+  </button>
+
+  <button class="btnAdm"
+          routerLink="orderDate">
+    Order by Date
+  </button>
+
+  <button class="btnAdm"
+          routerLink="orderCategory">
+    Order by Category
+  </button>
+
+  <button class="btnAdm"
+          routerLink="orderUser">
+    Order of the user
+  </button>
+</div>
+
+<router-outlet></router-outlet>
