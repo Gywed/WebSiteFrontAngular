@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {DtoInputOrder} from "../dtos/dto-input-order";
+import {DtoInputOrder} from "../../dtos/dto-input-order";
 import {DtoOutputOrderDate} from "../dtos/dto-output-order-date";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoOutputFilterOrder} from "../dtos/dto-output-filter-order";
-import {DtoInputOrderContent} from "../dtos/dto-input-order-content";
+import {DtoInputOrderContent} from "../../dtos/dto-input-order-content";
 import {DtoOutputUpdateOrdercontent} from "../dtos/dto-output-update-ordercontent";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
-import {Subscription} from "rxjs";
+import {debounceTime, Subject, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-order-filtered-list',
@@ -17,6 +17,7 @@ export class OrderFilteredListComponent implements OnInit {
 
   orders : DtoInputOrder[] = []
 
+  searchNotifier = new Subject()
   fetchOrderThroughFilterSub? : Subscription
 
   form: FormGroup = this._fb.group({
@@ -28,6 +29,10 @@ export class OrderFilteredListComponent implements OnInit {
               private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
+    this.searchNotifier
+      .pipe(debounceTime(1000))
+      .subscribe(()=>this.emitFilter())
+
     this.fetchOrderThroughFilterSub = this._eventBus.on(Events.fetchOrderThroughFilter).
     subscribe(orders => this.orders = orders);
 

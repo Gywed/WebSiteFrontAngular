@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DtoOutputOrderDate} from "./dtos/dto-output-order-date";
 import {OrderService} from "./order.service";
-import {DtoInputOrder} from "./dtos/dto-input-order";
+import {DtoInputOrder} from "../dtos/dto-input-order";
 import {DtoOutputFilterOrder} from "./dtos/dto-output-filter-order";
 import {DtoOutputOrderCategory} from "./dtos/dto-output-order-category";
 import {DtoOutputUpdateOrdercontent} from "./dtos/dto-output-update-ordercontent";

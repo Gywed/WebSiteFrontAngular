@@ -4,12 +4,14 @@ import {AdminService} from "./admin.service";
 import {DtoOutputDeleteEmployee} from "./dtos/dto-output-delete-employee";
 import {LocalService} from "../local.service";
 import {DtoOutputCreateArticle} from "../article-hub/dtos/dto-output-create-article";
-import {DtoInputArticle} from "../article-hub/dtos/dto-input-article";
+import {DtoInputArticle} from "../dtos/dto-input-article";
 import {DtoOutputDeleteArticle} from "./dtos/dto-output-delete-article";
 import {DtoOutputUpdateArticle} from "../article-hub/dtos/dto-output-update-article";
 import {DtoOutputEmployeeFilteringParameters} from "./dtos/dto-output-employee-filtering-parameters";
 import {DtoOutputUpdateUser} from "../user-hub/dtos/dto-output-update-user";
 import {DtoInputCompleteUser} from "../user-hub/dtos/dto-input-complete-user";
+import {DtoInputCategory} from "../dtos/dto-input-category";
+import {DtoInputBrand} from "../dtos/dto-input-brand";
 import {EmitEvent, EventBusService, Events} from "../event-bus.service";
 import {DtoInputUser} from "../user-hub/dtos/dto-input-user";
 
@@ -45,10 +47,6 @@ export class AdminHubComponent implements OnInit {
 
     //brand events
     this._eventBus.on(Events.fetchBrand).subscribe(() => this.fetchAllBrands())
-
-    this.fetchAllBrands()
-    this.fetchAllCategories()
-    this.fetchArticles("")
   }
 
   fetchEmployeePagination(dto : DtoOutputEmployeeFilteringParameters){
@@ -117,7 +115,7 @@ export class AdminHubComponent implements OnInit {
 
   fetchAllCategories(){
     this._adminService.fetchAllCategories().subscribe(listOfCategories=> {
-      this._eventBus.emit(new EmitEvent(Events.fetchCategorie, {
+      this._eventBus.emit(new EmitEvent(Events.emitfetchCategorie, {
         categories: listOfCategories
       }))
     })
@@ -125,7 +123,7 @@ export class AdminHubComponent implements OnInit {
 
   fetchAllBrands(){
     this._adminService.fetchAllBrands().subscribe(listOfBrands=> {
-      this._eventBus.emit(new EmitEvent(Events.fetchBrand, {
+      this._eventBus.emit(new EmitEvent(Events.emitfetchBranch, {
         brands: listOfBrands
       }))
     })
@@ -145,7 +143,15 @@ export class AdminHubComponent implements OnInit {
       .subscribe(article=>
           this.articlesInPage.forEach((art) => {
               if(art.id == dto.id) {
-                  this.articlesInPage[this.articlesInPage.indexOf(art)] = dto;
+                  this.articlesInPage[this.articlesInPage.indexOf(art)] = {
+                    nametag : dto.nametag,
+                    price : dto.price,
+                    pricingType : dto.pricingType,
+                    stock : dto.stock,
+                    id : dto.id,
+                    brand : dto.brand,
+                    category : dto.category
+                  };
               }
           }))
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DtoInputOrder} from "../dtos/dto-input-order";
+import {DtoInputOrder} from "../../dtos/dto-input-order";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 import {Subscription} from "rxjs";
 

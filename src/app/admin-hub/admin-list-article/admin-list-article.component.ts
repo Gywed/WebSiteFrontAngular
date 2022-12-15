@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalService} from "../../local.service";
-import {DtoInputArticle} from "../../article-hub/dtos/dto-input-article";
+import {DtoInputArticle} from "../../dtos/dto-input-article";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 import {debounceTime, Subject} from "rxjs";
 
@@ -39,6 +39,8 @@ export class AdminListArticleComponent implements OnInit {
     })
     this.emitFilter()
     this.sortArticleByStock(this.articlesInPage)
+    this._eventBus.emit(new EmitEvent(Events.fetchCategorie))
+    this._eventBus.emit(new EmitEvent(Events.fetchBrand))
   }
 
   clickUpdateArticle(article: DtoInputArticle) {

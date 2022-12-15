@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DtoInputCategory} from "../../order-hub/dtos/dto-input-category";
-import {DtoInputBrand} from "../../order-hub/dtos/dto-input-brand";
+import {DtoOutputCreateArticle} from "../../article-hub/dtos/dto-output-create-article";
+import {DtoInputCategory} from "../../dtos/dto-input-category";
+import {DtoInputBrand} from "../../dtos/dto-input-brand";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 
 @Component({
@@ -28,10 +29,10 @@ export class ArticleCreateComponent implements OnInit {
   constructor(private _fb: FormBuilder, private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
-    this._eventBus.on(Events.fetchCategorie).subscribe((data: any) => {
+    this._eventBus.on(Events.emitfetchCategorie).subscribe((data: any) => {
       this.listOfCategories = data.categories
     })
-    this._eventBus.on(Events.fetchBrand).subscribe((data: any) => {
+    this._eventBus.on(Events.emitfetchBranch).subscribe((data: any) => {
       this.listOfBrands = data.brands
     })
   }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DtoInputArticle} from "./dtos/dto-input-article";
+import {DtoInputArticle} from "../dtos/dto-input-article";
 import {ArticleService} from "./article.service";
 
 @Component({
