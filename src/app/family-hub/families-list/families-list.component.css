@@ -4,6 +4,7 @@
   width: 20%;
   height: auto;
   text-align: center;
+  float: right;
 }
 .familyListElement{
   border: 1px solid black;
