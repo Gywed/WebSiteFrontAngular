@@ -14,6 +14,7 @@ export class BannerHubComponent implements OnInit {
   AdminActive = false;
   ArticleActive = false;
   OrderActive = false;
+  username:string="";
 
   constructor(private _userService : UserService) { }
 
@@ -23,6 +24,12 @@ export class BannerHubComponent implements OnInit {
 
   login(dto: DtoOutputLogUser) {
     this._userService.login(dto).subscribe();
+
+  }
+
+  fetchUsernameByEmail()
+  {
+    this._userService.fetchUsernameByEmail().subscribe(users=>this.username=users.surname);
   }
 
   clickLogin() {
@@ -61,6 +68,7 @@ export class BannerHubComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fetchUsernameByEmail();
   }
 
 
@@ -71,5 +79,18 @@ export class BannerHubComponent implements OnInit {
     else if(content.style.display=='block'){
       content.style.display='none';
     }
+  }
+
+  showDropdownLogged(Loggedcontent: HTMLDivElement) {
+    if(Loggedcontent.style.display=='none'){
+      Loggedcontent.style.display='block';
+    }
+    else if(Loggedcontent.style.display=='block'){
+      Loggedcontent.style.display='none';
+    }
+  }
+
+  disconnect() {
+
   }
 }
