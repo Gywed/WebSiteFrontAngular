@@ -25,7 +25,6 @@ import { CategoryHubComponent } from './menubar-hub/category-hub/category-hub.co
 import { AdminUpdateEmployeeComponent } from './admin-hub/admin-update-employee/admin-update-employee.component';
 import { OrderListCategoryComponent } from './order-hub/order-list-category/order-list-category.component';
 import { ShoppingCartHubComponent } from './menubar-hub/shopping-cart-hub/shopping-cart-hub.component';
-import { OrderUpdateOrdercontentComponent } from './order-hub/order-update-ordercontent/order-update-ordercontent.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { OrderListUserComponent } from './order-hub/order-list-user/order-list-user.component';
 import { UserCreateOrderComponent } from './user-hub/user-create-order/user-create-order.component';
@@ -57,7 +56,6 @@ import { OrderListTodayComponent } from './order-hub/order-list-today/order-list
     CategoryHubComponent,
     OrderListCategoryComponent,
     ShoppingCartHubComponent,
-    OrderUpdateOrdercontentComponent,
     OrderListUserComponent,
     UserCreateOrderComponent,
     FamilyHubComponent,
