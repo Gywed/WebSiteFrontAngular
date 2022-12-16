@@ -16,13 +16,14 @@ export class OrderListUserComponent implements OnInit {
   constructor(private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
-    this.emitUser()
 
     this.fetchOrderByUserIdSub = this._eventBus.on(Events.fetchOrderByUserId).
     subscribe(orders => this.orders = orders);
+    this.emitUser()
   }
 
   emitUser() {
+    this.orders = []
     this._eventBus.emit(new EmitEvent(Events.emitUser))
   }
 
