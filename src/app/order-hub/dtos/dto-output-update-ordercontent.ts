@@ -1,5 +1,6 @@
 export interface DtoOutputUpdateOrdercontent {
-  orderid : number,
-  articleid : number,
+  idOrder : number,
+  idArticle : number,
   prepared : boolean
 }
+

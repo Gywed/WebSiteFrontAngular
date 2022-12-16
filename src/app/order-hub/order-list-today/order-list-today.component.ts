@@ -27,8 +27,8 @@ export class OrderListTodayComponent implements OnInit {
 
   emitPreparedUpdate(order: DtoInputOrder, orderContent: DtoInputOrderContent) {
     this._eventBus.emit(new EmitEvent(Events.updateOrderContent, {
-      orderid : order.id,
-      articleid : orderContent.article.id,
+      idOrder : order.id,
+      idArticle : orderContent.article.id,
       prepared : !orderContent.prepared
     }));
     orderContent.prepared = !orderContent.prepared

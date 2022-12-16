@@ -1,10 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DtoInputOrder} from "../../dtos/dto-input-order";
-import {DtoOutputOrderDate} from "../dtos/dto-output-order-date";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DtoOutputFilterOrder} from "../dtos/dto-output-filter-order";
 import {DtoInputOrderContent} from "../../dtos/dto-input-order-content";
-import {DtoOutputUpdateOrdercontent} from "../dtos/dto-output-update-ordercontent";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 import {debounceTime, Subject, Subscription} from "rxjs";
 
@@ -51,8 +48,8 @@ export class OrderFilteredListComponent implements OnInit {
 
   emitPreparedUpdate(order: DtoInputOrder, orderContent: DtoInputOrderContent) {
     this._eventBus.emit(new EmitEvent(Events.updateOrderContent, {
-      orderid : order.id,
-      articleid : orderContent.article.id,
+      idOrder : order.id,
+      idArticle : orderContent.article.id,
       prepared : !orderContent.prepared
     }));
     orderContent.prepared = !orderContent.prepared
