@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DtoInputOrder} from "../../dtos/dto-input-order";
-import {DtoOutputOrderDate} from "../dtos/dto-output-order-date";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 import {DtoInputOrderContent} from "../../dtos/dto-input-order-content";
@@ -35,7 +34,6 @@ export class OrderListDateComponent implements OnInit {
     this._eventBus.emit(new EmitEvent(Events.emitOrderDate, {
       date : this.form.value.date
     }))
-    this.form.reset();
   }
 
   emitPreparedUpdate(order: DtoInputOrder, orderContent: DtoInputOrderContent) {

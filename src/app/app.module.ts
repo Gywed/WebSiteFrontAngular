@@ -31,6 +31,7 @@ import { OrderListUserComponent } from './order-hub/order-list-user/order-list-u
 import { UserCreateOrderComponent } from './user-hub/user-create-order/user-create-order.component';
 import { FamilyHubComponent } from './family-hub/family-hub.component';
 import { FamiliesListComponent } from './family-hub/families-list/families-list.component';
+import { OrderListTodayComponent } from './order-hub/order-list-today/order-list-today.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { FamiliesListComponent } from './family-hub/families-list/families-list.
     UserCreateOrderComponent,
     FamilyHubComponent,
     FamiliesListComponent,
+    OrderListTodayComponent,
   ],
   imports: [
     BrowserModule,
