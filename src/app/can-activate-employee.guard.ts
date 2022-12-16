@@ -21,12 +21,22 @@ export class CanActivateEmployeeGuard implements CanActivate, CanActivateChild {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+
+    var isAuthenticated = this._authService.CheckCookieEmployee();
+    if (!isAuthenticated) {
+      this._router.navigate(['']);
+    }
+    return isAuthenticated;
   }
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+
+    var isAuthenticated = this._authService.CheckCookieEmployee();
+    if (!isAuthenticated) {
+      this._router.navigate(['']);
+    }
+    return isAuthenticated;
   }
 
 }
