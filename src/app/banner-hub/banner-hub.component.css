@@ -199,6 +199,10 @@ body{
 .dropdown-content button:hover{
   background-color: #cbcbcb;
 }
+.dropdown-content a:hover{
+  background-color: #cbcbcb;
+  user-select: none;
+}
 
 .center-links{
   margin-right: 30%;

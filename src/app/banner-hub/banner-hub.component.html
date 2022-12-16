@@ -41,7 +41,8 @@
   <div class="dropdown" >
     <button class="dropbtn" (click)="showDropdownLogged(Loggedcontent)">{{username}}</button>
     <div class="dropdown-content" #Loggedcontent style="display: none;">
-      <a (click)="disconnect()">Disconnect</a>
+      <a href="#">History Order</a>
+      <a (click)="logout()">LogOut</a>
     </div>
   </div>
 </ng-template>

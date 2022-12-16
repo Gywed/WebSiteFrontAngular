@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from "../user-hub/user.service";
 import {DtoOutputCreateUser} from "../user-hub/dtos/dto-output-create-user";
 import {DtoOutputLogUser} from "../user-hub/dtos/dto-output-log-user";
+import {LocalService} from "../local.service";
 
 @Component({
   selector: 'app-banner-hub',
@@ -16,7 +17,7 @@ export class BannerHubComponent implements OnInit {
   OrderActive = false;
   username:string="";
 
-  constructor(private _userService : UserService) { }
+  constructor(private _userService : UserService, private _localService : LocalService) { }
 
   createClient(dto: DtoOutputCreateUser) {
     this._userService.createClient(dto).subscribe();
@@ -24,7 +25,8 @@ export class BannerHubComponent implements OnInit {
 
   login(dto: DtoOutputLogUser) {
     this._userService.login(dto).subscribe();
-
+    this._localService.saveData("isLogged","logged");
+    window.location.reload();
   }
 
   fetchUsernameByEmail()
@@ -68,7 +70,11 @@ export class BannerHubComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchUsernameByEmail();
+    console.log(this._localService.getData("isLogged"))
+    if(this._localService.getData("isLogged")=="logged")
+    {
+      this.fetchUsernameByEmail();
+    }
   }
 
 
@@ -90,7 +96,9 @@ export class BannerHubComponent implements OnInit {
     }
   }
 
-  disconnect() {
-
+  logout() {
+    this._userService.logout().subscribe();
+    this._localService.removeData("isLogged");
+    window.location.reload();
   }
 }
