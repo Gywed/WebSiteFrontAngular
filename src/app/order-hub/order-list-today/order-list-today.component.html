@@ -1,1 +1,57 @@
-<p>order-list-today works!</p>
+<div *ngIf="orders.length; else orderListEmpty">
+  <table class="tblMain">
+    <tr class="tileMain">
+      <th>Id</th>
+      <th>Creation</th>
+      <th>Total of the order</th>
+      <th>Is the order fully prepared</th>
+      <th>Order content</th>
+    </tr>
+    <tr *ngFor="let order of orders" class="tileMain">
+      <td class="tileMain">{{order.id}}</td>
+      <td class="tileMain">{{order.creationDate.slice(0,order.creationDate.search("T"))}}</td>
+      <td class="tileMain">{{order.totalOrderPrice}}</td>
+      <td class="tileMain">{{order.isFullyPrepared}}</td>
+      <td class="tileMain">
+        <table class="tblSecondary">
+          <tr class="tileSecondary">
+            <th class="tileSecondary">Article</th>
+            <th class="tileSecondary">Quantity</th>
+          </tr>
+          <tr *ngFor="let orderContent of order.orderContents" class="tileSecondary">
+            <td class="tileSecondary">
+              <table class="tblSecondary">
+                <tr class="tileSecondary">
+                  <th>Id</th>
+                  <th>Name tag</th>
+                  <th>Price</th>
+                  <th>Pricing type</th>
+                  <th>Category</th>
+                  <th>Brand</th>
+                  <th>Prepared</th>
+                </tr>
+                <tr class="tileSecondary">
+                  <td class="tileSecondary">{{orderContent.article.id}}</td>
+                  <td class="tileSecondary">{{orderContent.article.nametag}}</td>
+                  <td class="tileSecondary">{{orderContent.article.price}}</td>
+                  <td class="tileSecondary">{{orderContent.article.pricingType}}</td>
+                  <td class="tileSecondary">{{orderContent.article.category.name}}</td>
+                  <td class="tileSecondary">{{orderContent.article.brand.name}}</td>
+                  <td class="tileSecondary"><input type="checkbox" [checked]="orderContent.prepared"
+                                                   (change)="emitPreparedUpdate(order,orderContent)"></td>
+                </tr>
+              </table>
+            </td>
+            <td class="tileSecondary">{{orderContent.quantity}}</td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!-- Will be displayed if employees list is empty-->
+<ng-template #orderListEmpty>
+  <p>No order Today.</p>
+</ng-template>

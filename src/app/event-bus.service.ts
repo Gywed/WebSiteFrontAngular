@@ -46,6 +46,8 @@ export enum Events {
   updateOrderContent,
   emitUser,
   fetchOrderByUserId,
+  emitTodayOrderRequest,
+  fetchTodayOrder,
 
   //ArticleEvent
   fetchArticle,
