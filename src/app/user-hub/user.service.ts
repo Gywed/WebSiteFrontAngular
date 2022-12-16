@@ -26,4 +26,8 @@ export class UserService {
   fetchUsernameByEmail():Observable<DtoInputUsername>{
     return this._httpClient.get<DtoInputUsername>(`${UserService.ENTRY_POINT}/`);
   }
+
+  logout():Observable<any>{
+    return this._httpClient.post(`${UserService.ENTRY_POINT}/logout`,"");
+  }
 }
