@@ -15,6 +15,7 @@ import {OrderListUserComponent} from "./order-hub/order-list-user/order-list-use
 import {UserCreateOrderComponent} from "./user-hub/user-create-order/user-create-order.component";
 import {ArticleHubComponent} from "./article-hub/article-hub.component";
 import {CanActivateAdminGuard} from "./can-activate-admin.guard";
+import {OrderListTodayComponent} from "./order-hub/order-list-today/order-list-today.component";
 
 const routes: Routes =[
   {path: "", component: ArticleHubComponent},
@@ -31,6 +32,7 @@ const routes: Routes =[
       {path: "orderDate", component: OrderListDateComponent},
       {path: "orderCategory", component: OrderListCategoryComponent},
       {path: "orderUser", component: OrderListUserComponent},
+      {path: "orderToday", component: OrderListTodayComponent},
     ]},
   {path:"user-create-order",component:UserCreateOrderComponent}
 ];
