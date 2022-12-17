@@ -1,12 +1,14 @@
 <div class="familyList" >
   <label>Families list</label>
-  <div *ngFor="let family of families" (click)="familyClicked(family)">
+  <div *ngFor="let family of families" (click)="familyClicked(family); isAdding=false">
     <div class="familyListElement">
       {{family.familyName}}
     </div>
     <div *ngIf="familySelectedId == family.id" >
-      <div *ngFor="let article of articlesInFamily" class="articleOfFamily">
-        {{article.nametag}}
+      <div *ngIf="articlesInFamily.length > 0; else articlesOfFamilyEmpty">
+        <div *ngFor="let article of articlesInFamily" class="articleOfFamily">
+          {{article.nametag}}
+        </div>
       </div>
     </div>
   </div>
@@ -15,11 +17,19 @@
   </div>
 </div>
 
+<!-- if "+" button is pressed -->
 <ng-template #addPressed>
   <div class="addForm">
     <form [formGroup]="form" (ngSubmit)="emitFamilyCreated()">
       <input class="addField" type="text" placeholder="family's name" formControlName="familyName">
       <input type="submit" value="+" class="addFormButton" [disabled]="form.invalid">
     </form>
+  </div>
+</ng-template>
+
+<!-- articles list of the family is empty -->
+<ng-template #articlesOfFamilyEmpty>
+  <div class="articleOfFamily">
+    There isn't any article in this family
   </div>
 </ng-template>
