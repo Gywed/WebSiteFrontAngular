@@ -1,7 +1,7 @@
 <div class="familyList" >
   <label>Families list</label>
   <div *ngFor="let family of families" (click)="familyClicked(family); isAdding=false">
-    <div class="familyListElement">
+    <div class="familyListElement clickable">
       {{family.familyName}}
       <span class="deleteFamily" (click)="emitFamilyDeleted(family)">x</span>
     </div>
@@ -9,6 +9,7 @@
       <div *ngIf="articlesInFamily.length > 0; else articlesOfFamilyEmpty">
         <div *ngFor="let article of articlesInFamily" class="articleOfFamily">
           {{article.nametag}}
+          <span class="clickable">| x</span>
         </div>
       </div>
     </div>
