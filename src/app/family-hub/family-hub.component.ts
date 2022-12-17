@@ -5,6 +5,7 @@ import {EmitEvent, EventBusService, Events} from "../event-bus.service";
 import {DtoInputArticle} from "../dtos/dto-input-article";
 import {DtoOutputCreateFamily} from "./dtos/dto-output-create-family";
 import {DtoOutputDeleteFamily} from "./dtos/dto-output-delete-family";
+import {DtoOutputRemoveFamilyArticle} from "./dtos/dto-output-remove-family-article";
 
 @Component({
   selector: 'app-family-hub',
@@ -45,6 +46,13 @@ export class FamilyHubComponent implements OnInit {
     let index = this.families.indexOf(family[0])
     this._familyService.deleteFamily(dto)
       .subscribe(()=> this.families.splice(index, 1))
+  }
+
+  removeArticleFromFamily(dto: DtoOutputRemoveFamilyArticle){
+    let article = this.articlesOfFamily.filter(e => e.id == dto.idArticle)
+    let index = this.articlesOfFamily.indexOf(article[0])
+    this._familyService.removeArticleFromFamily(dto)
+      .subscribe(()=>this.articlesOfFamily.splice(index, 1))
   }
 
 }
