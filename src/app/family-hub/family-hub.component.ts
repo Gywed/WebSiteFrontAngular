@@ -23,10 +23,6 @@ export class FamilyHubComponent implements OnInit {
     this.fetchAll()
   }
 
-  ngDoCheck():void{
-    console.log(this.families)
-  }
-
   fetchAll(){
     this._familyService.fetchAll().subscribe(families=>{
       this.families = families

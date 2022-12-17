@@ -6,6 +6,7 @@ import {DtoInputArticle} from "../../dtos/dto-input-article";
 import {DtoOutputCreateFamily} from "../dtos/dto-output-create-family";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoOutputDeleteFamily} from "../dtos/dto-output-delete-family";
+import {DtoOutputRemoveFamilyArticle} from "../dtos/dto-output-remove-family-article";
 
 @Component({
   selector: 'app-families-list',
@@ -25,36 +26,45 @@ export class FamiliesListComponent implements OnInit {
   @Output() familySelected: EventEmitter<DtoInputFamily> = new EventEmitter<DtoInputFamily>()
   @Output() familyCreated: EventEmitter<DtoOutputCreateFamily> = new EventEmitter<DtoOutputCreateFamily>()
   @Output() familyDeleted: EventEmitter<DtoOutputDeleteFamily> = new EventEmitter<DtoOutputDeleteFamily>()
+  @Output() articleFromFamilyRemoved: EventEmitter<DtoOutputRemoveFamilyArticle> = new EventEmitter<DtoOutputRemoveFamilyArticle>()
 
   constructor(private _eventBus: EventBusService,
-              private _fb: FormBuilder) { }
+              private _fb: FormBuilder) {
+  }
 
   ngOnInit(): void {
 
   }
 
-  familyClicked(family: DtoInputFamily){
-    if(this.familySelectedId == family.id){
+  familyClicked(family: DtoInputFamily) {
+    if (this.familySelectedId == family.id) {
       this.articlesInFamily = []
       this.familySelectedId = 0
-    }else {
+    } else {
       this.familySelected.next(family)
       this.familySelectedId = family.id
     }
 
   }
 
-  emitFamilyCreated(){
+  emitFamilyCreated() {
     this.familyCreated.next({
       familyName: this.form.value.familyName
     })
     this.form.reset()
-    this.isAdding =false
+    this.isAdding = false
   }
 
-  emitFamilyDeleted(family: DtoInputFamily){
+  emitFamilyDeleted(family: DtoInputFamily) {
     this.familyDeleted.next({
       id: family.id
+    })
+  }
+
+  emitArticleFromFamilyRemoved(article: DtoInputArticle){
+    this.articleFromFamilyRemoved.next({
+      idArticle: article.id,
+      idFamily: this.familySelectedId
     })
   }
 
