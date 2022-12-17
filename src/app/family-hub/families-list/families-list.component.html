@@ -17,8 +17,9 @@
 
 <ng-template #addPressed>
   <div class="addForm">
-    <input class="addField" type="text" placeholder="family's name">
-    <button class="addFormButton">+</button>
+    <form [formGroup]="form" (ngSubmit)="emitFamilyCreated()">
+      <input class="addField" type="text" placeholder="family's name" formControlName="familyName">
+      <input type="submit" value="+" class="addFormButton" [disabled]="form.invalid">
+    </form>
   </div>
-
 </ng-template>
