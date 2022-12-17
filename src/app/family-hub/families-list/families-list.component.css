@@ -22,3 +22,21 @@
   margin-right: 10px;
   font-size: medium;
 }
+
+.addButton{
+  width: 100%;
+}
+
+.addForm{
+  width: available;
+}
+
+.addField{
+  box-sizing: border-box;
+  display: inline-block;
+  width: 90%;
+}
+
+.addFormButton{
+  width: 10%;
+}

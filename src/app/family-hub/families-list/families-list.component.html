@@ -10,4 +10,15 @@
       </div>
     </div>
   </div>
+  <div *ngIf="!isAdding; else addPressed">
+    <button class="addButton" (click)="isAdding=true">+</button>
+  </div>
 </div>
+
+<ng-template #addPressed>
+  <div class="addForm">
+    <input class="addField" type="text" placeholder="family's name">
+    <button class="addFormButton">+</button>
+  </div>
+
+</ng-template>

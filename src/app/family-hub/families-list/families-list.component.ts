@@ -14,6 +14,7 @@ export class FamiliesListComponent implements OnInit {
   @Input() families: DtoInputFamily[] = []
   @Input() articlesInFamily: DtoInputArticle[] = []
   familySelectedId: number = 0
+  isAdding: boolean = false
 
   @Output() familySelected: EventEmitter<DtoInputFamily> = new EventEmitter<DtoInputFamily>()
 
@@ -24,8 +25,14 @@ export class FamiliesListComponent implements OnInit {
   }
 
   familyClicked(family: DtoInputFamily){
-    this.familySelected.next(family)
-    this.familySelectedId = family.id
+    if(this.familySelectedId == family.id){
+      this.articlesInFamily = []
+      this.familySelectedId = 0
+    }else {
+      this.familySelected.next(family)
+      this.familySelectedId = family.id
+    }
+
   }
 
 }
