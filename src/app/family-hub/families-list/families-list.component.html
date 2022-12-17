@@ -3,7 +3,7 @@
   <div *ngFor="let family of families" (click)="familyClicked(family); isAdding=false">
     <div class="familyListElement">
       {{family.familyName}}
-      <span class="deleteFamily">x</span>
+      <span class="deleteFamily" (click)="emitFamilyDeleted(family)">x</span>
     </div>
     <div *ngIf="familySelectedId == family.id" >
       <div *ngIf="articlesInFamily.length > 0; else articlesOfFamilyEmpty">

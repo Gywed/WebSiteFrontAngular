@@ -1,4 +1,5 @@
 <app-families-list [families]="families"
                    [articlesInFamily]="articlesOfFamily"
                    (familySelected)="fetchArticlesOfFamily($event)"
-                   (familyCreated)="createFamily($event)"></app-families-list>
+                   (familyCreated)="createFamily($event)"
+                   (familyDeleted)="deleteFamily($event)"></app-families-list>
