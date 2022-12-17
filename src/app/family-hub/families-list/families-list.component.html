@@ -13,7 +13,7 @@
     </div>
   </div>
   <div *ngIf="!isAdding; else addPressed">
-    <button class="addButton" (click)="isAdding=true">+</button>
+    <button class="addButton" (click)="isAdding=true; familySelectedId=0">+</button>
   </div>
 </div>
 
