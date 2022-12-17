@@ -3,6 +3,7 @@ import {FamilyService} from "./family.service";
 import {DtoInputFamily} from "./dtos/dto-input-family";
 import {EmitEvent, EventBusService, Events} from "../event-bus.service";
 import {DtoInputArticle} from "../dtos/dto-input-article";
+import {DtoOutputCreateFamily} from "./dtos/dto-output-create-family";
 
 @Component({
   selector: 'app-family-hub',
@@ -32,6 +33,10 @@ export class FamilyHubComponent implements OnInit {
 
   fetchArticlesOfFamily(dto: DtoInputFamily){
     this._familyService.fetchArticlesOfFamily(dto.id).subscribe(articles => this.articlesOfFamily = articles)
+  }
+
+  createFamily(dto: DtoOutputCreateFamily){
+    this._familyService.createFamily(dto).subscribe(family => this.families.push(family))
   }
 
 }

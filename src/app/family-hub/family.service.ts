@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {DtoInputFamily} from "./dtos/dto-input-family";
 import {DtoInputArticle} from "../dtos/dto-input-article";
+import {DtoOutputCreateFamily} from "./dtos/dto-output-create-family";
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class FamilyService {
 
   fetchArticlesOfFamily(idFamily: number):Observable<DtoInputArticle[]>{
     return this._httpClient.get<DtoInputArticle[]>(FamilyService.ENTRY_POINT_FAMILY + `/${idFamily}`)
+  }
+
+  createFamily(dto: DtoOutputCreateFamily):Observable<DtoInputFamily>{
+    return this._httpClient.post<DtoInputFamily>(FamilyService.ENTRY_POINT_FAMILY+"/create", dto)
   }
 }
