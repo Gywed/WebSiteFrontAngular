@@ -26,6 +26,10 @@ export class FamilyService {
     return this._httpClient.get<DtoInputArticle[]>(FamilyService.ENTRY_POINT_FAMILY + `/${idFamily}`)
   }
 
+  fetchFamiliesOfArticle(idArticle: number):Observable<DtoInputFamily[]>{
+    return this._httpClient.get<DtoInputFamily[]>(FamilyService.ENTRY_POINT_FAMILY + `/article/${idArticle}`)
+  }
+
   createFamily(dto: DtoOutputCreateFamily):Observable<DtoInputFamily>{
     return this._httpClient.post<DtoInputFamily>(FamilyService.ENTRY_POINT_FAMILY+"/create", dto)
   }
