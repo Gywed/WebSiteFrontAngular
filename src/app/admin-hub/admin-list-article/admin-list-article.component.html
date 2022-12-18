@@ -11,7 +11,7 @@
         <th (click)="sortArticleByStock(this.articlesInPage)">In stock <a [hidden]="sortIncreasingArticleStock">↑</a><a [hidden]="!sortIncreasingArticleStock">↓</a></th>
         <th>Delete</th>
       </tr>
-      <tr *ngFor="let article of articlesDisplayed">
+      <tr *ngFor="let article of articlesDisplayed" draggable="true" (dragstart)="drag($event, article)">
         <td>{{article.nametag}}</td>
         <td>{{article.price}}</td>
         <td>{{article.stock}}</td>

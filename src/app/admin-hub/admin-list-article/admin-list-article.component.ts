@@ -84,4 +84,9 @@ export class AdminListArticleComponent implements OnInit {
 
       this.rangeDisplayed = 1;
   }
+
+  drag($event: DragEvent, article: DtoInputArticle) {
+    $event.dataTransfer?.setData("text", article.id.toString())
+    console.log(article)
+  }
 }
