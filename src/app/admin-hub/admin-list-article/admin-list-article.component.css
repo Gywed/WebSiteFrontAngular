@@ -7,12 +7,14 @@
 .fields
 {
   text-align: left;
-  margin-left: 12%;
+  margin-left:3%;
+  font-size: 70%;
 }
 .button
 {
   text-align: left;
-  margin-left: 12%;
+  margin-left: 5%;
+  font-size: 70%;
 }
 table, th, td {
   text-align: center;
