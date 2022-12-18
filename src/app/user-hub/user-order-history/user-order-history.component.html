@@ -1,0 +1,55 @@
+<div *ngIf="orders.length; else orderListEmpty">
+  <details *ngFor="let order of orders">
+    <summary>
+      <table>
+        <tr class="trTitle">
+          <th class="tileMain">N° order</th>
+          <th class="tileMain">Creation date</th>
+          <th class="tileMain">Total of the order</th>
+          <th class="tileMain">Ready ?</th>
+        </tr>
+        <tr>
+          <td class="tileMain">{{order.id}}</td>
+          <td class="tileMain">{{order.creationDate.slice(0,order.creationDate.search("T"))}}</td>
+          <td class="tileMain">{{order.totalOrderPrice}}</td>
+          <td class="tileMain" *ngIf="order.isFullyPrepared; else notReady">Ready!</td>
+          <ng-template #notReady>
+            <td class="tileMain">Not ready!</td>
+          </ng-template>
+        </tr>
+      </table>
+    </summary>
+    <table class="tblSecondary">
+      <tr class="trTitle">
+        <th class="tileSecondary" class="article">Article</th>
+        <th class="tileSecondary" class="quantity">Quantity</th>
+      </tr>
+      <tr *ngFor="let orderContent of order.orderContents">
+        <td>
+          <table>
+            <tr class="trTitle">
+              <th>Name tag</th>
+              <th>Price</th>
+              <th>Pricing type</th>
+              <th>Category</th>
+              <th>Brand</th>
+            </tr>
+            <tr class="articleDetails">
+              <td class="tdSecondary" id="nametag">{{orderContent.article.nametag}}</td>
+              <td class="tdSecondary" id="price">{{orderContent.article.price}}</td>
+              <td class="tdSecondary" id="pricingType">{{orderContent.article.pricingType}}</td>
+              <td class="tdSecondary" id="category">{{orderContent.article.category.name}}</td>
+              <td class="tdSecondary" id="brand">{{orderContent.article.brand.name}}</td>
+            </tr>
+          </table>
+        </td>
+        <td class="tdSecondary">{{orderContent.quantity}}</td>
+      </tr>
+    </table>
+  </details>
+</div>
+
+<!-- Will be displayed if employees list is empty-->
+<ng-template #orderListEmpty>
+  <p>You don't have any order</p>
+</ng-template>
