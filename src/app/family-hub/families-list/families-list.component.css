@@ -1,6 +1,11 @@
 .clickable{
   cursor: pointer;
 }
+
+.editable{
+  cursor: text;
+}
+
 .familyList{
   border: 2px solid black;
   border-radius: 5px;
@@ -48,4 +53,18 @@
 
 .addFormButton{
   width: 10%;
+}
+
+.updateForm{
+  width: available;
+}
+
+.updateField{
+  box-sizing: border-box;
+  display: inline-block;
+  width: 80%;
+}
+
+.updateFormButton{
+  width: 20%;
 }
