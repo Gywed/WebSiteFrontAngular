@@ -7,6 +7,7 @@ import {DtoOutputCreateFamily} from "../dtos/dto-output-create-family";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoOutputDeleteFamily} from "../dtos/dto-output-delete-family";
 import {DtoOutputRemoveFamilyArticle} from "../dtos/dto-output-remove-family-article";
+import {DtoOutputUpdateFamily} from "../dtos/dto-output-update-family";
 
 @Component({
   selector: 'app-families-list',
@@ -32,6 +33,7 @@ export class FamiliesListComponent implements OnInit {
   @Output() familyCreated: EventEmitter<DtoOutputCreateFamily> = new EventEmitter<DtoOutputCreateFamily>()
   @Output() familyDeleted: EventEmitter<DtoOutputDeleteFamily> = new EventEmitter<DtoOutputDeleteFamily>()
   @Output() articleFromFamilyRemoved: EventEmitter<DtoOutputRemoveFamilyArticle> = new EventEmitter<DtoOutputRemoveFamilyArticle>()
+  @Output() familyUpdated: EventEmitter<DtoOutputUpdateFamily> = new EventEmitter<DtoOutputUpdateFamily>()
 
   constructor(private _eventBus: EventBusService,
               private _fb: FormBuilder) {
@@ -76,6 +78,19 @@ export class FamiliesListComponent implements OnInit {
   }
 
   emitFamilyUpdated() {
+    this.familyUpdated.next({
+      id: this.familyUpdatedId,
+      familyName: this.updateForm.value.familyName
+    })
+    this.updateForm.reset()
+    this.familyUpdatedId = 0
+  }
 
+  familyDblClicked(family: DtoInputFamily) {
+    this.familyUpdatedId=family.id;
+    this.familySelectedId=0;
+    this.updateForm.patchValue({
+      familyName: family.familyName
+    })
   }
 }

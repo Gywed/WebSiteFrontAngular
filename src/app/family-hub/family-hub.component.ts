@@ -53,7 +53,9 @@ export class FamilyHubComponent implements OnInit {
   }
 
   updateFamily(dto: DtoOutputUpdateFamily){
-    this._familyService.updateFamily(dto).subscribe()
+    this._familyService.updateFamily(dto).subscribe(()=>{
+      this.families.filter(e=>e.id == dto.id)[0].familyName = dto.familyName
+    })
   }
 
 }

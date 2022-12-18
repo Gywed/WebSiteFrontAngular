@@ -3,7 +3,7 @@
   <div *ngFor="let family of families" >
     <div *ngIf="familyUpdatedId != family.id; else updateFamily" class="familyListElement clickable"
          (click)="familyClicked(family); isAdding=false" >
-      <span class="editable" (dblclick)="familyUpdatedId=family.id; familySelectedId=0">
+      <span class="editable" (dblclick)="familyDblClicked(family)">
         {{family.familyName}}
       </span>
       <span class="deleteFamily" (click)="emitFamilyDeleted(family)">x</span>
