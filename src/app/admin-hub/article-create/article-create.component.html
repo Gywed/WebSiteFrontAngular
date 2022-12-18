@@ -1,34 +1,40 @@
 <form [formGroup]="form" (ngSubmit)="emitArticle()" class="form">
   <div>
+    <input type="text" class="fieldsHeader" value="Name tag" readonly [disabled]="true">
     <input type="text" formControlName="nameTag" class="fields" placeholder="name tag">
     <div *ngIf="controls('nameTag')?.dirty && controls('nameTag')?.invalid" class="warning">
       This information is required!
     </div>
   </div>
   <div>
+    <input type="text" class="fieldsHeader" value="Price" readonly [disabled]="true">
     <input type="text" formControlName="price" class="fields" placeholder="price">
     <div *ngIf="controls('price')?.dirty && controls('price')?.invalid" class="warning">
       This information is required!
     </div>
   </div>
   <div>
+    <input type="text" class="fieldsHeader" value="Pricing type" readonly [disabled]="true">
     <input type="text" formControlName="pricingType" class="fields" placeholder="type of pricing">
     <div *ngIf="controls('pricingType')?.dirty && controls('pricingType')?.invalid" class="warning">
       This information is required!
     </div>
   </div>
   <div>
+    <input type="text" class="fieldsHeader" value="Stock" readonly [disabled]="true">
     <input type="text" formControlName="stock" class="fields" placeholder="number of article in stock">
     <div *ngIf="controls('stock')?.dirty && controls('stock')?.invalid" class="warning">
       This information is required!
     </div>
   </div>
   <div>
+    <input type="text" class="fieldsHeader" value="Category" readonly [disabled]="true">
     <select class="list" (change)="setIdCategory($event)" [selectedIndex]="idCategory - 1">
       <option *ngFor="let cate of listOfCategories" [value]="cate.id">{{cate.name}}</option>
     </select>
   </div>
   <div>
+    <input type="text" class="fieldsHeader" value="Brand" readonly [disabled]="true">
     <select class="list" (change)="setIdBrand($event)" [selectedIndex]="idBrand - 1">
       <option *ngFor="let bran of listOfBrands" [value]="bran.id">{{bran.name}}</option>
     </select>
