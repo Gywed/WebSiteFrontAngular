@@ -96,9 +96,16 @@ export class FamiliesListComponent implements OnInit {
     })
   }
 
-  drop($event: DragEvent) {
-    console.log($event.dataTransfer?.getData("text"))
-    console.log("dropped")
+  drop($event: DragEvent, family: DtoInputFamily) {
+    let articleId = $event.dataTransfer?.getData("text")
+    if (articleId)
+      this.articleAddedToFamily.next({
+        idArticle: +articleId,
+        idFamily: family.id
+      })
+    //hide articles in family
+    this.familySelectedId = 0
+    this.articlesInFamily = []
   }
 
   dragover($event: DragEvent) {

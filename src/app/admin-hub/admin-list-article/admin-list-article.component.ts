@@ -87,6 +87,5 @@ export class AdminListArticleComponent implements OnInit {
 
   drag($event: DragEvent, article: DtoInputArticle) {
     $event.dataTransfer?.setData("text", article.id.toString())
-    console.log(article)
   }
 }
