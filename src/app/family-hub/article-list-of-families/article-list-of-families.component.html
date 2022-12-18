@@ -1,8 +1,15 @@
 <div class="familyList" >
   <label>Families of the article</label>
-  <div *ngFor="let family of families" class="familyListElement clickable">
+  <div *ngIf="families.length > 0">
+    <div *ngFor="let family of families" class="familyListElement">
       <span>
         {{family.familyName}}
+      </span>
+    </div>
+  </div>
+  <div *ngIf="families.length == 0" class="familyListEmpty">
+      <span>
+        This article is in no familly
       </span>
   </div>
 </div>

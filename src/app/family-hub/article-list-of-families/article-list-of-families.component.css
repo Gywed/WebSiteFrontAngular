@@ -16,3 +16,16 @@
   margin-top: 5px;
   padding-left: 10px;
 }
+.familyListEmpty{
+  width: available;
+  text-align: center;
+  font-size: large;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding-left: 10px;
+}
+.articleOfFamily{
+  text-align: right;
+  margin-right: 10px;
+  font-size: 0.7em;
+}
