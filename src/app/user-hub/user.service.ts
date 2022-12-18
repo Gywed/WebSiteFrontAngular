@@ -5,6 +5,7 @@ import {DtoOutputCreateUser} from "./dtos/dto-output-create-user";
 import {Observable} from "rxjs";
 import {DtoInputUser} from "./dtos/dto-input-user";
 import {DtoOutputLogUser} from "./dtos/dto-output-log-user";
+import {DtoInputUsername} from "./dtos/dto-input-username";
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,13 @@ export class UserService {
 
   login(dto : DtoOutputLogUser) : Observable<DtoInputUser>{
     return this._httpClient.post<DtoInputUser>(`${UserService.ENTRY_POINT}/login`, dto);
+  }
+
+  fetchUsernameByEmail():Observable<DtoInputUsername>{
+    return this._httpClient.get<DtoInputUsername>(`${UserService.ENTRY_POINT}/`);
+  }
+
+  logout():Observable<any>{
+    return this._httpClient.post(`${UserService.ENTRY_POINT}/logout`,"");
   }
 }

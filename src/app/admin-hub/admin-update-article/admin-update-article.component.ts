@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DtoInputCategory} from "../../order-hub/dtos/dto-input-category";
-import {DtoInputBrand} from "../../order-hub/dtos/dto-input-brand";
+import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-article";
+import {DtoInputCategory} from "../../dtos/dto-input-category";
+import {DtoInputBrand} from "../../dtos/dto-input-brand";
+import {tsCastToAny} from "@angular/compiler-cli/src/ngtsc/typecheck/src/ts_util";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 import {Subscription} from "rxjs";
-import {DtoInputArticle} from "../../article-hub/dtos/dto-input-article";
+import {DtoInputArticle} from "../../dtos/dto-input-article";
 
 @Component({
   selector: 'app-admin-update-article',
@@ -37,6 +39,7 @@ export class AdminUpdateArticleComponent implements OnInit {
     stock : ['', Validators.required],
   })
 
+
   idCategoryToUpdate = 1;
   idBrandToUpdate = 1;
   PricingTypeToUpdate = 1;
@@ -53,17 +56,17 @@ export class AdminUpdateArticleComponent implements OnInit {
       });
       this.updated = false
       this.id = data.id;
-      this.idCategoryToUpdate = data.idCategory;
-      this.idBrandToUpdate = data.idBrand;
+      this.idCategoryToUpdate = data.category.id;
+      this.idBrandToUpdate = data.brand.id;
       this.PricingTypeToUpdate = data.pricingType;
     })
 
-    this._eventBus.on(Events.fetchCategorie).subscribe((data: any) => {
+    this._eventBus.on(Events.emitfetchCategorie).subscribe((data: any) => {
       this.tmplistOfCategories = data.categories
     })
     this.listOfCategories = this.tmplistOfCategories
 
-    this._eventBus.on(Events.fetchBrand).subscribe((data: any) => {
+    this._eventBus.on(Events.emitfetchBranch).subscribe((data: any) => {
       this.tmplistOfBrands = data.brands
     })
     this.listOfBrands = this.tmplistOfBrands
@@ -78,15 +81,21 @@ export class AdminUpdateArticleComponent implements OnInit {
   }
 
   emitUpdate() {
+    let updateCategory = this.listOfCategories.find(value => value.id == this.idCategoryToUpdate)
+    if (updateCategory == undefined)
+      return;
+    let updateBrand = this.listOfBrands.find(value => value.id == this.idBrandToUpdate)
+    if (updateBrand == undefined)
+      return;
     this._eventBus.emit(new EmitEvent(Events.articleUpdate, {
       id : this.id,
       nametag : this.form.value.nameTag,
       price : this.form.value.price,
       pricingType : this.form.value.pricingType,
       stock : this.form.value.stock,
-      idCategory : this.idCategoryToUpdate,
-      idBrand : this.idBrandToUpdate
-    }))
+      category : updateCategory,
+      brand : updateBrand
+    }));
     this.updated = true;
   }
 

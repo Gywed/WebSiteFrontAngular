@@ -1,47 +1,76 @@
-.fields
-{
-  font-size: 100%;
-  width: 10%;
-  margin-top: 0.5%;
+details summary {
+  cursor: pointer;
 }
-.btn
-{
-  text-align: left;
-  font-size: 100%;
-  margin-top: 0.5%;
-  width: 6%;
+details summary > * {
+  display: inline;
 }
-.list
-{
-  text-align: center;
+
+details {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: .5em .5em 0;
+  margin-left:15%;
+  margin-right: 15%;
 }
-.tblMain {
-  margin-left: auto;
-  margin-right: auto;
+
+summary {
+  padding: .5em .5em 0;
+  font-weight: bold;
+  margin: -.5em -.5em 0;
+  padding: .5em;
 }
-.tblSecondary {
-  width: 100%;
+
+details[open] {
+  padding: .5em;
 }
-table, th, td {
-  text-align: center;
-  min-width: 80px;
-}
-th {
-  background-color: #009879;
-  color: #ffffff;
+
+details[open] summary {
+  border-bottom: 1px solid #aaa;
+  margin-bottom: .5em;
 }
 
 .tileMain {
   border: 2px solid #008869;
+  padding: .2em;
+  text-align: center;
+  vertical-align: middle;
 }
 .tileSecondary {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  vertical-align: middle;
 }
-#btnBackToList {
-  margin-left: 25%;
-  margin-bottom: 2%;
-  font-size: 80%;
-  width: 8%;
-  background-color: #007a7a;
-  border-radius: 15px;
+
+.tdSecondary{
+  border: 2px solid #008869;
+  padding: .2em;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.articleDetails #nametag{
+  width: 10%;
+}
+.articleDetails #price{
+  width: 4%;
+}
+.articleDetails #pricingType{
+  width: 10%;
+}
+.articleDetails #category{
+  width: auto;
+}
+.articleDetails #brand{
+  width: 10%;
+}
+
+.trTitle{
+  background: #007a7a;
+}
+
+table {
+  width: 100%;
+}
+
+.article{
+
 }

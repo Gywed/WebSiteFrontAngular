@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DtoOutputOrderDate} from "./dtos/dto-output-order-date";
 import {OrderService} from "./order.service";
-import {DtoInputOrder} from "./dtos/dto-input-order";
+import {DtoInputOrder} from "../dtos/dto-input-order";
 import {DtoOutputFilterOrder} from "./dtos/dto-output-filter-order";
 import {DtoOutputOrderCategory} from "./dtos/dto-output-order-category";
 import {DtoOutputUpdateOrdercontent} from "./dtos/dto-output-update-ordercontent";
@@ -15,6 +15,7 @@ import {Subscription} from "rxjs";
 })
 export class OrderHubComponent implements OnInit {
   ordersDate : DtoInputOrder[] = []
+  ordersToday : DtoInputOrder[] = []
   ordersFilterred : DtoInputOrder[] = []
   ordersCategory : DtoInputOrder[] = []
   ordersUser : DtoInputOrder[] = []
@@ -22,6 +23,7 @@ export class OrderHubComponent implements OnInit {
 
   emitOrderFilterSub? : Subscription;
   emitOrderDateSub? : Subscription;
+  emitTodayOrderRequestSub? : Subscription;
   emitOrderCategorySub? : Subscription;
   updateOrderContentSub? : Subscription;
   emitUserSub? : Subscription;
@@ -35,6 +37,7 @@ export class OrderHubComponent implements OnInit {
     this.emitOrderCategorySub = this._eventBus.on(Events.emitOrderCategory).subscribe((orders :  DtoOutputOrderCategory) => this.fetchOrderByCategory(orders))
     this.emitUserSub = this._eventBus.on(Events.emitUser).subscribe(() => this.fetchOrderByUserId())
     this.updateOrderContentSub = this._eventBus.on(Events.updateOrderContent).subscribe((orders :  DtoOutputUpdateOrdercontent) => this.updateOrderContent(orders))
+    this.emitTodayOrderRequestSub = this._eventBus.on(Events.emitTodayOrderRequest).subscribe(() => this.fetchTodayOrders())
   }
 
   fetchOrderByUserId(){
@@ -48,6 +51,13 @@ export class OrderHubComponent implements OnInit {
     this._service.fetchOrderByDate(dto).subscribe(orders => {
       this.ordersDate = orders
       this._eventBus.emit(new EmitEvent(Events.fetchOrderByDate, this.ordersDate))
+    })
+  }
+
+  fetchTodayOrders() {
+    this._service.fetchOrderByDate({date : new Date().toISOString()}).subscribe(orders => {
+      this.ordersToday = orders
+      this._eventBus.emit(new EmitEvent(Events.fetchTodayOrder, this.ordersToday))
     })
   }
 

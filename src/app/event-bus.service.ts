@@ -46,6 +46,8 @@ export enum Events {
   updateOrderContent,
   emitUser,
   fetchOrderByUserId,
+  emitTodayOrderRequest,
+  fetchTodayOrder,
 
   //ArticleEvent
   fetchArticle,
@@ -56,8 +58,10 @@ export enum Events {
   articleUpdate,
 
   //CategorieEvent
+  emitfetchCategorie,
   fetchCategorie,
 
   //BrandEvent
+  emitfetchBranch,
   fetchBrand
 }

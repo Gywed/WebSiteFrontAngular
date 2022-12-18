@@ -14,6 +14,10 @@ import {OrderListCategoryComponent} from "./order-hub/order-list-category/order-
 import {OrderListUserComponent} from "./order-hub/order-list-user/order-list-user.component";
 import {UserCreateOrderComponent} from "./user-hub/user-create-order/user-create-order.component";
 import {ArticleHubComponent} from "./article-hub/article-hub.component";
+import {CanActivateAdminGuard} from "./can-activate-admin.guard";
+import {OrderListTodayComponent} from "./order-hub/order-list-today/order-list-today.component";
+import {CanActivateClientGuard} from "./can-activate-client.guard";
+import {CanActivateEmployeeGuard} from "./can-activate-employee.guard";
 
 const routes: Routes =[
   {path: "", component: ArticleHubComponent},
@@ -24,12 +28,13 @@ const routes: Routes =[
       {path: "articleList", component:AdminListArticleComponent},
       {path: "articleCreate", component: ArticleCreateComponent},
       {path: "articleUpdate", component: AdminUpdateArticleComponent}
-    ]},
+    ]/*,canActivate:[CanActivateAdminGuard],canActivateChild:[CanActivateAdminGuard]*/},
   {path: "order", component: OrderHubComponent, children: [
-      {path: "orderFiltered", component: OrderFilteredListComponent},
-      {path: "orderDate", component: OrderListDateComponent},
-      {path: "orderCategory", component: OrderListCategoryComponent},
-      {path: "orderUser", component: OrderListUserComponent},
+      {path: "orderFiltered", component: OrderFilteredListComponent/*,canActivate:[CanActivateEmployeeGuard]*/},
+      {path: "orderDate", component: OrderListDateComponent/*,canActivate:[CanActivateEmployeeGuard]*/},
+      {path: "orderCategory", component: OrderListCategoryComponent/*,canActivate:[CanActivateEmployeeGuard]*/},
+      {path: "orderUser", component: OrderListUserComponent/*,canActivate:[CanActivateClientGuard]*/},
+      {path: "orderToday", component: OrderListTodayComponent/*,canActivate:[CanActivateEmployeeGuard]*/},
     ]},
   {path:"user-create-order",component:UserCreateOrderComponent}
 ];

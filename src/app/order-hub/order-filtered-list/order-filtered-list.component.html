@@ -1,13 +1,12 @@
-<form [formGroup]="form" (ngSubmit)="emitFilter()">
+<form [formGroup]="form">
   <div>
     <label>
-      Select a date : <input type="date" formControlName="date" class="fields">
+      Select a date : <input type="date" formControlName="date" class="fields" (ngModelChange)="emitFilter()">
     </label>
     <label>
-      Name of the emitter of the order : <input type="text" formControlName="name" class="fields">
+      Name of the emitter of the order : <input type="text" formControlName="name" class="fields" (ngModelChange)="searchNotifier.next(null)">
     </label>
   </div>
-  <input type="submit" value="Filter" class="btn">
 </form>
 
 

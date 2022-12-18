@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DtoInputArticle} from "../dtos/dto-input-article";
+import {DtoInputArticle} from "../../dtos/dto-input-article";
 import {DtoOutputCartContent} from "../../menubar-hub/shopping-cart-hub/dtos/dto-output-cart-content";
 import {ShoppingCartService} from "../../menubar-hub/shopping-cart-hub/shopping-cart.service";
 
@@ -25,8 +25,8 @@ export class ArticleListComponent implements OnInit {
         article : {
           id:article.id,
           nametag:article.nametag,
-          idBrand:article.idBrand,
-          idCategory:article.idCategory,
+          idBrand:article.brand.id,
+          idCategory:article.category.id,
           price : article.price,
           pricingType : article.pricingType
         },

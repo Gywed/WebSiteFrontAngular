@@ -1,49 +1,52 @@
 <div *ngIf="orders.length; else orderListEmpty">
-  <table class="tblMain">
-    <tr class="tileMain">
-      <th>Id</th>
-      <th>Creation</th>
-      <th>Total of the order</th>
-      <th>Order content</th>
-    </tr>
-    <tr *ngFor="let order of orders" class="tileMain">
-      <td class="tileMain">{{order.id}}</td>
-      <td class="tileMain">{{order.creationDate.slice(0,order.creationDate.search("T"))}}</td>
-      <td class="tileMain">{{order.totalOrderPrice}}</td>
-      <td class="tileMain">
-        <table class="tblSecondary">
-          <tr class="tileSecondary">
-            <th class="tileSecondary">Article</th>
-            <th class="tileSecondary">Quantity</th>
-          </tr>
-          <tr *ngFor="let orderContent of order.orderContents" class="tileSecondary">
-            <td class="tileSecondary">
-              <table class="tblSecondary">
-                <tr class="tileSecondary">
-                  <th>Id</th>
-                  <th>Name tag</th>
-                  <th>Price</th>
-                  <th>Pricing type</th>
-                  <th>Category</th>
-                  <th>Brand</th>
-                </tr>
-                <tr class="tileSecondary">
-                  <td class="tileSecondary">{{orderContent.article.id}}</td>
-                  <td class="tileSecondary">{{orderContent.article.nametag}}</td>
-                  <td class="tileSecondary">{{orderContent.article.price}}</td>
-                  <td class="tileSecondary">{{orderContent.article.pricingType}}</td>
-                  <td class="tileSecondary">{{orderContent.article.category.name}}</td>
-                  <td class="tileSecondary">{{orderContent.article.brand.name}}</td>
-                </tr>
-              </table>
-            </td>
-            <td class="tileSecondary">{{orderContent.quantity}}</td>
-          </tr>
-        </table>
-
-      </td>
-    </tr>
-  </table>
+  <details *ngFor="let order of orders">
+    <summary>
+      <table>
+        <tr class="trTitle">
+          <th class="tileMain">N° order</th>
+          <th class="tileMain">Creation date</th>
+          <th class="tileMain">Total of the order</th>
+          <th class="tileMain">Ready ?</th>
+        </tr>
+        <tr>
+          <td class="tileMain">{{order.id}}</td>
+          <td class="tileMain">{{order.creationDate.slice(0,order.creationDate.search("T"))}}</td>
+          <td class="tileMain">{{order.totalOrderPrice}}</td>
+          <td class="tileMain" *ngIf="order.isFullyPrepared; else notReady">Ready!</td>
+          <ng-template #notReady>
+            <td class="tileMain">Not ready!</td>
+          </ng-template>
+        </tr>
+      </table>
+    </summary>
+    <table class="tblSecondary">
+      <tr class="trTitle">
+        <th class="tileSecondary" class="article">Article</th>
+        <th class="tileSecondary" class="quantity">Quantity</th>
+      </tr>
+      <tr *ngFor="let orderContent of order.orderContents">
+        <td>
+          <table>
+            <tr class="trTitle">
+              <th>Name tag</th>
+              <th>Price</th>
+              <th>Pricing type</th>
+              <th>Category</th>
+              <th>Brand</th>
+            </tr>
+            <tr class="articleDetails">
+              <td class="tdSecondary" id="nametag">{{orderContent.article.nametag}}</td>
+              <td class="tdSecondary" id="price">{{orderContent.article.price}}</td>
+              <td class="tdSecondary" id="pricingType">{{orderContent.article.pricingType}}</td>
+              <td class="tdSecondary" id="category">{{orderContent.article.category.name}}</td>
+              <td class="tdSecondary" id="brand">{{orderContent.article.brand.name}}</td>
+            </tr>
+          </table>
+        </td>
+        <td class="tdSecondary">{{orderContent.quantity}}</td>
+      </tr>
+    </table>
+  </details>
 </div>
 
 <!-- Will be displayed if employees list is empty-->

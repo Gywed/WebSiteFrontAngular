@@ -1,9 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {DtoInputOrder} from "../dtos/dto-input-order";
-import {DtoOutputOrderDate} from "../dtos/dto-output-order-date";
+import {Component, OnInit} from '@angular/core';
+import {DtoInputOrder} from "../../dtos/dto-input-order";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
-import {DtoInputOrderContent} from "../dtos/dto-input-order-content";
+import {DtoInputOrderContent} from "../../dtos/dto-input-order-content";
 import {Subscription} from "rxjs";
 
 @Component({
@@ -35,13 +34,12 @@ export class OrderListDateComponent implements OnInit {
     this._eventBus.emit(new EmitEvent(Events.emitOrderDate, {
       date : this.form.value.date
     }))
-    this.form.reset();
   }
 
   emitPreparedUpdate(order: DtoInputOrder, orderContent: DtoInputOrderContent) {
     this._eventBus.emit(new EmitEvent(Events.updateOrderContent, {
-      orderid : order.id,
-      articleid : orderContent.article.id,
+      idOrder : order.id,
+      idArticle : orderContent.article.id,
       prepared : !orderContent.prepared
     }));
     orderContent.prepared = !orderContent.prepared

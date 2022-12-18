@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {DtoInputCategory} from "./category-hub/dtos/DtoInputCategory";
+import {DtoInputCategory} from "../dtos/dto-input-category";
 
 @Injectable({
   providedIn: 'root'
