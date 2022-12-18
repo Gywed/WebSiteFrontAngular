@@ -1,6 +1,17 @@
 .list
 {
   text-align: center;
+  margin-left: 28%;
+}
+.fields
+{
+  text-align: left;
+  margin-left: 12%;
+}
+.button
+{
+  text-align: left;
+  margin-left: 12%;
 }
 table, th, td {
   text-align: center;

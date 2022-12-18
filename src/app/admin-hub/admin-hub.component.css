@@ -1,21 +1,12 @@
 .adminBanner
 {
-  margin-top: 10%;
-  text-align: center;
-}
-#empBanner
-{
-  margin-top: 1%;
-  text-align: center;
-}
-#artBanner
-{
-  margin-top: 1%;
+  margin-top: 2%;
   text-align: center;
 }
 .adminWindows
 {
   margin-top: 2%;
+  margin-left: 5%;
   font-size: 200%;
 }
 .btnAdm
