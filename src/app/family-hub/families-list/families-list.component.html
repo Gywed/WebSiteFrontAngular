@@ -1,8 +1,11 @@
 <div class="familyList" >
   <label>Families list</label>
   <div *ngFor="let family of families" >
-    <div class="familyListElement clickable" (click)="familyClicked(family); isAdding=false">
-      {{family.familyName}}
+    <div *ngIf="familyUpdatedId != family.id; else updateFamily" class="familyListElement clickable"
+         (click)="familyClicked(family); isAdding=false" >
+      <span class="editable" (dblclick)="familyDblClicked(family)">
+        {{family.familyName}}
+      </span>
       <span class="deleteFamily" (click)="emitFamilyDeleted(family)">x</span>
     </div>
     <div *ngIf="familySelectedId == family.id" >
@@ -14,19 +17,17 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!isAdding; else addPressed">
+  <div *ngIf="!isAdding; else createFamily">
     <button class="addButton" (click)="isAdding=true; familySelectedId=0">+</button>
   </div>
 </div>
 
 <!-- if "+" button is pressed -->
-<ng-template #addPressed>
-  <div class="addForm">
-    <form [formGroup]="form" (ngSubmit)="emitFamilyCreated()">
+<ng-template #createFamily>
+    <form class="addForm" [formGroup]="createForm" (ngSubmit)="emitFamilyCreated()">
       <input class="addField" type="text" placeholder="family's name" formControlName="familyName">
-      <input type="submit" value="+" class="addFormButton" [disabled]="form.invalid">
+      <input type="submit" value="+" class="addFormButton" [disabled]="createForm.invalid">
     </form>
-  </div>
 </ng-template>
 
 <!-- articles list of the family is empty -->
@@ -34,4 +35,12 @@
   <div class="articleOfFamily">
     There isn't any article in this family
   </div>
+</ng-template>
+
+<!-- family double-clicked -->
+<ng-template #updateFamily>
+  <form class="updateForm" [formGroup]="updateForm" (ngSubmit)="emitFamilyUpdated()">
+    <input class="updateField" type="text" placeholder="family's name" formControlName="familyName">
+    <input type="submit" value="Confirm" class="updateFormButton" [disabled]="updateForm.invalid">
+  </form>
 </ng-template>

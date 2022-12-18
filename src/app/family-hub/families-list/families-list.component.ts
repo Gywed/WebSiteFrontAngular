@@ -7,6 +7,7 @@ import {DtoOutputCreateFamily} from "../dtos/dto-output-create-family";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoOutputDeleteFamily} from "../dtos/dto-output-delete-family";
 import {DtoOutputRemoveFamilyArticle} from "../dtos/dto-output-remove-family-article";
+import {DtoOutputUpdateFamily} from "../dtos/dto-output-update-family";
 
 @Component({
   selector: 'app-families-list',
@@ -14,7 +15,11 @@ import {DtoOutputRemoveFamilyArticle} from "../dtos/dto-output-remove-family-art
   styleUrls: ['./families-list.component.css']
 })
 export class FamiliesListComponent implements OnInit {
-  form: FormGroup = this._fb.group({
+  createForm: FormGroup = this._fb.group({
+    familyName: ["", Validators.required]
+  })
+
+  updateForm: FormGroup = this._fb.group({
     familyName: ["", Validators.required]
   })
 
@@ -22,11 +27,13 @@ export class FamiliesListComponent implements OnInit {
   @Input() articlesInFamily: DtoInputArticle[] = []
   familySelectedId: number = 0
   isAdding: boolean = false
+  familyUpdatedId: number = 0
 
   @Output() familySelected: EventEmitter<DtoInputFamily> = new EventEmitter<DtoInputFamily>()
   @Output() familyCreated: EventEmitter<DtoOutputCreateFamily> = new EventEmitter<DtoOutputCreateFamily>()
   @Output() familyDeleted: EventEmitter<DtoOutputDeleteFamily> = new EventEmitter<DtoOutputDeleteFamily>()
   @Output() articleFromFamilyRemoved: EventEmitter<DtoOutputRemoveFamilyArticle> = new EventEmitter<DtoOutputRemoveFamilyArticle>()
+  @Output() familyUpdated: EventEmitter<DtoOutputUpdateFamily> = new EventEmitter<DtoOutputUpdateFamily>()
 
   constructor(private _eventBus: EventBusService,
               private _fb: FormBuilder) {
@@ -44,14 +51,16 @@ export class FamiliesListComponent implements OnInit {
       this.familySelected.next(family)
       this.familySelectedId = family.id
     }
+    this.familyUpdatedId = 0
+    this.updateForm.reset()
 
   }
 
   emitFamilyCreated() {
     this.familyCreated.next({
-      familyName: this.form.value.familyName
+      familyName: this.createForm.value.familyName
     })
-    this.form.reset()
+    this.createForm.reset()
     this.isAdding = false
   }
 
@@ -61,11 +70,27 @@ export class FamiliesListComponent implements OnInit {
     })
   }
 
-  emitArticleFromFamilyRemoved(article: DtoInputArticle){
+  emitArticleFromFamilyRemoved(article: DtoInputArticle) {
     this.articleFromFamilyRemoved.next({
       idArticle: article.id,
       idFamily: this.familySelectedId
     })
   }
 
+  emitFamilyUpdated() {
+    this.familyUpdated.next({
+      id: this.familyUpdatedId,
+      familyName: this.updateForm.value.familyName
+    })
+    this.updateForm.reset()
+    this.familyUpdatedId = 0
+  }
+
+  familyDblClicked(family: DtoInputFamily) {
+    this.familyUpdatedId=family.id;
+    this.familySelectedId=0;
+    this.updateForm.patchValue({
+      familyName: family.familyName
+    })
+  }
 }
