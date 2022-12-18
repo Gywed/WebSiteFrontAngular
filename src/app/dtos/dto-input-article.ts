@@ -9,4 +9,5 @@ export interface DtoInputArticle {
   stock : number
   category : DtoInputCategory
   brand : DtoInputBrand
+  imagePath : string
 }

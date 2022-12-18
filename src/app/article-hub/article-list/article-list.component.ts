@@ -28,7 +28,8 @@ export class ArticleListComponent implements OnInit {
           idBrand:article.brand.id,
           idCategory:article.category.id,
           price : article.price,
-          pricingType : article.pricingType
+          pricingType : article.pricingType,
+          imagePath : article.imagePath
         },
         quantity : quantity
       };

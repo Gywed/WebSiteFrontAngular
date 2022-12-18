@@ -2,11 +2,13 @@
   <div *ngIf="articles.length; else articleListEmpty">
     <table>
       <tr>
+        <th>Image</th>
         <th>Name</th>
         <th>Price</th>
         <th>Stock</th>
       </tr>
       <tr *ngFor="let article of articles;let i = index">
+        <td><img src="{{article.imagePath}}"></td>
         <td>{{article.nametag}}</td>
         <td>{{article.price}}</td>
         <td>{{article.stock}}</td>
