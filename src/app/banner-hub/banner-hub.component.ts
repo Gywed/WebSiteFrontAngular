@@ -12,9 +12,6 @@ import {LocalService} from "../local.service";
 export class BannerHubComponent implements OnInit {
   LoginActive = true;
   RegisterActive = false;
-  AdminActive = false;
-  ArticleActive = false;
-  OrderActive = false;
   username:string="";
 
   constructor(private _userService : UserService, private _localService : LocalService) { }
@@ -44,30 +41,7 @@ export class BannerHubComponent implements OnInit {
     this.RegisterActive = true;
   }
 
-  clickAdmin() {
-    this.resetDisplay();
-    this.AdminActive = true;
-  }
 
-  clickArticle() {
-    this.resetDisplay();
-    this.ArticleActive = true;
-  }
-
-  clickOrder() {
-    this.resetDisplay();
-    this.OrderActive = true;
-  }
-
-  clickLogo() {
-    this.resetDisplay();
-  }
-
-  resetDisplay() {
-    this.AdminActive = false;
-    this.ArticleActive = false;
-    this.OrderActive = false;
-  }
 
   ngOnInit(): void {
     console.log(this._localService.getData("isLogged"))

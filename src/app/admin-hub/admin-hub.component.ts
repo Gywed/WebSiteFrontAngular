@@ -10,8 +10,6 @@ import {DtoOutputUpdateArticle} from "../article-hub/dtos/dto-output-update-arti
 import {DtoOutputEmployeeFilteringParameters} from "./dtos/dto-output-employee-filtering-parameters";
 import {DtoOutputUpdateUser} from "../user-hub/dtos/dto-output-update-user";
 import {DtoInputCompleteUser} from "../user-hub/dtos/dto-input-complete-user";
-import {DtoInputCategory} from "../dtos/dto-input-category";
-import {DtoInputBrand} from "../dtos/dto-input-brand";
 import {EmitEvent, EventBusService, Events} from "../event-bus.service";
 import {DtoInputUser} from "../user-hub/dtos/dto-input-user";
 
@@ -150,7 +148,8 @@ export class AdminHubComponent implements OnInit {
                     stock : dto.stock,
                     id : dto.id,
                     brand : dto.brand,
-                    category : dto.category
+                    category : dto.category,
+                    imagePath : dto.imagePath
                   };
               }
           }))

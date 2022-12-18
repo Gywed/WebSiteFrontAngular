@@ -1,4 +1,3 @@
-import {DtoOutputBrand} from "../../menubar-hub/shopping-cart-hub/dtos/dto-output-brand";
 import {DtoInputCategory} from "../../dtos/dto-input-category";
 
 export interface DtoOutputUpdateArticle {
@@ -8,5 +7,6 @@ export interface DtoOutputUpdateArticle {
   pricingType : number,
   stock : number,
   category : DtoInputCategory,
-  brand : DtoInputCategory
+  brand : DtoInputCategory,
+  imagePath:string
 }
