@@ -43,7 +43,8 @@ export class FamilyHubComponent implements OnInit {
     let family = this.families.filter(e => e.id == dto.id)
     let index = this.families.indexOf(family[0])
     this._familyService.deleteFamily(dto)
-      .subscribe(()=> this.families.splice(index, 1))
+      .subscribe(()=> {this.families.splice(index, 1)
+      console.log(this.families)})
   }
 
   removeArticleFromFamily(dto: DtoOutputRemoveFamilyArticle){

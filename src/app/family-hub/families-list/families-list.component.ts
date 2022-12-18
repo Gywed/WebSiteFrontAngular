@@ -67,6 +67,8 @@ export class FamiliesListComponent implements OnInit {
   }
 
   emitFamilyDeleted(family: DtoInputFamily) {
+    this.familySelectedId = 0
+    this.articlesInFamily = []
     this.familyDeleted.next({
       id: family.id
     })
