@@ -8,6 +8,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoOutputDeleteFamily} from "../dtos/dto-output-delete-family";
 import {DtoOutputRemoveFamilyArticle} from "../dtos/dto-output-remove-family-article";
 import {DtoOutputUpdateFamily} from "../dtos/dto-output-update-family";
+import {DtoOutputAddFamilyArticle} from "../dtos/dto-output-add-family-article";
 
 @Component({
   selector: 'app-families-list',
@@ -34,6 +35,7 @@ export class FamiliesListComponent implements OnInit {
   @Output() familyDeleted: EventEmitter<DtoOutputDeleteFamily> = new EventEmitter<DtoOutputDeleteFamily>()
   @Output() articleFromFamilyRemoved: EventEmitter<DtoOutputRemoveFamilyArticle> = new EventEmitter<DtoOutputRemoveFamilyArticle>()
   @Output() familyUpdated: EventEmitter<DtoOutputUpdateFamily> = new EventEmitter<DtoOutputUpdateFamily>()
+  @Output() articleAddedToFamily: EventEmitter<DtoOutputAddFamilyArticle> = new EventEmitter<DtoOutputAddFamilyArticle>()
 
   constructor(private _eventBus: EventBusService,
               private _fb: FormBuilder) {
@@ -65,6 +67,8 @@ export class FamiliesListComponent implements OnInit {
   }
 
   emitFamilyDeleted(family: DtoInputFamily) {
+    this.familySelectedId = 0
+    this.articlesInFamily = []
     this.familyDeleted.next({
       id: family.id
     })
@@ -92,5 +96,21 @@ export class FamiliesListComponent implements OnInit {
     this.updateForm.patchValue({
       familyName: family.familyName
     })
+  }
+
+  drop($event: DragEvent, family: DtoInputFamily) {
+    let articleId = $event.dataTransfer?.getData("text")
+    if (articleId)
+      this.articleAddedToFamily.next({
+        idArticle: +articleId,
+        idFamily: family.id
+      })
+    //hide articles in family
+    this.familySelectedId = 0
+    this.articlesInFamily = []
+  }
+
+  dragover($event: DragEvent) {
+    $event.preventDefault()
   }
 }

@@ -8,6 +8,7 @@ import {DtoOutputCreateFamily} from "./dtos/dto-output-create-family";
 import {DtoOutputDeleteFamily} from "./dtos/dto-output-delete-family";
 import {DtoOutputRemoveFamilyArticle} from "./dtos/dto-output-remove-family-article";
 import {DtoOutputUpdateFamily} from "./dtos/dto-output-update-family";
+import {DtoOutputAddFamilyArticle} from "./dtos/dto-output-add-family-article";
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,9 @@ export class FamilyService {
 
   updateFamily(dto: DtoOutputUpdateFamily):Observable<any>{
     return this._httpClient.put<any>(FamilyService.ENTRY_POINT_FAMILY + "/update", dto)
+  }
+
+  addArticleInFamily(dto: DtoOutputAddFamilyArticle):Observable<DtoOutputAddFamilyArticle>{
+    return this._httpClient.post<DtoOutputAddFamilyArticle>(FamilyService.ENTRY_POINT_FAMILY + "/addArticle", dto)
   }
 }

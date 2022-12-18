@@ -1,6 +1,6 @@
 <div class="familyList" >
   <label>Families list</label>
-  <div *ngFor="let family of families" >
+  <div *ngFor="let family of families" (drop)="drop($event, family)" (dragover)="dragover($event)">
     <div *ngIf="familyUpdatedId != family.id; else updateFamily" class="familyListElement clickable"
          (click)="familyClicked(family); isAdding=false" >
       <span class="editable" (dblclick)="familyDblClicked(family)">
