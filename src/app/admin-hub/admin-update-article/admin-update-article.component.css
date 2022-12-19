@@ -1,33 +1,35 @@
 .form
 {
   text-align: center;
+  float: left;
+  margin-left: 18%;
 }
 .fieldsHeader
 {
-  font-size: 80%;
-  width: 15%;
+  font-size: 100%;
+  width: 20%;
   margin-top: 0.5%;
   background-color: #007a7a;
   color: #f1f1f1;
 }
 .fields
 {
-  font-size: 80%;
-  width: 35%;
+  font-size: 100%;
+  width: 60%;
   margin-top: 0.5%;
 }
 .list
 {
-  font-size: 80%;
-  width: 35.5%;
+  font-size: 100%;
+  width: 60.5%;
   margin-top: 0.5%;
 }
 .btn
 {
-  margin-left: 39%;
+  margin-left: 60%;
   text-align: center;
   font-size: 100%;
-  width: 12%;
+  width: 15%;
 }
 .warning
 {

@@ -1,0 +1,31 @@
+.familyList{
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 20%;
+  height: auto;
+  text-align: center;
+  float: right;
+}
+.familyListElement{
+  border: 1px solid black;
+  border-radius: 5px;
+  width: available;
+  text-align: center;
+  font-size: large;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding-left: 10px;
+}
+.familyListEmpty{
+  width: available;
+  text-align: center;
+  font-size: large;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding-left: 10px;
+}
+.articleOfFamily{
+  text-align: right;
+  margin-right: 10px;
+  font-size: 0.7em;
+}

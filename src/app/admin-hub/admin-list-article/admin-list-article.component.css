@@ -7,13 +7,13 @@
 .fields
 {
   text-align: left;
-  margin-left:3%;
+  margin-left:2%;
   font-size: 70%;
 }
 .button
 {
   text-align: left;
-  margin-left: 5%;
+  margin-left: 31%;
   font-size: 70%;
 }
 table, th, td {
@@ -39,4 +39,8 @@ th, td {
   width: 8%;
   background-color: #007a7a;
   border-radius: 15px;
+}
+
+.draggable{
+  cursor: move;
 }

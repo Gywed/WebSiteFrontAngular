@@ -9,17 +9,18 @@
 .familyList{
   border: 2px solid black;
   border-radius: 5px;
-  width: 20%;
   height: auto;
   text-align: center;
   float: right;
+  width: 25%;
+  margin-right: 4%;
 }
 .familyListElement{
   border: 1px solid black;
   border-radius: 5px;
   width: available;
   text-align: center;
-  font-size: large;
+  font-size: 0.9em;
   margin-bottom: 5px;
   margin-top: 5px;
   padding-left: 10px;
@@ -34,7 +35,7 @@
   cursor: default;
   text-align: right;
   margin-right: 10px;
-  font-size: medium;
+  font-size: 0.7em;
 }
 
 .addButton{

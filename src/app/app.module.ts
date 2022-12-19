@@ -31,6 +31,7 @@ import { UserCreateOrderComponent } from './user-hub/user-create-order/user-crea
 import { FamilyHubComponent } from './family-hub/family-hub.component';
 import { FamiliesListComponent } from './family-hub/families-list/families-list.component';
 import { OrderListTodayComponent } from './order-hub/order-list-today/order-list-today.component';
+import { ArticleListOfFamiliesComponent } from './family-hub/article-list-of-families/article-list-of-families.component';
 import { UserOrderHistoryComponent } from './user-hub/user-order-history/user-order-history.component';
 
 @NgModule({
@@ -62,6 +63,7 @@ import { UserOrderHistoryComponent } from './user-hub/user-order-history/user-or
     FamilyHubComponent,
     FamiliesListComponent,
     OrderListTodayComponent,
+    ArticleListOfFamiliesComponent,
     UserOrderHistoryComponent,
   ],
   imports: [

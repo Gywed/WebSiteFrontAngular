@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-article";
 import {DtoInputCategory} from "../../dtos/dto-input-category";
 import {DtoInputBrand} from "../../dtos/dto-input-brand";
-import {tsCastToAny} from "@angular/compiler-cli/src/ngtsc/typecheck/src/ts_util";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 import {Subscription} from "rxjs";
 import {DtoInputArticle} from "../../dtos/dto-input-article";
@@ -38,7 +36,6 @@ export class AdminUpdateArticleComponent implements OnInit {
     pricingType : ['', Validators.required],
     stock : ['', Validators.required],
   })
-
 
   idCategoryToUpdate = 1;
   idBrandToUpdate = 1;

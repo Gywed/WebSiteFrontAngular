@@ -1,37 +1,42 @@
-<div class="list">
-  <button routerLink="../articleCreate" class="button">Register a new article</button>
-
-  <input class="fields" placeholder="Search by name" [(ngModel)]="nametagToSearch" (ngModelChange)="searchNotifier.next(null)">
-
-  <!--List of articles-->
-  <div *ngIf="articlesInPage.length; else articleListEmpty">
-    <table class="tbl">
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th (click)="sortArticleByStock(this.articlesInPage)">In stock <a [hidden]="sortIncreasingArticleStock">↑</a><a [hidden]="!sortIncreasingArticleStock">↓</a></th>
-        <th>Delete</th>
-      </tr>
-      <tr *ngFor="let article of articlesDisplayed">
-        <td>{{article.nametag}}</td>
-        <td>{{article.price}}</td>
-        <td>{{article.stock}}</td>
-        <td><button (click)="emitDelete(article);searchNotifier.next(null)">X</button></td>
-        <td><button routerLink="../articleUpdate" (click)="clickUpdateArticle(article)">Modify</button></td>
-      </tr>
-    </table>
-
-    <!--Page selector-->
-    <div>
-      <button *ngFor="let page of createPageNumberRange()" (click)="rangeDisplayed=page; changeDisplayedRange(this.articlesInPage)">{{page}}</button>
-    </div>
+<div>
+  <div>
+    <button routerLink="../articleCreate" class="button">Register a new article</button>
+    <input class="fields" placeholder="Search by name" [(ngModel)]="nametagToSearch" (ngModelChange)="searchNotifier.next(null)">
   </div>
 
-  <!-- Will be displayed if articles list is empty-->
-  <ng-template #articleListEmpty>
-    <p [hidden]="searchingByName">You don't have any article. Register a new article.</p>
-    <p [hidden]="!searchingByName">There is no article matching your search.</p>
-  </ng-template>
+  <div class="list">
+
+    <!--List of articles-->
+    <div *ngIf="articlesInPage.length; else articleListEmpty">
+      <table class="tbl">
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th (click)="sortArticleByStock(this.articlesInPage)">In stock <a [hidden]="sortIncreasingArticleStock">↑</a><a [hidden]="!sortIncreasingArticleStock">↓</a></th>
+          <th>Delete</th>
+        </tr>
+        <tr *ngFor="let article of articlesDisplayed" draggable="true" (dragstart)="drag($event, article)" class="draggable">
+          <td>{{article.nametag}}</td>
+          <td>{{article.price}}</td>
+          <td>{{article.stock}}</td>
+          <td><button (click)="emitDelete(article);searchNotifier.next(null)">X</button></td>
+          <td><button routerLink="../articleUpdate" (click)="clickUpdateArticle(article)">Modify</button></td>
+        </tr>
+      </table>
+
+      <!--Page selector-->
+      <div>
+        <button *ngFor="let page of createPageNumberRange()" (click)="rangeDisplayed=page; changeDisplayedRange(this.articlesInPage)">{{page}}</button>
+      </div>
+    </div>
+
+    <!-- Will be displayed if articles list is empty-->
+    <ng-template #articleListEmpty>
+      <p [hidden]="searchingByName">You don't have any article. Register a new article.</p>
+      <p [hidden]="!searchingByName">There is no article matching your search.</p>
+    </ng-template>
+  </div>
+
+  <app-family-hub></app-family-hub>
 </div>
 
-<app-family-hub></app-family-hub>
