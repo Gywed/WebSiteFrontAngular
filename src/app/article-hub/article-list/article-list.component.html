@@ -13,23 +13,25 @@
 
       </div>
       <ng-template #pricingtype>
-        {{article.brand.name}}
-        <br>
-        {{article.nametag}}
-        <br>
-        {{article.price}}€/u
+        <div class="content-article">
+          {{article.brand.name}}
+          <br>
+          {{article.nametag}}
+          <br>
+          {{article.price}}€/u
+        </div>
       </ng-template>
       <div class="add-to-cart">
-        <span class="material-symbols-outlined">
+        <button class="material-symbols-outlined btn-quantity" (click)="remove(i)">
           remove
-        </span>
-        <input type="number" name="quantity" [(ngModel)]="quantity[i]">
-        <span class="material-symbols-outlined">
+        </button>
+        <input type="number" name="quantity" [(ngModel)]="quantity[i]" placeholder="0">
+        <button class="material-symbols-outlined btn-quantity" (click)="add(i)">
           add
-        </span>
+        </button>
         <br>
-        <button (click)="addToCart(article,quantity[i])">
-          Add to cart
+        <button class="material-symbols-outlined" (click)="addToCart(article,quantity[i])">
+          shopping_cart
         </button>
       </div>
     </div>
