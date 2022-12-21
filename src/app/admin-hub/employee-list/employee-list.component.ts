@@ -3,7 +3,6 @@ import {LocalService} from "../../local.service";
 import {DtoInputCompleteUser} from "../../user-hub/dtos/dto-input-complete-user";
 import {debounceTime, Subject} from "rxjs";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
-import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-employee-list',
@@ -25,8 +24,7 @@ export class EmployeeListComponent implements OnInit {
   searchingByName: boolean = false;
 
   constructor(private _localService : LocalService,
-              private _eventBus: EventBusService,
-              public datePipe: DatePipe) { }
+              private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
     this.searchNotifier
@@ -70,4 +68,8 @@ export class EmployeeListComponent implements OnInit {
       .map((n, index) => index + 1);
   }
 
+  getAge(birthdate: string) {
+    let bDate = new Date(birthdate)
+    return Math.floor((Math.abs(Date.now() - bDate.getTime()) / (1000 * 3600 * 24))/365.25);
+  }
 }

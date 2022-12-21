@@ -23,7 +23,7 @@
       <tr *ngFor="let employee of employeesInPage">
         <td >{{employee.surname}}</td>
         <td >{{employee.lastname}}</td>
-        <td >{{datePipe.transform(employee.birthdate, 'dd-MM-yyyy')}}</td>
+        <td >{{getAge(employee.birthdate)}}</td>
         <td >{{employee.email}}</td>
         <td>{{employee.permission}}</td>
         <td><button (click)="emitDelete(employee)">X</button></td>
