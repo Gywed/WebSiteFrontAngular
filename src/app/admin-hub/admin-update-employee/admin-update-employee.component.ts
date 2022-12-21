@@ -3,6 +3,7 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 import {DtoInputCompleteUser} from "../../user-hub/dtos/dto-input-complete-user";
 import {Subscription} from "rxjs";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-admin-update-employee',
@@ -26,7 +27,8 @@ export class AdminUpdateEmployeeComponent {
   })
 
   constructor(private _fb: FormBuilder,
-              private _eventBus: EventBusService) {
+              private _eventBus: EventBusService,
+              private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
@@ -51,7 +53,7 @@ export class AdminUpdateEmployeeComponent {
     this.form.patchValue({
       surname: data.surname,
       lastname: data.lastname,
-      age: data.birthdate,
+      age: this.datePipe.transform(data.birthdate, 'dd-MM-yyyy'),
       permission: data.permission
     })
   }

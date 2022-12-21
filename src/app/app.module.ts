@@ -33,6 +33,7 @@ import { FamiliesListComponent } from './family-hub/families-list/families-list.
 import { OrderListTodayComponent } from './order-hub/order-list-today/order-list-today.component';
 import { ArticleListOfFamiliesComponent } from './family-hub/article-list-of-families/article-list-of-families.component';
 import { UserOrderHistoryComponent } from './user-hub/user-order-history/user-order-history.component';
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { UserOrderHistoryComponent } from './user-hub/user-order-history/user-or
     provide : HTTP_INTERCEPTORS,
     useClass : InterceptorCredentialInterceptor,
     multi : true
-  }
+  },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

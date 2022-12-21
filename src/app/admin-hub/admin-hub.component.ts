@@ -81,7 +81,7 @@ export class AdminHubComponent implements OnInit {
           if(emp.id == dto.id) {
             this.employeesInPage[this.employeesInPage.indexOf(emp)].surname = dto.surname;
             this.employeesInPage[this.employeesInPage.indexOf(emp)].lastname = dto.lastname;
-            //this.employeesInPage[this.employeesInPage.indexOf(emp)].age = dto.age;
+            this.employeesInPage[this.employeesInPage.indexOf(emp)].birthdate = dto.birthdate;
             this.employeesInPage[this.employeesInPage.indexOf(emp)].permission = dto.permission;
           }
         }))

@@ -3,6 +3,7 @@ import {LocalService} from "../../local.service";
 import {DtoInputCompleteUser} from "../../user-hub/dtos/dto-input-complete-user";
 import {debounceTime, Subject} from "rxjs";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-employee-list',
@@ -24,7 +25,8 @@ export class EmployeeListComponent implements OnInit {
   searchingByName: boolean = false;
 
   constructor(private _localService : LocalService,
-              private _eventBus: EventBusService) { }
+              private _eventBus: EventBusService,
+              public datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.searchNotifier
