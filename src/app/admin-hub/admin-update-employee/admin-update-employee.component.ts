@@ -53,9 +53,15 @@ export class AdminUpdateEmployeeComponent {
     this.form.patchValue({
       surname: data.surname,
       lastname: data.lastname,
-      age: this.datePipe.transform(data.birthdate, 'dd-MM-yyyy'),
+      age: this.datePipe.transform(data.birthdate, 'dd/MM/yyyy'),
       permission: data.permission
     })
+  }
+
+  convertDate(date: string) {
+    let dateParts = date.split("/");
+    dateParts[0] = String(Number(dateParts[0]) + 1);
+    return new Date(dateParts[2] + '/' + dateParts[1] + '/' + dateParts[0]);
   }
 
   emitUpdate() {
@@ -63,7 +69,7 @@ export class AdminUpdateEmployeeComponent {
       id: this.employeeToUpdateId,
       surname: this.form.value.surname,
       lastname: this.form.value.lastname,
-      age: this.form.value.age,
+      birthdate: this.convertDate(this.form.value.age),
       permission: this.form.value.permission
     }))
     this.updated = true;
