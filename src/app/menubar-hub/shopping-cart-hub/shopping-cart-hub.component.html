@@ -1,23 +1,23 @@
-<div *ngIf="orderContent.length;else articlesListEmpty">
-
-  <div *ngFor="let article of orderContent" class="content">
-    <div class="container-article">
-      <div class="image-article">
-        <img src="{{article.article.imagePath}}">
-      </div>
-      <div class="name-article">
-        {{article.article.nametag}}
-      </div>
-      <div class="quantity-article">
-        <input type="number" value="{{article.quantity}}">
+<div *ngIf="orderContent.length;else articlesListEmpty" class="container-cart">
+  <div class="content">
+    <div *ngFor="let article of orderContent">
+      <div class="container-article">
+        <div class="image-article">
+          <img src="{{article.article.imagePath}}">
+        </div>
+        <div class="name-article">
+          {{article.article.nametag}}
+        </div>
+        <div class="quantity-article">
+          <input type="number" value="{{article.quantity}}">
+        </div>
       </div>
     </div>
   </div>
+    <button routerLink="user-create-order" class="btn-show-cart">
+      Show Cart
+    </button>
 
-
-  <button routerLink="user-create-order" >
-    Show Cart
-  </button>
 </div>
 
 
