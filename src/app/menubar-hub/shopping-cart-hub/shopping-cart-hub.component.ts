@@ -23,7 +23,6 @@ export class ShoppingCartHubComponent implements OnInit {
     this.orderContent=this.fetchShoppingCart();
     this.articles=this.fetchArticleList();
 
-    //this.articles =
   }
 
   private fetchShoppingCart():DtoOutputCartContent[]{
@@ -36,7 +35,5 @@ export class ShoppingCartHubComponent implements OnInit {
     return this._shoppingCartService.fetchArticleList();
   }
 
-  showCart() {
 
-  }
 }

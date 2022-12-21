@@ -4,35 +4,37 @@
       <div class="image-article">
         <img src="{{article.imagePath}}">
       </div>
-      <div class="content-article" *ngIf="article.pricingType==0;else pricingtype">
-        {{article.brand.name}}
-        <br>
-        {{article.nametag}}
-        <br>
-        {{article.price}}€ /kg
-
-      </div>
-      <ng-template #pricingtype>
-        <div class="content-article">
+      <div class="container-content-article">
+        <div class="content-article" *ngIf="article.pricingType==0;else pricingtype">
           {{article.brand.name}}
           <br>
           {{article.nametag}}
           <br>
-          {{article.price}}€/u
+          {{article.price}}€ /kg
+
         </div>
-      </ng-template>
-      <div class="add-to-cart">
-        <button class="material-symbols-outlined btn-quantity" (click)="remove(i)">
-          remove
-        </button>
-        <input type="number" name="quantity" [(ngModel)]="quantity[i]" placeholder="0">
-        <button class="material-symbols-outlined btn-quantity" (click)="add(i)">
-          add
-        </button>
-        <br>
-        <button class="material-symbols-outlined" (click)="addToCart(article,quantity[i])">
-          shopping_cart
-        </button>
+        <ng-template #pricingtype>
+          <div class="content-article">
+            {{article.brand.name}}
+            <br>
+            {{article.nametag}}
+            <br>
+            {{article.price}}€/u
+          </div>
+        </ng-template>
+        <div class="add-to-cart">
+          <button class="material-symbols-outlined btn-quantity" (click)="remove(i)">
+            remove
+          </button>
+          <input type="number" name="quantity" [(ngModel)]="quantity[i]" placeholder="0">
+          <button class="material-symbols-outlined btn-quantity" (click)="add(i)">
+            add
+          </button>
+          <br>
+          <button class="material-symbols-outlined shoppingcart" (click)="addToCart(article,quantity[i])">
+            shopping_cart
+          </button>
+        </div>
       </div>
     </div>
 
