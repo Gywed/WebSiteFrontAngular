@@ -16,11 +16,6 @@ export class AdminUpdateArticleComponent implements OnInit {
   updated = false;
 
   id: number = 0;
-  nametag: string = "";
-  price: number = 0;
-  pricingType: number = 0;
-  stock: number = 0;
-  path: string = "";
 
   // liste temporaire pour eviter un bug ou les listes ne changent pas
   tmplistOfCategories: DtoInputCategory[] = []
@@ -114,5 +109,13 @@ export class AdminUpdateArticleComponent implements OnInit {
 
   setPricingType(id: any) {
     this.idPricingTypeToUpdate = id.target.value;
+  }
+
+  getImage() {
+    if (this.form.value.path == "") {
+      return "assets/articles/No-Image-Placeholder.png";
+    } else {
+      return this.form.value.path;
+    }
   }
 }

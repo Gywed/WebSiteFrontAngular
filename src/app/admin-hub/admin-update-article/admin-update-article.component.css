@@ -46,3 +46,18 @@
 {
   color: forestgreen;
 }
+.img {
+  height: 100%;
+  max-height: 250px;
+  width: 100%;
+  max-width: 250px;
+}
+.imgWindow {
+  float: left;
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
+  position: absolute;
+  left: 11%;
+  bottom: 26%;
+}

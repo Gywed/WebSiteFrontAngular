@@ -1,5 +1,9 @@
 <input type="submit" value="Back" class="btnBackToList" routerLink="../articleList">
 
+<div class="imgWindow">
+  <img src="{{getImage()}}" alt="No image" class="img">
+</div>
+
 <form [formGroup]="form" (ngSubmit)="emitUpdate()" class="form">
   <div>
     <input type="text" class="fieldsHeader" value="Name tag" readonly [disabled]="true">
@@ -42,7 +46,7 @@
     </select>
   </div>
   <div>
-    <input type="text" class="fieldsHeader" value="Path of the image" readonly [disabled]="true">
+    <input type="text" class="fieldsHeader" value="Image path" readonly [disabled]="true">
     <input type="text" formControlName="path" class="fields" placeholder="path (optional)">
   </div> <br/>
   <input type="submit" [disabled]="form.invalid" value="Modify" class="btn">
