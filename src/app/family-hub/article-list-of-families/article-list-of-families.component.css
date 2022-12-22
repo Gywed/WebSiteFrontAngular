@@ -5,6 +5,8 @@
   height: auto;
   text-align: center;
   float: right;
+  margin-right: 2%;
+  margin-top: 2.4%;
 }
 .familyListElement{
   border: 1px solid black;
