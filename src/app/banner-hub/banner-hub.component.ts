@@ -26,7 +26,9 @@ export class BannerHubComponent implements OnInit {
   login(dto: DtoOutputLogUser) {
     this._userService.login(dto).subscribe();
     this._localService.saveData("isLogged","logged");
-    window.location.reload();
+    setTimeout(()=>{
+      window.location.reload();
+    },500)
   }
 
   fetchUsernameByEmail()
