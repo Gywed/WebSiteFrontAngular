@@ -92,3 +92,32 @@
   z-index: 1;
   text-align: left;
 }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  float: left;
+}
+
+li {
+  display: table-cell;
+  float: left;
+}
+
+li a {
+  display: block;
+  font-size: larger;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  min-height: 45px;
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: 45px;
+}
+
+li a:hover {
+  background-color: #007a7a;
+}

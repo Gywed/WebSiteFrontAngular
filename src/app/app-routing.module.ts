@@ -21,7 +21,7 @@ import {CanActivateEmployeeGuard} from "./can-activate-employee.guard";
 import {UserOrderHistoryComponent} from "./user-hub/user-order-history/user-order-history.component";
 
 const routes: Routes =[
-  {path: "", component: ArticleHubComponent},
+
   {path: "admin", component: AdminHubComponent, children: [
       {path: "employeeList", component: EmployeeListComponent},
       {path: "employeeCreate", component: EmployeeCreateComponent},
@@ -38,7 +38,8 @@ const routes: Routes =[
       {path: "orderToday", component: OrderListTodayComponent/*,canActivate:[CanActivateEmployeeGuard]*/},
     ]},
   {path:"user-create-order",component:UserCreateOrderComponent},
-  {path:"user-order-history",component:UserOrderHistoryComponent}
+  {path:"user-order-history",component:UserOrderHistoryComponent},
+  {path: "", component: ArticleHubComponent}
 ];
 
 @NgModule({
