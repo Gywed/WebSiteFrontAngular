@@ -17,10 +17,10 @@
   </div>
   <div>
     <input type="text" class="fieldsHeader" value="Pricing type" readonly [disabled]="true">
-    <input type="text" formControlName="pricingType" class="fields" placeholder="type of pricing">
-    <div *ngIf="controls('pricingType')?.dirty && controls('pricingType')?.invalid" class="warning">
-      This information is required!
-    </div>
+    <select class="list">
+      <option (select)="setPricingTypeUnit()" [selected]="idPricingTypeToUpdate == 1">Per unit</option>
+      <option (select)="setPricingTypeWeight()" [selected]="idPricingTypeToUpdate == 0">Per weight</option>
+    </select>
   </div>
   <div>
     <input type="text" class="fieldsHeader" value="Stock" readonly [disabled]="true">

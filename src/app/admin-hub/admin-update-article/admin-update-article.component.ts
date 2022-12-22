@@ -39,7 +39,7 @@ export class AdminUpdateArticleComponent implements OnInit {
 
   idCategoryToUpdate = 1;
   idBrandToUpdate = 1;
-  PricingTypeToUpdate = 1;
+  idPricingTypeToUpdate = 1;
 
   constructor(private _fb: FormBuilder, private _eventBus: EventBusService) { }
 
@@ -55,7 +55,7 @@ export class AdminUpdateArticleComponent implements OnInit {
       this.id = data.id;
       this.idCategoryToUpdate = data.category.id;
       this.idBrandToUpdate = data.brand.id;
-      this.PricingTypeToUpdate = data.pricingType;
+      this.idPricingTypeToUpdate = data.pricingType;
     })
 
     this._eventBus.on(Events.emitfetchCategorie).subscribe((data: any) => {
@@ -88,7 +88,7 @@ export class AdminUpdateArticleComponent implements OnInit {
       id : this.id,
       nametag : this.form.value.nameTag,
       price : this.form.value.price,
-      pricingType : this.form.value.pricingType,
+      pricingType : this.idPricingTypeToUpdate,
       stock : this.form.value.stock,
       category : updateCategory,
       brand : updateBrand
@@ -104,7 +104,11 @@ export class AdminUpdateArticleComponent implements OnInit {
     this.idBrandToUpdate = id.target.value;
   }
 
-  setPricingType(id: number) {
-    this.PricingTypeToUpdate = id;
+  setPricingTypeUnit() {
+    this.idPricingTypeToUpdate = 1;
+  }
+
+  setPricingTypeWeight() {
+    this.idPricingTypeToUpdate = 0;
   }
 }
