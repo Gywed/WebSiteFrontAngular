@@ -1,0 +1,58 @@
+.container{
+  border: solid black 1px;
+  border-radius: 25px;
+  position: fixed;
+  display: block;
+  width:30%;
+  height: 70%;
+  left: 0;
+  right: 0;
+  bottom:0;
+  margin:15% auto 5% auto;
+
+
+}
+.table{
+  margin-top: 5%;
+  position: relative;
+  display: flex;
+  height: 80%;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+
+.image-article{
+  width: 20%;
+  height: 50px;
+  margin-right: 10px;
+
+}
+
+
+.image-article img{
+  max-height: 100%;
+  max-width: 100%;
+  margin:auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: relative;
+}
+
+.create-order{
+  position: relative;
+  display: flex;
+  border: solid 1px black;
+  border-radius: 25px;
+  background-color: darkorange;
+  text-align: center;
+  left: 0;
+  right: 0;
+  font-size: 20px;
+  margin: 2% auto;
+}
+
+
+
