@@ -15,6 +15,7 @@ export class ArticleCreateComponent implements OnInit {
     nameTag : ['', Validators.required],
     price : ['', Validators.required],
     stock : ['', Validators.required],
+    path : [''],
   })
 
   idCategory = 1;
@@ -40,6 +41,10 @@ export class ArticleCreateComponent implements OnInit {
   }
 
   emitArticle() {
+    if (this.form.value.path == "") {
+      this.form.value.path = "assets/articles/No-Image-Placeholder.png";
+    }
+
     this._eventBus.emit(new EmitEvent(Events.createArticle, {
       nametag : this.form.value.nameTag,
       price : this.form.value.price,
@@ -47,7 +52,7 @@ export class ArticleCreateComponent implements OnInit {
       stock : this.form.value.stock,
       idcategory : this.idCategory,
       idbrand : this.idBrand,
-      imagePath : "assets/articles/No-Image-Placeholder.png"
+      imagePath : this.form.value.path
     }))
     this.form.reset();
   }

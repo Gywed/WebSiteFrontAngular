@@ -38,6 +38,10 @@
     <select class="list" (change)="setIdBrand($event)" [selectedIndex]="idBrand - 1">
       <option *ngFor="let bran of listOfBrands" [value]="bran.id">{{bran.name}}</option>
     </select>
+  </div>
+  <div>
+    <input type="text" class="fieldsHeader" value="Path of the image" readonly [disabled]="true">
+    <input type="text" formControlName="path" class="fields" placeholder="path (optional)">
   </div> <br/>
   <input type="submit" [disabled]="form.invalid" value="Register" class="btn">
 </form>
