@@ -104,11 +104,7 @@ export class AdminUpdateArticleComponent implements OnInit {
     this.idBrandToUpdate = id.target.value;
   }
 
-  setPricingTypeUnit() {
-    this.idPricingTypeToUpdate = 1;
-  }
-
-  setPricingTypeWeight() {
-    this.idPricingTypeToUpdate = 0;
+  setPricingType(id: any) {
+    this.idPricingTypeToUpdate = id.target.value;
   }
 }

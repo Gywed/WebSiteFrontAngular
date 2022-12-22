@@ -17,9 +17,9 @@
   </div>
   <div>
     <input type="text" class="fieldsHeader" value="Pricing type" readonly [disabled]="true">
-    <select class="list">
-      <option (select)="setPricingTypeUnit()" [selected]="idPricingTypeToUpdate == 1">Per unit</option>
-      <option (select)="setPricingTypeWeight()" [selected]="idPricingTypeToUpdate == 0">Per weight</option>
+    <select class="list" (change)="setPricingType($event)">
+      <option [value]="1" [selected]="idPricingTypeToUpdate == 1">Per unit</option>
+      <option [value]="0" [selected]="idPricingTypeToUpdate == 0">Per weight</option>
     </select>
   </div>
   <div>

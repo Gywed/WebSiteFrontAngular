@@ -4,5 +4,6 @@ export interface DtoOutputCreateArticle {
   pricingtype : string,
   stock : number,
   idcategory: number,
-  idbrand: number
+  idbrand: number,
+  imagePath : string
 }

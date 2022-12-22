@@ -46,7 +46,8 @@ export class ArticleCreateComponent implements OnInit {
       pricingtype : this.idPricingType,
       stock : this.form.value.stock,
       idcategory : this.idCategory,
-      idbrand : this.idBrand
+      idbrand : this.idBrand,
+      imagePath : "assets/articles/No-Image-Placeholder.png"
     }))
     this.form.reset();
   }
@@ -59,11 +60,7 @@ export class ArticleCreateComponent implements OnInit {
     this.idBrand = id.target.value;
   }
 
-  setPricingTypeUnit() {
-    this.idPricingType = 1;
-  }
-
-  setPricingTypeWeight() {
-    this.idPricingType = 0;
+  setPricingType(id: any) {
+    this.idPricingType = id.target.value;
   }
 }
