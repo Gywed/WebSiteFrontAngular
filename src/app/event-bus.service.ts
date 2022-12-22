@@ -58,8 +58,9 @@ export enum Events {
   articleUpdate,
 
   //CategorieEvent
-  emitfetchCategorie,
-  fetchCategorie,
+  emitFetchCategories,
+  fetchCategories,
+  emitCategory,
 
   //BrandEvent
   emitfetchBranch,
