@@ -20,6 +20,7 @@ export class AdminUpdateArticleComponent implements OnInit {
   price: number = 0;
   pricingType: number = 0;
   stock: number = 0;
+  path: string = "";
 
   // liste temporaire pour eviter un bug ou les listes ne changent pas
   tmplistOfCategories: DtoInputCategory[] = []
@@ -35,6 +36,7 @@ export class AdminUpdateArticleComponent implements OnInit {
     price : ['', Validators.required],
     pricingType : ['', Validators.required],
     stock : ['', Validators.required],
+    path : [''],
   })
 
   idCategoryToUpdate = 1;
@@ -50,6 +52,7 @@ export class AdminUpdateArticleComponent implements OnInit {
         price: data.price,
         pricingType: data.pricingType,
         stock: data.stock,
+        path: data.imagePath,
       });
       this.updated = false
       this.id = data.id;
@@ -78,6 +81,10 @@ export class AdminUpdateArticleComponent implements OnInit {
   }
 
   emitUpdate() {
+    if (this.form.value.path == "") {
+      this.form.value.path = "assets/articles/No-Image-Placeholder.png";
+    }
+
     let updateCategory = this.listOfCategories.find(value => value.id == this.idCategoryToUpdate)
     if (updateCategory == undefined)
       return;
@@ -92,7 +99,7 @@ export class AdminUpdateArticleComponent implements OnInit {
       stock : this.form.value.stock,
       category : updateCategory,
       brand : updateBrand,
-      imagePath : "assets/articles/No-Image-Placeholder.png"
+      imagePath : this.form.value.path
     }));
     this.updated = true;
   }
