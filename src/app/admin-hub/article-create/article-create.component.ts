@@ -16,6 +16,7 @@ export class ArticleCreateComponent implements OnInit {
     price : ['', Validators.required],
     stock : ['', Validators.required],
     path : [''],
+    file : File
   })
 
   idCategory = 1;
@@ -24,6 +25,8 @@ export class ArticleCreateComponent implements OnInit {
 
   listOfCategories: DtoInputCategory[] = []
   listOfBrands: DtoInputBrand[] = []
+  selectedFiles: File | undefined
+  imageString : String = ""
 
   constructor(private _fb: FormBuilder, private _eventBus: EventBusService) { }
 
@@ -45,7 +48,8 @@ export class ArticleCreateComponent implements OnInit {
       this.form.value.path = "assets/articles/No-Image-Placeholder.png";
     }
 
-    this._eventBus.emit(new EmitEvent(Events.createArticle, {
+    this._eventBus.emit(new EmitEvent(Events.createArticle,
+      {
       nametag : this.form.value.nameTag,
       price : this.form.value.price,
       pricingtype : this.idPricingType,
@@ -67,5 +71,14 @@ export class ArticleCreateComponent implements OnInit {
 
   setPricingType(id: any) {
     this.idPricingType = id.target.value;
+  }
+
+  onFileSelected($event: Event) {
+    if (this.form.value.file != undefined) {
+      const fileReader = new FileReader()
+      fileReader.readAsText(this.form.value.file,'utf-8')
+      this.imageString = fileReader.result as String
+      console.log(this.imageString);
+    }
   }
 }

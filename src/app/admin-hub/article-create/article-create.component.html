@@ -40,8 +40,8 @@
     </select>
   </div>
   <div>
-    <input type="text" class="fieldsHeader" value="Image path" readonly [disabled]="true">
-    <input type="text" formControlName="path" class="fields" placeholder="path (optional)">
+    <input type="text" class="fieldsHeader" value="Image" readonly [disabled]="true">
+    <input type="file" formControlName="file" [(ngModel)]="selectedFiles" (change)="onFileSelected($event)" accept="image/jpeg">
   </div> <br/>
   <input type="submit" [disabled]="form.invalid" value="Register" class="btn">
 </form>
