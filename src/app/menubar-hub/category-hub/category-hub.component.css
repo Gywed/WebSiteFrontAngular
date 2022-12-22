@@ -1,4 +1,27 @@
 .content{
   margin-top: 0;
   margin-bottom: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top:0;
+}
+
+
+
+.btn-category{
+  border:none;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top:0;
+  background-color: white;
+
+}
+
+.content:hover,.content:hover button{
+  background-color: #aaaaaa;
 }

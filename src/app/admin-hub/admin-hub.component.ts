@@ -41,7 +41,7 @@ export class AdminHubComponent implements OnInit {
     this._eventBus.on(Events.articleUpdate).subscribe((data: DtoOutputUpdateArticle) => this.updateArticle(data))
 
     //categorie events
-    this._eventBus.on(Events.fetchCategorie).subscribe(() => this.fetchAllCategories())
+    this._eventBus.on(Events.fetchCategories).subscribe(() => this.fetchAllCategories())
 
     //brand events
     this._eventBus.on(Events.fetchBrand).subscribe(() => this.fetchAllBrands())
@@ -113,7 +113,7 @@ export class AdminHubComponent implements OnInit {
 
   fetchAllCategories(){
     this._adminService.fetchAllCategories().subscribe(listOfCategories=> {
-      this._eventBus.emit(new EmitEvent(Events.emitfetchCategorie, {
+      this._eventBus.emit(new EmitEvent(Events.emitFetchCategories, {
         categories: listOfCategories
       }))
     })

@@ -38,4 +38,23 @@ export class ArticleListComponent implements OnInit {
 
   }
 
+  add(i: number) {
+
+    if(!this.quantity[i])
+    {
+      this.quantity[i]=1;
+    }
+    else
+      if(this.quantity[i]<99)
+        this.quantity[i]++;
+  }
+
+  remove(i:number){
+    if(this.quantity[i]>=1)
+    {
+      this.quantity[i]--;
+    }
+    else
+      this.quantity[i]=0;
+  }
 }

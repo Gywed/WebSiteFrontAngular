@@ -39,7 +39,7 @@ export class AdminListArticleComponent implements OnInit {
     })
     this.emitFilter()
     this.sortArticleByStock(this.articlesInPage)
-    this._eventBus.emit(new EmitEvent(Events.fetchCategorie))
+    this._eventBus.emit(new EmitEvent(Events.fetchCategories))
     this._eventBus.emit(new EmitEvent(Events.fetchBrand))
   }
 
