@@ -47,7 +47,7 @@ export class AdminUpdateArticleComponent implements OnInit {
         price: data.price,
         pricingType: data.pricingType,
         stock: data.stock,
-        path: data.imagePath,
+        path: data.imageData,
       });
       this.updated = false
       this.id = data.id;

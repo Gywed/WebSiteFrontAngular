@@ -3,5 +3,6 @@ export interface DtoInputUser {
   surname : string,
   lastname : string,
   email : string,
-  age : number
+  age : number,
+  isLogged : boolean
 }

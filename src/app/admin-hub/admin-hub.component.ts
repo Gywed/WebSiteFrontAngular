@@ -149,7 +149,7 @@ export class AdminHubComponent implements OnInit {
                     id : dto.id,
                     brand : dto.brand,
                     category : dto.category,
-                    imagePath : dto.imagePath
+                    imageData : dto.imageData
                   };
               }
           }))

@@ -2,7 +2,7 @@
   <div *ngIf="articles.length; else articleListEmpty">
     <div *ngFor="let article of articles;let i = index" class="container-article">
       <div class="image-article">
-        <img src="{{article.imagePath}}">
+        <img [src]="article.imageData">
       </div>
       <div class="container-content-article">
         <div class="content-article" *ngIf="article.pricingType==0;else pricingtype">
