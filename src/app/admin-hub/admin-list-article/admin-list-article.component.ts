@@ -88,4 +88,14 @@ export class AdminListArticleComponent implements OnInit {
   drag($event: DragEvent, article: DtoInputArticle) {
     $event.dataTransfer?.setData("text", article.id.toString())
   }
+
+  getPricingTypeString(pt: number) {
+    if (pt == 0) {
+      return " €/kg";
+    }
+    if (pt == 1) {
+      return  " €/u";
+    }
+    return "";
+  }
 }

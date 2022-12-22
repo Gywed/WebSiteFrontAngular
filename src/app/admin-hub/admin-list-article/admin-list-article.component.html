@@ -17,7 +17,7 @@
         </tr>
         <tr *ngFor="let article of articlesDisplayed" draggable="true" (dragstart)="drag($event, article)" class="draggable">
           <td>{{article.nametag}}</td>
-          <td>{{article.price}}</td>
+          <td>{{article.price + getPricingTypeString(article.pricingType)}}</td>
           <td>{{article.stock}}</td>
           <td><button (click)="emitDelete(article);searchNotifier.next(null)">X</button></td>
           <td><button routerLink="../articleUpdate" (click)="clickUpdateArticle(article)">Modify</button></td>
