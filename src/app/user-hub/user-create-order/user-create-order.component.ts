@@ -14,12 +14,16 @@ export class UserCreateOrderComponent implements OnInit {
   cartContent:DtoOutputCartContent[]=[];
   orderContent:DtoOutputOrder[]=[];
   date:string="";
+  total:number=0;
 
   constructor(private _shoppingCartService: ShoppingCartService,private _orderService:OrderService) { }
 
   ngOnInit(): void {
     this.cartContent=this.fetchShoppingCart();
-
+    for(let article of this.cartContent){
+      this.total+=article.article.price*article.quantity;
+    }
+    this.total = Math.round(this.total*100)/100;
   }
 
   private fetchShoppingCart():DtoOutputCartContent[]{
