@@ -21,4 +21,8 @@ export class ArticleService {
     return this._httpClient.get<DtoInputArticle>(`${ArticleService.ENTRY_POINT}/${id}`);
   }
 
+  fetchArticleByCategory(idcategory:number):Observable<DtoInputArticle[]>{
+    return this._httpClient.get<DtoInputArticle[]>(`${ArticleService.ENTRY_POINT}/categories/${idcategory}`);
+  }
+
 }
