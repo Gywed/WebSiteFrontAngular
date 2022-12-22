@@ -1,8 +1,47 @@
-#btnBackToList {
+.list
+{
+  text-align: center;
+  float: left;
   margin-left: 20%;
-  margin-bottom: 2%;
+}
+.fields
+{
+  text-align: left;
+  margin-left:2%;
+  font-size: 60%;
+  width: 15%;
+}
+.button
+{
+  margin-left: 0;
+  text-align: left;
+  font-size: 60%;
+}
+.labl
+{
   font-size: 80%;
-  width: 8%;
-  background-color: #007a7a;
-  border-radius: 15px;
+  margin-left: 2%;
+}
+.listOfEmployee
+{
+  margin-left: 6%;
+}
+table, th, td {
+  text-align: center;
+  border: 1px solid;
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  min-width: 80px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+th {
+  background-color: #009879;
+  color: #ffffff;
+}
+th, td {
+  padding: 12px 15px;
+}
+.draggable{
+  cursor: move;
 }

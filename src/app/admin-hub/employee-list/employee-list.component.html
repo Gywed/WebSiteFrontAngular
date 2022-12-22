@@ -1,9 +1,11 @@
-<button routerLink="../employeeCreate">Register a new employee</button>
 <div class="list" [hidden]="updateEmployeeClick">
+
+  <button class="button" routerLink="../employeeCreate">Register a new employee</button>
+
   <!-- filtering by surname and lastname -->
-  <label>Search an employee : </label>
+  <label class="labl">Search an employee : </label>
   <input class="fields" type="text" placeholder="surname" [(ngModel)]="surname" (ngModelChange)="nbPage=1; searchNotifier.next(null)">
-  <input class="fileds" type="text" placeholder="lastname" [(ngModel)]="lastname" (ngModelChange)="nbPage=1; searchNotifier.next(null)">
+  <input class="fields" type="text" placeholder="lastname" [(ngModel)]="lastname" (ngModelChange)="nbPage=1; searchNotifier.next(null)">
   <!--Select the number of elements by page-->
   <select [(ngModel)]="nbElementsByPage" (ngModelChange)="nbPage=1; emitPaginationChanged()">
     <option [ngValue]="10" >10</option>
@@ -11,7 +13,7 @@
     <option [ngValue]="50" >50</option>
   </select>
   <!--List of employees-->
-  <div *ngIf="employeesInPage.length; else employeeListEmpty">
+  <div *ngIf="employeesInPage.length; else employeeListEmpty" class="listOfEmployee">
     <table>
       <tr>
         <th>Surname</th>
