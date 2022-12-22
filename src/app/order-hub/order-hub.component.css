@@ -1,20 +1,3 @@
-.order
-{
-  text-align: center;
-  font-size: 200%;
-}
-
-.orderBanner
-{
-  text-align: center;
-}
-
-.btnOrd
-{
-  font-size: 160%;
-  margin-right: 1%;
-  margin-top: 0.5%;
-  background-color: #007a7a;
-  border-radius: 15px;
-  width: 15%;
+.OrderPanel{
+  margin-top: 10%;
 }

@@ -86,5 +86,6 @@ export class OrderHubComponent implements OnInit {
     this.emitOrderDateSub?.unsubscribe()
     this.updateOrderContentSub?.unsubscribe()
     this.emitUserSub?.unsubscribe()
+    this._eventBus.emit(new EmitEvent(Events.inOrderHubChanged, false))
   }
 }

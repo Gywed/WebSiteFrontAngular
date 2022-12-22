@@ -1,29 +1,4 @@
-
-<div class="orderBanner">
-  <button class="btnOrd"
-          routerLink="orderFiltered">
-    Filter Order
-  </button>
-
-  <button class="btnOrd"
-          routerLink="orderDate">
-    Order by Date
-  </button>
-
-  <button class="btnOrd"
-          routerLink="orderToday">
-    Today's orders
-  </button>
-
-  <button class="btnOrd"
-          routerLink="orderCategory">
-    Order by Category
-  </button>
-
-  <button class="btnOrd"
-          routerLink="orderUser">
-    Order of the user
-  </button>
+<div class="OrderPanel">
+  <router-outlet></router-outlet>
 </div>
 
-<router-outlet></router-outlet>

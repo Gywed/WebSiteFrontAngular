@@ -3,13 +3,11 @@
 <!--      <div class="dropdown-content-category" #category_content>-->
 <!--        <app-category-hub></app-category-hub>-->
 <!--      </div>-->
-  <div>
-    <ul>
-      <li><a routerLink="order">Orders</a></li>
-      <li><a>Manage articles</a></li>
-      <li><a>Manage employees</a></li>
-    </ul>
-  </div>
+  <ul *ngIf="!inOrderHub;else orderNavBar">
+    <li *ngIf="isEmployee"><a routerLink="order/orderToday" (click)="inOrderHub = true">Orders</a></li>
+    <li *ngIf="isAdmin"><a routerLink="admin/articleList">Manage articles</a></li>
+    <li *ngIf="isAdmin"><a routerLink="admin/employeeList">Manage employees</a></li>
+  </ul>
 
   <div class="dropdown-order">
     <button class="material-symbols-outlined shoppingcart dropbtn-cart" (click)="showDropdownShoppingCart(cart_content)">
@@ -21,3 +19,15 @@
   </div>
 
 </div>
+
+<ng-template #orderNavBar>
+  <div>
+    <ul>
+      <li *ngIf="isEmployee"><a routerLink="order/orderFiltered">Filter orders</a></li>
+      <li *ngIf="isAdmin"><a routerLink="order/orderDate">Orders by date</a></li>
+      <li *ngIf="isAdmin"><a routerLink="order/orderToday">Today's orders</a></li>
+      <li *ngIf="isAdmin"><a routerLink="order/orderCategory">Orders by categories</a></li>
+      <li *ngIf="isAdmin"><a routerLink="order/orderUser">Orders of the user</a></li>
+    </ul>
+  </div>
+</ng-template>

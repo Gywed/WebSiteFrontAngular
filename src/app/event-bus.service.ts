@@ -64,5 +64,8 @@ export enum Events {
 
   //BrandEvent
   emitfetchBranch,
-  fetchBrand
+  fetchBrand,
+
+  //MenuBar
+  inOrderHubChanged
 }
