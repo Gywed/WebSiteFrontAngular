@@ -91,7 +91,8 @@ export class AdminUpdateArticleComponent implements OnInit {
       pricingType : this.idPricingTypeToUpdate,
       stock : this.form.value.stock,
       category : updateCategory,
-      brand : updateBrand
+      brand : updateBrand,
+      imagePath : "assets/articles/No-Image-Placeholder.png"
     }));
     this.updated = true;
   }
