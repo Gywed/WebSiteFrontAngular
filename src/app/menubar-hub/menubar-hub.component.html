@@ -23,11 +23,11 @@
 <ng-template #orderNavBar>
   <div>
     <ul>
-      <li *ngIf="isEmployee"><a routerLink="order/orderFiltered">Filter orders</a></li>
-      <li *ngIf="isAdmin"><a routerLink="order/orderDate">Orders by date</a></li>
-      <li *ngIf="isAdmin"><a routerLink="order/orderToday">Today's orders</a></li>
-      <li *ngIf="isAdmin"><a routerLink="order/orderCategory">Orders by categories</a></li>
-      <li *ngIf="isAdmin"><a routerLink="order/orderUser">Orders of the user</a></li>
+      <li><a routerLink="order/orderFiltered">Filter orders</a></li>
+      <li><a routerLink="order/orderDate">Orders by date</a></li>
+      <li><a routerLink="order/orderToday">Today's orders</a></li>
+      <li><a routerLink="order/orderCategory">Orders by categories</a></li>
+      <li><a routerLink="order/orderUser">Orders of the user</a></li>
     </ul>
   </div>
 </ng-template>

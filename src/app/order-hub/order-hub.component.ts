@@ -38,6 +38,7 @@ export class OrderHubComponent implements OnInit {
     this.emitUserSub = this._eventBus.on(Events.emitUser).subscribe(() => this.fetchOrderByUserId())
     this.updateOrderContentSub = this._eventBus.on(Events.updateOrderContent).subscribe((orders :  DtoOutputUpdateOrdercontent) => this.updateOrderContent(orders))
     this.emitTodayOrderRequestSub = this._eventBus.on(Events.emitTodayOrderRequest).subscribe(() => this.fetchTodayOrders())
+    this._eventBus.emit(new EmitEvent(Events.inOrderHubChanged, true))
   }
 
   fetchOrderByUserId(){
