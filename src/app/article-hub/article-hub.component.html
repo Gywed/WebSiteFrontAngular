@@ -1,7 +1,10 @@
 <div class="window">
+  <div class="dropdown-content-category" #category_content>
+    <app-category-hub></app-category-hub>
+  </div>
 
-
-  <app-article-list [articles]="articles"></app-article-list>
-
+  <div class="content">
+    <app-article-list [articles]="articles"></app-article-list>
+  </div>
 </div>
 

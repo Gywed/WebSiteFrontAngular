@@ -22,7 +22,7 @@ export class ArticleService {
   }
 
   fetchArticleByCategory(idcategory:number):Observable<DtoInputArticle[]>{
-    return this._httpClient.get<DtoInputArticle[]>(`${ArticleService.ENTRY_POINT}/categories/${idcategory}`);
+    return this._httpClient.get<DtoInputArticle[]>(`${ArticleService.ENTRY_POINT}/category/${idcategory}`);
   }
 
 }

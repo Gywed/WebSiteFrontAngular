@@ -1,11 +1,31 @@
-.window
+.window{
+  position: relative;
+}
+.content
 {
+  display: flex;
+  position: relative;
   text-align: center;
   margin-top: 10%;
   margin-left: 20%;
 }
-#searchField
-{
-  font-size: 200%;
-  width: 30%;
+
+.dropdown-content-category{
+  position: fixed;
+  display: block;
+  top: 0;
+  margin-top: 8.2%;
+  bottom: 0;
+
+
+  width: 20%;
+  background-color: #f9f9f9;
+  min-width: 300px;
+  float:left;
+  left :0;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 0;
+  overflow-y: scroll;
+  bottom:0;
+  user-select: none;
 }
