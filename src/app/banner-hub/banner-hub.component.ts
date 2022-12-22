@@ -3,6 +3,7 @@ import {UserService} from "../user-hub/user.service";
 import {DtoOutputCreateUser} from "../user-hub/dtos/dto-output-create-user";
 import {DtoOutputLogUser} from "../user-hub/dtos/dto-output-log-user";
 import {LocalService} from "../local.service";
+import {EmitEvent, EventBusService, Events} from "../event-bus.service";
 
 @Component({
   selector: 'app-banner-hub',
@@ -14,7 +15,9 @@ export class BannerHubComponent implements OnInit {
   RegisterActive = false;
   username:string="";
 
-  constructor(private _userService : UserService, private _localService : LocalService) { }
+  constructor(private _userService : UserService,
+              private _localService : LocalService,
+              private _eventBus: EventBusService) { }
 
   createClient(dto: DtoOutputCreateUser) {
     this._userService.createClient(dto).subscribe();
@@ -74,5 +77,9 @@ export class BannerHubComponent implements OnInit {
     this._userService.logout().subscribe();
     this._localService.removeData("isLogged");
     window.location.reload();
+  }
+
+  showArticles() {
+    this._eventBus.emit(new EmitEvent(Events.fetchArticle))
   }
 }
