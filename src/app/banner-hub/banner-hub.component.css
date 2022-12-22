@@ -25,6 +25,7 @@ body{
 }
 .divnavbar{
   position: fixed;
+  display: block;
   top: 0;
   width: 100%;
   z-index: 2;
@@ -39,7 +40,7 @@ body{
   align-items: center;
   background-color: #007a7a;
   color: white;
-  height: 80px;
+  height: 11.1%;
 }
 .brand-title{
   font-size: 50px;

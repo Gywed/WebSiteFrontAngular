@@ -1,4 +1,4 @@
-<div *ngIf="orders.length; else orderListEmpty">
+<div *ngIf="orders.length; else orderListEmpty" class="container">
   <details *ngFor="let order of orders">
     <summary>
       <table>

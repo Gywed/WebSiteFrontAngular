@@ -1,23 +1,41 @@
-<div>
-  <table>
-    <tr>
-      <td>Name</td>
-      <td>Quantity</td>
-      <td>Delete</td>
-    </tr>
-    <tr *ngFor="let article of cartContent">
-      <td>{{article.article.nametag}}</td>
-      <td>{{article.quantity}}</td>
-      <td>
-        <button (click)="deleteArticle(article)">
-          X
-        </button>
-      </td>
-    </tr>
-  </table>
-  <p>When do you want to come take your order ?</p>
+<div class="container">
+  <div class="table">
+    <table>
+      <tr>
+        <td>Article</td>
+        <td>Name</td>
+        <td>Quantity</td>
+        <td>Price</td>
+        <td>Total</td>
+        <td>Delete</td>
+      </tr>
+      <tr *ngFor="let article of cartContent;">
+        <td class="image-article"><img src="{{article.article.imagePath}}"></td>
+        <td>{{article.article.nametag}}</td>
+        <td>{{article.quantity}}</td>
+        <td>{{article.article.price}}€</td>
+        <td>{{article.article.price*article.quantity}}€</td>
+        <td>
+          <button (click)="deleteArticle(article)" class="material-symbols-outlined">
+            delete
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{total}}€</td>
+      </tr>
+    </table>
+  </div>
+  When do you want to come take your order ?
+  <br/>
   <input type="datetime-local" [(ngModel)]="date">
-  <button (click)="confirmOrder(cartContent,date)" >
+  <br/>
+  <button (click)="confirmOrder(cartContent,date)" class="create-order">
     Confirm order
   </button>
 </div>
+
