@@ -41,7 +41,7 @@
   </div>
   <div>
     <input type="text" class="fieldsHeader" value="Image" readonly [disabled]="true">
-    <input type="file" formControlName="file" [(ngModel)]="selectedFiles" (change)="onFileSelected($event)" accept="image/jpeg">
+    <input type="file" formControlName="file" [(ngModel)]="selectedFiles" (change)="onFileSelected($event)" accept="image/jpeg" class="list">
   </div> <br/>
   <input type="submit" [disabled]="form.invalid" value="Register" class="btn">
 </form>
