@@ -9,6 +9,7 @@ import {DtoInputArticle} from "../../dtos/dto-input-article";
 export class ShoppingCartService {
   shoppingCartList : DtoOutputCartContent[]=[];
   articles:DtoInputArticle[]=[];
+  total:number=0;
 
   constructor(private _articleService: ArticleService) { }
 
@@ -26,9 +27,9 @@ export class ShoppingCartService {
     if(!stop)
     {
       this.shoppingCartList.push(article);
+      this.total+=article.quantity*article.article.price;
       this.fetchArticleById(article.article.id);
     }
-
   }
  fetchShoppingCartList():DtoOutputCartContent[]{
     return this.shoppingCartList;
@@ -42,5 +43,14 @@ export class ShoppingCartService {
     this._articleService
       .fetchArticleById(id)
       .subscribe(article => this.articles.push(article));
+  }
+
+
+  actualiseTotal() {
+    this.total=0;
+    for(let item of this.shoppingCartList)
+    {
+      this.total+=item.article.price*item.quantity;
+    }
   }
 }
