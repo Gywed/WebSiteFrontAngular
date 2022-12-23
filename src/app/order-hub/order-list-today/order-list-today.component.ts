@@ -39,4 +39,7 @@ export class OrderListTodayComponent implements OnInit {
     this.fetchTodayOrderSub?.unsubscribe()
   }
 
+  sendOrderToHistory(order: DtoInputOrder) {
+    this._eventBus.emit(new EmitEvent(Events.orderToHistorySent, order))
+  }
 }

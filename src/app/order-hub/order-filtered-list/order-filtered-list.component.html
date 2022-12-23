@@ -23,7 +23,9 @@
       <td class="tileMain">{{order.id}}</td>
       <td class="tileMain">{{order.creationDate.slice(0,order.creationDate.search("T"))}}</td>
       <td class="tileMain">{{order.totalOrderPrice}}</td>
-      <td class="tileMain">{{order.isFullyPrepared}}</td>
+      <td class="tileMain">
+        <button [disabled]="!order.isFullyPrepared" (click)="sendOrderToHistory(order)">Retrieved by the client</button>
+      </td>
       <td class="tileMain">
         <table class="tblSecondary">
           <tr class="tileSecondary">
