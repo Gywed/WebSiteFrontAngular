@@ -123,8 +123,12 @@ export class AdminUpdateArticleComponent implements OnInit, AfterViewInit {
       imagePath : this.imagePath,
       imageData : this.originalImageData
     }
-    if (this.imagePath = "new")
+    if (this.imagePath == "new") {
       dto.imageData = this.newImageDataStringToOutput
+    } else {
+      dto.imagePath = "new"
+    }
+    dto.imageData = dto.imageData.slice(dto.imageData.indexOf(",")+1,dto.imageData.length)
 
     this._eventBus.emit(new EmitEvent(Events.articleUpdate, dto));
 
