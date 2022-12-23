@@ -10,7 +10,7 @@
         </tr>
         <tr>
           <td class="tileMain">{{order.id}}</td>
-          <td class="tileMain">{{order.takeDateTime.slice(0,order.takeDateTime.search("T"))}} - {{order.takeDateTime.slice(order.takeDateTime.search("T")+1,order.takeDateTime.length)}}</td>
+          <td class="tileMain">{{order.takeDateTime.replace("T"," ")}}</td>
           <td class="tileMain">{{order.totalOrderPrice}}</td>
           <td class="tileMain" *ngIf="order.isFullyPrepared; else notReady">Ready!</td>
           <ng-template #notReady>
