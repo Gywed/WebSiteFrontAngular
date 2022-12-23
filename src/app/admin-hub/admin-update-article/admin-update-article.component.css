@@ -31,6 +31,13 @@
   font-size: 100%;
   width: 15%;
 }
+
+.btnReset
+{
+  text-align: center;
+  font-size: 100%;
+  width: 30%;
+}
 .btnBackToList
 {
   float: left;

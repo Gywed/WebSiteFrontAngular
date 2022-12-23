@@ -46,8 +46,11 @@
     </select>
   </div>
   <div>
-    <input type="text" class="fieldsHeader" value="Image path" readonly [disabled]="true">
-    <input type="text" formControlName="path" class="fields" placeholder="path (optional)">
+    <input type="text" class="fieldsHeader" value="Image" readonly [disabled]="true">
+    <input type="file" #imageInput accept="image/jpeg" class="list">
+  </div> <br/>
+  <div>
+    <button type="button" class="btnReset" (click)="resetToOriginalImage()">Reset image</button>
   </div> <br/>
   <input type="submit" [disabled]="form.invalid" value="Modify" class="btn">
   <h3 [hidden]="!updated" id="validation">Article updated with success</h3>

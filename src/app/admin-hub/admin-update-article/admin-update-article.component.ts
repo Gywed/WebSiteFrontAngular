@@ -1,17 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoInputCategory} from "../../dtos/dto-input-category";
 import {DtoInputBrand} from "../../dtos/dto-input-brand";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 import {Subscription} from "rxjs";
 import {DtoInputArticle} from "../../dtos/dto-input-article";
+import {DtoOutputUpdateArticle} from "../../article-hub/dtos/dto-output-update-article";
 
 @Component({
   selector: 'app-admin-update-article',
   templateUrl: './admin-update-article.component.html',
   styleUrls: ['./admin-update-article.component.css']
 })
-export class AdminUpdateArticleComponent implements OnInit {
+export class AdminUpdateArticleComponent implements OnInit, AfterViewInit {
+  @ViewChild('imageInput', { static: false }) imageInput: ElementRef<HTMLInputElement> | undefined;
   //Flag for the validation message
   updated = false;
 
@@ -31,12 +33,16 @@ export class AdminUpdateArticleComponent implements OnInit {
     price : ['', Validators.required],
     pricingType : ['', Validators.required],
     stock : ['', Validators.required],
-    path : [''],
   })
 
   idCategoryToUpdate = 1;
   idBrandToUpdate = 1;
   idPricingTypeToUpdate = 1;
+  imagePath = "";
+  newImageDataString : string = "";
+  newImageDataStringToOutput : string = "";
+  originalImageData : string = "";
+  browse: string = "Browse...";
 
   constructor(private _fb: FormBuilder, private _eventBus: EventBusService) { }
 
@@ -46,14 +52,14 @@ export class AdminUpdateArticleComponent implements OnInit {
         nameTag: data.nametag,
         price: data.price,
         pricingType: data.pricingType,
-        stock: data.stock,
-        path: data.imageData,
+        stock: data.stock
       });
       this.updated = false
       this.id = data.id;
       this.idCategoryToUpdate = data.category.id;
       this.idBrandToUpdate = data.brand.id;
       this.idPricingTypeToUpdate = data.pricingType;
+      this.originalImageData = data.imageData
     })
 
     this._eventBus.on(Events.emitFetchCategories).subscribe((data: any) => {
@@ -67,6 +73,28 @@ export class AdminUpdateArticleComponent implements OnInit {
     this.listOfBrands = this.tmplistOfBrands
   }
 
+  ngAfterViewInit() {
+    if (this.imageInput != undefined)
+    {
+      this.imageInput.nativeElement.addEventListener('change', () => {
+        if (this.imageInput != undefined) {
+          const images = this.imageInput.nativeElement.files;
+
+          if (images != null)
+          {
+            const fileReader = new FileReader();
+            fileReader.onload = () => {
+              this.newImageDataString = fileReader.result as string;
+              this.newImageDataStringToOutput = this.newImageDataString.slice(this.newImageDataString.indexOf(",")+1,this.newImageDataString.length)
+              this.imagePath = "new"
+            };
+            fileReader.readAsDataURL(images[0]);
+          }
+        }
+      });
+    }
+  }
+
   ngOnDestroy(): void {
     this.emitArticleSubs?.unsubscribe()
   }
@@ -76,17 +104,15 @@ export class AdminUpdateArticleComponent implements OnInit {
   }
 
   emitUpdate() {
-    if (this.form.value.path == "") {
-      this.form.value.path = "assets/articles/No-Image-Placeholder.png";
-    }
-
     let updateCategory = this.listOfCategories.find(value => value.id == this.idCategoryToUpdate)
     if (updateCategory == undefined)
       return;
     let updateBrand = this.listOfBrands.find(value => value.id == this.idBrandToUpdate)
     if (updateBrand == undefined)
       return;
-    this._eventBus.emit(new EmitEvent(Events.articleUpdate, {
+
+    let dto: DtoOutputUpdateArticle;
+    dto = {
       id : this.id,
       nametag : this.form.value.nameTag,
       price : this.form.value.price,
@@ -94,8 +120,14 @@ export class AdminUpdateArticleComponent implements OnInit {
       stock : this.form.value.stock,
       category : updateCategory,
       brand : updateBrand,
-      imagePath : this.form.value.path
-    }));
+      imagePath : this.imagePath,
+      imageData : this.originalImageData
+    }
+    if (this.imagePath = "new")
+      dto.imageData = this.newImageDataStringToOutput
+
+    this._eventBus.emit(new EmitEvent(Events.articleUpdate, dto));
+
     this.updated = true;
   }
 
@@ -112,10 +144,13 @@ export class AdminUpdateArticleComponent implements OnInit {
   }
 
   getImage() {
-    if (this.form.value.path == "") {
-      return "assets/articles/No-Image-Placeholder.png";
-    } else {
-      return this.form.value.path;
-    }
+    if (this.imagePath == "new")
+      return this.newImageDataString;
+
+    return this.originalImageData;
+  }
+
+  resetToOriginalImage() {
+    this.imagePath = ""
   }
 }

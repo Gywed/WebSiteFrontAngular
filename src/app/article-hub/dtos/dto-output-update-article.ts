@@ -8,5 +8,6 @@ export interface DtoOutputUpdateArticle {
   stock : number,
   category : DtoInputCategory,
   brand : DtoInputCategory,
-  imageData:string
+  imagePath : string,
+  imageData : string
 }
