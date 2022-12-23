@@ -4,6 +4,7 @@
 <!--        <app-category-hub></app-category-hub>-->
 <!--      </div>-->
   <ul *ngIf="!inOrderHub;else orderNavBar">
+    <li *ngIf="isClient"><a routerLink="order/orderUser">My orders</a></li>
     <li *ngIf="isEmployee"><a routerLink="order/orderToday" (click)="inOrderHub = true">Orders</a></li>
     <li *ngIf="isAdmin"><a routerLink="admin/articleList">Manage articles</a></li>
     <li *ngIf="isAdmin"><a routerLink="admin/employeeList">Manage employees</a></li>
@@ -27,7 +28,6 @@
       <li><a routerLink="order/orderDate">Orders by date</a></li>
       <li><a routerLink="order/orderToday">Today's orders</a></li>
       <li><a routerLink="order/orderCategory">Orders by categories</a></li>
-      <li><a routerLink="order/orderUser">Orders of the user</a></li>
     </ul>
   </div>
 </ng-template>
