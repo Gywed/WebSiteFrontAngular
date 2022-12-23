@@ -32,7 +32,6 @@ export class OrderHubComponent implements OnInit {
     //Listener
     this.emitOrderFilterSub = this._eventBus.on(Events.emitOrderFilter).subscribe((orders :  DtoOutputFilterOrder) => this.fetchOrderThroughFilter(orders))
     this.emitOrderDateSub = this._eventBus.on(Events.emitOrderDate).subscribe((orders :  DtoOutputOrderDate) => this.fetchOrderByDate(orders))
-    this.emitOrderCategorySub = this._eventBus.on(Events.emitOrderCategory).subscribe((orders :  DtoOutputOrderCategory) => this.fetchOrderByCategory(orders))
     this.emitUserSub = this._eventBus.on(Events.emitUser).subscribe(() => this.fetchOrderByUserId())
     this.updateOrderContentSub = this._eventBus.on(Events.updateOrderContent).subscribe((orders :  DtoOutputUpdateOrdercontent) => this.updateOrderContent(orders))
     this.emitTodayOrderRequestSub = this._eventBus.on(Events.emitTodayOrderRequest).subscribe(() => this.fetchTodayOrders())
@@ -67,13 +66,6 @@ export class OrderHubComponent implements OnInit {
     this._orderService.fetchFilteredOrder(dto).subscribe(orders => {
       this.orders = orders;
       this._eventBus.emit(new EmitEvent(Events.fetchOrderThroughFilter, this.orders))
-    })
-  }
-
-  fetchOrderByCategory(dto: DtoOutputOrderCategory) {
-    this._orderService.fetchOrderByCategory(dto).subscribe(orders => {
-      this.orders = orders
-      this._eventBus.emit(new EmitEvent(Events.fetchOrderByCategory, this.orders))
     })
   }
 
