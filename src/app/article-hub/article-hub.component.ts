@@ -54,6 +54,7 @@ export class ArticleHubComponent implements OnInit {
   ngOnDestroy(): void {
     this.emitCategoryListener?.unsubscribe()
     this.emitFetchArticleListener?.unsubscribe()
+    this.emitShowCategoryListener?.unsubscribe()
   }
 
   private fetchAll(filter: string) {
