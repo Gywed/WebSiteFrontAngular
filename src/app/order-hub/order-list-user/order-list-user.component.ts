@@ -20,6 +20,7 @@ export class OrderListUserComponent implements OnInit {
     this.fetchOrderByUserIdSub = this._eventBus.on(Events.fetchOrderByUserId).
     subscribe(orders => this.orders = orders);
     this.emitUser()
+    this._eventBus.emit(new EmitEvent(Events.inOrderHubChanged, false))
   }
 
   emitUser() {
