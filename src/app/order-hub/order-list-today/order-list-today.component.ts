@@ -3,6 +3,7 @@ import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 import {DtoInputOrder} from "../../dtos/dto-input-order";
 import {Subscription} from "rxjs";
 import {DtoInputOrderContent} from "../../dtos/dto-input-order-content";
+import {DtoOutputDeleteOrder} from "../dtos/dto-output-delete-order";
 
 @Component({
   selector: 'app-order-list-today',
@@ -41,5 +42,12 @@ export class OrderListTodayComponent implements OnInit {
 
   sendOrderToHistory(order: DtoInputOrder) {
     this._eventBus.emit(new EmitEvent(Events.orderToHistorySent, order))
+  }
+
+  cancelOrder(order: DtoInputOrder) {
+    let dto: DtoOutputDeleteOrder = {
+      idOrder: order.id
+    }
+    this._eventBus.emit(new EmitEvent(Events.orderCanceled, dto))
   }
 }
