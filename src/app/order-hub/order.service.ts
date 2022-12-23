@@ -7,6 +7,7 @@ import {Observable} from "rxjs";
 import {DtoOutputFilterOrder} from "./dtos/dto-output-filter-order";
 import {DtoOutputOrderCategory} from "./dtos/dto-output-order-category";
 import {DtoOutputUpdateOrdercontent} from "./dtos/dto-output-update-ordercontent";
+import {DtoOutputOrder} from "../menubar-hub/shopping-cart-hub/dtos/dto-output-order";
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,9 @@ export class OrderService {
   fetchOrderByUserId(): Observable<DtoInputOrder[]>
   {
     return this._httpClient.get<DtoInputOrder[]>(`${OrderService.ENTRY_POINT}/client`);
+  }
+
+  sendOrderToHistory(dto: DtoInputOrder): Observable<DtoInputOrder>{
+    return this._httpClient.post<DtoInputOrder>(OrderService.ENTRY_POINT + "/orderToHistory", {id: dto.id})
   }
 }

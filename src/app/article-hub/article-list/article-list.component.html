@@ -5,22 +5,29 @@
         <img [src]="article.imageData">
       </div>
       <div class="container-content-article">
-        <div class="content-article" *ngIf="article.pricingType==0;else pricingtype">
-          {{article.brand.name}}
-          <br>
-          {{article.nametag}}
-          <br>
-          {{article.price}}€ /kg
-
+        <div *ngIf="article.pricingType==0;else pricingtype">
+          <div class="content-article" >
+            {{article.brand.name}}
+            <br>
+            {{article.nametag}}
+          </div>
+          <div class="price">
+            {{article.price}}€ /kg
+          </div>
         </div>
+
+
         <ng-template #pricingtype>
           <div class="content-article">
             {{article.brand.name}}
             <br>
             {{article.nametag}}
-            <br>
+          </div>
+          <div class="price">
             {{article.price}}€/u
           </div>
+
+
         </ng-template>
         <div class="add-to-cart">
           <button class="material-symbols-outlined btn-quantity" (click)="remove(i)">
@@ -30,10 +37,12 @@
           <button class="material-symbols-outlined btn-quantity" (click)="add(i)">
             add
           </button>
-          <br>
-          <button class="material-symbols-outlined shoppingcart" (click)="addToCart(article,quantity[i])">
-            shopping_cart
-          </button>
+          <div class="btn-add-to-cart">
+            <button class="material-symbols-outlined shoppingcart" (click)="addToCart(article,quantity[i])">
+              shopping_cart
+            </button>
+          </div>
+
         </div>
       </div>
     </div>

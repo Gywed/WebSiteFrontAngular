@@ -14,7 +14,6 @@ import { EmployeeListComponent } from './admin-hub/employee-list/employee-list.c
 import { ArticleHubComponent } from './article-hub/article-hub.component';
 import { ArticleListComponent } from './article-hub/article-list/article-list.component';
 import { OrderHubComponent } from './order-hub/order-hub.component';
-import { OrderListDateComponent } from './order-hub/order-list-date/order-list-date.component';
 import { BannerHubComponent } from './banner-hub/banner-hub.component';
 import { OrderFilteredListComponent } from './order-hub/order-filtered-list/order-filtered-list.component';
 import { MenubarHubComponent } from './menubar-hub/menubar-hub.component';
@@ -23,7 +22,6 @@ import { AdminListArticleComponent } from './admin-hub/admin-list-article/admin-
 import { AdminUpdateArticleComponent } from './admin-hub/admin-update-article/admin-update-article.component';
 import { CategoryHubComponent } from './menubar-hub/category-hub/category-hub.component';
 import { AdminUpdateEmployeeComponent } from './admin-hub/admin-update-employee/admin-update-employee.component';
-import { OrderListCategoryComponent } from './order-hub/order-list-category/order-list-category.component';
 import { ShoppingCartHubComponent } from './menubar-hub/shopping-cart-hub/shopping-cart-hub.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { OrderListUserComponent } from './order-hub/order-list-user/order-list-user.component';
@@ -47,7 +45,6 @@ import {DatePipe} from "@angular/common";
     ArticleHubComponent,
     ArticleListComponent,
     OrderHubComponent,
-    OrderListDateComponent,
     BannerHubComponent,
     OrderFilteredListComponent,
     MenubarHubComponent,
@@ -57,7 +54,6 @@ import {DatePipe} from "@angular/common";
     AdminUpdateEmployeeComponent,
     AdminUpdateArticleComponent,
     CategoryHubComponent,
-    OrderListCategoryComponent,
     ShoppingCartHubComponent,
     OrderListUserComponent,
     UserCreateOrderComponent,

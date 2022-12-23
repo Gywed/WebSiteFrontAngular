@@ -48,6 +48,7 @@ export enum Events {
   fetchOrderByUserId,
   emitTodayOrderRequest,
   fetchTodayOrder,
+  orderToHistorySent,
 
   //ArticleEvent
   fetchArticle,
@@ -62,6 +63,7 @@ export enum Events {
   emitFetchCategories,
   fetchCategories,
   emitCategory,
+  showCategory,
 
   //BrandEvent
   emitfetchBranch,

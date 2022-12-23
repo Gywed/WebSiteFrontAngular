@@ -9,8 +9,6 @@ import {ArticleCreateComponent} from "./admin-hub/article-create/article-create.
 import {AdminUpdateArticleComponent} from "./admin-hub/admin-update-article/admin-update-article.component";
 import {OrderHubComponent} from "./order-hub/order-hub.component";
 import {OrderFilteredListComponent} from "./order-hub/order-filtered-list/order-filtered-list.component";
-import {OrderListDateComponent} from "./order-hub/order-list-date/order-list-date.component";
-import {OrderListCategoryComponent} from "./order-hub/order-list-category/order-list-category.component";
 import {OrderListUserComponent} from "./order-hub/order-list-user/order-list-user.component";
 import {UserCreateOrderComponent} from "./user-hub/user-create-order/user-create-order.component";
 import {ArticleHubComponent} from "./article-hub/article-hub.component";
@@ -32,8 +30,6 @@ const routes: Routes =[
     ]/*,canActivate:[CanActivateAdminGuard],canActivateChild:[CanActivateAdminGuard]*/},
   {path: "order", component: OrderHubComponent, children: [
       {path: "orderFiltered", component: OrderFilteredListComponent/*,canActivate:[CanActivateEmployeeGuard]*/},
-      {path: "orderDate", component: OrderListDateComponent/*,canActivate:[CanActivateEmployeeGuard]*/},
-      {path: "orderCategory", component: OrderListCategoryComponent/*,canActivate:[CanActivateEmployeeGuard]*/},
       {path: "orderUser", component: OrderListUserComponent/*,canActivate:[CanActivateClientGuard]*/},
       {path: "orderToday", component: OrderListTodayComponent/*,canActivate:[CanActivateEmployeeGuard]*/},
     ]},

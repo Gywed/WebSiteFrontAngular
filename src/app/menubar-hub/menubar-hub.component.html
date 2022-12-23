@@ -1,8 +1,10 @@
-
 <div class="menubar">
-<!--      <div class="dropdown-content-category" #category_content>-->
-<!--        <app-category-hub></app-category-hub>-->
-<!--      </div>-->
+      <div class="dropdown-content-category" #category_content>
+        <button class="material-symbols-outlined dropbtn-category" (click)="showCategory()">
+          menu
+        </button>
+      </div>
+
   <ul *ngIf="!inOrderHub;else orderNavBar">
     <li *ngIf="isClient"><a routerLink="order/orderUser">My orders</a></li>
     <li *ngIf="isEmployee"><a routerLink="order/orderToday" (click)="inOrderHub = true">Orders</a></li>
@@ -25,9 +27,7 @@
   <div>
     <ul>
       <li><a routerLink="order/orderFiltered">Filter orders</a></li>
-      <li><a routerLink="order/orderDate">Orders by date</a></li>
       <li><a routerLink="order/orderToday">Today's orders</a></li>
-      <li><a routerLink="order/orderCategory">Orders by categories</a></li>
     </ul>
   </div>
 </ng-template>

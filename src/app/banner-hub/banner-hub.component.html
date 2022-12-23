@@ -16,14 +16,13 @@
     <div *ngIf="username==''; else isLogged">
       <div class="dropdown" >
         <button class="dropbtn" (click)="showDropdown(content)">Log In</button>
-        <div class="dropdown-content" #content style="display: none;">
+        <div class="dropdown-content" #content  style="display: none">
 
           <app-user-create (clientCreated)="createClient($event)" [hidden]="!RegisterActive"></app-user-create>
 
 
           <app-user-login (userLog)="login($event)" [hidden]="!LoginActive"></app-user-login>
 
-          <a href="#">Scan Qr Code</a>
           <div *ngIf="RegisterActive;else logActive">
             <a (click)="clickLogin()" [hidden]="RegisterActive">Log in</a>
           </div>

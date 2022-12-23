@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AppAuthService} from "../app-auth.service";
 import {Subscription} from "rxjs";
-import {EventBusService, Events} from "../event-bus.service";
+import {EmitEvent, EventBusService, Events} from "../event-bus.service";
 
 @Component({
   selector: 'app-menubar-hub',
@@ -14,7 +14,9 @@ export class MenubarHubComponent implements OnInit {
   isClient: boolean = false
   inOrderHub: boolean = false
 
+  CategoryActive:boolean = false
   //Subscription
+  emitShowCategoryListener?:Subscription
   InOrderHubChangedSub?: Subscription
 
   constructor(private _authService: AppAuthService,
@@ -27,19 +29,16 @@ export class MenubarHubComponent implements OnInit {
     this._authService.CheckCookieEmployee().subscribe(bool => this.isEmployee = bool)
     this._authService.CheckCookieClient().subscribe(bool => this.isClient = bool)
     this.InOrderHubChangedSub = this._eventBus.on(Events.inOrderHubChanged).subscribe((bool: boolean) => this.inOrderHub = bool)
+    this.emitShowCategoryListener = this._eventBus.on(Events.showCategory)
+      .subscribe(CategoryActive=>this.CategoryActive=CategoryActive)
   }
 
   ngOnDestroy():void{
     this.InOrderHubChangedSub?.unsubscribe()
+    this.emitShowCategoryListener?.unsubscribe()
   }
 
-  showDropdownCategory(category_content: HTMLDivElement) {
-    if (category_content.style.display == 'none') {
-      category_content.style.display = 'block';
-    } else if (category_content.style.display == 'block') {
-      category_content.style.display = 'none';
-    }
-  }
+
 
   showDropdownShoppingCart(cart_content: HTMLDivElement) {
     if (cart_content.style.display == 'none') {
@@ -47,5 +46,10 @@ export class MenubarHubComponent implements OnInit {
     } else if (cart_content.style.display == 'block') {
       cart_content.style.display = 'none';
     }
+  }
+
+  showCategory() {
+
+    this._eventBus.emit(new EmitEvent(Events.showCategory, !this.CategoryActive));
   }
 }
