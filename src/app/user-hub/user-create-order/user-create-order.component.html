@@ -14,7 +14,7 @@
         <td>{{article.article.nametag}}</td>
         <td>{{article.quantity}}</td>
         <td>{{article.article.price}}€</td>
-        <td>{{article.article.price*article.quantity}}€</td>
+        <td>{{getTotal(article.article.price, article.quantity)}}€</td>
         <td>
           <button (click)="deleteArticle(article)" class="material-symbols-outlined">
             delete

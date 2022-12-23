@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="center-links">
-      <input type="text" placeholder="Which article are you looking for?">
+      <input type="text" placeholder="Which article are you looking for?" [(ngModel)]="nametagToSearch" (ngModelChange)="changeFilter(nametagToSearch)">
     </div>
 
     <div *ngIf="username==''; else isLogged">
