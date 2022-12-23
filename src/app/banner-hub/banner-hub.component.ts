@@ -14,8 +14,6 @@ export class BannerHubComponent implements OnInit {
   LoginActive = true;
   RegisterActive = false;
   username:string="";
-  isMobile: boolean=false;
-  SearchBarActive = false;
 
   constructor(private _userService : UserService,
               private _localService : LocalService,
@@ -61,14 +59,7 @@ export class BannerHubComponent implements OnInit {
 
   }
 
-  getIsMobile(searchBar:HTMLDivElement){
-      if (window.matchMedia("(min-width: 900px)").matches) {
-        searchBar.style.display='block';
-      } else {
-        searchBar.style.display='none';
-      }
 
-  }
 
   showDropdown(content: HTMLDivElement) {
     if(content.style.display=='none'){
@@ -99,12 +90,5 @@ export class BannerHubComponent implements OnInit {
   }
 
 
-  showSearchBar(searchBar:HTMLDivElement) {
-      if(searchBar.style.display=='none'){
-        searchBar.style.display='block';
-      }
-      else if(searchBar.style.display=='block'){
-        searchBar.style.display='none';
-      }
-  }
+
 }

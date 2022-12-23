@@ -9,12 +9,10 @@
         <img src="../../assets/logo/title.png" id="title_img">
       </div>
     </div>
-    <div class="center-links" #searchBar  (resize)="getIsMobile(searchBar)" >
+    <div class="center-links"  >
       <input type="text" placeholder="Which article are you looking for?">
     </div>
-    <span class="material-symbols-outlined search-item" [hidden]="!isMobile"  (click)="showSearchBar(searchBar)">
-      search
-    </span>
+
 
     <div *ngIf="username==''; else isLogged">
       <div class="dropdown" >
