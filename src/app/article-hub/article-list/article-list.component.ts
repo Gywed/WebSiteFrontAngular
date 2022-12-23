@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {DtoInputArticle} from "../../dtos/dto-input-article";
 import {DtoOutputCartContent} from "../../menubar-hub/shopping-cart-hub/dtos/dto-output-cart-content";
 import {ShoppingCartService} from "../../menubar-hub/shopping-cart-hub/shopping-cart.service";
+import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 
 @Component({
   selector: 'app-article-list',
@@ -14,7 +15,8 @@ export class ArticleListComponent implements OnInit {
 
   @Input() filter = "";
 
-  constructor(private _shoppingCartService :ShoppingCartService) { }
+  constructor(private _shoppingCartService :ShoppingCartService,
+              private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
   }
@@ -36,6 +38,10 @@ export class ArticleListComponent implements OnInit {
       };
       this._shoppingCartService.addArticle(articlesCart);
       this.quantity.length = 0;
+      this._eventBus.emit(new EmitEvent(Events.addArticleInCart,{
+        quantity : quantity,
+        articleLength : this._shoppingCartService.articles.length
+      }));
     }
 
   }
