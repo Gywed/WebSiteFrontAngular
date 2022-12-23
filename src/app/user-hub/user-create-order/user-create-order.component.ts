@@ -4,6 +4,7 @@ import {ShoppingCartService} from "../../menubar-hub/shopping-cart-hub/shopping-
 import {DtoOutputCartContent} from "../../menubar-hub/shopping-cart-hub/dtos/dto-output-cart-content";
 import {DtoOutputOrderContent} from "../../menubar-hub/shopping-cart-hub/dtos/dto-output-order-content";
 import {DtoOutputOrder} from "../../menubar-hub/shopping-cart-hub/dtos/dto-output-order";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-create-order',
@@ -16,7 +17,9 @@ export class UserCreateOrderComponent implements OnInit {
   date:string="";
   total:number=0;
 
-  constructor(private _shoppingCartService: ShoppingCartService,private _orderService:OrderService) { }
+  constructor(private _shoppingCartService: ShoppingCartService,
+              private _orderService:OrderService,
+              private _router: Router) { }
 
   ngOnInit(): void {
     this.cartContent=this.fetchShoppingCart();
@@ -50,8 +53,13 @@ export class UserCreateOrderComponent implements OnInit {
         dtosOrderContents:orderContents
       }
       this._orderService.CreateOrder(dto).subscribe(order => this.orderContent.push(order));
+      this._shoppingCartService.shoppingCartList.splice(0, this._shoppingCartService.shoppingCartList.length)
+      this._shoppingCartService.articles.splice(0, this._shoppingCartService.articles.length)
+      this._router.navigate(["order/orderUser"]);
     }
   }
+
+
 
 
   deleteArticle(article: DtoOutputCartContent) {
@@ -65,7 +73,6 @@ export class UserCreateOrderComponent implements OnInit {
   }
 
   getTotal(price: number, quantity: number) {
-    // arrondie le total à deux chiffres après la virgule
     return Math.round((price * quantity) * 100) /100;
   }
 }
