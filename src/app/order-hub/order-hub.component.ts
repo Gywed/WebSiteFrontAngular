@@ -7,6 +7,7 @@ import {DtoOutputOrderCategory} from "./dtos/dto-output-order-category";
 import {DtoOutputUpdateOrdercontent} from "./dtos/dto-output-update-ordercontent";
 import {EmitEvent, EventBusService, Events} from "../event-bus.service";
 import {Subscription} from "rxjs";
+import {DtoOutputDeleteOrder} from "./dtos/dto-output-delete-order";
 
 @Component({
   selector: 'app-order-hub',
@@ -77,6 +78,12 @@ export class OrderHubComponent implements OnInit {
     let order = this.orders.filter(e => e.id == dto.id)
     let index = this.orders.indexOf(order[0])
     this._orderService.sendOrderToHistory(dto).subscribe(()=>this.orders.splice(index, 1))
+  }
+
+  cancelOrder(dto: DtoOutputDeleteOrder){
+    let order = this.orders.filter(e => e.id == dto.idOrder)
+    let index = this.orders.indexOf(order[0])
+    this._orderService.cancelOrder(dto).subscribe(() => this.orders.splice(index, 1))
   }
 
   ngOnDestroy()
