@@ -66,5 +66,8 @@
   border-style: solid;
   position: absolute;
   left: 11%;
-  bottom: 26%;
+  bottom: 37%;
+}
+#window {
+  margin-top: 12%;
 }
