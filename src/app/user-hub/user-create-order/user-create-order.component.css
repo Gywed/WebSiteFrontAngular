@@ -16,9 +16,10 @@
   margin-top: 5%;
   position: relative;
   display: flex;
-  height: 80%;
+  height: 70%;
   width: 100%;
   overflow-y: scroll;
+  margin-bottom: 5%;
 }
 
 
@@ -27,6 +28,9 @@
   height: 50px;
   margin-right: 10px;
 
+}
+.content{
+  display: block;
 }
 
 
@@ -53,6 +57,16 @@
   font-size: 20px;
   margin: 2% auto;
 }
+@media screen and (max-width: 900px){
+  .container{
+    width:80%;
+    height: 70%;
+    margin:-40% auto 5% auto;
+  }
 
+  .create-order{
+    margin: 6% auto;
+  }
+}
 
 

@@ -30,12 +30,14 @@
       </tr>
     </table>
   </div>
-  When do you want to come take your order ?
-  <br/>
-  <input type="datetime-local" [(ngModel)]="date">
-  <br/>
-  <button (click)="confirmOrder(cartContent,date)" class="create-order">
-    Confirm order
-  </button>
+  <div class="content">
+    When do you want to come take your order ?
+    <br/>
+    <input type="datetime-local" [(ngModel)]="date">
+    <br/>
+    <button (click)="confirmOrder(cartContent,date)" class="create-order">
+      Confirm order
+    </button>
+  </div>
 </div>
 
