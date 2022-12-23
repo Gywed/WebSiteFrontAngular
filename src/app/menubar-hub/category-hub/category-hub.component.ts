@@ -11,6 +11,7 @@ import {Subscription} from "rxjs";
 })
 export class CategoryHubComponent implements OnInit {
   categories:DtoInputCategory[]=[]
+  noCategorySelected:DtoInputCategory = {name: "no category", id: -1};
   CategoryActive:boolean = false
   btnStyle: string[] = [];
   //Subscription
@@ -28,15 +29,22 @@ export class CategoryHubComponent implements OnInit {
     this.emitShowCategoryListener?.unsubscribe()
   }
 
-  selectStyle(id: number) {
-    this.resetStyle();
+  select(category: DtoInputCategory) {
+    if (this.btnStyle[category.id] == 'btn-category-selected') {
+      this.resetStyle();
 
-    this.btnStyle[id] = 'btn-category-selected';
+      this.selectCategory(this.noCategorySelected);
+    } else {
+      this.resetStyle();
+
+      this.btnStyle[category.id] = 'btn-category-selected';
+      this.selectCategory(category);
+    }
   }
 
   resetStyle() {
-    for(let i=0;i<this.categories.length;i++) {
-      this.btnStyle[i] = 'btn-category';
+    for(let category of this.categories) {
+      this.btnStyle[category.id] = 'btn-category';
     }
   }
 
@@ -45,8 +53,6 @@ export class CategoryHubComponent implements OnInit {
   }
 
   selectCategory(category: DtoInputCategory) {
-
-
     if (window.matchMedia("(min-width: 900px)").matches) {
       this._eventBus.emit(new EmitEvent(Events.emitCategory, category));
     }
@@ -57,7 +63,6 @@ export class CategoryHubComponent implements OnInit {
         this._eventBus.emit(new EmitEvent(Events.showCategory, !this.CategoryActive));
       },300)
     }
-
   }
 
 
