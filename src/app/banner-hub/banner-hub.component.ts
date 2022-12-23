@@ -53,12 +53,16 @@ export class BannerHubComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     console.log(this._localService.getData("isLogged"))
     if(this._localService.getData("isLogged")=="logged")
     {
       this.fetchUsernameByEmail();
     }
+
+
   }
+
 
 
   showDropdown(content: HTMLDivElement) {
