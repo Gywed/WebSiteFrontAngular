@@ -12,6 +12,7 @@ import {Subscription} from "rxjs";
 export class CategoryHubComponent implements OnInit {
   categories:DtoInputCategory[]=[]
   CategoryActive:boolean = false
+  btnStyle: string[] = [];
   //Subscription
   emitShowCategoryListener?:Subscription
   constructor(private _categoryService: CategoryService,
@@ -25,6 +26,18 @@ export class CategoryHubComponent implements OnInit {
 
   ngOnDestroy():void{
     this.emitShowCategoryListener?.unsubscribe()
+  }
+
+  selectStyle(id: number) {
+    this.resetStyle();
+
+    this.btnStyle[id] = 'btn-category-selected';
+  }
+
+  resetStyle() {
+    for(let i=0;i<this.categories.length;i++) {
+      this.btnStyle[i] = 'btn-category';
+    }
   }
 
   private fetchAll(){
