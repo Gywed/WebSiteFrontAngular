@@ -61,6 +61,7 @@ export enum Events {
   emitFetchCategories,
   fetchCategories,
   emitCategory,
+  showCategory,
 
   //BrandEvent
   emitfetchBranch,

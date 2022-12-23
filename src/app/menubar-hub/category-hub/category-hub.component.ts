@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DtoInputCategory} from "../../dtos/dto-input-category";
 import {CategoryService} from "../category.service";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-category-hub',
@@ -10,12 +11,16 @@ import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 })
 export class CategoryHubComponent implements OnInit {
   categories:DtoInputCategory[]=[]
-
+  CategoryActive:boolean = false
+  //Subscription
+  emitShowCategoryListener?:Subscription
   constructor(private _categoryService: CategoryService,
               private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
     this.fetchAll();
+    this.emitShowCategoryListener = this._eventBus.on(Events.showCategory)
+      .subscribe(CategoryActive=>this.CategoryActive=CategoryActive)
   }
 
   private fetchAll(){
@@ -23,6 +28,13 @@ export class CategoryHubComponent implements OnInit {
   }
 
   selectCategory(category: DtoInputCategory) {
-    this._eventBus.emit(new EmitEvent(Events.emitCategory, category))
+
+    setTimeout(() => {
+      this._eventBus.emit(new EmitEvent(Events.emitCategory, category));
+      this._eventBus.emit(new EmitEvent(Events.showCategory, !this.CategoryActive));
+    },300)
+
   }
+
+
 }
