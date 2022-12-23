@@ -1,6 +1,6 @@
 <div *ngIf="orderContent.length;else articlesListEmpty" class="container-cart">
   <div class="content">
-    <div *ngFor="let article of orderContent">
+    <div *ngFor="let article of orderContent;let i = index">
       <div class="container-article">
         <div class="image-article">
           <img [src]="article.article.imagePath">
@@ -9,7 +9,14 @@
           {{article.article.nametag}}
         </div>
         <div class="quantity-article">
-          <input type="number" value="{{article.quantity}}">
+<!--          <input type="number" value="{{article.quantity}}">-->
+          <button class="material-symbols-outlined btn-quantity" (click)="remove(i)">
+            remove
+          </button>
+          <input type="number" [(ngModel)]="quantity[i]">
+          <button class="material-symbols-outlined btn-quantity" (click)="add(i)">
+            add
+          </button>
         </div>
       </div>
     </div>
