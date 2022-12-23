@@ -59,6 +59,10 @@ export class OrderFilteredListComponent implements OnInit {
   ngOnDestroy(){
     this.fetchOrderThroughFilterSub?.unsubscribe()
   }
+
+  sendOrderToHistory(order: DtoInputOrder) {
+    this._eventBus.emit(new EmitEvent(Events.orderToHistorySent, order))
+  }
 }
 
 
