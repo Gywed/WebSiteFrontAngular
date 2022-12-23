@@ -63,4 +63,9 @@ export class UserCreateOrderComponent implements OnInit {
       }
     }
   }
+
+  getTotal(price: number, quantity: number) {
+    // arrondie le total à deux chiffres après la virgule
+    return Math.round((price * quantity) * 100) /100;
+  }
 }

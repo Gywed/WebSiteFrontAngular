@@ -56,6 +56,7 @@ export enum Events {
   createArticle,
   emitArticle,
   articleUpdate,
+  emitArticleFilterParam,
 
   //CategorieEvent
   emitFetchCategories,
