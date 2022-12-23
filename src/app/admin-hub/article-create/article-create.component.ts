@@ -1,23 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DtoInputCategory} from "../../dtos/dto-input-category";
 import {DtoInputBrand} from "../../dtos/dto-input-brand";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
-import * as Console from "console";
 
 @Component({
   selector: 'app-article-create',
   templateUrl: './article-create.component.html',
   styleUrls: ['./article-create.component.css']
 })
-export class ArticleCreateComponent implements OnInit {
+export class ArticleCreateComponent implements OnInit, AfterViewInit {
+  @ViewChild('imageInput', { static: false }) imageInput: ElementRef<HTMLInputElement> | undefined;
 
   form: FormGroup = this._fb.group({
     nameTag : ['', Validators.required],
     price : ['', Validators.required],
     stock : ['', Validators.required],
-    path : [''],
-    file : File
+    path : ['']
   })
 
   idCategory = 1;
@@ -26,8 +25,8 @@ export class ArticleCreateComponent implements OnInit {
 
   listOfCategories: DtoInputCategory[] = []
   listOfBrands: DtoInputBrand[] = []
-  selectedFiles: File | undefined
-  imageString : String = ""
+  imageDataString : String = ""
+  imagePath : String = ""
 
   constructor(private _fb: FormBuilder, private _eventBus: EventBusService) { }
 
@@ -40,25 +39,46 @@ export class ArticleCreateComponent implements OnInit {
     })
   }
 
+  ngAfterViewInit() {
+    if (this.imageInput != undefined)
+    {
+      this.imageInput.nativeElement.addEventListener('change', (event) => {
+        if (this.imageInput != undefined) {
+          const images = this.imageInput.nativeElement.files;
+
+          if (images != null)
+          {
+            const fileReader = new FileReader();
+            fileReader.onload = (e) => {
+              this.imageDataString = fileReader.result as string;
+              this.imageDataString = this.imageDataString.slice(this.imageDataString.indexOf(",")+1,this.imageDataString.length)
+              this.imagePath = "new"
+            };
+            fileReader.readAsDataURL(images[0]);
+          }
+        }
+      });
+    }
+  }
+
   controls(name: string): AbstractControl | null {
     return this.form.get(name);
   }
 
   emitArticle() {
-    if (this.form.value.path == "") {
-      this.form.value.path = "assets/articles/No-Image-Placeholder.png";
-    }
-
     this._eventBus.emit(new EmitEvent(Events.createArticle,
       {
-      nametag : this.form.value.nameTag,
-      price : this.form.value.price,
-      pricingtype : this.idPricingType,
-      stock : this.form.value.stock,
-      idcategory : this.idCategory,
-      idbrand : this.idBrand,
-      imagePath : this.form.value.path
+        nametag : this.form.value.nameTag,
+        price : this.form.value.price,
+        pricingtype : this.idPricingType,
+        stock : this.form.value.stock,
+        idcategory : this.idCategory,
+        idbrand : this.idBrand,
+        imagePath: this.imagePath,
+        imageData : this.imageDataString
     }))
+    this.imagePath = "";
+    this.imageDataString = "";
     this.form.reset();
   }
 
@@ -72,23 +92,5 @@ export class ArticleCreateComponent implements OnInit {
 
   setPricingType(id: any) {
     this.idPricingType = id.target.value;
-  }
-
-  public fileToBase64(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = error => reject(error);
-    });
-  }
-
-  onFileSelected($event: Event) {
-    if (this.form.value.file != undefined) {
-      console.log($event)
-      this.fileToBase64(this.form.value.file)
-        .then(imageToBase64 => console.log(imageToBase64))
-        .catch(error => console.error(error));
-    }
   }
 }

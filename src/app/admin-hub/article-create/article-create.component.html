@@ -8,7 +8,7 @@
   </div>
   <div>
     <input type="text" class="fieldsHeader" value="Price" readonly [disabled]="true">
-    <input type="text" formControlName="price" class="fields" placeholder="price">
+    <input type="number" formControlName="price" class="fields" placeholder="price">
     <div *ngIf="controls('price')?.dirty && controls('price')?.invalid" class="warning">
       This information is required!
     </div>
@@ -22,7 +22,7 @@
   </div>
   <div>
     <input type="text" class="fieldsHeader" value="Stock" readonly [disabled]="true">
-    <input type="text" formControlName="stock" class="fields" placeholder="number of article in stock">
+    <input type="number" formControlName="stock" class="fields" placeholder="number of article in stock">
     <div *ngIf="controls('stock')?.dirty && controls('stock')?.invalid" class="warning">
       This information is required!
     </div>
@@ -41,7 +41,7 @@
   </div>
   <div>
     <input type="text" class="fieldsHeader" value="Image" readonly [disabled]="true">
-    <input type="file" formControlName="file" [(ngModel)]="selectedFiles" (change)="onFileSelected($event)" accept="image/jpeg">
+    <input type="file" #imageInput accept="image/jpeg">
   </div> <br/>
   <input type="submit" [disabled]="form.invalid" value="Register" class="btn">
 </form>
