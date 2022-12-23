@@ -1,5 +1,5 @@
 <div class="window">
-  <div class="dropdown-content-category" #category_content>
+  <div class="dropdown-content-category" #category_content (resize)="showCategory()" [hidden]="isMobile">
     <app-category-hub></app-category-hub>
   </div>
 

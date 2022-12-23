@@ -49,12 +49,15 @@ input[type=number] {
   left: 0;
   right: 0;
 }
-.content-article{
-  position: absolute;
+
+.content-article, .price{
   bottom: 80px;
   font-size: 20px;
   left: 0;
   right: 0;
+}
+.price{
+  margin-top: 3%;
 }
 .add-to-cart input{
   width: 25px;
@@ -81,7 +84,7 @@ input[type=number] {
 }
 
 .container-content-article{
-  display: flex;
+  display: block;
   position: absolute;
   border-radius: 20px;
   width: 100%;
@@ -95,4 +98,57 @@ input[type=number] {
 }
 .shoppingcart:hover{
   background-color: #ffa73e;
+}
+@media screen and (max-width: 900px){
+  .container-article{
+    border:solid black 1px;
+    border-radius: 20px;
+    position: relative;
+    width: 120px;
+    height: 150px;
+    display: inline-block;
+    margin:5px;
+  }
+
+  .image-article{
+    height: 50%;
+    width: 100%;
+    position: absolute;
+  }
+  .container-article .image-article img{
+    max-width: 80%;
+    max-height: 80%;
+  }
+
+  .add-to-cart{
+    position: relative;
+    display: flex;
+    margin-top: 10%;
+  }
+  .content-article{
+    display: none;
+  }
+
+  .btn-quantity{
+    width: 15px;
+    height: 15px;
+    font-size: 10px ;
+  }
+  .price{
+    font-size: 20px;
+    margin-top: 70%;
+  }
+
+  .shoppingcart{
+    font-size: 16px;
+  }
+
+  .add-to-cart input{
+    width: 15px;
+    height: 14px;
+    font-size: 16px;
+  }
+  .btn-add-to-cart{
+    display: flex;
+  }
 }
