@@ -29,10 +29,17 @@ export class CategoryHubComponent implements OnInit {
 
   selectCategory(category: DtoInputCategory) {
 
-    setTimeout(() => {
+
+    if (window.matchMedia("(min-width: 900px)").matches) {
       this._eventBus.emit(new EmitEvent(Events.emitCategory, category));
-      this._eventBus.emit(new EmitEvent(Events.showCategory, !this.CategoryActive));
-    },300)
+    }
+    else
+    {
+      setTimeout(() => {
+        this._eventBus.emit(new EmitEvent(Events.emitCategory, category));
+        this._eventBus.emit(new EmitEvent(Events.showCategory, !this.CategoryActive));
+      },300)
+    }
 
   }
 
