@@ -4,13 +4,13 @@
       <table>
         <tr class="trTitle">
           <th class="tileMain">N° order</th>
-          <th class="tileMain">Creation date</th>
+          <th class="tileMain">Take date time</th>
           <th class="tileMain">Total of the order</th>
           <th class="tileMain">Ready ?</th>
         </tr>
         <tr>
           <td class="tileMain">{{order.id}}</td>
-          <td class="tileMain">{{order.creationDate.slice(0,order.creationDate.search("T"))}}</td>
+          <td class="tileMain">{{order.takeDateTime.slice(0,order.takeDateTime.search("T"))}} - {{order.takeDateTime.slice(order.takeDateTime.search("T")+1,order.takeDateTime.length)}}</td>
           <td class="tileMain">{{order.totalOrderPrice}}</td>
           <td class="tileMain" *ngIf="order.isFullyPrepared; else notReady">Ready!</td>
           <ng-template #notReady>

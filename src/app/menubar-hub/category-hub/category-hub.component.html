@@ -1,6 +1,6 @@
 <div *ngIf="categories.length;else categoryListEmpty"  >
-  <div *ngFor="let category of categories" class="content" (click)="selectCategory(category)" >
-    <button class="btn-category">{{category.name}}</button>
+  <div *ngFor="let category of categories" class="content" (click)="select(category)">
+    <button [ngClass]="btnStyle[category.id]" class="btn-category">{{category.name}}</button>
   </div>
 </div>
 

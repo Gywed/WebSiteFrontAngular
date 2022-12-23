@@ -17,6 +17,7 @@ export class ArticleHubComponent implements OnInit {
   isMobile: boolean=false;
 
   filter = "";
+  idCategory = -1;
 
   //Subscription
   emitCategoryListener?: Subscription
@@ -29,22 +30,24 @@ export class ArticleHubComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchAll("");
+    this.fetchAll();
 
     this.emitFetchArticleListener = this._eventBus.on(Events.emitArticleFilterParam)
-      .subscribe((data) => this.fetchAll(data));
+      .subscribe((data) => {
+        this.filter = data;
+        this.fetchAll();
+      });
 
     this.emitCategoryListener = this._eventBus.on(Events.emitCategory)
-      .subscribe((data: DtoInputCategory) =>this.fetchArticleByCategory(data.id))
+      .subscribe((data: DtoInputCategory) => {
+        this.idCategory = data.id;
+        this.fetchAll();
+      })
 
     this.emitShowCategoryListener = this._eventBus.on(Events.showCategory)
       .subscribe(CategoryActive=>this.isMobile=CategoryActive)
 
-    if (window.matchMedia("(min-width: 900px)").matches) {
-      this.isMobile=false;
-    }
-    else
-      this.isMobile=true;
+    this.isMobile = !window.matchMedia("(min-width: 900px)").matches;
 
     window.onresize = () => {
       this.isMobile = this.showCategory();
@@ -57,9 +60,33 @@ export class ArticleHubComponent implements OnInit {
     this.emitShowCategoryListener?.unsubscribe()
   }
 
-  private fetchAll(filter: string) {
-    this.filter = filter;
+  private fetchAll() {
+    if (this.idCategory == -1) {
+      this.fetchArticleByFilter(this.filter);
+    } else {
+      this.fetchArticleByCategory(this.filter, this.idCategory);
+    }
+  }
 
+  fetchArticleByCategory(filter: string, idcategory:number){
+    if (filter == "") {
+      this._articleService.fetchArticleByCategory(idcategory).subscribe(listOfArticles=> {
+        this.articles = listOfArticles
+        this._eventBus.emit(new EmitEvent(Events.fetchArticle, {
+          articles: listOfArticles
+        }))
+      })
+    } else {
+      this._articleService.fetchArticleByCategoryAndFilter(filter, idcategory).subscribe(listOfArticles=> {
+        this.articles = listOfArticles
+        this._eventBus.emit(new EmitEvent(Events.fetchArticle, {
+          articles: listOfArticles
+        }))
+      })
+    }
+  }
+
+  fetchArticleByFilter(filter: string){
     if (filter == "") {
       this._articleService.fetchAllArticle().subscribe(listOfArticles=> {
         this.articles = listOfArticles
@@ -77,18 +104,7 @@ export class ArticleHubComponent implements OnInit {
     }
   }
 
-  fetchArticleByCategory(idcategory:number){
-    this._articleService
-      .fetchArticleByCategory(idcategory)
-      .subscribe(articles=>this.articles=articles);
-  }
-
   showCategory():boolean {
-    if (window.matchMedia("(min-width: 900px)").matches) {
-      return false
-    } else {
-      return true
-    }
-
+    return !window.matchMedia("(min-width: 900px)").matches;
   }
 }

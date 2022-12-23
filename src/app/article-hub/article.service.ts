@@ -29,4 +29,7 @@ export class ArticleService {
     return this._httpClient.get<DtoInputArticle[]>(`${ArticleService.ENTRY_POINT}/category/${idcategory}`);
   }
 
+  fetchArticleByCategoryAndFilter(filter: string, idcategory: number): Observable<DtoInputArticle[]>{
+    return this._httpClient.get<DtoInputArticle[]>(`${ArticleService.ENTRY_POINT}/${filter}/${idcategory}`)
+  }
 }

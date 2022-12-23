@@ -7,8 +7,6 @@
   top:0;
 }
 
-
-
 .btn-category{
   border:none;
   font-size: 14px;
@@ -19,7 +17,18 @@
   left: 0;
   top:0;
   background-color: white;
+}
 
+.btn-category-selected{
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top:0;
+  background-color: white;
+  font-weight: bold;
 }
 
 .content:hover,.content:hover button{
