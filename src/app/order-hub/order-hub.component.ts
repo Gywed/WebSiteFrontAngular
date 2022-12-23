@@ -14,11 +14,7 @@ import {Subscription} from "rxjs";
   styleUrls: ['./order-hub.component.css']
 })
 export class OrderHubComponent implements OnInit {
-  ordersDate : DtoInputOrder[] = []
-  ordersToday : DtoInputOrder[] = []
-  ordersFilterred : DtoInputOrder[] = []
-  ordersCategory : DtoInputOrder[] = []
-  ordersUser : DtoInputOrder[] = []
+  orders : DtoInputOrder[] = []
   newPrepared : boolean = false
 
   emitOrderFilterSub? : Subscription;
@@ -48,36 +44,36 @@ export class OrderHubComponent implements OnInit {
 
   fetchOrderByUserId(){
     this._orderService.fetchOrderByUserId().subscribe(orders => {
-      this.ordersUser = orders
-      this._eventBus.emit(new EmitEvent(Events.fetchOrderByUserId, this.ordersUser))
+      this.orders = orders
+      this._eventBus.emit(new EmitEvent(Events.fetchOrderByUserId, this.orders))
     })
   }
 
   fetchOrderByDate(dto: DtoOutputOrderDate) {
     this._orderService.fetchOrderByDate(dto).subscribe(orders => {
-      this.ordersDate = orders
-      this._eventBus.emit(new EmitEvent(Events.fetchOrderByDate, this.ordersDate))
+      this.orders = orders
+      this._eventBus.emit(new EmitEvent(Events.fetchOrderByDate, this.orders))
     })
   }
 
   fetchTodayOrders() {
     this._orderService.fetchOrderByDate({date : new Date().toISOString()}).subscribe(orders => {
-      this.ordersToday = orders
-      this._eventBus.emit(new EmitEvent(Events.fetchTodayOrder, this.ordersToday))
+      this.orders = orders
+      this._eventBus.emit(new EmitEvent(Events.fetchTodayOrder, this.orders))
     })
   }
 
   fetchOrderThroughFilter(dto: DtoOutputFilterOrder) {
     this._orderService.fetchFilteredOrder(dto).subscribe(orders => {
-      this.ordersFilterred = orders;
-      this._eventBus.emit(new EmitEvent(Events.fetchOrderThroughFilter, this.ordersFilterred))
+      this.orders = orders;
+      this._eventBus.emit(new EmitEvent(Events.fetchOrderThroughFilter, this.orders))
     })
   }
 
   fetchOrderByCategory(dto: DtoOutputOrderCategory) {
     this._orderService.fetchOrderByCategory(dto).subscribe(orders => {
-      this.ordersCategory = orders
-      this._eventBus.emit(new EmitEvent(Events.fetchOrderByCategory, this.ordersCategory))
+      this.orders = orders
+      this._eventBus.emit(new EmitEvent(Events.fetchOrderByCategory, this.orders))
     })
   }
 
@@ -86,7 +82,9 @@ export class OrderHubComponent implements OnInit {
   }
 
   sendOrderToHistory(dto: DtoInputOrder){
-    this._orderService.sendOrderToHistory(dto).subscribe()
+    let order = this.orders.filter(e => e.id == dto.id)
+    let index = this.orders.indexOf(order[0])
+    this._orderService.sendOrderToHistory(dto).subscribe(()=>this.orders.splice(index, 1))
   }
 
   ngOnDestroy()
@@ -96,6 +94,7 @@ export class OrderHubComponent implements OnInit {
     this.emitOrderDateSub?.unsubscribe()
     this.updateOrderContentSub?.unsubscribe()
     this.emitUserSub?.unsubscribe()
+    this.orderToHistorySentSub?.unsubscribe()
     this._eventBus.emit(new EmitEvent(Events.inOrderHubChanged, false))
   }
 }
