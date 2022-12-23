@@ -23,6 +23,10 @@ export class CategoryHubComponent implements OnInit {
       .subscribe(CategoryActive=>this.CategoryActive=CategoryActive)
   }
 
+  ngOnDestroy():void{
+    this.emitShowCategoryListener?.unsubscribe()
+  }
+
   private fetchAll(){
     this._categoryService.fetchAllCategories().subscribe(categories=>this.categories=categories);
   }
