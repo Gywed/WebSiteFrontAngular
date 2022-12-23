@@ -35,6 +35,7 @@ export class ArticleListComponent implements OnInit {
         quantity : quantity
       };
       this._shoppingCartService.addArticle(articlesCart);
+      this.quantity.length = 0;
     }
 
   }
