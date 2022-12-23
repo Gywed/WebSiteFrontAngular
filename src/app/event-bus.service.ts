@@ -48,6 +48,7 @@ export enum Events {
   fetchOrderByUserId,
   emitTodayOrderRequest,
   fetchTodayOrder,
+  orderToHistorySent,
 
   //ArticleEvent
   fetchArticle,
