@@ -42,7 +42,8 @@
 
   <!-- Will be displayed if article list is empty-->
   <ng-template #articleListEmpty>
-    <p>There is no article.</p>
+    <p [hidden]="isSearching()">There is no article.</p>
+    <p [hidden]="!isSearching()">There is no article matching your search.</p>
   </ng-template>
 
 </div>

@@ -15,6 +15,8 @@ export class BannerHubComponent implements OnInit {
   RegisterActive = false;
   username:string="";
 
+  nametagToSearch: string = "";
+
   constructor(private _userService : UserService,
               private _localService : LocalService,
               private _eventBus: EventBusService) { }
@@ -83,5 +85,9 @@ export class BannerHubComponent implements OnInit {
 
   showArticles() {
     this._eventBus.emit(new EmitEvent(Events.fetchArticle))
+  }
+
+  changeFilter(value: string) {
+    this._eventBus.emit(new EmitEvent(Events.emitArticleFilterParam, value))
   }
 }

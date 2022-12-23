@@ -12,6 +12,7 @@ export class ArticleListComponent implements OnInit {
   @Input() articles: DtoInputArticle[] = []
   quantity: number[]=[];
 
+  @Input() filter = "";
 
   constructor(private _shoppingCartService :ShoppingCartService) { }
 
@@ -56,5 +57,9 @@ export class ArticleListComponent implements OnInit {
     }
     else
       this.quantity[i]=0;
+  }
+
+  isSearching() {
+    return !(this.filter=="");
   }
 }
