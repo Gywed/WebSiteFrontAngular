@@ -41,8 +41,6 @@ export enum Events {
   emitOrderDate,
   fetchOrderThroughFilter,
   emitOrderFilter,
-  fetchOrderByCategory,
-  emitOrderCategory,
   updateOrderContent,
   emitUser,
   fetchOrderByUserId,
@@ -50,6 +48,7 @@ export enum Events {
   fetchTodayOrder,
   orderToHistorySent,
   actualiseTotal,
+  orderCanceled,
 
   //ArticleEvent
   fetchArticle,

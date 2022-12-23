@@ -64,6 +64,9 @@ export class UserCreateOrderComponent implements OnInit {
       this._orderService.CreateOrder(dto).subscribe(order => this.orderContent.push(order));
       this._shoppingCartService.shoppingCartList.splice(0, this._shoppingCartService.shoppingCartList.length)
       this._shoppingCartService.articles.splice(0, this._shoppingCartService.articles.length)
+      setTimeout(()=>{
+        window.location.reload();
+      },100)
       this._router.navigate(["order/orderUser"]);
     }
   }

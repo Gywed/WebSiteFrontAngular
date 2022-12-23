@@ -4,6 +4,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/form
 import {DtoInputOrderContent} from "../../dtos/dto-input-order-content";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
 import {debounceTime, Subject, Subscription} from "rxjs";
+import {DtoOutputDeleteOrder} from "../dtos/dto-output-delete-order";
 
 @Component({
   selector: 'app-order-filtered-list',
@@ -64,6 +65,13 @@ export class OrderFilteredListComponent implements OnInit {
 
   sendOrderToHistory(order: DtoInputOrder) {
     this._eventBus.emit(new EmitEvent(Events.orderToHistorySent, order))
+  }
+
+  cancelOrder(order: DtoInputOrder) {
+    let dto: DtoOutputDeleteOrder = {
+      idOrder: order.id
+    }
+    this._eventBus.emit(new EmitEvent(Events.orderCanceled, dto))
   }
 }
 

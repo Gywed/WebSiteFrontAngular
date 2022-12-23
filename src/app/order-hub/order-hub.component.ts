@@ -3,10 +3,10 @@ import {DtoOutputOrderDate} from "./dtos/dto-output-order-date";
 import {OrderService} from "./order.service";
 import {DtoInputOrder} from "../dtos/dto-input-order";
 import {DtoOutputFilterOrder} from "./dtos/dto-output-filter-order";
-import {DtoOutputOrderCategory} from "./dtos/dto-output-order-category";
 import {DtoOutputUpdateOrdercontent} from "./dtos/dto-output-update-ordercontent";
 import {EmitEvent, EventBusService, Events} from "../event-bus.service";
 import {Subscription} from "rxjs";
+import {DtoOutputDeleteOrder} from "./dtos/dto-output-delete-order";
 
 @Component({
   selector: 'app-order-hub',
@@ -24,6 +24,7 @@ export class OrderHubComponent implements OnInit {
   updateOrderContentSub? : Subscription;
   emitUserSub? : Subscription;
   orderToHistorySentSub?: Subscription;
+  orderCanceledSub?: Subscription
 
   constructor(private _orderService: OrderService,
               private _eventBus : EventBusService) { }
@@ -36,6 +37,7 @@ export class OrderHubComponent implements OnInit {
     this.updateOrderContentSub = this._eventBus.on(Events.updateOrderContent).subscribe((orders :  DtoOutputUpdateOrdercontent) => this.updateOrderContent(orders))
     this.emitTodayOrderRequestSub = this._eventBus.on(Events.emitTodayOrderRequest).subscribe(() => this.fetchTodayOrders())
     this.orderToHistorySentSub = this._eventBus.on(Events.orderToHistorySent).subscribe((order: DtoInputOrder) => this.sendOrderToHistory(order))
+    this.orderCanceledSub = this._eventBus.on(Events.orderCanceled).subscribe((data:DtoOutputDeleteOrder) => this.cancelOrder(data))
 
     //Emitter
     this._eventBus.emit(new EmitEvent(Events.inOrderHubChanged, true))
@@ -79,6 +81,12 @@ export class OrderHubComponent implements OnInit {
     this._orderService.sendOrderToHistory(dto).subscribe(()=>this.orders.splice(index, 1))
   }
 
+  cancelOrder(dto: DtoOutputDeleteOrder){
+    let order = this.orders.filter(e => e.id == dto.idOrder)
+    let index = this.orders.indexOf(order[0])
+    this._orderService.cancelOrder(dto).subscribe(() => this.orders.splice(index, 1))
+  }
+
   ngOnDestroy()
   {
     this.emitOrderCategorySub?.unsubscribe()
@@ -87,6 +95,8 @@ export class OrderHubComponent implements OnInit {
     this.updateOrderContentSub?.unsubscribe()
     this.emitUserSub?.unsubscribe()
     this.orderToHistorySentSub?.unsubscribe()
+    this.orderCanceledSub?.unsubscribe()
+
     this._eventBus.emit(new EmitEvent(Events.inOrderHubChanged, false))
   }
 }
