@@ -3,6 +3,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/form
 import {DtoInputCategory} from "../../dtos/dto-input-category";
 import {DtoInputBrand} from "../../dtos/dto-input-brand";
 import {EmitEvent, EventBusService, Events} from "../../event-bus.service";
+import * as Console from "console";
 
 @Component({
   selector: 'app-article-create',
@@ -73,12 +74,21 @@ export class ArticleCreateComponent implements OnInit {
     this.idPricingType = id.target.value;
   }
 
+  public fileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+    });
+  }
+
   onFileSelected($event: Event) {
     if (this.form.value.file != undefined) {
-      const fileReader = new FileReader()
-      fileReader.readAsText(this.form.value.file,'utf-8')
-      this.imageString = fileReader.result as String
-      console.log(this.imageString);
+      console.log($event)
+      this.fileToBase64(this.form.value.file)
+        .then(imageToBase64 => console.log(imageToBase64))
+        .catch(error => console.error(error));
     }
   }
 }
