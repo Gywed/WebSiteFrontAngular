@@ -16,8 +16,8 @@
     </div>
   </div>
   <div>
-    <input type="text" class="fieldsHeader" value="Age" readonly [disabled]="true">
-    <input type="text" formControlName="age" class="fields" placeholder="age">
+    <input type="text" class="fieldsHeader" value="Birthdate" readonly [disabled]="true">
+    <input type="text" formControlName="age" class="fields" placeholder="birthdate">
     <div *ngIf="controls('age')?.dirty && controls('age')?.invalid" class="warning">
       This information is required!
     </div>
