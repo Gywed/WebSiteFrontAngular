@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {EmitEvent, EventBusService, Events} from "../event-bus.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-menubar-hub',
@@ -7,19 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenubarHubComponent implements OnInit {
 
-  constructor() { }
+  CategoryActive:boolean = false
+  //Subscription
+  emitShowCategoryListener?:Subscription
+  constructor(private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
+    this.emitShowCategoryListener = this._eventBus.on(Events.showCategory)
+      .subscribe(CategoryActive=>this.CategoryActive=CategoryActive)
   }
 
-  showDropdownCategory(category_content: HTMLDivElement) {
-    if(category_content.style.display=='none'){
-      category_content.style.display='block';
-    }
-    else if(category_content.style.display=='block'){
-      category_content.style.display='none';
-    }
-  }
+
 
   showDropdownShoppingCart(cart_content: HTMLDivElement) {
     if(cart_content.style.display=='none'){
@@ -28,5 +28,10 @@ export class MenubarHubComponent implements OnInit {
     else if(cart_content.style.display=='block'){
       cart_content.style.display='none';
     }
+  }
+
+  showCategory() {
+
+    this._eventBus.emit(new EmitEvent(Events.showCategory, !this.CategoryActive));
   }
 }
