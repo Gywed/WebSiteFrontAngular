@@ -247,30 +247,36 @@ body{
   .search-item{
     display: flex;
     position: relative;
-
+  z-index: 1;
   }
   .navbar{
     height: 5%;
   }
 
   .dropdown{
-
     margin: auto;
-    margin-right: 20px;
+
   }
 
   .dropbtn{
+    position: relative;
+    z-index: 0;
     font-size: 90%;
-    width: 130%;
+    width: 100%;
+    right: 0;
     height: 5px;
     margin-bottom: 30%;
     padding-top: 5%;
     user-select: none;
-    margin-top: 20%;
+    margin-top: 15%;
   }
 
   .dropdown:hover .dropbtn{
     background-color: #007a7a;
 
+  }
+  .dropdown-content{
+    position: absolute;
+    margin-top: -20px;
   }
 }

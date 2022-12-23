@@ -5,6 +5,8 @@ import {DtoOutputCartContent} from "../../menubar-hub/shopping-cart-hub/dtos/dto
 import {DtoOutputOrderContent} from "../../menubar-hub/shopping-cart-hub/dtos/dto-output-order-content";
 import {DtoOutputOrder} from "../../menubar-hub/shopping-cart-hub/dtos/dto-output-order";
 import {Router} from "@angular/router";
+import {EventBusService, Events} from "../../event-bus.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-user-create-order',
@@ -17,12 +19,19 @@ export class UserCreateOrderComponent implements OnInit {
   date:string="";
   total:number=0;
 
+  //Subscription
+  emitActualiseTotalSub?:Subscription;
+
   constructor(private _shoppingCartService: ShoppingCartService,
               private _orderService:OrderService,
-              private _router: Router) { }
+              private _router: Router,
+              private _eventBus:EventBusService) { }
 
   ngOnInit(): void {
+    this.emitActualiseTotalSub = this._eventBus.on(Events.addArticleInCart)
+      .subscribe(total=>this.total=Math.round(total*100)/100)
     this.cartContent=this.fetchShoppingCart();
+
     for(let article of this.cartContent){
       this.total+=article.article.price*article.quantity;
     }

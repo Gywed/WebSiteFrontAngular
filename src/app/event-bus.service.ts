@@ -49,6 +49,7 @@ export enum Events {
   emitTodayOrderRequest,
   fetchTodayOrder,
   orderToHistorySent,
+  actualiseTotal,
 
   //ArticleEvent
   fetchArticle,
@@ -58,6 +59,7 @@ export enum Events {
   emitArticle,
   articleUpdate,
   emitArticleFilterParam,
+  addArticleInCart,
 
   //CategorieEvent
   emitFetchCategories,
